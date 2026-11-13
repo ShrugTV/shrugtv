@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="theme_color" format="color|reference" />
+    <attr name="theme_color_bright" format="color|reference" />
+    <attr name="theme_color_dark" format="color|reference" />
+    <attr name="theme_color_main_background" format="color|reference" />
+    <attr name="theme_context_color_dark" format="color|reference" />
+    <attr name="theme_context_color_highlight" format="color|reference" />
+    <attr name="theme_selection" format="color|reference" />
+    <attr name="theme_title_color_dark" format="color|reference" />
+    <attr name="theme_title_color_highlight" format="color|reference" />
+</resources>

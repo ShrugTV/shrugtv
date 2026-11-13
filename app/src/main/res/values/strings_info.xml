@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Info pages in the settings: About, Changes, Privacy, Licences, Imprint (
+     #93, #162). Edition texts (about, footer, controller) live in src/<edition>/res/values. -->
+<resources>
+    <string name="info_title_about">About ShrugTV</string>
+    <string name="info_title_changes">Changes</string>
+    <string name="info_title_privacy">Privacy</string>
+    <string name="info_title_licences">Licences</string>
+    <string name="info_title_imprint">Imprint</string>
+
+    <string name="info_about_2">The app sends no usage data, crash reports or advertising IDs. Only your settings and your Twitch sign-in are stored, on this device. ShrugTV is an unofficial client and is not affiliated with or endorsed by Twitch Interactive, Inc.</string>
+
+    <string name="info_privacy_intro">ShrugTV has no server of its own and collects no data for itself. This page lists what is stored on this device and which services the app contacts directly. Each of them receives your IP address and the technical details of the request.</string>
+    <string name="info_privacy_h_controller">Who is responsible</string>
+    <string name="info_privacy_h_device">Stored on this device</string>
+    <string name="info_privacy_device">Your Twitch sign-in (access token), your settings, favourites, watch progress of videos, the watch statistics (which channels you watched, when and for how long; kept 25 months, in a database that is not part of backups, deleted on the Statistics page) and a local error log. Nothing of it leaves the device. Signing out removes the sign-in; clearing the app data in the system settings removes everything.</string>
+    <string name="info_privacy_h_twitch">Twitch</string>
+    <string name="info_privacy_twitch">Streams, videos, chat, channel data, sign-in and live events come directly from Twitch Interactive, Inc. (id.twitch.tv, api.twitch.tv, gql.twitch.tv, usher.ttvnw.net, irc-ws.chat.twitch.tv, eventsub.wss.twitch.tv, static-cdn.jtvnw.net). Twitch processes this data under its own privacy policy (twitch.tv/p/legal/privacy-notice). Legal basis: Art. 6(1)(b) GDPR, the use of Twitch you ask for.</string>
+    <string name="info_privacy_h_emotes">Emote services</string>
+    <string name="info_privacy_emotes">To show third-party emotes in the chat, the app loads emote lists and images from BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) and 7TV (7tv.io, cdn.7tv.app, events.7tv.io). They learn which channel you are watching. Legal basis: Art. 6(1)(f) GDPR, the chat shown as on Twitch.</string>
+    <string name="info_privacy_h_optional">Only when you switch it on</string>
+    <string name="info_privacy_optional">Chat history: recent-messages.robotty.de supplies the last chat messages of a channel. Home Assistant: the app connects to the MQTT broker you enter. Phone page: the app opens a small web page in your home network. All three are off until you enable them in the settings.</string>
+    <string name="info_privacy_h_proxy">Proxy</string>
+    <string name="info_privacy_proxy">If you choose a proxy in the settings, live stream playlists are requested through that server instead of directly from Twitch.</string>
+    <string name="info_privacy_h_rights">Your rights</string>
+    <string name="info_privacy_rights">You have the right to access, rectification, erasure, restriction and objection (Art. 15 to 21 GDPR) and to lodge a complaint with a data protection supervisory authority. Since the app keeps your data only on your device, you exercise most of these rights yourself by signing out or clearing the app data. For data held by Twitch or the emote services, contact them.</string>
+
+    <string name="info_licences_intro">ShrugTV is built with the following open-source components. Thanks to their authors.</string>
+
+    <string name="info_imprint_h_provider">Provider</string>
+    <string name="info_imprint_h_contact">Contact</string>
+    <string name="info_imprint_h_note">Note</string>
+    <string name="info_imprint_note">ShrugTV is a free, non-commercial app. It is an unofficial client for Twitch and is not affiliated with or endorsed by Twitch Interactive, Inc. Twitch is a trademark of Twitch Interactive, Inc.</string>
+
+    <string name="info_changes_empty">No entries found.</string>
+
+    <!-- Badges on the changelog cards; the changelog text itself stays English -->
+    <string name="info_badge_new">New</string>
+    <string name="info_badge_changed">Changed</string>
+    <string name="info_badge_fixed">Fixed</string>
+    <string name="info_badge_removed">Removed</string>
+</resources>

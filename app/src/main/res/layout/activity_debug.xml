@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/layout_app_info" android:layout_width="200.0dp" android:layout_height="300.0dp" android:layout_marginStart="5.0dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="App info" android:layout_marginStart="50.0dp" android:layout_marginEnd="50.0dp" />
+            <ListView android:id="@id/LV_AppInfo" android:layout_width="match_parent" android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/layout_device_info" android:layout_width="200.0dp" android:layout_height="300.0dp" android:layout_marginStart="5.0dp" app:layout_constraintStart_toEndOf="@id/layout_app_info" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Device info" android:layout_marginStart="50.0dp" android:layout_marginEnd="50.0dp" />
+            <ListView android:id="@id/LV_DeviceInfo" android:layout_width="match_parent" android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/layout_networkinfo" android:layout_width="200.0dp" android:layout_height="300.0dp" android:layout_marginStart="5.0dp" app:layout_constraintStart_toEndOf="@id/layout_device_info" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Network info" android:layout_marginStart="50.0dp" android:layout_marginEnd="50.0dp" />
+            <ListView android:id="@id/LV_NetworkInfo" android:layout_width="match_parent" android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/layout_streaminfo" android:layout_width="200.0dp" android:layout_height="300.0dp" android:layout_marginStart="5.0dp" app:layout_constraintStart_toEndOf="@id/layout_networkinfo" app:layout_constraintTop_toTopOf="parent">
+            <TextView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Stream info" android:layout_marginStart="50.0dp" android:layout_marginEnd="50.0dp" />
+            <ListView android:id="@id/LV_StreamInfo" android:layout_width="match_parent" android:layout_height="match_parent" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

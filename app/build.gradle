@@ -1,0 +1,267 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+// Your own Twitch application and the release key come from the environment or from local.properties
+// (twitch.clientId, keystore.file, keystore.password); none of it is in the repo.
+// Register the application at dev.twitch.tv (type "Public", redirect URL http://localhost).
+def localProps = new Properties()
+rootProject.file('local.properties').with { f -> if (f.exists()) f.withInputStream { localProps.load(it) } }
+def twitchClientId = System.getenv('TWITCH_CLIENT_ID') ?: localProps.getProperty('twitch.clientId') ?: ''
+def keystorePw = System.getenv('SHRUGTV_KEYSTORE_PW') ?: localProps.getProperty('keystore.password') ?: ''
+def keystoreDatei = System.getenv('SHRUGTV_KEYSTORE') ?: localProps.getProperty('keystore.file') ?:
+    "${System.getenv('LOCALAPPDATA') ?: System.getProperty('user.home')}/Android/shrugtv-release.jks"
+def canSign = keystorePw && file(keystoreDatei).exists()
+
+// Edition: "homelab" (default) is the private app with the ad blocker and HLS
+// proxy; "oss" is the public edition that plays Twitch streams unchanged. Chosen with
+// -Pedition=oss (tools/build.sh: EDITION=oss), so task names and APK paths stay the same.
+// Edition-specific code lives in src/<edition>/java, edition-specific tests in src/test<Edition>/java.
+def edition = (findProperty('edition') ?: (file('src/homelab').isDirectory() ? 'homelab' : 'oss')).toString()
+if (!(edition in ['homelab', 'oss'])) {
+    throw new GradleException("Unknown edition '${edition}' - use homelab or oss")
+}
+
+// Version from Git (release process tools/release.sh): versionName from the last
+// tag vX.Y.Z -- exactly on the tag "X.Y.Z", afterwards "X.Y.Z-<commits since tag>-g<commit>";
+// versionCode = number of commits, so it rises with every build (Android rejects downgrades).
+def git = { String... args ->
+    try {
+        def p = (['git'] + args.toList()).execute(null, rootDir)
+        def aus = p.text.trim()
+        p.waitFor() == 0 ? aus : ''
+    } catch (Exception ignored) { '' }
+}
+def gitCount = (git('rev-list', '--count', 'HEAD') ?: '1') as int
+def gitCommit = git('rev-parse', '--short', 'HEAD') ?: 'nogit'
+def gitDescription = git('describe', '--tags', '--match', 'v[0-9]*')
+def appVersion = gitDescription ? gitDescription.substring(1) : "0.0.0-${gitCount}-g${gitCommit}"
+
+android {
+	namespace "com.shrug.shrugtv"
+    // compileSdk 36: minimum value of Media3 from 1.10 (aar-metadata minCompileSdk), since 2026-10-28.
+    // targetSdk 35 since 2026-10-28: NotificationService has the foreground service
+    // Vordergrunddienst-Typ specialUse; Edge-to-Edge betrifft am Fernseher nichts Sichtbares.
+    compileSdkVersion 36
+
+    defaultConfig {
+        applicationId 'com.shrug.shrugtv'
+        // 26 since 2026-10-28: java.time from Android 8 in the system instead of Joda-Time,
+        // without a desugaring library. All devices in the house run Android 11 or newer (Fire TV 11).
+        minSdkVersion 26
+        //noinspection ExpiringTargetSdkVersion,ExpiredTargetSdkVersion
+        targetSdkVersion 35
+        versionCode gitCount
+        versionName appVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "TWITCH_CLIENT_ID", "\"${twitchClientId}\""
+        buildConfigField "String", "EDITION", "\"${edition}\""
+        // Ad blocker and proxy only in the private edition; R8 removes the code guarded by it
+        buildConfigField "boolean", "AD_FREE", edition == 'homelab' ? 'true' : 'false'
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/${edition}/java"
+        main.res.srcDirs += "src/${edition}/res"
+        test.java.srcDirs += "src/test${edition.capitalize()}/java"
+    }
+
+    // Release signing only when a keystore and its password are given; otherwise the release APK stays unsigned
+    signingConfigs {
+        if (canSign) {
+            release {
+                storeFile file(keystoreDatei)
+                storePassword keystorePw
+                keyAlias 'shrugtv'
+                keyPassword keystorePw
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            if (canSign) signingConfig signingConfigs.release
+            // R8 since 2026-10-28: shrink and optimise, without renaming
+            // (rationale and keep rules in proguard-rules.pro); shrinkResources then removes
+            // unused resources.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        // Measure like a release (not debuggable) but signed with the debug key: replaces the
+        // debug build in the emulator without deleting the sign-in (tools/measure.sh, performance).
+        profile {
+            initWith release
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+        }
+    }
+
+    // Java 17 for Java and Kotlin alike, otherwise the JVM target check of Kotlin fails
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Unit tests on the JVM: android.util.Log & Co. return default values instead of
+    // "Stub!" exceptions, so parsers and the ad blocker run without a device.
+    testOptions {
+        unitTests.returnDefaultValues = true
+        // Robolectric UI tests (player key handling) need the merged resources
+        unitTests.includeAndroidResources = true
+    }
+
+    lintOptions {
+        abortOnError false
+        // Media3 markiert Parser, DataSource-Factories, Bandbreitenmesser usw. als @UnstableApi
+        // (may change between versions). The app uses it deliberately, the parser is even
+        // a copy; an update is built and tested anyway.
+        disable 'UnsafeOptInUsageError'
+    }
+
+    buildFeatures {
+        buildConfig = true
+        compose = true
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.xerial:sqlite-jdbc:3.47.0.0'
+    // Compose UI tests on the JVM with Robolectric: key handling of the player controls
+    // (docs/bug_review.md B28-B37). Robolectric downloads its Android framework jar from Maven Central.
+    testImplementation 'org.robolectric:robolectric:4.17'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+    // Embedded MQTT broker for the Home Assistant bridge test
+    testImplementation 'io.moquette:moquette-broker:0.17'
+    testImplementation 'androidx.test:core:1.7.0'
+    testImplementation 'androidx.test.ext:junit:1.3.0'
+    testImplementation 'androidx.compose.ui:ui-test-junit4'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    // Versions and evidence: git history of docs/.
+    // Firebase, Crashlytics, Analytics and Remote Config are removed in the private rebuild (#5).
+    // Room code is generated by the annotation processor (room-compiler) since ; the
+    // identity hash dd460f1e... and all column names (also "vod_legth") are unchanged.
+    // GeneratedAppGlideModuleImpl is written by hand (stage 0).
+
+    // Kotlin: the Kotlin plugin brings the matching stdlib for 2.4.21 itself; the former fixed
+    // kotlin-stdlib-jdk8 1.6.21 (an empty shell since 1.8) has been gone since 2026-10-28.
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0'
+
+    // AndroidX, as of 2026-10-28. Limits: compileSdk 36 and AGP 8.10 (core from
+    // 1.19 needs 37/AGP 9.1). Room stays at 2.6.1 for now (upgrade only with a migration test).
+    // lifecycle-extensions (deprecated) was dropped; everything used is in lifecycle-process.
+    implementation 'androidx.appcompat:appcompat:1.8.0'
+    implementation 'androidx.core:core:1.16.0'
+    // Preference stays 1.0.0: custom layout copies (preference_*_material.xml) reference
+    // values that 1.2 no longer has; the classes only serve settings.xml (Compose reads it)
+    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
+    implementation 'androidx.tvprovider:tvprovider:1.1.0'
+    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'androidx.work:work-runtime:2.12.0'
+    implementation 'androidx.lifecycle:lifecycle-process:2.9.4'
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+    // Material 1.12: from 1.13 the m3_sys_motion_duration values are missing that the custom
+    // Theme-Kopie in res/values/styles.xml (Base.V14.Theme.Material3.Dark) verweist
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Compose for TV. BOM 2026.06.01 = Compose 1.11.4, the newest line that works with
+    // AGP 8.10 auskommt (ab BOM 2026.08.00: compileSdk 37, AGP 9.1). activity-compose 1.10.1 blieb
+    // were set when compileSdk was still 35 (1.11 needs 36); possible now, but untested.
+    implementation platform('androidx.compose:compose-bom:2026.06.01')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    implementation 'androidx.activity:activity-compose:1.10.1'
+    implementation 'androidx.tv:tv-foundation:1.0.0'
+    implementation 'androidx.tv:tv-material:1.1.0'
+
+    // Netz und JSON
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.google.code.gson:gson:2.13.2'
+    // Home Assistant via MQTT (docs/mqtt_ha_plan.md, decision D1): Paho mqttv3 without its Android
+    // service; MQTT 3.1.1 is all HA's discovery needs
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
+    // Phone companion (docs/companion_plan.md, decision D1): small HTTP + WebSocket server
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation 'org.nanohttpd:nanohttpd-websocket:2.3.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0'
+
+    // Medien
+    implementation 'androidx.media3:media3-exoplayer:1.11.1'
+    implementation 'androidx.media3:media3-exoplayer-hls:1.11.1'
+    implementation 'androidx.media3:media3-ui:1.11.1'
+    // No media3-session: its compatibility layer crashed on the Fire TV on media commands;
+    // the media session uses the system API (player/PlayerMediaSession.java)
+
+    // Pictures and animation
+    implementation 'io.coil-kt:coil:2.5.0'
+    // Glide 4.16: Glide 5 verlangt compileSdk 37; webpdecoder-Version folgt der Glide-Version
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation 'com.github.bumptech.glide:recyclerview-integration:4.16.0'
+    implementation 'com.github.zjupure:webpdecoder:2.7.4.16.0'
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
+    // QR-Code
+    implementation 'com.google.zxing:core:3.5.3'
+
+    // ViewTooltip 1.2.2 only on a JCenter mirror; source under
+    // com/github/florent37/viewtooltip
+}
+
+// Show all compile errors at once instead of stopping after 100
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xmaxerrs', '100000', '-Xmaxwarns', '0']
+    options.encoding = 'UTF-8'
+}
+
+// Writes the complete javac class path (dependencies, R.jar, android.jar) to
+// build/classpath.txt so that tools/javac_check.sh can check without Gradle - several
+// editors can compile in parallel without sharing the Gradle lock.
+tasks.register('writeClasspath') {
+    dependsOn 'processDebugResources'
+    doLast {
+        def variant = android.applicationVariants.find { it.name == 'debug' }
+        def classFiles = variant.javaCompileProvider.get().classpath.files + android.bootClasspath
+        def outFile = file("${rootProject.buildDir}/classpath.txt")
+        outFile.parentFile.mkdirs()  // after "clean" build/ is missing
+        outFile.text = classFiles.join(File.pathSeparator)
+    }
+}
+
+// Without an own client ID nobody can sign in: release builds fail, debug builds warn.
+gradle.taskGraph.whenReady { graph ->
+    if (!twitchClientId) {
+        if (graph.allTasks.any { it.name.toLowerCase().contains('release') }) {
+            throw new GradleException("TWITCH_CLIENT_ID missing - set it in the environment or as twitch.clientId in local.properties")
+        }
+        // error instead of warn: -q hides warn, and then nobody notices the empty ID
+        logger.error("WARNING: TWITCH_CLIENT_ID missing, sign-in and the Twitch API do not work in this build (environment or twitch.clientId in local.properties)")
+    }
+    // A public release needs a filled-in imprint (§ 5 DDG)
+    if (edition == 'oss' && graph.allTasks.any { it.name.toLowerCase().contains('release') }
+            && file('src/oss/res/values/imprint.xml').text.contains('TODO')) {
+        throw new GradleException("Imprint missing - fill in app/src/oss/res/values/imprint.xml before an oss release")
+    }
+    // The private edition is deployed from here and must always be signed; the public tree may build an unsigned release
+    if (graph.allTasks.any { it.name.toLowerCase().contains('release') } && !canSign) {
+        if (edition == 'homelab') {
+            throw new GradleException("SHRUGTV_KEYSTORE_PW or the keystore is missing - build with tools/build.sh")
+        }
+        logger.error("WARNING: no keystore (keystore.file / keystore.password), the release APK stays unsigned")
+    }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Card in the channel switcher, redesigned after the mockup: 10 dp corners,
+     surface #1F1F25, Inter. IDs unchanged. -->
+<androidx.cardview.widget.CardView android:id="@id/PeekCardView" android:layout_width="167.5dp" android:layout_height="129.0dp" android:elevation="8.0dp" app:cardCornerRadius="10.0dp" app:cardElevation="8.0dp" app:cardPreventCornerOverlap="false" app:cardBackgroundColor="#1F1F25"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:id="@id/background" android:background="#1F1F25" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ImageView android:id="@id/stream_navigation_preview_preview" android:layout_width="match_parent" android:layout_height="94.0dp" android:scaleType="centerCrop" />
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/peek_card_bottomLayout" android:layout_width="match_parent" android:layout_height="35.0dp" android:layout_alignParentBottom="true">
+            <ImageView android:id="@id/stream_navigation_preview_badge_image" android:layout_width="24.0dp" android:layout_height="24.0dp" android:layout_marginStart="6.0dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+            <TextView android:textSize="13.0sp" android:fontFamily="@font/inter_semibold" android:textColor="#EFEFF1" android:gravity="center_vertical" android:id="@id/stream_navigation_preview_title" android:layout_width="0.0dp" android:layout_height="31.0dp" android:layout_marginStart="8.0dp" android:layout_marginEnd="6.0dp" android:singleLine="true" android:ellipsize="end" app:layout_constraintBottom_toBottomOf="@id/peek_card_bottomLayout" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/stream_navigation_preview_badge_image" app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

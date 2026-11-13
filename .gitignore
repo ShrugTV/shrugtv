@@ -1,0 +1,20 @@
+# Gradle and Android Studio
+.gradle/
+.kotlin/
+build/
+local.properties
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing keys and credentials never go into Git
+*.jks
+*.keystore
+keystore.properties
+secrets.properties
+
+# Binaries
+*.apk
+*.aab

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Imprint of the public edition (§ 5 DDG). Pseudonym and e-mail only, as decided by Michael on 2026-11-13
+     (no postal address: a private, non-commercial project; to be revisited if that changes). -->
+<resources>
+    <string name="imprint_provider" translatable="false">ShrugTV (pseudonym)</string>
+    <string name="imprint_contact" translatable="false">shrugtv@mailbox.org</string>
+</resources>

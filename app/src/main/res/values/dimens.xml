@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="abc_switch_padding">0.0px</dimen>
+    <dimen name="peekview_card_preview_scale">150.0%</dimen>
+    <dimen name="preference_no_icon_padding_start">72.0dp</dimen>
+</resources>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Player, channel switcher, notices and login page, German.
+     Same names as values/strings_player.xml, adjust_shrugtv.xml, input_shrugtv.xml and the
+     tooltip_* / pa_layout_* entries of values/strings.xml. -->
+<resources>
+    <!-- Player bar -->
+    <string name="player_btn_quality">Qualität</string>
+    <string name="player_btn_chat">Chat</string>
+    <string name="player_btn_chat_layout">Chat-Layout</string>
+    <string name="player_btn_channel">Kanal</string>
+    <string name="player_btn_follow">Folgen</string>
+    <string name="player_btn_search">Suchen</string>
+    <string name="player_more">Mehr</string>
+    <string name="player_more_volume">Lautstärke</string>
+    <string name="player_more_send_message">Nachricht senden</string>
+    <string name="player_more_chat_position">Chat anpassen</string>
+    <string name="player_more_multiview">Multiview anpassen</string>
+    <string name="player_more_video_size">Video und Chat nebeneinander</string>
+    <string name="player_more_fastforward">Zum Live-Rand</string>
+    <string name="player_more_preview_audio">Ton der Vorschau</string>
+    <string name="player_more_save_vod">VOD sichern</string>
+    <string name="player_more_reload_emotes">Emotes neu laden</string>
+    <string name="player_more_stats">Statistik</string>
+
+    <string name="player_panel_quality">Qualität</string>
+    <string name="player_panel_volume">Lautstärke</string>
+    <string name="player_panel_chapters">Kapitel</string>
+    <string name="player_press_back_again">Zum Verlassen nochmal ZURÜCK drücken</string>
+    <string name="player_audio_only_hint">Nur Ton · OK bringt das Bild zurück · Chat bleibt an</string>
+    <string name="player_rest_hint">Pausiert · beliebige Taste zum Weiterschauen</string>
+    <string name="player_btn_prev_category">Vorige Kategorie</string>
+    <string name="player_btn_next_category">Nächste Kategorie</string>
+    <string name="player_panel_speed">Tempo</string>
+
+    <string name="player_stats_title">Video-Statistiken</string>
+    <string name="player_stats_resolution">Auflösung</string>
+    <string name="player_stats_bitrate">Bitrate</string>
+    <string name="player_stats_dropped">Ausgelassene Bilder</string>
+    <string name="player_stats_emotes">Animierte Emotes</string>
+    <string name="player_stats_buffer">Puffer</string>
+    <string name="player_stats_latency">Abstand zum Live-Rand</string>
+    <string name="player_stats_chat_delay">Chat-Verzögerung</string>
+    <string name="player_stats_memory">Speicherbedarf</string>
+    <string name="player_quality_source">Quelle</string>
+    <string name="player_quality_audio_only">Nur Audio</string>
+    <string name="player_info_since">seit %1$s h</string>
+    <string name="player_info_length">%1$s h</string>
+    <string name="player_info_followed">Du folgst diesem Kanal</string>
+    <string name="player_info_favorite">Favorit</string>
+    <plurals name="player_viewers">
+        <item quantity="one">%1$s Zuschauer</item>
+        <item quantity="other">%1$s Zuschauer</item>
+    </plurals>
+    <string name="peek_followers">%1$s Follower</string>
+
+    <string name="player_chat_welcome">Willkommen im Chat von %1$s!</string>
+    <string name="player_chat_followers_only">Chat nur für Follower</string>
+    <string name="player_chat_emote_only">Nur Emotes erlaubt</string>
+    <string name="player_chat_subs_only">Chat nur für Abonnenten</string>
+    <string name="player_chat_slow_mode">Langsamer Modus %1$d s</string>
+    <string name="player_chat_unique">Nur eindeutige Nachrichten</string>
+    <string name="player_chat_paused">Chat angehalten</string>
+    <string name="player_chat_resumed">Chat läuft weiter</string>
+    <string name="player_chat_banned">Du bist hier gebannt! Keine Sorge, ich hab dich!</string>
+    <string name="player_chat_message_removed">Nachricht entfernt</string>
+    <string name="player_chat_sign_in">Melde dich an, um den Chat zu sehen</string>
+    <string name="player_chat_reconnecting">Chat-Verbindung unterbrochen, verbinde neu …</string>
+    <string name="player_chat_connected">Mit dem Chat verbunden</string>
+    <string name="player_chat_history_end">Darüber frühere Nachrichten · ab hier live</string>
+    <string name="player_chat_subscribe_failed">Chat konnte sich nicht mit Twitch verbinden: %1$s</string>
+    <string name="player_chat_send_failed">Nachricht nicht gesendet: %1$s</string>
+    <string name="player_raid_hosting">%1$s hostet jetzt %2$s</string>
+    <string name="player_playback_error">Wiedergabefehler!</string>
+    <string name="player_stream_ended">Der Stream ist beendet</string>
+    <string name="player_status_hint">OK: erneut versuchen · Zurück: verlassen</string>
+    <string name="player_open_with">Öffnen mit</string>
+    <string name="player_ad_blocking">Werbung wird blockiert</string>
+    <string name="player_ad_stripping">Werbung wird entfernt – Bild wartet</string>
+    <string name="player_btn_play">Abspielen</string>
+    <string name="player_btn_pause">Pause</string>
+    <string name="chat_adjust_width">Breite</string>
+    <string name="chat_adjust_width_auto">Auto (%1$d dp)</string>
+    <string name="chat_adjust_position">Seite</string>
+    <string name="chat_adjust_left">Links</string>
+    <string name="chat_adjust_right">Rechts</string>
+    <string name="chat_adjust_background">Hintergrund</string>
+    <string name="chat_adjust_hint">◀ ▶ ändern · Zurück: fertig</string>
+    <string name="chat_adjust_font">Schriftgröße</string>
+    <string name="chat_adjust_emotes">Emotes</string>
+    <string name="chat_adjust_emotes_normal">Normal</string>
+    <string name="chat_adjust_emotes_bigger">Größer</string>
+    <string name="chat_adjust_height">Höhe</string>
+    <string name="chat_adjust_vertical">Lage</string>
+    <string name="chat_adjust_top">Oben</string>
+    <string name="chat_adjust_middle">Mitte</string>
+    <string name="chat_adjust_bottom">Unten</string>
+    <string name="player_btn_live">Live</string>
+    <string name="player_behind_live">%1$s zurück</string>
+    <string name="player_raid_title">%1$s raidet zu %2$s</string>
+    <string name="player_raid_hint">OK: mitgehen · Zurück: bleiben</string>
+    <string name="player_live_card_title">%1$s ist live</string>
+    <string name="player_live_card_hint">OK: umschalten · Zurück: bleiben</string>
+    <string name="player_next_channel">Weiter mit %1$s in %2$d s</string>
+    <string name="player_next_channel_suggest">Als Nächstes: %1$s</string>
+    <string name="player_next_hint">OK: jetzt wechseln · Zurück: bleiben</string>
+    <string name="companion_qr_steps">1. Handy im selben WLAN. 2. Code mit der Kamera scannen. Oder diese Adresse im Browser eines Handys oder Computers öffnen und die PIN eingeben:</string>
+    <string name="companion_pin">PIN %1$s</string>
+    <string name="companion_qr_valid">Gilt 2 Minuten und für ein Handy. Zurück schließt.</string>
+    <string name="companion_no_network">Kein Netz: den TV mit WLAN oder Ethernet verbinden und „Handy-Begleiter“ in den Einstellungen einschalten.</string>
+    <string name="companion_phone_connected">Handy verbunden: %1$s</string>
+    <string name="player_more_phone">Handy</string>
+    <string name="player_btn_back10">−10 s</string>
+    <string name="player_btn_forward10">+10 s</string>
+    <string name="player_back_to_live_hud">Wieder live</string>
+    <string name="player_btn_replay">Nochmal</string>
+    <string name="player_replay_hud">%1$d s zurück, danach wieder live</string>
+    <string name="player_loading_archive">Aufzeichnung wird geladen …</string>
+    <string name="player_loading_live">Zurück zu live …</string>
+    <string name="player_zap_unavailable">Links/rechts wechseln geht nur bei Streams, die aus einer Zeile geöffnet wurden</string>
+
+    <string name="channel_switcher_title">Kanal wechseln</string>
+    <string name="switcher_count">%1$d Kanäle</string>
+    <string name="switcher_tab_same_game">Gleiche Kategorie</string>
+    <string name="switcher_tab_top_language">Top in deiner Sprache</string>
+    <string name="peek_tab_recent">Zuletzt geschaut</string>
+    <string name="peek_tab_followed">Gefolgt</string>
+    <string name="peek_tab_followed_games">Gefolgte Kategorien</string>
+    <string name="peek_tab_language">Sprache</string>
+    <string name="peek_tab_top_games">Kategorien</string>
+    <string name="peek_tab_top_streams">Top-Streams</string>
+    <string name="peek_tab_game">Kategorie</string>
+    <string name="peek_tab_game_language">Kategorie in deiner Sprache</string>
+    <string name="peek_tab_search_streams">Streams</string>
+    <string name="peek_tab_search_games">Kategorien</string>
+    <string name="peek_tab_search_channels">Kanäle</string>
+
+    <string name="notice_is_live">%1$s ist live</string>
+    <string name="notice_gifted_sub">%1$s hat dir ein Abo geschenkt!</string>
+    <string name="notice_gifted_sub_you">dir</string>
+    <string name="notice_channel_offline">%1$s ist gerade nicht live.</string>
+    <string name="notice_twitch_unreachable">Twitch ist nicht erreichbar, %1$s lässt sich nicht öffnen.</string>
+    <string name="notice_emotes_reloaded">Emotes neu geladen: %1$d</string>
+    <string name="notice_emotes_reloaded_channel">Emotes neu geladen: %1$d (%2$s)</string>
+    <string name="notice_no_live_chat">Kein Live-Chat aktiv</string>
+    <string name="notice_vod_resume_added">VOD-Position gespeichert!</string>
+    <string name="notice_vod_resume_updated">VOD-Position aktualisiert!</string>
+    <string name="notice_vod_not_found">Das VOD zum laufenden Stream wurde nicht gefunden, die Position lässt sich nicht speichern!</string>
+    <string name="notice_clock_error">Fehler bei Uhr %1$d, bitte eine andere Zeitzone wählen</string>
+    <string name="notice_service_running">Läuft …</string>
+
+    <string name="login_title">Bei Twitch anmelden</string>
+    <string name="login_intro">Dann siehst du deine gefolgten Kanäle, deinen Verlauf und kannst im Chat schreiben.</string>
+    <string name="login_step_1">twitch.tv/activate auf Handy oder PC öffnen</string>
+    <string name="login_step_2">Den Code rechts eingeben</string>
+    <string name="login_step_3">Freigeben, der Fernseher meldet sich von selbst</string>
+    <string name="login_status_requesting">Code wird angefordert …</string>
+    <string name="login_status_unreachable">Twitch nicht erreichbar, neuer Versuch …</string>
+    <string name="login_status_waiting">Warte auf Freigabe …</string>
+    <string name="login_status_signed_in">Angemeldet.</string>
+    <string name="login_status_denied">Anmeldung abgelehnt. Neuer Code …</string>
+    <string name="login_status_expired">Code abgelaufen. Neuer Code …</string>
+    <string name="login_code_valid">Code gültig noch %1$d min</string>
+    <string name="login_qr_description">QR-Code zu twitch.tv/activate</string>
+    <string name="login_scan_hint">oder mit der Handykamera scannen</string>
+
+    <!-- Adjust mode (values/adjust_shrugtv.xml) -->
+    <string name="adjust_key_back">Zurück</string>
+    <string name="adjust_ok_fine">Breite und Höhe</string>
+    <string name="adjust_ok_coarse">Position und Größe</string>
+    <string name="adjust_measures">Breite %1$d %% · Höhe %2$d %% des Bildes</string>
+
+    <!-- Input bar (values/input_shrugtv.xml) -->
+    <string name="input_send">senden</string>
+    <string name="input_search">suchen</string>
+    <string name="input_search_hint">Kanal oder Kategorie suchen</string>
+    <string name="input_message_to">Nachricht an %1$s</string>
+    <string name="input_message">Nachricht an den Chat</string>
+
+    <!-- From values/strings.xml -->
+    <string name="button_vod_chapters">Kapitel</string>
+    <string name="pa_layout_finish_modify">Fertig</string>
+    <string name="pa_layout_modify_chat_text">Chat anpassen</string>
+    <string name="pa_layout_modify_height">Höhe</string>
+    <string name="pa_layout_modify_multiview_text">Multiview anpassen</string>
+    <string name="pa_layout_modify_position">Position</string>
+    <string name="pa_layout_modify_size">Größe</string>
+    <string name="pa_layout_modify_width">Breite</string>
+    <string name="tooltip_channel_profile">Kanal</string>
+    <string name="tooltip_chat_position">Chat anpassen</string>
+    <string name="tooltip_fastforward">Zum Live-Rand</string>
+    <string name="tooltip_follow">Folgen</string>
+    <string name="tooltip_multiview">Multiview anpassen</string>
+    <string name="tooltip_preview_audio">Ton der Vorschau</string>
+    <string name="tooltip_search">Suchen</string>
+    <string name="tooltip_send_message">Nachricht senden · lang: Chat in der App</string>
+    <string name="tooltip_show_chat">Chat ein/aus</string>
+    <string name="tooltip_show_chat_MW">Chat ein/aus · lang: Chat tauschen</string>
+    <string name="tooltip_stat">Statistik</string>
+    <string name="tooltip_video_quality">Qualität</string>
+    <string name="tooltip_video_size">Video und Chat nebeneinander</string>
+    <string name="tooltip_video_size_MV">Multiwatch</string>
+    <string name="tooltip_volume_control">Lautstärke</string>
+    <string name="tooltip_emotes_reload">Emotes neu laden</string>
+    <string name="player_chapters_count">%1$d Kapitel</string>
+</resources>

@@ -1,0 +1,10 @@
+# Zeilenenden im Repo grundsaetzlich LF, wie in den anderen Projekt-Repos.
+* text=auto eol=lf
+*.sh   text eol=lf
+*.apk  binary
+*.jar  binary
+*.png  binary
+*.webp binary
+*.so   binary
+*.cmd  text eol=crlf
+*.bat  text eol=crlf

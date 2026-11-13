@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texte der öffentlichen Fassung -->
+<resources>
+    <string name="info_about_1">Ein inoffizieller Android-TV-Client für Twitch: Live-Streams, Videos, Chat und Kanäle, bedienbar mit der Fernbedienung.</string>
+    <string name="info_about_footer">Version %1$s · inoffizieller Client, keine Verbindung zu Twitch</string>
+    <string name="info_privacy_controller">Der unter Impressum genannte Anbieter. Die App selbst sendet ihm nichts.</string>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home screen and shared Compose components, English -->
+<resources>
+    <!-- Hero -->
+    <string name="home_sign_in_title">Sign in to Twitch</string>
+    <string name="home_sign_in_hint">Then your channels that are live right now show up here.</string>
+    <string name="home_sign_in">Sign in</string>
+    <string name="home_loading">Loading …</string>
+    <string name="home_nobody_live">None of the channels you follow is live right now.</string>
+    <!-- %1$s = formatted viewer count, %2$s = uptime h:mm -->
+    <string name="home_hero_stats">%1$s viewers · live for %2$s h</string>
+    <string name="home_watch">Watch</string>
+    <string name="home_to_channel">Go to channel</string>
+    <string name="home_multiview">Multiview</string>
+    <!-- Navigation bar (content descriptions) -->
+    <string name="home_nav_search">Search</string>
+    <string name="home_nav_home">Home</string>
+    <string name="home_nav_settings">Settings</string>
+    <string name="home_nav_profile">Profile</string>
+    <!-- Rows -->
+    <string name="home_row_followed_live">Live from channels you follow</string>
+    <string name="home_row_live_history">Recently watched live</string>
+    <string name="home_row_continue_watching">Continue watching</string>
+    <string name="home_row_followed_channels">Followed channels</string>
+    <string name="home_row_followed_categories">Followed categories</string>
+    <string name="home_row_past_broadcasts">Past broadcasts</string>
+    <string name="home_row_top_categories">Top categories</string>
+    <string name="home_row_top_streams">Top streams</string>
+    <!-- Components -->
+    <string name="home_live_badge">LIVE</string>
+    <!-- Errors -->
+    <string name="home_twitch_unreachable">Twitch is not reachable</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="playbutton_enter_in_duration">100</integer>
+    <integer name="playbutton_exit_out_duration">100</integer>
+</resources>

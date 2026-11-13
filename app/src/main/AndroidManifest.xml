@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-feature android:name="android.software.leanback" android:required="true"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:name="android.hardware.faketouch" android:required="false"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.android.providers.tv.permission.READ_EPG_DATA"/>
+    <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <permission android:name="com.shrug.shrugtv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.shrug.shrugtv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <application tools:replace="android:label" android:allowBackup="true" android:fullBackupContent="@xml/backup_rules" android:dataExtractionRules="@xml/data_extraction_rules" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:banner="@drawable/banner" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:label="@string/app_name" android:logo="@drawable/banner" android:name="com.shrug.shrugtv.MainApp" android:theme="@style/AppTheme_Shrug" android:usesCleartextTraffic="true">
+        <activity android:configChanges="keyboard|keyboardHidden" android:exported="true" android:label="@string/app_name" android:logo="@drawable/banner" android:name="com.shrug.shrugtv.activities.MainActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoDisplay"/>
+        <!-- Home screen in Compose for TV; MainActivity only forwards to it -->
+        <activity android:configChanges="keyboard|keyboardHidden" android:exported="true" android:label="@string/app_name" android:logo="@drawable/banner" android:name="com.shrug.shrugtv.ui.tv.home.HomeActivity" android:screenOrientation="sensorLandscape" android:theme="@style/ShrugTV.Start">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!-- Settings in Compose for TV; the classic SettingsActivity has been removed since 2026-10-22 (#30) -->
+        <activity android:configChanges="keyboard|keyboardHidden" android:exported="false" android:name="com.shrug.shrugtv.ui.tv.settings.SettingsActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <!-- Fire TV starts through LAUNCHER: the same new home screen -->
+        <activity-alias android:exported="true" android:label="@string/app_name" android:logo="@drawable/banner" android:name="com.shrug.shrugtv.FireTVStart" android:targetActivity="com.shrug.shrugtv.ui.tv.home.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|density|uiMode|navigation" android:exported="false" android:launchMode="singleTask" android:name="com.shrug.shrugtv.activities.PlayerActivity" android:parentActivityName="com.shrug.shrugtv.ui.tv.home.HomeActivity" android:screenOrientation="sensorLandscape"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:label="@string/title_activity_login" android:name="com.shrug.shrugtv.activities.LoginActivity" android:screenOrientation="sensorLandscape"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.ClearHistoryActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.LogoutActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.category.CategoryActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.stats.StatsActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.search.SearchActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.channel.ChannelActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
+        <!-- The only entry from outside into the player: accepts only the deep-link URI and starts the
+             non-exported player with a fresh intent ( point 4) -->
+        <activity android:exported="true" android:name="com.shrug.shrugtv.activities.DeepLinkActivity" android:theme="@android:style/Theme.NoDisplay" android:excludeFromRecents="true" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="com.shrug.shrugtv" android:pathPrefix="/startstream" android:scheme="channel"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="stream" android:scheme="shrugtv"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="vod" android:scheme="shrugtv"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.ContextMenuActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.shrug.shrugtv.activities.DebugActivity" android:screenOrientation="sensorLandscape" android:theme="@style/LeanbackPreferencesRed"/>
+        <activity android:name="com.shrug.shrugtv.ui.tv.dialogs.FollowQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.shrug.shrugtv.ui.tv.dialogs.ChatQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.shrug.shrugtv.companion.CompanionQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.shrug.shrugtv.companion.CompanionDevicesActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.shrug.shrugtv.channels.RunOnInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.shrug.shrugtv.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.work.WorkManagerInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <!-- Profiling with simpleperf/Perfetto in release too (performance); only through adb shell, no debugging -->
+        <profileable android:shell="true" tools:targetApi="29" />
+    </application>
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android 12 and later draw their own splash from these attributes. -->
+    <style name="ShrugTV.Start" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/shrug_start_background</item>
+        <item name="android:colorBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashScreenBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/shrugtv_logo</item>
+    </style>
+    <style name="AppTheme_Shrug" parent="@style/AppTheme_DarkGrey">
+        <item name="android:windowBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashScreenBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/shrugtv_logo</item>
+    </style>
+</resources>

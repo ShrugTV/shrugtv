@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Values from Material 1.7.0 (taken over from its values.xml) that decompiled copies
+          refer to: the theme copy in values/styles.xml (Base.V14.Theme.Material3.Dark) and
+          color/mtrl_switch_thumb_tint.xml. Material 1.12 no longer knows them under these names
+. tools/thin_resources.py leaves *_shrugtv.xml alone. -->
+<resources>
+    <integer name="m3_sys_motion_duration_50">50</integer>
+    <integer name="m3_sys_motion_duration_100">100</integer>
+    <integer name="m3_sys_motion_duration_150">150</integer>
+    <integer name="m3_sys_motion_duration_200">200</integer>
+    <integer name="m3_sys_motion_duration_250">250</integer>
+    <integer name="m3_sys_motion_duration_300">300</integer>
+    <integer name="m3_sys_motion_duration_350">350</integer>
+    <integer name="m3_sys_motion_duration_400">400</integer>
+    <integer name="m3_sys_motion_duration_450">450</integer>
+    <integer name="m3_sys_motion_duration_500">500</integer>
+    <integer name="m3_sys_motion_duration_550">550</integer>
+    <integer name="m3_sys_motion_duration_600">600</integer>
+    <integer name="m3_sys_motion_duration_700">700</integer>
+    <integer name="m3_sys_motion_duration_800">800</integer>
+    <integer name="m3_sys_motion_duration_900">900</integer>
+    <integer name="m3_sys_motion_duration_1000">1000</integer>
+    <item format="float" name="m3_comp_switch_disabled_handle_opacity" type="dimen">0.38</item>
+</resources>

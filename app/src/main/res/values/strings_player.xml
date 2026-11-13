@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Player, channel switcher, notices and login page, English.
+     German versions with the same names: values-de/strings_player.xml. -->
+<resources>
+    <!-- Player bar: labels under the buttons and in the "More" menu -->
+    <string name="player_btn_quality">Quality</string>
+    <string name="player_btn_chat">Chat</string>
+    <string name="player_btn_chat_layout">Chat layout</string>
+    <string name="player_btn_channel">Channel</string>
+    <string name="player_btn_follow">Follow</string>
+    <string name="player_btn_search">Search</string>
+    <string name="player_more">More</string>
+    <string name="player_more_volume">Volume</string>
+    <string name="player_more_send_message">Send message</string>
+    <string name="player_more_chat_position">Adjust chat</string>
+    <string name="player_more_multiview">Adjust multiview</string>
+    <string name="player_more_video_size">Video and chat side by side</string>
+    <string name="player_more_fastforward">Jump to live</string>
+    <string name="player_more_preview_audio">Preview audio</string>
+    <string name="player_more_save_vod">Save VOD position</string>
+    <string name="player_more_reload_emotes">Reload emotes</string>
+    <string name="player_more_stats">Statistics</string>
+
+    <!-- Panel headings -->
+    <string name="player_panel_quality">Quality</string>
+    <string name="player_panel_volume">Volume</string>
+    <string name="player_panel_chapters">Chapters</string>
+    <string name="player_press_back_again">Press BACK again to leave</string>
+    <string name="player_audio_only_hint">Audio only · OK brings the picture back · chat stays on</string>
+    <string name="player_rest_hint">Paused · press any key to continue</string>
+    <string name="player_btn_prev_category">Prev. category</string>
+    <string name="player_btn_next_category">Next category</string>
+    <string name="player_panel_speed">Speed</string>
+
+    <!-- Info line in the player and viewer counts -->
+    <string name="player_stats_title">Video statistics</string>
+    <string name="player_stats_resolution">Resolution</string>
+    <string name="player_stats_bitrate">Bitrate</string>
+    <string name="player_stats_dropped">Dropped frames</string>
+    <string name="player_stats_emotes">Animated emotes</string>
+    <string name="player_stats_buffer">Buffer</string>
+    <string name="player_stats_latency">Latency to live</string>
+    <string name="player_stats_chat_delay">Chat delay</string>
+    <string name="player_stats_memory">Memory</string>
+    <string name="player_quality_source">source</string>
+    <string name="player_quality_audio_only">Audio only</string>
+    <string name="player_info_since">live for %1$s h</string>
+    <string name="player_info_length">%1$s h</string>
+    <string name="player_info_followed">You follow this channel</string>
+    <string name="player_info_favorite">Favourite</string>
+    <plurals name="player_viewers">
+        <item quantity="one">%1$s viewer</item>
+        <item quantity="other">%1$s viewers</item>
+    </plurals>
+    <string name="peek_followers">%1$s followers</string>
+
+    <!-- Chat -->
+    <string name="player_chat_welcome">Welcome to %1$s\'s chat!</string>
+    <string name="player_chat_followers_only">Followers-only chat</string>
+    <string name="player_chat_emote_only">Emote-only mode</string>
+    <string name="player_chat_subs_only">Subscriber-only mode</string>
+    <string name="player_chat_slow_mode">Slow mode %1$d s</string>
+    <string name="player_chat_unique">Unique chat</string>
+    <string name="player_chat_paused">Chat is paused</string>
+    <string name="player_chat_resumed">Chat is resumed</string>
+    <string name="player_chat_banned">Dude, you are BANNED here! But don\'t worry, I\'ve got you!</string>
+    <string name="player_chat_message_removed">message removed</string>
+    <string name="player_chat_sign_in">Sign in to see the chat</string>
+    <string name="player_chat_reconnecting">Chat connection lost, reconnecting…</string>
+    <string name="player_chat_connected">Connected to the chat</string>
+    <string name="player_chat_history_end">Earlier messages above · live from here</string>
+    <string name="player_chat_subscribe_failed">Chat could not connect to Twitch: %1$s</string>
+    <string name="player_chat_send_failed">Message not sent: %1$s</string>
+    <string name="player_raid_hosting">%1$s is hosting %2$s</string>
+    <string name="player_playback_error">Playback error!</string>
+    <string name="player_stream_ended">The stream has ended</string>
+    <string name="player_status_hint">OK: try again · Back: leave</string>
+    <string name="player_open_with">Open with</string>
+    <string name="player_ad_blocking">Blocking ads</string>
+    <string name="player_ad_stripping">Removing ads – picture is waiting</string>
+    <string name="player_btn_play">Play</string>
+    <string name="player_btn_pause">Pause</string>
+    <string name="chat_adjust_width">Width</string>
+    <string name="chat_adjust_width_auto">Auto (%1$d dp)</string>
+    <string name="chat_adjust_position">Side</string>
+    <string name="chat_adjust_left">Left</string>
+    <string name="chat_adjust_right">Right</string>
+    <string name="chat_adjust_background">Background</string>
+    <string name="chat_adjust_hint">◀ ▶ change · Back: done</string>
+    <string name="chat_adjust_font">Text size</string>
+    <string name="chat_adjust_emotes">Emotes</string>
+    <string name="chat_adjust_emotes_normal">Normal</string>
+    <string name="chat_adjust_emotes_bigger">Bigger</string>
+    <string name="chat_adjust_height">Height</string>
+    <string name="chat_adjust_vertical">Placement</string>
+    <string name="chat_adjust_top">Top</string>
+    <string name="chat_adjust_middle">Middle</string>
+    <string name="chat_adjust_bottom">Bottom</string>
+    <string name="player_btn_live">Live</string>
+    <string name="player_behind_live">%1$s behind</string>
+    <string name="player_raid_title">%1$s is raiding %2$s</string>
+    <string name="player_raid_hint">OK: join · Back: stay</string>
+    <string name="player_live_card_title">%1$s is live</string>
+    <string name="player_live_card_hint">OK: switch · Back: stay</string>
+    <string name="player_next_channel">Next: %1$s in %2$d s</string>
+    <string name="player_next_channel_suggest">Next: %1$s</string>
+    <string name="player_next_hint">OK: switch now · Back: stay</string>
+    <string name="companion_qr_steps">1. Phone in the same Wi-Fi. 2. Scan the code with the camera. Or open this address in the browser of a phone or computer and enter the PIN:</string>
+    <string name="companion_pin">PIN %1$s</string>
+    <string name="companion_qr_valid">Valid for 2 minutes and one phone. Back closes.</string>
+    <string name="companion_no_network">No network: connect the TV to Wi-Fi or Ethernet, and switch on "Phone companion" in the settings.</string>
+    <string name="companion_phone_connected">Phone connected: %1$s</string>
+    <string name="player_more_phone">Phone</string>
+    <string name="player_btn_back10">−10 s</string>
+    <string name="player_btn_forward10">+10 s</string>
+    <string name="player_back_to_live_hud">Live again</string>
+    <string name="player_btn_replay">Replay</string>
+    <string name="player_replay_hud">%1$d s back, then live again</string>
+    <string name="player_loading_archive">Loading the recording …</string>
+    <string name="player_loading_live">Back to live …</string>
+    <string name="player_zap_unavailable">Switching with left/right only works for streams opened from a row</string>
+
+    <!-- Channel switcher: tab names -->
+    <string name="channel_switcher_title">Switch channel</string>
+    <string name="switcher_count">%1$d channels</string>
+    <string name="switcher_tab_same_game">Same category</string>
+    <string name="switcher_tab_top_language">Top in your language</string>
+    <string name="peek_tab_recent">Recently watched</string>
+    <string name="peek_tab_followed">Followed</string>
+    <string name="peek_tab_followed_games">Followed categories</string>
+    <string name="peek_tab_language">Language</string>
+    <string name="peek_tab_top_games">Categories</string>
+    <string name="peek_tab_top_streams">Top streams</string>
+    <string name="peek_tab_game">Category</string>
+    <string name="peek_tab_game_language">Category in your language</string>
+    <string name="peek_tab_search_streams">Streams</string>
+    <string name="peek_tab_search_games">Categories</string>
+    <string name="peek_tab_search_channels">Channels</string>
+
+    <!-- Notices -->
+    <string name="notice_is_live">%1$s is live</string>
+    <string name="notice_gifted_sub">%1$s gifted you a sub!</string>
+    <!-- The word in notice_gifted_sub that is highlighted -->
+    <string name="notice_gifted_sub_you">you</string>
+    <string name="notice_channel_offline">%1$s is not live right now.</string>
+    <string name="notice_twitch_unreachable">Twitch is unreachable, %1$s can\'t be opened.</string>
+    <string name="notice_emotes_reloaded">Emotes reloaded: %1$d</string>
+    <string name="notice_emotes_reloaded_channel">Emotes reloaded: %1$d (%2$s)</string>
+    <string name="notice_no_live_chat">No live chat active</string>
+    <string name="notice_vod_resume_added">VOD resume position added!</string>
+    <string name="notice_vod_resume_updated">VOD resume position updated!</string>
+    <string name="notice_vod_not_found">The current stream\'s VOD was not found, the position can\'t be saved!</string>
+    <string name="notice_clock_error">Error with custom clock %1$d, try a different time zone</string>
+    <string name="notice_service_running">Running…</string>
+
+    <!-- Login page -->
+    <string name="login_title">Sign in to Twitch</string>
+    <string name="login_intro">Then you see your followed channels and your history, and you can write in chat.</string>
+    <string name="login_step_1">Open twitch.tv/activate on your phone or PC</string>
+    <string name="login_step_2">Enter the code on the right</string>
+    <string name="login_step_3">Approve it, the TV signs in by itself</string>
+    <string name="login_status_requesting">Requesting code …</string>
+    <string name="login_status_unreachable">Twitch unreachable, trying again …</string>
+    <string name="login_status_waiting">Waiting for approval …</string>
+    <string name="login_status_signed_in">Signed in.</string>
+    <string name="login_status_denied">Sign-in denied. New code …</string>
+    <string name="login_status_expired">Code expired. New code …</string>
+    <string name="login_code_valid">Code valid for %1$d more min</string>
+    <string name="login_qr_description">QR code for twitch.tv/activate</string>
+    <string name="login_scan_hint">or scan it with your phone camera</string>
+    <string name="player_chapters_count">%1$d chapters</string>
+</resources>

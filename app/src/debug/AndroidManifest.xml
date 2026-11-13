@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Debug builds only: pages that are otherwise only reachable through a state, open them with
+     "adb shell am start -n com.shrug.shrugtv/.activities.LoginActivity", e.g. the sign-in,
+     without signing out. Release builds stay unchanged. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <activity android:name="com.shrug.shrugtv.activities.LoginActivity" android:exported="true" tools:node="merge" />
+        <activity android:name="com.shrug.shrugtv.ui.tv.settings.SettingsActivity" android:exported="true" tools:node="merge" tools:replace="android:exported" />
+    </application>
+</manifest>

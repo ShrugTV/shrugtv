@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0E">
+<title>ShrugTV</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/app.css">
+<script>
+// Theme before the first paint (no flash): ?theme=light|dark, otherwise the saved choice
+(function () {
+  const q = new URLSearchParams(location.search).get('theme');
+  let t = q === 'light' || q === 'dark' ? q : null;
+  try { if (t) localStorage.setItem('shrugtv.theme', t); else t = localStorage.getItem('shrugtv.theme'); } catch (e) { /* private mode */ }
+  document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+})();
+</script>
+</head>
+<body>
+<main id="pair" hidden>
+  <h1><img class="logo" src="/favicon.png" alt="" width="36" height="36">ShrugTV</h1>
+  <p id="pair-text" data-i18n="pairText"></p>
+  <form id="pin-form">
+    <label for="pin" data-i18n="pinLabel"></label>
+    <input id="pin" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>
+    <button type="submit" data-i18n="connect"></button>
+  </form>
+  <p id="pair-error" class="error" role="alert"></p>
+</main>
+
+<main id="app" hidden>
+  <header id="now">
+    <img id="now-avatar" alt="" width="56" height="56">
+    <div class="now-text">
+      <div class="now-line"><strong id="now-channel"></strong><span id="now-live" class="badge"></span></div>
+      <div id="now-meta" class="muted"></div>
+      <div id="now-title" class="muted ellipsis"></div>
+    </div>
+  </header>
+  <p id="offline" class="error" role="status" hidden data-i18n="offline"></p>
+
+  <nav id="side" aria-label="ShrugTV">
+    <div class="brand"><img class="logo" src="/favicon.png" alt="" width="32" height="32">ShrugTV</div>
+    <div id="tabs" role="tablist">
+      <button role="tab" data-tab="remote" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="8" r="2"/><path d="M10 14h4M10 17h4"/></svg><span class="full" data-i18n="tabRemote"></span><span class="short" aria-hidden="true" data-i18n="tabRemoteShort"></span></button>
+      <button role="tab" data-tab="chat" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span class="full" data-i18n="tabChat"></span><span class="short" aria-hidden="true" data-i18n="tabChatShort"></span></button>
+      <button role="tab" data-tab="find" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg><span class="full" data-i18n="tabFind"></span><span class="short" aria-hidden="true" data-i18n="tabFindShort"></span></button>
+      <button role="tab" data-tab="player" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg><span class="full" data-i18n="tabPlayer"></span><span class="short" aria-hidden="true" data-i18n="tabPlayerShort"></span></button>
+      <button role="tab" data-tab="log" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12 15h5"/></svg><span class="full" data-i18n="tabLog"></span><span class="short" aria-hidden="true" data-i18n="tabLog"></span></button>
+      <button role="tab" data-tab="settings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span class="full" data-i18n="tabSettings"></span><span class="short" aria-hidden="true" data-i18n="tabSettingsShort"></span></button>
+    </div>
+    <div id="set-groups" hidden></div>
+    <div class="side-foot">
+      <span class="hint muted" data-i18n="searchHint"></span>
+      <button id="theme" type="button" data-i18n-label="theme" data-i18n-title="theme"></button>
+    </div>
+  </nav>
+
+  <section id="tab-remote" class="tab">
+    <div class="dpad">
+      <button class="k up" data-key="up" data-i18n-label="up">▲</button>
+      <button class="k left" data-key="left" data-i18n-label="left">◀</button>
+      <button class="k ok" data-key="ok">OK</button>
+      <button class="k right" data-key="right" data-i18n-label="right">▶</button>
+      <button class="k down" data-key="down" data-i18n-label="down">▼</button>
+    </div>
+    <div class="row">
+      <button data-key="back" data-i18n="back"></button>
+      <button data-key="menu" data-i18n="more"></button>
+      <button data-key="play_pause" data-i18n="playPause"></button>
+    </div>
+    <div class="row">
+      <button data-cmd="previous" data-i18n="prev"></button>
+      <button data-cmd="live" data-i18n="live"></button>
+      <button data-cmd="next" data-i18n="next"></button>
+    </div>
+    <label class="slider"><span data-i18n="volume"></span>
+      <input id="volume" type="range" min="0" max="100" step="5">
+    </label>
+  </section>
+
+  <section id="tab-chat" class="tab" hidden>
+    <div id="chat" aria-live="polite"></div>
+    <form id="chat-form">
+      <label for="chat-input" class="sr-only" data-i18n="message"></label>
+      <input id="chat-input" maxlength="500" autocomplete="off" enterkeyhint="send" data-i18n-placeholder="message">
+      <button type="submit" data-i18n="send"></button>
+    </form>
+    <p id="chat-off" class="muted" hidden data-i18n="chatOff"></p>
+  </section>
+
+  <section id="tab-find" class="tab" hidden>
+    <form id="search-form">
+      <label for="search" class="sr-only" data-i18n="search"></label>
+      <input id="search" type="search" maxlength="100" enterkeyhint="search" data-i18n-placeholder="searchChannels">
+      <button type="submit" data-i18n="search"></button>
+    </form>
+    <h2 id="find-title" data-i18n="liveNow"></h2>
+    <ul id="cards"></ul>
+  </section>
+
+  <section id="tab-player" class="tab" hidden>
+    <label class="field"><span data-i18n="quality"></span><select id="quality"></select></label>
+    <label class="field"><span data-i18n="chatLayout"></span>
+      <select id="layout">
+        <option value="side_by_side" data-i18n="layoutSide"></option>
+        <option value="overlay" data-i18n="layoutOverlay"></option>
+        <option value="transparent" data-i18n="layoutTransparent"></option>
+      </select>
+    </label>
+    <div class="row">
+      <button data-cmd="chat" data-payload="ON" data-i18n="chatOn"></button>
+      <button data-cmd="chat" data-payload="OFF" data-i18n="chatOffBtn"></button>
+      <button data-key="info" data-i18n="stats"></button>
+    </div>
+    <div class="row"><button data-cmd="close" data-i18n="close"></button></div>
+    <p><a id="open-twitch" href="#" target="_blank" rel="noopener noreferrer" data-i18n="openTwitch"></a></p>
+  </section>
+
+  <section id="tab-log" class="tab" hidden>
+    <p id="log-off" class="muted" hidden data-i18n="logOff"></p>
+    <div id="log-ui">
+      <p class="muted log-about" data-i18n="logAbout"></p>
+      <div class="log-tools">
+        <label for="log-search" class="sr-only" data-i18n="logSearch"></label>
+        <input id="log-search" type="search" maxlength="80" autocomplete="off" data-i18n-placeholder="logSearch">
+        <label for="log-tag" class="sr-only" data-i18n="logSource"></label>
+        <select id="log-tag"></select>
+      </div>
+      <div class="log-tools2">
+        <div class="log-levels" role="group" data-i18n-label="logLevel">
+          <button type="button" data-level="all" aria-pressed="true" data-i18n="logAll"></button>
+          <button type="button" data-level="E" aria-pressed="false"><span data-i18n="logErrors"></span> <span class="n" id="n-E"></span></button>
+          <button type="button" data-level="W" aria-pressed="false"><span data-i18n="logWarnings"></span> <span class="n" id="n-W"></span></button>
+          <button type="button" data-level="I" aria-pressed="false" data-i18n="logInfo"></button>
+          <button type="button" data-level="D" aria-pressed="false" data-i18n="logDebug"></button>
+        </div>
+        <div class="log-actions">
+          <button type="button" id="log-pause" aria-pressed="false" data-i18n="logPause"></button>
+          <button type="button" id="log-copy" data-i18n="logCopy"></button>
+          <button type="button" id="log-export" data-i18n="logExport"></button>
+          <label class="check"><input type="checkbox" id="log-private" checked> <span data-i18n="logPrivate"></span></label>
+        </div>
+      </div>
+      <p id="log-status" class="muted" role="status"></p>
+      <div id="log-view" role="log" aria-live="off" tabindex="0"></div>
+      <button type="button" id="log-latest" hidden data-i18n="logLatest"></button>
+    </div>
+  </section>
+
+  <section id="tab-settings" class="tab" hidden>
+    <p id="set-off" class="muted" hidden data-i18n="settingsOff"></p>
+    <div id="set-ui">
+      <div class="set-search">
+        <label for="set-search" class="sr-only" data-i18n="settingsSearch"></label>
+        <input id="set-search" type="search" maxlength="60" autocomplete="off" data-i18n-placeholder="settingsSearch">
+      </div>
+      <div class="set-backup">
+        <button id="set-export" type="button" data-i18n="export"></button>
+        <label class="file-btn"><span data-i18n="import"></span><input id="set-import" type="file" accept="application/json,.json"></label>
+      </div>
+      <p id="set-status" class="muted" role="status"></p>
+      <div id="set-content"></div>
+    </div>
+  </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

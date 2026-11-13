@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texts of the public edition -->
+<resources>
+    <string name="info_about_1">An unofficial Android TV client for Twitch: live streams, videos, chat and channels, operated with the remote.</string>
+    <string name="info_about_footer">Version %1$s · unofficial client, not affiliated with Twitch</string>
+    <string name="info_privacy_controller">The provider named under Imprint. The app itself sends nothing to the provider.</string>
+</resources>

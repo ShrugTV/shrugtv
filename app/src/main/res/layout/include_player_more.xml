@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "More" menu of the player bar: rarely used actions as a labelled list,
+     opened with the "More" button, closed with Back. A row is visible as long as its button is
+     visible (PlayerActivity.syncButtonRows). -->
+<LinearLayout android:orientation="vertical" android:background="@drawable/menu_panel" android:paddingStart="10dp" android:paddingEnd="18dp" android:paddingTop="10dp" android:paddingBottom="10dp"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:text="@string/player_more" android:textSize="13sp" android:fontFamily="@font/inter_semibold" android:textColor="#FFADADB8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_marginBottom="6dp" />
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonVolumeControl" android:nextFocusRight="@id/ButtonVolumeControl" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonVolumeControl" android:tag="@string/tooltip_volume_control" android:background="@drawable/playerbutton_selector" android:src="@drawable/speaker_wireless" android:contentDescription="@string/tooltip_volume_control" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_volume" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonSendMessage" android:nextFocusRight="@id/ButtonSendMessage" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonSendMessage" android:tag="@string/tooltip_send_message" android:background="@drawable/playerbutton_selector" android:src="@drawable/send_message" android:contentDescription="@string/tooltip_send_message" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_send_message" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonChatPosition" android:nextFocusRight="@id/ButtonChatPosition" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonChatPosition" android:tag="@string/tooltip_chat_position" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_resize_chat" android:contentDescription="@string/tooltip_chat_position" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_chat_position" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonMultiViewSize" android:nextFocusRight="@id/ButtonMultiViewSize" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonMultiViewSize" android:tag="@string/tooltip_multiview" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_resize_multiview" android:contentDescription="@string/tooltip_multiview" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_multiview" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonVideoSize" android:nextFocusRight="@id/ButtonVideoSize" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonVideoSize" android:tag="@string/tooltip_video_size" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_baseline_aspect_ratio_24px" android:contentDescription="@string/tooltip_video_size" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_video_size" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonFastForward" android:nextFocusRight="@id/ButtonFastForward" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonFastForward" android:tag="@string/tooltip_fastforward" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_round_fast_forward_24px" android:contentDescription="@string/tooltip_fastforward" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_fastforward" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonPreviewAudio" android:nextFocusRight="@id/ButtonPreviewAudio" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonPreviewAudio" android:tag="@string/tooltip_preview_audio" android:background="@drawable/playerbutton_selector" android:visibility="gone" android:scaleType="fitCenter" android:contentDescription="@string/tooltip_preview_audio" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_preview_audio" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonSaveVod" android:nextFocusRight="@id/ButtonSaveVod" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonSaveVod" android:tag="@string/remote_shortcut_save_vod" android:background="@drawable/playerbutton_selector" android:src="@drawable/save_vod" android:scaleType="fitCenter" android:contentDescription="@string/remote_shortcut_save_vod" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_save_vod" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@+id/ButtonEmotesReload" android:nextFocusRight="@+id/ButtonEmotesReload" android:tint="@color/playerbutton_symbol" android:id="@+id/ButtonEmotesReload" android:tag="@string/tooltip_emotes_reload" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_emotes_reload" android:scaleType="fitCenter" android:contentDescription="@string/tooltip_emotes_reload" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_reload_emotes" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp">
+        <ImageButton android:layout_width="38dp" android:layout_height="38dp" android:padding="9dp" android:nextFocusLeft="@id/ButtonStat4Nerds" android:nextFocusRight="@id/ButtonStat4Nerds" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonStat4Nerds" android:tag="@string/tooltip_stat" android:background="@drawable/playerbutton_selector" android:src="@drawable/stat4nerds" android:contentDescription="@string/tooltip_stat" />
+        <TextView style="@style/MoreText" android:text="@string/player_more_stats" />
+    </LinearLayout>
+</LinearLayout>

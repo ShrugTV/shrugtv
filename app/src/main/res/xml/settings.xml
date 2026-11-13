@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/pref_title_root_title" android:key="pref_main">
+    <PreferenceScreen android:icon="@drawable/ic_home_mqtt" android:title="@string/pref_title_home" android:key="pref_general_settings">
+        <com.shrug.shrugtv.ui.tv.settings.DesignPreviewPreference android:title="@string/theme_preview" />
+        <PreferenceCategory android:title="@string/cat_home_start">
+            <SwitchPreference android:title="@string/settings_pref_start_last_channel" android:key="pref_start_last_channel" android:summary="@string/settings_pref_start_last_channel_summary" android:defaultValue="false" />
+            <ListPreference android:entries="@array/display_splash_style" android:title="@string/settings_pref_splash_style" android:key="pref_splash_style" android:summary="@string/settings_pref_splash_style_summary" android:defaultValue="full" android:entryValues="@array/value_splash_style" />
+            <SwitchPreference android:title="@string/settings_pref_splash_greeting" android:key="pref_splash_greeting" android:summary="@string/settings_pref_splash_greeting_summary" android:defaultValue="true" />
+            <ListPreference android:entries="@array/display_splash_min" android:title="@string/settings_pref_splash_min" android:key="pref_splash_min_ms" android:summary="@string/settings_pref_splash_min_summary" android:defaultValue="600" android:entryValues="@array/value_splash_min" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_home_content">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_home_tip" />
+            <PreferenceScreen android:icon="@drawable/ic_row_visibility" android:title="@string/pref_title_row_visibility" android:key="pref_mainscreen_row_visibility">
+                <PreferenceCategory android:title="@string/pref_title_row_visibility">
+                    <SwitchPreference android:title="@string/settings_pref_live_history" android:key="pref_show_LiveStreamHistory" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_followed" android:key="pref_show_Followed" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_followed_games" android:key="pref_show_FollowedGames" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_followed_channels" android:key="pref_show_FollowedChannels" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_past_broadcasts" android:key="pref_show_PastBroadcasts" android:summary="@string/summary_rowvisibilty_past_broadcast" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_vod_history_row" android:key="pref_show_VodHistory" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_top_games" android:key="pref_show_top_games" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_top_streamers" android:key="pref_show_top_streamers" android:defaultValue="true" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_row_visibility" android:title="@string/pref_title_row_order" android:key="pref_row_order_screen">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_row_order_tip" />
+                <Preference android:title="@string/home_row_followed_live" android:key="pref_row_move_followed_live" />
+                <Preference android:title="@string/home_row_live_history" android:key="pref_row_move_live_history" />
+                <Preference android:title="@string/home_row_continue_watching" android:key="pref_row_move_continue_watching" />
+                <Preference android:title="@string/home_row_followed_channels" android:key="pref_row_move_followed_channels" />
+                <Preference android:title="@string/home_row_followed_categories" android:key="pref_row_move_followed_categories" />
+                <Preference android:title="@string/home_row_past_broadcasts" android:key="pref_row_move_past_broadcasts" />
+                <Preference android:title="@string/home_row_top_categories" android:key="pref_row_move_top_categories" />
+                <Preference android:title="@string/home_row_top_streams" android:key="pref_row_move_top_streams" />
+                <Preference android:title="@string/settings_row_order_reset" android:key="pref_row_order_reset" />
+            </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_baseline_language_24px" android:title="@string/pref_title_languagestream" android:key="pref_language_screen">
+                <Preference android:title="@string/pref_title_languagestream" android:selectable="false" android:summary="@string/pref_summary_languagestream" />
+                <SwitchPreference android:title="@string/settings_pref_language_row_main" android:key="pref_show_language_row" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_pref_language_row_games" android:key="pref_show_language_row_games" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_pref_language_row_primary" android:key="pref_language_row_as_primary" android:dependency="pref_show_language_row_games" android:defaultValue="false" />
+                <ListPreference android:entries="@array/display_languages" android:title="@string/settings_pref_select_language" android:key="prefs_languagerow" android:summary="%s" android:defaultValue="en" android:entryValues="@array/value_languages" />
+            </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_filter_03" android:title="@string/pref_title_filtering" android:key="pref_filtering_main" android:summary="@string/pref_summary_filtering_exclude">
+                <PreferenceCategory android:title="@string/pref_title_filtering_exclude">
+                    <SwitchPreference android:title="@string/pref_title_use_filtering" android:key="pref_filtering_use_filtering" android:defaultValue="false" />
+                    <EditTextPreference android:icon="@drawable/ic_filter_03" android:title="@string/pref_title_filter_channels" android:key="pref_filtering_channels" android:dependency="pref_filtering_use_filtering" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/dialogtitle_filtering_separate_by" />
+                    <EditTextPreference android:icon="@drawable/ic_filter_03" android:title="@string/pref_title_filter_categories" android:key="pref_filtering_categories" android:dependency="pref_filtering_use_filtering" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/dialogtitle_filtering_separate_by" />
+                    <SwitchPreference android:icon="@drawable/ic_filter_03" android:title="@string/pref_title_filter_reruns" android:key="pref_filtering_reruns" android:dependency="pref_filtering_use_filtering" android:defaultValue="false" />
+                    <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/pref_summary_filter_tip" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_baseline_refresh_24px" android:title="@string/pref_title_auto_refresh" android:key="pref_mainscreen_autorefresh">
+                <Preference android:title="@string/pref_title_auto_refresh" android:selectable="false" android:summary="@string/pref_summary_autorefresh" />
+                <SwitchPreference android:title="@string/settings_pref_use_auto_refresh" android:key="pref_autorefresh_parent" android:defaultValue="true" />
+                <ListPreference android:entries="@array/value_autorefresh_minutes" android:title="@string/settings_pref_minutes" android:key="prefs_autorefresh_minutes" android:summary="%s" android:dependency="pref_autorefresh_parent" android:defaultValue="20" android:entryValues="@array/value_autorefresh_minutes" />
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_pref_auto_refresh_tip" />
+            </PreferenceScreen>
+            <ListPreference android:icon="@drawable/ic_photo_size_select_large_24px" android:entries="@array/display_video_card_size" android:title="@string/settings_pref_video_card_size" android:key="prefs_video_card_size" android:summary="%s" android:defaultValue="normal" android:entryValues="@array/value_video_card_size" />
+            <SwitchPreference android:title="@string/settings_pref_favorites_first" android:key="pref_favorites_in_front_of_followed" android:summary="@string/settings_pref_favorites_first_summary" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_pref_stream_preview_category">
+            <SwitchPreference android:icon="@drawable/ic_show_preview" android:title="@string/settings_pref_show_stream_preview" android:key="pref_show_stream_preview" android:summary="@string/settings_pref_show_stream_preview_summary" android:defaultValue="true" />
+            <ListPreference android:entries="@array/display_stream_preview_quality" android:title="@string/pref_title_stream_preview_quality" android:key="pref_stream_preview_quality" android:summary="%s" android:dependency="pref_show_stream_preview" android:defaultValue="0" android:entryValues="@array/value_stream_preview_quality" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_pref_watch_stats_category">
+            <SwitchPreference android:title="@string/settings_pref_watch_stats" android:key="pref_watch_stats" android:summary="@string/settings_pref_watch_stats_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_pref_watch_stats_card" android:key="pref_watch_stats_card" android:summary="@string/settings_pref_watch_stats_card_summary" android:dependency="pref_watch_stats" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_pref_live_history">
+            <Preference android:icon="@drawable/trashcan" android:title="@string/settings_pref_clear_history" android:key="pref_live_channel_history_clear_history" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/pref_title_vod_history">
+            <Preference android:icon="@drawable/trashcan" android:title="@string/pref_title_clear_vod_history" android:key="pref_clear_vod_history" android:summary="@string/pref_summary_clear_vod_history" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_palette_24px" android:title="@string/pref_title_appearance" android:key="pref_appearance_screen">
+        <com.shrug.shrugtv.ui.tv.settings.DesignPreviewPreference android:title="@string/theme_preview" />
+        <com.shrug.shrugtv.ui.tv.settings.SkinPreference android:title="@string/theme_skin" android:key="pref_skin" android:summary="@string/theme_skin_summary" android:defaultValue="shrugtv" />
+        <PreferenceCategory android:title="@string/theme_group_colors">
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/pref_title_accent_color" android:key="pref_theme_accent" android:summary="@string/settings_pref_theme_accent_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_background" android:key="pref_theme_background" android:summary="@string/theme_background_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_surface" android:key="pref_theme_surface" android:summary="@string/theme_surface_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_text" android:key="pref_theme_text" android:summary="@string/theme_text_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_text_muted" android:key="pref_theme_text_muted" android:summary="@string/theme_text_muted_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_live" android:key="pref_theme_live" android:summary="@string/theme_live_summary" android:defaultValue="skin" />
+            <com.shrug.shrugtv.ui.tv.settings.ColorPreference android:title="@string/theme_focus" android:key="pref_theme_focus" android:summary="@string/theme_focus_summary" android:defaultValue="skin" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/theme_group_shapes">
+            <ListPreference android:entries="@array/display_theme_corners" android:title="@string/theme_corners" android:key="pref_theme_corners" android:summary="@string/theme_corners_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_corners" />
+            <ListPreference android:entries="@array/display_theme_focus_style" android:title="@string/theme_focus_style" android:key="pref_theme_focus_style" android:summary="@string/theme_focus_style_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_focus_style" />
+            <ListPreference android:entries="@array/display_theme_focus_scale" android:title="@string/theme_focus_scale" android:key="pref_theme_focus_scale" android:summary="@string/theme_focus_scale_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_focus_scale" />
+            <ListPreference android:entries="@array/display_theme_border" android:title="@string/theme_border" android:key="pref_theme_border" android:summary="@string/theme_border_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_border" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/theme_group_surfaces">
+            <ListPreference android:entries="@array/display_theme_glass" android:title="@string/theme_glass" android:key="pref_theme_glass" android:summary="@string/theme_glass_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_glass" />
+            <ListPreference android:entries="@array/display_theme_hero_dim" android:title="@string/theme_hero_dim" android:key="pref_theme_hero_dim" android:summary="@string/theme_hero_dim_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_hero_dim" />
+            <ListPreference android:entries="@array/display_theme_background_style" android:title="@string/theme_background_style" android:key="pref_theme_background_style" android:summary="@string/theme_background_style_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_background_style" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/theme_group_text">
+            <ListPreference android:entries="@array/display_theme_font" android:title="@string/theme_font" android:key="pref_theme_font" android:summary="@string/theme_font_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_font" />
+            <ListPreference android:entries="@array/display_theme_text_scale" android:title="@string/theme_text_scale" android:key="pref_theme_text_scale" android:summary="@string/theme_text_scale_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_text_scale" />
+            <ListPreference android:entries="@array/display_theme_animations" android:title="@string/theme_animations" android:key="pref_theme_animations" android:summary="@string/theme_animations_summary" android:defaultValue="skin" android:entryValues="@array/value_theme_animations" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_language">
+            <ListPreference android:entries="@array/app_language_names" android:title="@string/pref_title_app_language" android:key="pref_app_language" android:summary="%s" android:defaultValue="system" android:entryValues="@array/app_language_values" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/theme_group_more">
+            <Preference android:title="@string/theme_reset" android:key="pref_theme_reset" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_baseline_play_circle_outline_24px" android:title="@string/pref_title_player" android:key="pref_stream_settings">
+        <com.shrug.shrugtv.ui.tv.settings.DesignPreviewPreference android:title="@string/theme_preview" />
+        <PreferenceCategory android:title="@string/cat_quality">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_quality_tip" />
+            <ListPreference android:entries="@array/display_video_quality" android:title="@string/pref_title_default_video_quality" android:key="prefs_video_quality_v3" android:summary="%s" android:defaultValue="0" android:entryValues="@array/value_video_quality" />
+            <ListPreference android:entries="@array/display_video_quality" android:title="@string/pref_title_default_VOD_video_quality" android:key="prefs_VOD_video_quality_v3" android:summary="%s" android:defaultValue="0" android:entryValues="@array/value_video_quality" />
+            <SwitchPreference android:title="@string/settings_low_latency" android:key="pref_low_latency" android:summary="@string/settings_low_latency_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_match_frame_rate" android:key="pref_match_frame_rate" android:summary="@string/settings_match_frame_rate_summary" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_vod_chapters" android:key="pref_vod_chapters" android:summary="@string/settings_vod_chapters_summary" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_controls">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_player_keys_tip" />
+            <ListPreference android:entries="@array/display_player_controls_timeout" android:title="@string/settings_player_controls_timeout" android:key="pref_player_controls_timeout" android:summary="%s" android:defaultValue="8" android:entryValues="@array/value_player_controls_timeout" />
+            <SwitchPreference android:title="@string/settings_player_info_corner" android:key="pref_player_info_corner" android:summary="@string/settings_player_info_corner_summary" android:defaultValue="true" />
+            <ListPreference android:entries="@array/display_player_bar_labels" android:title="@string/settings_player_bar_labels" android:key="pref_player_bar_labels" android:summary="%s" android:defaultValue="highlighted" android:entryValues="@array/value_player_bar_labels" />
+            <SwitchPreference android:title="@string/pref_title_double_tap_back" android:key="pref_stream_double_tap_back" android:summary="@string/pref_summary_double_tap_back" android:defaultValue="false" />
+            <PreferenceScreen android:icon="@drawable/ic_peekview" android:title="@string/settings_switcher_screen" android:key="pref_switcher_screen" android:summary="@string/settings_switcher_screen_summary">
+                <PreferenceCategory android:title="@string/settings_switcher_category">
+                    <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_switcher_tip" />
+                    <SwitchPreference android:title="@string/settings_switcher_updown" android:key="pref_switcher_updown" android:summary="@string/settings_switcher_updown_summary" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/peek_tab_followed" android:key="pref_switcher_list_followed" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/switcher_tab_same_game" android:key="pref_switcher_list_same_game" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/peek_tab_game_language" android:key="pref_switcher_list_same_game_language" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/peek_tab_recent" android:key="pref_switcher_list_history" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/peek_tab_top_streams" android:key="pref_switcher_list_top_streams" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/switcher_tab_top_language" android:key="pref_switcher_list_top_language" android:defaultValue="true" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_clock_outline" android:title="@string/settings_pref_clock" android:key="pref_ClockScreen">
+                <SwitchPreference android:title="@string/settings_pref_show_clock" android:key="pref_clock_showclock" android:summary="@string/settings_clock_summary" android:defaultValue="true" />
+                <ListPreference android:entries="@array/display_time_format" android:title="@string/settings_pref_time_format" android:key="pref_clock_time_format" android:summary="%s" android:defaultValue="H:mm" android:entryValues="@array/value_time_format" />
+                <ListPreference android:entries="@array/clock_date_format" android:title="@string/settings_pref_date_format" android:key="pref_clock_date_format" android:summary="%s" android:defaultValue="yyyy-MM-dd" android:entryValues="@array/clock_date_format" />
+                <PreferenceCategory android:title="@string/settings_pref_local_clock">
+                    <SwitchPreference android:title="@string/settings_pref_show_local_time" android:key="pref_clock_showlocal" android:summary="" android:dependency="pref_clock_showclock" android:defaultValue="true" />
+                    <SwitchPreference android:title="@string/settings_pref_show_local_date" android:key="pref_clock_show_date_v2" android:summary="" android:dependency="pref_clock_showclock" android:defaultValue="false" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_live">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_live_tip" />
+            <SwitchPreference android:title="@string/settings_player_back_to_live" android:key="pref_player_back_to_live" android:summary="@string/settings_player_back_to_live_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_player_live_rewind" android:key="pref_live_rewind" android:summary="@string/settings_player_live_rewind_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_player_self_heal" android:key="pref_player_self_heal" android:summary="@string/settings_player_self_heal_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_player_replay" android:key="pref_player_replay" android:summary="@string/settings_player_replay_summary" android:defaultValue="true" />
+            <ListPreference android:entries="@array/display_player_replay_seconds" android:title="@string/settings_player_replay_seconds" android:key="pref_player_replay_seconds" android:summary="%s" android:dependency="pref_player_replay" android:defaultValue="30" android:entryValues="@array/value_player_replay_seconds" />
+            <ListPreference android:entries="@array/display_player_end_of_stream" android:title="@string/settings_player_end_of_stream" android:key="pref_player_end_of_stream" android:summary="%s" android:defaultValue="countdown" android:entryValues="@array/value_player_end_of_stream" />
+            <SwitchPreference android:title="@string/pref_title_show_incoming_raid_notification" android:key="pref_stream_show_incoming_raid_notification" android:defaultValue="true" android:summary="@string/settings_player_raid_summary" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_protection">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_player_burn_in_tip" />
+            <SwitchPreference android:title="@string/settings_player_audio_only_screen" android:key="pref_player_audio_only_screen" android:summary="@string/settings_player_audio_only_screen_summary" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_player_burn_in" android:key="pref_player_burn_in" android:summary="@string/settings_player_burn_in_summary" android:defaultValue="false" />
+            <ListPreference android:entries="@array/display_player_rest_after" android:title="@string/settings_player_rest_after" android:key="pref_player_rest_after" android:summary="%s" android:defaultValue="5" android:entryValues="@array/value_player_rest_after" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_baseline_chat_24px" android:title="@string/pref_title_chatsettings" android:key="pref_chat_screen">
+        <com.shrug.shrugtv.ui.tv.settings.DesignPreviewPreference android:title="@string/theme_preview" />
+        <PreferenceCategory android:title="@string/pref_title_chatsettings">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_chat_layout_tip" />
+            <SwitchPreference android:title="@string/settings_title_chat_join_chat" android:key="pref_join_chat" android:defaultValue="true" android:summaryOff="@string/settings_summary_chat_join_chat" />
+            <SwitchPreference android:title="@string/settings_title_chat_show_chat_on_playback" android:key="pref_show_chat" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_vod_chat" android:key="pref_chat_vod" android:summary="@string/settings_chat_vod_chat_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <ListPreference android:entries="@array/display_chat_delay" android:title="@string/settings_title_chat_delay" android:key="prefs_chat_delay" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="auto" android:entryValues="@array/value_chat_delay" />
+            <SwitchPreference android:title="@string/settings_title_chat_show_gif" android:key="pref_chat_usegifs" android:dependency="pref_join_chat" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_layout">
+            <ListPreference android:icon="@drawable/ic_baseline_aspect_ratio_24px" android:entries="@array/display_chat_layout" android:title="@string/settings_title_chat_layout" android:key="pref_chat_layout" android:summary="%s" android:defaultValue="side_by_side" android:entryValues="@array/value_chat_layout" />
+            <ListPreference android:entries="@array/display_chat_font_size" android:title="@string/settings_title_chat_font_size" android:key="prefs_chat_font_size" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="2" android:entryValues="@array/value_chat_font_size" />
+            <ListPreference android:entries="@array/display_chat_width" android:title="@string/settings_title_chat_default_width" android:key="pref_chat_width" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="0" android:entryValues="@array/value_chat_width" />
+            <ListPreference android:entries="@array/display_chat_height" android:title="@string/settings_title_chat_height" android:key="pref_chat_height" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="100" android:entryValues="@array/value_chat_height" />
+            <ListPreference android:entries="@array/display_chat_vertical" android:title="@string/settings_title_chat_vertical" android:key="pref_chat_vertical" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="bottom" android:entryValues="@array/value_chat_vertical" />
+            <ListPreference android:entries="@array/display_chat_position" android:title="@string/settings_title_chat_default_position" android:key="pref_chat_position" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="2" android:entryValues="@array/value_chat_position" />
+            <ListPreference android:entries="@array/display_emote_size" android:title="@string/settings_title_chat_emote_size" android:key="pref_chat_emote_size" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="1" android:entryValues="@array/value_emote_size" />
+            <ListPreference android:entries="@array/display_chat_background_opacity" android:title="@string/settings_title_chat_background_opacity" android:key="pref_chat_background_opacity" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="6" android:entryValues="@array/value_chat_background_opacity" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/cat_events">
+            <SwitchPreference android:title="@string/settings_title_chat_show_subscriptions" android:key="pref_show_sub_messages" android:dependency="pref_join_chat" android:defaultValue="false" android:switchTextOn="@string/settings_summaryON_chat_show_subscriptions" android:switchTextOff="@string/settings_summaryOFF_chat_show_subscriptions" />
+            <SwitchPreference android:title="@string/settings_title_chat_show_prime" android:key="pref_show_prime" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_title_chat_show_gifted_subs" android:key="pref_show_giftedsubs" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_title_chat_show_timestamp" android:key="pref_show_timestamp" android:dependency="pref_join_chat" android:defaultValue="false" android:switchTextOn="@string/settings_summary_chat_show_timestamp" android:switchTextOff="" />
+            <ListPreference android:entries="@array/display_deleted_style" android:title="@string/settings_title_chat_deleted_style" android:key="pref_chat_deleted_style" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="strike" android:entryValues="@array/value_deleted_style" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_chat_look_category">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_chat_look_tip" />
+            <ListPreference android:entries="@array/display_name_colors" android:title="@string/settings_chat_name_colors" android:key="pref_chat_name_colors" android:summary="%s" android:dependency="pref_join_chat" android:defaultValue="readable" android:entryValues="@array/value_name_colors" />
+            <SwitchPreference android:title="@string/settings_chat_alternate" android:key="pref_chat_alternate" android:summary="@string/settings_chat_alternate_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_chat_separators" android:key="pref_chat_separators" android:summary="@string/settings_chat_separators_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_chat_compact" android:key="pref_chat_compact" android:summary="@string/settings_chat_compact_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <ListPreference android:entries="@array/display_chat_animation" android:title="@string/settings_chat_animation" android:key="pref_chat_animation" android:summary="@string/settings_chat_animation_summary" android:dependency="pref_join_chat" android:defaultValue="slide" android:entryValues="@array/value_chat_animation" />
+            <ListPreference android:entries="@array/display_chat_text_shadow" android:title="@string/settings_chat_text_shadow" android:key="pref_chat_text_shadow" android:summary="@string/settings_chat_text_shadow_summary" android:dependency="pref_join_chat" android:defaultValue="auto" android:entryValues="@array/value_chat_text_shadow" />
+            <ListPreference android:entries="@array/display_chat_merge_repeats" android:title="@string/settings_chat_merge_repeats" android:key="pref_chat_merge_repeats" android:summary="@string/settings_chat_merge_repeats_summary" android:dependency="pref_join_chat" android:defaultValue="0" android:entryValues="@array/value_chat_merge_repeats" />
+            <SeekBarPreference android:title="@string/settings_title_chat_reply_chars" android:key="pref_chat_reply_chars" android:summary="@string/settings_summary_chat_reply_chars" android:dependency="pref_join_chat" android:defaultValue="78" android:min="20" android:max="300" android:stepSize="5" />
+            <SwitchPreference android:title="@string/settings_chat_show_badges" android:key="pref_chat_show_badges" android:summary="@string/settings_chat_show_badges_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_chat_emotes_category">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_chat_emotes_tip" />
+            <SwitchPreference android:title="@string/settings_chat_emotes_7tv" android:key="pref_chat_emotes_7tv" android:summary="@string/settings_chat_emotes_7tv_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_emotes_bttv" android:key="pref_chat_emotes_bttv" android:summary="@string/settings_chat_emotes_bttv_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_emotes_ffz" android:key="pref_chat_emotes_ffz" android:summary="@string/settings_chat_emotes_ffz_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_zero_width" android:key="pref_chat_zero_width" android:summary="@string/settings_chat_zero_width_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_7tv_paints" android:key="pref_chat_7tv_paints" android:summary="@string/settings_chat_7tv_paints_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_7tv_badges" android:key="pref_chat_7tv_badges" android:summary="@string/settings_chat_7tv_badges_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_chat_7tv_personal" android:key="pref_chat_7tv_personal" android:summary="@string/settings_chat_7tv_personal_summary" android:dependency="pref_join_chat" android:defaultValue="true" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_chat_highlights_category">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_chat_highlight_tip" />
+            <EditTextPreference android:title="@string/settings_title_chat_highlight_words" android:key="pref_chat_highlight_words" android:summary="@string/settings_summary_chat_highlight_words" android:dependency="pref_join_chat" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_dialog_chat_highlight" />
+            <EditTextPreference android:title="@string/settings_title_chat_highlight_users" android:key="pref_chat_highlight_users" android:summary="@string/settings_summary_chat_highlight_users" android:dependency="pref_join_chat" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_dialog_chat_highlight" />
+            <SwitchPreference android:title="@string/settings_chat_highlight_broadcaster" android:key="pref_chat_highlight_broadcaster" android:summary="@string/settings_chat_highlight_broadcaster_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_chat_highlight_mods" android:key="pref_chat_highlight_mods" android:summary="@string/settings_chat_highlight_mods_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_chat_highlight_vips" android:key="pref_chat_highlight_vips" android:summary="@string/settings_chat_highlight_vips_summary" android:dependency="pref_join_chat" android:defaultValue="false" />
+            <ListPreference android:title="@string/settings_chat_highlight_color" android:key="pref_chat_highlight_color" android:summary="@string/settings_chat_highlight_color_summary" android:dependency="pref_join_chat" android:defaultValue="purple" android:entries="@array/settings_chat_highlight_color_names" android:entryValues="@array/settings_chat_highlight_color_values" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_chat_history_category">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_chat_history_tip" />
+            <SwitchPreference android:title="@string/settings_title_chat_recent_messages" android:key="pref_chat_recent_messages" android:summary="@string/settings_summary_chat_recent_messages" android:dependency="pref_join_chat" android:defaultValue="false" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/pref_title_filter">
+            <PreferenceScreen android:icon="@drawable/ic_filter_03" android:title="@string/pref_title_filter" android:key="pref_filter_screen">
+                <EditTextPreference android:title="@string/settings_pref_filter_users" android:key="pref_filter_users" android:summary="@string/pref_filter_users_summary" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_pref_filter_users_dialog" />
+                <EditTextPreference android:title="@string/settings_pref_filter_words" android:key="pref_filter_words" android:summary="@string/pref_filter_words_summary" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_pref_filter_words_dialog" />
+                <SwitchPreference android:title="@string/settings_pref_filter_bots" android:key="pref_filter_bots" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_pref_filter_commands" android:key="pref_filter_commands" android:summary="@string/settings_pref_filter_commands_summary" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_pref_filter_predict_bots" android:key="pref_filter_predit_bots" android:summary="@string/settings_pref_filter_predict_bots_summary" android:defaultValue="false" />
+            </PreferenceScreen>
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_baseline_notifications_active_24px" android:title="@string/pref_title_Notification" android:key="pref_Notifications">
+        <PreferenceCategory android:title="@string/pref_title_Live_Notification">
+            <SwitchPreference android:title="@string/settings_pref_live_card" android:key="pref_notification_player_card" android:summary="@string/settings_summary_live_card" android:defaultValue="true" />
+            <SwitchPreference android:title="@string/settings_pref_use_live_notification" android:key="pref_notification_on" android:summary="@string/pref_summary_live_notification" android:defaultValue="false" />
+            <SwitchPreference android:title="@string/settings_pref_favorites_only" android:key="pref_notification_foreground_favorite_only" android:dependency="pref_notification_on" android:defaultValue="false" />
+            <Preference android:title="@string/settings_pref_tip_favorites" android:selectable="false" android:summary="@string/pref_summary_Notification" />
+            <PreferenceCategory android:title="@string/settings_pref_message_settings">
+                <ListPreference android:entries="@array/display_notification_type" android:title="@string/pref_notification_type_title" android:key="prefs_notification_type" android:summary="%s" android:dependency="pref_notification_on" android:defaultValue="0" android:entryValues="@array/value_notification_type" />
+                <ListPreference android:entries="@array/value_notification_font_size" android:title="@string/pref_notification_font_size" android:key="prefs_notification_font_size" android:summary="%s" android:dependency="pref_notification_on" android:defaultValue="20" android:entryValues="@array/value_notification_font_size" />
+                <ListPreference android:entries="@array/display_notification_position" android:title="@string/pref_title_notification_position" android:key="prefs_notification_position" android:summary="%s" android:dependency="pref_notification_on" android:defaultValue="1" android:entryValues="@array/value_notification_position" />
+                <Preference android:title="@string/title_request_draw_over_permission" android:key="pref_request_draw_over_permission" android:summary="@string/summary_request_draw_over_permission" />
+                <ListPreference android:entries="@array/display_notification_duration" android:title="@string/pref_title_notification_duration" android:key="pref_notification_duration" android:summary="%s" android:dependency="pref_notification_on" android:defaultValue="3000" android:entryValues="@array/value_notification_duration" />
+                <ListPreference android:entries="@array/display_notification_animation" android:title="@string/pref_title_notification_animation" android:key="pref_notification_animation" android:summary="%s" android:dependency="pref_notification_on" android:defaultValue="1" android:entryValues="@array/value_notification_animation" />
+                <Preference android:title="@string/settings_pref_test_notification" android:key="pref_notification_test" android:dependency="pref_notification_on" />
+                <Preference android:selectable="false" android:summary="@string/pref_summary_live_notification3" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_quiet_category">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_quiet_tip" />
+                <SwitchPreference android:title="@string/settings_quiet_on" android:key="pref_notification_quiet" android:defaultValue="false" />
+                <ListPreference android:entries="@array/display_hours" android:title="@string/settings_quiet_from" android:key="pref_notification_quiet_from" android:summary="%s" android:dependency="pref_notification_quiet" android:defaultValue="22" android:entryValues="@array/value_hours" />
+                <ListPreference android:entries="@array/display_hours" android:title="@string/settings_quiet_to" android:key="pref_notification_quiet_to" android:summary="%s" android:dependency="pref_notification_quiet" android:defaultValue="7" android:entryValues="@array/value_hours" />
+            </PreferenceCategory>
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_phone_browser" android:title="@string/pref_title_connections" android:key="pref_connections">
+        <PreferenceScreen android:icon="@drawable/ic_home_mqtt" android:title="@string/settings_mqtt_category" android:key="pref_mqtt_screen">
+            <PreferenceCategory android:title="@string/settings_mqtt_connection_category">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_mqtt_tip" />
+                <SwitchPreference android:title="@string/settings_mqtt_enabled" android:key="pref_mqtt_enabled" android:defaultValue="false" />
+                <EditTextPreference android:title="@string/settings_mqtt_url" android:key="pref_mqtt_url" android:summary="@string/settings_mqtt_url_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_mqtt_url" />
+                <EditTextPreference android:title="@string/settings_mqtt_user" android:key="pref_mqtt_user" android:dependency="pref_mqtt_enabled" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_mqtt_user" />
+                <EditTextPreference android:title="@string/settings_mqtt_password" android:key="pref_mqtt_password" android:summary="@string/settings_mqtt_password_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_mqtt_password" />
+                <Preference android:title="@string/settings_mqtt_status" android:key="pref_mqtt_status" android:summary="@string/settings_mqtt_status_summary" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_mqtt_identity_category">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_mqtt_identity_tip" />
+                <EditTextPreference android:title="@string/settings_mqtt_device_name" android:key="pref_mqtt_device_name" android:summary="@string/settings_mqtt_device_name_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="@string/pref_filter_default" android:dialogTitle="@string/settings_mqtt_device_name" />
+                <ListPreference android:title="@string/settings_mqtt_interval" android:key="pref_mqtt_interval" android:summary="@string/settings_mqtt_interval_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="60" android:entries="@array/settings_mqtt_interval_names" android:entryValues="@array/settings_mqtt_interval_values" />
+                <PreferenceScreen android:title="@string/settings_mqtt_advanced" android:key="pref_mqtt_advanced" android:summary="@string/settings_mqtt_advanced_summary" android:dependency="pref_mqtt_enabled">
+                    <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_mqtt_advanced_tip" />
+                    <EditTextPreference android:title="@string/settings_mqtt_topic_prefix" android:key="pref_mqtt_topic_prefix" android:summary="@string/settings_mqtt_topic_prefix_summary" android:defaultValue="shrugtv" android:dialogTitle="@string/settings_mqtt_topic_prefix" />
+                    <EditTextPreference android:title="@string/settings_mqtt_discovery_prefix" android:key="pref_mqtt_discovery_prefix" android:summary="@string/settings_mqtt_discovery_prefix_summary" android:defaultValue="homeassistant" android:dialogTitle="@string/settings_mqtt_discovery_prefix" />
+                </PreferenceScreen>
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_mqtt_entities_category">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_mqtt_entities_tip" />
+                <SwitchPreference android:title="@string/settings_mqtt_entities_info" android:key="pref_mqtt_entities_info" android:summary="@string/settings_mqtt_entities_info_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_mqtt_entities_avatar" android:key="pref_mqtt_entities_avatar" android:summary="@string/settings_mqtt_entities_avatar_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_mqtt_entities_preview" android:key="pref_mqtt_entities_preview" android:summary="@string/settings_mqtt_entities_preview_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_mqtt_entities_events" android:key="pref_mqtt_entities_events" android:summary="@string/settings_mqtt_entities_events_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_mqtt_commands" android:key="pref_mqtt_commands" android:summary="@string/settings_mqtt_commands_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/ic_phone_browser" android:title="@string/settings_companion_category" android:key="pref_companion_screen">
+            <PreferenceCategory android:title="@string/settings_companion_category">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_companion_tip" />
+                <SwitchPreference android:title="@string/settings_companion_enabled" android:key="pref_companion_enabled" android:defaultValue="false" />
+                <Preference android:title="@string/settings_companion_pair" android:key="pref_companion_pair" android:summary="@string/settings_companion_pair_summary" android:dependency="pref_companion_enabled" />
+                <SwitchPreference android:title="@string/settings_companion_require_pin" android:key="pref_companion_require_pin" android:summary="@string/settings_companion_require_pin_summary" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_companion_remember" android:key="pref_companion_remember" android:summary="@string/settings_companion_remember_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
+                <Preference android:title="@string/companion_devices_title" android:key="pref_companion_devices" android:summary="@string/settings_companion_devices_summary" android:dependency="pref_companion_enabled" />
+                <SwitchPreference android:title="@string/settings_companion_chat" android:key="pref_companion_chat" android:summary="@string/settings_companion_chat_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_companion_settings" android:key="pref_companion_settings" android:summary="@string/settings_companion_settings_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_companion_log" android:key="pref_companion_log" android:summary="@string/settings_companion_log_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
+                <Preference android:title="@string/settings_companion_disconnect" android:key="pref_companion_disconnect" android:summary="@string/settings_companion_disconnect_summary" android:dependency="pref_companion_enabled" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_baseline_build_24px" android:title="@string/pref_title_advanced" android:key="pref_advanced">
+        <PreferenceScreen android:icon="@drawable/arrow_decision_mod" android:title="@string/pref_title_proxy_server" android:key="pref_ProxyServer">
+            <ListPreference android:entries="@array/settings_proxy_server_names" android:title="@string/pref_title_proxy_server" android:key="pref_proxy_server_name" android:summary="%s" android:defaultValue="0" android:entryValues="@array/value_proxy_server" />
+            <EditTextPreference android:title="@string/settings_proxy_url" android:key="pref_proxy_url" android:summary="@string/settings_proxy_url_summary" android:defaultValue="" />
+        </PreferenceScreen>
+        <PreferenceScreen android:icon="@drawable/bug" android:title="@string/settings_pref_developer" android:key="pref_developer">
+            <PreferenceCategory android:title="@string/settings_pref_developer">
+                <SwitchPreference android:title="@string/settings_pref_token_streams" android:key="pref_dev_use_stream_token" android:defaultValue="false" />
+                <SwitchPreference android:title="@string/settings_pref_show_errors" android:key="pref_dev_show_errors" android:defaultValue="false" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceScreen>
+    <PreferenceScreen android:icon="@drawable/ic_baseline_info_24px" android:title="@string/pref_title_about" android:key="pref_app_info">
+        <SwitchPreference android:title="@string/settings_show_advanced" android:key="pref_show_advanced" android:summary="@string/settings_show_advanced_summary" android:defaultValue="false" />
+        <Preference android:title="@string/settings_clear_caches" android:key="pref_clear_caches" android:summary="@string/settings_clear_caches_summary" />
+        <Preference android:title="@string/settings_pref_version_name" android:key="pref_version_name" />
+        <Preference android:title="@string/settings_pref_version_code" android:key="pref_version_code" />
+        <Preference android:title="@string/settings_pref_user_id" android:key="pref_user_id" />
+        <Preference android:title="@string/settings_pref_build_type" android:key="pref_buildType" />
+        <Preference android:title="@string/settings_pref_build_variant" android:key="pref_buildVariant" />
+    </PreferenceScreen>
+</PreferenceScreen>

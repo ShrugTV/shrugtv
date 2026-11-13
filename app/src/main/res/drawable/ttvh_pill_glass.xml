@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glass pill of the new player overlays: light translucent, fully rounded -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#24FFFFFF" />
+    <corners android:radius="20dp" />
+</shape>

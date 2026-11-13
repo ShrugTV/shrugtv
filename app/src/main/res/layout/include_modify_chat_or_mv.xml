@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adjust mode for chat and multiview in the new style: white frame around the
+     edited element (PlayerActivity.adjustFrameSet), title with dimensions at the top, a bar
+     with key chips at the bottom. Before: huge white arrows "POSITION"/"SIZE" on 70 % black. -->
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/EditUIInfo" android:background="#26000000" android:visibility="visible" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View android:id="@+id/EditFrame" android:layout_width="0dp" android:layout_height="0dp" android:visibility="invisible"
+        android:background="@drawable/adjust_frame"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout android:id="@+id/EditKopf" android:orientation="vertical" android:gravity="center_horizontal"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="32dp"
+        android:background="@drawable/menu_panel" android:paddingStart="24dp" android:paddingEnd="24dp" android:paddingTop="10dp" android:paddingBottom="10dp"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+        <TextView android:id="@id/ModeText" android:textSize="18sp" android:textColor="@color/white" android:fontFamily="@font/inter_bold"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" />
+        <TextView android:id="@+id/EditInfo" android:textSize="12sp" android:textColor="#FFADADB8" android:fontFamily="@font/inter_regular"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:maxLines="1" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/EditBar" android:orientation="horizontal" android:gravity="center_vertical"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="40dp"
+        android:background="@drawable/menu_panel" android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="10dp" android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+        <TextView style="@style/AdjustKey" android:text="← →" />
+        <TextView android:id="@id/PositionText" style="@style/AdjustText" android:text="@string/pa_layout_modify_position" />
+        <TextView style="@style/AdjustKey" android:text="↑ ↓" />
+        <TextView android:id="@id/SizeText" style="@style/AdjustText" android:text="@string/pa_layout_modify_size" />
+        <TextView style="@style/AdjustKey" android:text="OK" />
+        <TextView android:id="@+id/OkText" style="@style/AdjustText" android:text="@string/pa_layout_finish_modify" />
+        <TextView style="@style/AdjustKey" android:text="@string/adjust_key_back" />
+        <TextView style="@style/AdjustText" android:layout_marginEnd="0dp" android:text="@string/pa_layout_finish_modify" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

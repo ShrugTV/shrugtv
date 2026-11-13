@@ -1,0 +1,1406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="clock_date_format">
+        <item>yyyy-MM-dd</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+    </string-array>
+    <string-array name="display_chat_background_opacity">
+        <item>0%</item>
+        <item>10%</item>
+        <item>20%</item>
+        <item>30%</item>
+        <item>40%</item>
+        <item>50%</item>
+        <item>@string/array_chat_background_opacity_default</item>
+        <item>70%</item>
+        <item>80%</item>
+        <item>90%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="display_chat_delay">
+        <item>Automatic (matches the picture)</item>
+        <item>Off (chat in real time)</item>
+        <item>1 sec</item>
+        <item>1.5 sec</item>
+        <item>2 sec</item>
+        <item>2.5 sec</item>
+        <item>3 sec</item>
+        <item>3.5 sec</item>
+        <item>4 sec</item>
+        <item>4.5 sec</item>
+        <item>5 sec</item>
+    </string-array>
+    <string-array name="display_chat_font_size">
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14 (default)</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+    <string-array name="display_chat_input_box_position">
+        <item>Bottom</item>
+        <item>Default</item>
+        <item>Top</item>
+    </string-array>
+    <string-array name="display_chat_position">
+        <item>Right top</item>
+        <item>Right middle</item>
+        <item>Right bottom</item>
+        <item>Bottom center</item>
+        <item>Left bottom</item>
+        <item>Left middle</item>
+        <item>Left top</item>
+        <item>Top center</item>
+    </string-array>
+    <string-array name="display_chat_size2">
+        <item>Horizontal mode</item>
+        <item>10%</item>
+        <item>15%</item>
+        <item>25%</item>
+        <item>33%</item>
+        <item>50%</item>
+        <item>66%</item>
+        <item>75%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="display_chat_width">
+        <item>@string/array_display_chat_emote_size</item>
+        <item>100</item>
+        <item>150</item>
+        <item>175</item>
+        <item>200</item>
+        <item>225 (default 14 font)</item>
+        <item>250</item>
+        <item>275</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+    </string-array>
+    <string-array name="display_emote_size">
+        <item>@string/array_display_chat_emote_size_normal</item>
+        <item>@string/array_display_chat_emote_size_bigger</item>
+        <item>28</item>
+        <item>31</item>
+        <item>34</item>
+        <item>37</item>
+        <item>40 (default 14 font)</item>
+        <item>43</item>
+        <item>46</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+    </string-array>
+    <string-array name="display_name_colors">
+        <item>As chosen by the user</item>
+        <item>Made readable (recommended)</item>
+        <item>All in the accent colour</item>
+    </string-array>
+    <string-array name="value_name_colors">
+        <item>raw</item>
+        <item>readable</item>
+        <item>accent</item>
+    </string-array>
+    <string-array name="display_deleted_style">
+        <item>Struck through (still readable)</item>
+        <item>Grey</item>
+        <item>Hide the content</item>
+        <item>As it was sent</item>
+    </string-array>
+    <string-array name="display_hide_modded_message">
+        <item>Do nothing</item>
+        <item>Change the message color to Grey</item>
+        <item>Hide the message content</item>
+    </string-array>
+    <string-array name="display_languages">
+        <item>English</item>
+        <item>Dansk</item>
+        <item>Deutsch</item>
+        <item>Español</item>
+        <item>Français</item>
+        <item>Italiano</item>
+        <item>Magyar</item>
+        <item>Nederlands</item>
+        <item>Norsk</item>
+        <item>Polski</item>
+        <item>Português</item>
+        <item>Română</item>
+        <item>Slovenčina</item>
+        <item>Suomi</item>
+        <item>Svenska</item>
+        <item>Tiếng Việt</item>
+        <item>Türkçe</item>
+        <item>Čeština</item>
+        <item>Ελληνικά</item>
+        <item>Български</item>
+        <item>Русский</item>
+        <item>العربية</item>
+        <item>ภาษาไทย</item>
+        <item>中文</item>
+        <item>中文(粵語)</item>
+        <item>日本語</item>
+        <item>한국어</item>
+        <item>American Sign Language</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="display_multiview_size">
+        <item>Size 1</item>
+        <item>Size 2</item>
+        <item>Size 3 (default)</item>
+        <item>Size 4</item>
+        <item>Size 5</item>
+    </string-array>
+    <string-array name="display_notification_animation">
+        <item>@string/display_notification_anim_none</item>
+        <item>@string/display_notification_anim_fade_in</item>
+        <item>@string/display_notification_anim_zoom_in</item>
+        <item>@string/display_notification_anim_slide_in</item>
+        <item>@string/display_notification_anim_slide_up</item>
+    </string-array>
+    <string-array name="display_notification_duration">
+        <item>1 sec</item>
+        <item>2 sec</item>
+        <item>3 sec</item>
+        <item>4 sec</item>
+        <item>5 sec</item>
+        <item>6 sec</item>
+        <item>7 sec</item>
+        <item>8 sec</item>
+        <item>9 sec</item>
+        <item>10 sec</item>
+    </string-array>
+    <string-array name="display_notification_position">
+        <item>Top left</item>
+        <item>Top middle</item>
+        <item>Top right</item>
+        <item>Center screen</item>
+        <item>Bottom left</item>
+        <item>Bottom middle</item>
+        <item>Bottom right</item>
+    </string-array>
+    <string-array name="display_notification_type">
+        <item>@string/settings_notification_type_minimal</item>
+        <item>@string/settings_notification_type_detailed</item>
+    </string-array>
+    <string-array name="display_proxy_server">
+        <item>none</item>
+        <item>Tokyo</item>
+        <item>Eigene URL</item>
+    </string-array>
+    <string-array name="display_remote_shortcut">
+        <item>@string/remote_shortcut_none</item>
+        <item>@string/remote_shortcut_show_hide_chat</item>
+        <item>@string/remote_shortcut_modify_chat</item>
+        <item>@string/remote_shortcut_modify_multiview</item>
+        <item>@string/remote_shortcut_video_size</item>
+        <item>@string/remote_shortcut_fast_forward</item>
+        <item>@string/remote_shortcut_player_info</item>
+        <item>@string/remote_shortcut_send_chat_message</item>
+        <item>@string/remote_shortcut_video_quality</item>
+        <item>@string/remote_shortcut_open_external_player</item>
+        <item>@string/remote_shortcut_save_vod</item>
+        <item>@string/remote_shortcut_pause_chat</item>
+        <item>@string/remote_shortcut_change_chat_background_color</item>
+        <item>@string/remote_shortcut_swap_chat</item>
+        <item>@string/remote_shortcut_play_pause</item>
+        <item>@string/remote_shortcut_volume_control</item>
+        <item>@string/tooltip_search</item>
+        <item>@string/remote_shortcut_stream_navigation_prev</item>
+        <item>@string/remote_shortcut_stream_navigation_prev_mv</item>
+        <item>@string/remote_shortcut_stream_navigation_next</item>
+        <item>@string/remote_shortcut_stream_navigation_next_mv</item>
+        <item>@string/remote_shortcut_swap_multview</item>
+        <item>@string/remote_shortcut_swap_mv_audio</item>
+        <item>@string/settings_title_chat_background_opacity</item>
+    </string-array>
+    <string-array name="display_stream_autorefresh">
+        <item>Normal</item>
+        <item>Aggressive</item>
+    </string-array>
+    <string-array name="display_stream_preview_quality">
+        <item>720p</item>
+        <item>480p</item>
+        <item>360p</item>
+    </string-array>
+    <string-array name="display_time_format">
+        <item>12-hour clock</item>
+        <item>24-hour clock</item>
+    </string-array>
+    <string-array name="display_video_card_size">
+        <item>Normal (100%)</item>
+        <item>Small (70%)</item>
+    </string-array>
+    <string-array name="display_video_quality">
+        <item>Auto</item>
+        <item>Auto (max 1080p)</item>
+        <item>Auto (max 720p)</item>
+        <item>Auto (max 480p)</item>
+        <item>Source</item>
+    </string-array>
+    <string-array name="display_video_scale_mode">
+        <item>Fit to screen</item>
+        <item>Center crop</item>
+    </string-array>
+    <string-array name="display_vod_auto_hide_days">
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days</item>
+        <item>5 days</item>
+        <item>6 days</item>
+        <item>7 days</item>
+        <item>8 days</item>
+        <item>9 days</item>
+        <item>10 days</item>
+        <item>11 days</item>
+        <item>12 days</item>
+        <item>13 days</item>
+        <item>14 days</item>
+    </string-array>
+    <string-array name="time_zones">
+        <item>Africa/Abidjan</item>
+        <item>Africa/Accra</item>
+        <item>Africa/Addis_Ababa</item>
+        <item>Africa/Algiers</item>
+        <item>Africa/Asmara</item>
+        <item>Africa/Bamako</item>
+        <item>Africa/Bangui</item>
+        <item>Africa/Banjul</item>
+        <item>Africa/Bissau</item>
+        <item>Africa/Blantyre</item>
+        <item>Africa/Brazzaville</item>
+        <item>Africa/Bujumbura</item>
+        <item>Africa/Cairo</item>
+        <item>Africa/Casablanca</item>
+        <item>Africa/Ceuta</item>
+        <item>Africa/Conakry</item>
+        <item>Africa/Dakar</item>
+        <item>Africa/Dar_es_Salaam</item>
+        <item>Africa/Djibouti</item>
+        <item>Africa/Douala</item>
+        <item>Africa/El_Aaiun</item>
+        <item>Africa/Freetown</item>
+        <item>Africa/Gaborone</item>
+        <item>Africa/Harare</item>
+        <item>Africa/Johannesburg</item>
+        <item>Africa/Juba</item>
+        <item>Africa/Kampala</item>
+        <item>Africa/Khartoum</item>
+        <item>Africa/Kigali</item>
+        <item>Africa/Kinshasa</item>
+        <item>Africa/Lagos</item>
+        <item>Africa/Libreville</item>
+        <item>Africa/Lome</item>
+        <item>Africa/Luanda</item>
+        <item>Africa/Lubumbashi</item>
+        <item>Africa/Lusaka</item>
+        <item>Africa/Malabo</item>
+        <item>Africa/Maputo</item>
+        <item>Africa/Maseru</item>
+        <item>Africa/Mbabane</item>
+        <item>Africa/Mogadishu</item>
+        <item>Africa/Monrovia</item>
+        <item>Africa/Nairobi</item>
+        <item>Africa/Ndjamena</item>
+        <item>Africa/Niamey</item>
+        <item>Africa/Nouakchott</item>
+        <item>Africa/Ouagadougou</item>
+        <item>Africa/Porto-Novo</item>
+        <item>Africa/Sao_Tome</item>
+        <item>Africa/Timbuktu</item>
+        <item>Africa/Tripoli</item>
+        <item>Africa/Tunis</item>
+        <item>Africa/Windhoek</item>
+        <item>America/Adak</item>
+        <item>America/Anchorage</item>
+        <item>America/Anguilla</item>
+        <item>America/Antigua</item>
+        <item>America/Araguaina</item>
+        <item>America/Argentina/Buenos_Aires</item>
+        <item>America/Argentina/Catamarca</item>
+        <item>America/Argentina/ComodRivadavia</item>
+        <item>America/Argentina/Cordoba</item>
+        <item>America/Argentina/Jujuy</item>
+        <item>America/Argentina/La_Rioja</item>
+        <item>America/Argentina/Mendoza</item>
+        <item>America/Argentina/Rio_Gallegos</item>
+        <item>America/Argentina/Salta</item>
+        <item>America/Argentina/San_Juan</item>
+        <item>America/Argentina/San_Luis</item>
+        <item>America/Argentina/Tucuman</item>
+        <item>America/Argentina/Ushuaia</item>
+        <item>America/Aruba</item>
+        <item>America/Asuncion</item>
+        <item>America/Atikokan</item>
+        <item>America/Atka</item>
+        <item>America/Bahia</item>
+        <item>America/Bahia_Banderas</item>
+        <item>America/Barbados</item>
+        <item>America/Belem</item>
+        <item>America/Belize</item>
+        <item>America/Blanc-Sablon</item>
+        <item>America/Boa_Vista</item>
+        <item>America/Bogota</item>
+        <item>America/Boise</item>
+        <item>America/Buenos_Aires</item>
+        <item>America/Cambridge_Bay</item>
+        <item>America/Campo_Grande</item>
+        <item>America/Cancun</item>
+        <item>America/Caracas</item>
+        <item>America/Catamarca</item>
+        <item>America/Cayenne</item>
+        <item>America/Cayman</item>
+        <item>America/Chicago</item>
+        <item>America/Chihuahua</item>
+        <item>America/Coral_Harbour</item>
+        <item>America/Cordoba</item>
+        <item>America/Costa_Rica</item>
+        <item>America/Creston</item>
+        <item>America/Cuiaba</item>
+        <item>America/Curacao</item>
+        <item>America/Danmarkshavn</item>
+        <item>America/Dawson</item>
+        <item>America/Dawson_Creek</item>
+        <item>America/Denver</item>
+        <item>America/Detroit</item>
+        <item>America/Dominica</item>
+        <item>America/Edmonton</item>
+        <item>America/Eirunepe</item>
+        <item>America/El_Salvador</item>
+        <item>America/Ensenada</item>
+        <item>America/Fort_Nelson</item>
+        <item>America/Fort_Wayne</item>
+        <item>America/Fortaleza</item>
+        <item>America/Glace_Bay</item>
+        <item>America/Godthab</item>
+        <item>America/Goose_Bay</item>
+        <item>America/Grand_Turk</item>
+        <item>America/Grenada</item>
+        <item>America/Guadeloupe</item>
+        <item>America/Guatemala</item>
+        <item>America/Guayaquil</item>
+        <item>America/Guyana</item>
+        <item>America/Halifax</item>
+        <item>America/Havana</item>
+        <item>America/Hermosillo</item>
+        <item>America/Indiana/Indianapolis</item>
+        <item>America/Indiana/Knox</item>
+        <item>America/Indiana/Marengo</item>
+        <item>America/Indiana/Petersburg</item>
+        <item>America/Indiana/Tell_City</item>
+        <item>America/Indiana/Vevay</item>
+        <item>America/Indiana/Vincennes</item>
+        <item>America/Indiana/Winamac</item>
+        <item>America/Indianapolis</item>
+        <item>America/Inuvik</item>
+        <item>America/Iqaluit</item>
+        <item>America/Jamaica</item>
+        <item>America/Jujuy</item>
+        <item>America/Juneau</item>
+        <item>America/Kentucky/Louisville</item>
+        <item>America/Kentucky/Monticello</item>
+        <item>America/Knox_IN</item>
+        <item>America/Kralendijk</item>
+        <item>America/La_Paz</item>
+        <item>America/Lima</item>
+        <item>America/Los_Angeles</item>
+        <item>America/Louisville</item>
+        <item>America/Lower_Princes</item>
+        <item>America/Maceio</item>
+        <item>America/Managua</item>
+        <item>America/Manaus</item>
+        <item>America/Marigot</item>
+        <item>America/Martinique</item>
+        <item>America/Matamoros</item>
+        <item>America/Mazatlan</item>
+        <item>America/Mendoza</item>
+        <item>America/Menominee</item>
+        <item>America/Merida</item>
+        <item>America/Metlakatla</item>
+        <item>America/Mexico_City</item>
+        <item>America/Miquelon</item>
+        <item>America/Moncton</item>
+        <item>America/Monterrey</item>
+        <item>America/Montevideo</item>
+        <item>America/Montreal</item>
+        <item>America/Montserrat</item>
+        <item>America/Nassau</item>
+        <item>America/New_York</item>
+        <item>America/Nipigon</item>
+        <item>America/Nome</item>
+        <item>America/Noronha</item>
+        <item>America/North_Dakota/Beulah</item>
+        <item>America/North_Dakota/Center</item>
+        <item>America/North_Dakota/New_Salem</item>
+        <item>America/Ojinaga</item>
+        <item>America/Panama</item>
+        <item>America/Pangnirtung</item>
+        <item>America/Paramaribo</item>
+        <item>America/Phoenix</item>
+        <item>America/Port_of_Spain</item>
+        <item>America/Port-au-Prince</item>
+        <item>America/Porto_Acre</item>
+        <item>America/Porto_Velho</item>
+        <item>America/Puerto_Rico</item>
+        <item>America/Punta_Arenas</item>
+        <item>America/Rainy_River</item>
+        <item>America/Rankin_Inlet</item>
+        <item>America/Recife</item>
+        <item>America/Regina</item>
+        <item>America/Resolute</item>
+        <item>America/Rio_Branco</item>
+        <item>America/Rosario</item>
+        <item>America/Santa_Isabel</item>
+        <item>America/Santarem</item>
+        <item>America/Santiago</item>
+        <item>America/Santo_Domingo</item>
+        <item>America/Sao_Paulo</item>
+        <item>America/Scoresbysund</item>
+        <item>America/Shiprock</item>
+        <item>America/Sitka</item>
+        <item>America/St_Barthelemy</item>
+        <item>America/St_Johns</item>
+        <item>America/St_Kitts</item>
+        <item>America/St_Lucia</item>
+        <item>America/St_Thomas</item>
+        <item>America/St_Vincent</item>
+        <item>America/Swift_Current</item>
+        <item>America/Tegucigalpa</item>
+        <item>America/Thule</item>
+        <item>America/Thunder_Bay</item>
+        <item>America/Tijuana</item>
+        <item>America/Toronto</item>
+        <item>America/Tortola</item>
+        <item>America/Vancouver</item>
+        <item>America/Virgin</item>
+        <item>America/Whitehorse</item>
+        <item>America/Winnipeg</item>
+        <item>America/Yakutat</item>
+        <item>America/Yellowknife</item>
+        <item>Antarctica/Casey</item>
+        <item>Antarctica/Davis</item>
+        <item>Antarctica/DumontDUrville</item>
+        <item>Antarctica/Macquarie</item>
+        <item>Antarctica/Mawson</item>
+        <item>Antarctica/McMurdo</item>
+        <item>Antarctica/Palmer</item>
+        <item>Antarctica/Rothera</item>
+        <item>Antarctica/South_Pole</item>
+        <item>Antarctica/Syowa</item>
+        <item>Antarctica/Troll</item>
+        <item>Antarctica/Vostok</item>
+        <item>Arctic/Longyearbyen</item>
+        <item>Asia/Aden</item>
+        <item>Asia/Almaty</item>
+        <item>Asia/Amman</item>
+        <item>Asia/Anadyr</item>
+        <item>Asia/Aqtau</item>
+        <item>Asia/Aqtobe</item>
+        <item>Asia/Ashgabat</item>
+        <item>Asia/Ashkhabad</item>
+        <item>Asia/Atyrau</item>
+        <item>Asia/Baghdad</item>
+        <item>Asia/Bahrain</item>
+        <item>Asia/Baku</item>
+        <item>Asia/Bangkok</item>
+        <item>Asia/Barnaul</item>
+        <item>Asia/Beirut</item>
+        <item>Asia/Bishkek</item>
+        <item>Asia/Brunei</item>
+        <item>Asia/Calcutta</item>
+        <item>Asia/Chita</item>
+        <item>Asia/Choibalsan</item>
+        <item>Asia/Chongqing</item>
+        <item>Asia/Chungking</item>
+        <item>Asia/Colombo</item>
+        <item>Asia/Dacca</item>
+        <item>Asia/Damascus</item>
+        <item>Asia/Dhaka</item>
+        <item>Asia/Dili</item>
+        <item>Asia/Dubai</item>
+        <item>Asia/Dushanbe</item>
+        <item>Asia/Famagusta</item>
+        <item>Asia/Gaza</item>
+        <item>Asia/Harbin</item>
+        <item>Asia/Hebron</item>
+        <item>Asia/Ho_Chi_Minh</item>
+        <item>Asia/Hong_Kong</item>
+        <item>Asia/Hovd</item>
+        <item>Asia/Irkutsk</item>
+        <item>Asia/Istanbul</item>
+        <item>Asia/Jakarta</item>
+        <item>Asia/Jayapura</item>
+        <item>Asia/Jerusalem</item>
+        <item>Asia/Kabul</item>
+        <item>Asia/Kamchatka</item>
+        <item>Asia/Karachi</item>
+        <item>Asia/Kashgar</item>
+        <item>Asia/Kathmandu</item>
+        <item>Asia/Katmandu</item>
+        <item>Asia/Khandyga</item>
+        <item>Asia/Kolkata</item>
+        <item>Asia/Krasnoyarsk</item>
+        <item>Asia/Kuala_Lumpur</item>
+        <item>Asia/Kuching</item>
+        <item>Asia/Kuwait</item>
+        <item>Asia/Macao</item>
+        <item>Asia/Macau</item>
+        <item>Asia/Magadan</item>
+        <item>Asia/Makassar</item>
+        <item>Asia/Manila</item>
+        <item>Asia/Muscat</item>
+        <item>Asia/Novokuznetsk</item>
+        <item>Asia/Novosibirsk</item>
+        <item>Asia/Omsk</item>
+        <item>Asia/Oral</item>
+        <item>Asia/Phnom_Penh</item>
+        <item>Asia/Pontianak</item>
+        <item>Asia/Pyongyang</item>
+        <item>Asia/Qatar</item>
+        <item>Asia/Qyzylorda</item>
+        <item>Asia/Rangoon</item>
+        <item>Asia/Riyadh</item>
+        <item>Asia/Saigon</item>
+        <item>Asia/Sakhalin</item>
+        <item>Asia/Samarkand</item>
+        <item>Asia/Seoul</item>
+        <item>Asia/Shanghai</item>
+        <item>Asia/Singapore</item>
+        <item>Asia/Srednekolymsk</item>
+        <item>Asia/Taipei</item>
+        <item>Asia/Tashkent</item>
+        <item>Asia/Tbilisi</item>
+        <item>Asia/Tehran</item>
+        <item>Asia/Tel_Aviv</item>
+        <item>Asia/Thimbu</item>
+        <item>Asia/Thimphu</item>
+        <item>Asia/Tokyo</item>
+        <item>Asia/Tomsk</item>
+        <item>Asia/Ujung_Pandang</item>
+        <item>Asia/Ulaanbaatar</item>
+        <item>Asia/Ulan_Bator</item>
+        <item>Asia/Urumqi</item>
+        <item>Asia/Ust-Nera</item>
+        <item>Asia/Vientiane</item>
+        <item>Asia/Vladivostok</item>
+        <item>Asia/Yakutsk</item>
+        <item>Asia/Yangon</item>
+        <item>Asia/Yekaterinburg</item>
+        <item>Asia/Yerevan</item>
+        <item>Atlantic/Azores</item>
+        <item>Atlantic/Bermuda</item>
+        <item>Atlantic/Canary</item>
+        <item>Atlantic/Cape_Verde</item>
+        <item>Atlantic/Faeroe</item>
+        <item>Atlantic/Faroe</item>
+        <item>Atlantic/Jan_Mayen</item>
+        <item>Atlantic/Madeira</item>
+        <item>Atlantic/Reykjavik</item>
+        <item>Atlantic/South_Georgia</item>
+        <item>Atlantic/St_Helena</item>
+        <item>Atlantic/Stanley</item>
+        <item>Australia/Adelaide</item>
+        <item>Australia/Brisbane</item>
+        <item>Australia/Broken_Hill</item>
+        <item>Australia/Canberra</item>
+        <item>Australia/Currie</item>
+        <item>Australia/Darwin</item>
+        <item>Australia/Eucla</item>
+        <item>Australia/Hobart</item>
+        <item>Australia/Lindeman</item>
+        <item>Australia/Lord_Howe</item>
+        <item>Australia/Melbourne</item>
+        <item>Australia/Perth</item>
+        <item>Australia/Sydney</item>
+        <item>Australia/Yancowinna</item>
+        <item>Europe/Amsterdam</item>
+        <item>Europe/Andorra</item>
+        <item>Europe/Astrakhan</item>
+        <item>Europe/Athens</item>
+        <item>Europe/Belfast</item>
+        <item>Europe/Belgrade</item>
+        <item>Europe/Berlin</item>
+        <item>Europe/Bratislava</item>
+        <item>Europe/Brussels</item>
+        <item>Europe/Bucharest</item>
+        <item>Europe/Budapest</item>
+        <item>Europe/Busingen</item>
+        <item>Europe/Chisinau</item>
+        <item>Europe/Copenhagen</item>
+        <item>Europe/Dublin</item>
+        <item>Europe/Gibraltar</item>
+        <item>Europe/Guernsey</item>
+        <item>Europe/Helsinki</item>
+        <item>Europe/Isle_of_Man</item>
+        <item>Europe/Istanbul</item>
+        <item>Europe/Jersey</item>
+        <item>Europe/Kaliningrad</item>
+        <item>Europe/Kiev</item>
+        <item>Europe/Kirov</item>
+        <item>Europe/Lisbon</item>
+        <item>Europe/Ljubljana</item>
+        <item>Europe/London</item>
+        <item>Europe/Luxembourg</item>
+        <item>Europe/Madrid</item>
+        <item>Europe/Malta</item>
+        <item>Europe/Mariehamn</item>
+        <item>Europe/Minsk</item>
+        <item>Europe/Monaco</item>
+        <item>Europe/Moscow</item>
+        <item>Asia/Nicosia</item>
+        <item>Europe/Oslo</item>
+        <item>Europe/Paris</item>
+        <item>Europe/Podgorica</item>
+        <item>Europe/Prague</item>
+        <item>Europe/Riga</item>
+        <item>Europe/Rome</item>
+        <item>Europe/Samara</item>
+        <item>Europe/San_Marino</item>
+        <item>Europe/Sarajevo</item>
+        <item>Europe/Saratov</item>
+        <item>Europe/Simferopol</item>
+        <item>Europe/Skopje</item>
+        <item>Europe/Sofia</item>
+        <item>Europe/Stockholm</item>
+        <item>Europe/Tallinn</item>
+        <item>Europe/Tirane</item>
+        <item>Europe/Tiraspol</item>
+        <item>Europe/Ulyanovsk</item>
+        <item>Europe/Uzhgorod</item>
+        <item>Europe/Vaduz</item>
+        <item>Europe/Vatican</item>
+        <item>Europe/Vienna</item>
+        <item>Europe/Vilnius</item>
+        <item>Europe/Volgograd</item>
+        <item>Europe/Warsaw</item>
+        <item>Europe/Zagreb</item>
+        <item>Europe/Zaporozhye</item>
+        <item>Europe/Zurich</item>
+        <item>GMT</item>
+        <item>Indian/Antananarivo</item>
+        <item>Indian/Chagos</item>
+        <item>Indian/Christmas</item>
+        <item>Indian/Cocos</item>
+        <item>Indian/Comoro</item>
+        <item>Indian/Kerguelen</item>
+        <item>Indian/Mahe</item>
+        <item>Indian/Maldives</item>
+        <item>Indian/Mauritius</item>
+        <item>Indian/Mayotte</item>
+        <item>Indian/Reunion</item>
+        <item>Pacific/Apia</item>
+        <item>Pacific/Auckland</item>
+        <item>Pacific/Bougainville</item>
+        <item>Pacific/Chatham</item>
+        <item>Pacific/Chuuk</item>
+        <item>Pacific/Easter</item>
+        <item>Pacific/Efate</item>
+        <item>Pacific/Enderbury</item>
+        <item>Pacific/Fakaofo</item>
+        <item>Pacific/Fiji</item>
+        <item>Pacific/Funafuti</item>
+        <item>Pacific/Galapagos</item>
+        <item>Pacific/Gambier</item>
+        <item>Pacific/Guadalcanal</item>
+        <item>Pacific/Guam</item>
+        <item>Pacific/Honolulu</item>
+        <item>Pacific/Johnston</item>
+        <item>Pacific/Kiritimati</item>
+        <item>Pacific/Kosrae</item>
+        <item>Pacific/Kwajalein</item>
+        <item>Pacific/Majuro</item>
+        <item>Pacific/Marquesas</item>
+        <item>Pacific/Midway</item>
+        <item>Pacific/Nauru</item>
+        <item>Pacific/Niue</item>
+        <item>Pacific/Norfolk</item>
+        <item>Pacific/Noumea</item>
+        <item>Pacific/Pago_Pago</item>
+        <item>Pacific/Palau</item>
+        <item>Pacific/Pitcairn</item>
+        <item>Pacific/Pohnpei</item>
+        <item>Pacific/Ponape</item>
+        <item>Pacific/Port_Moresby</item>
+        <item>Pacific/Rarotonga</item>
+        <item>Pacific/Saipan</item>
+        <item>Pacific/Samoa</item>
+        <item>Pacific/Tahiti</item>
+        <item>Pacific/Tarawa</item>
+        <item>Pacific/Tongatapu</item>
+        <item>Pacific/Truk</item>
+        <item>Pacific/Wake</item>
+        <item>Pacific/Wallis</item>
+        <item>Pacific/Yap</item>
+        <item>UTC</item>
+        <item>Etc/GMT</item>
+        <item>Etc/GMT+0</item>
+        <item>Etc/GMT+1</item>
+        <item>Etc/GMT+10</item>
+        <item>Etc/GMT+11</item>
+        <item>Etc/GMT+12</item>
+        <item>Etc/GMT+2</item>
+        <item>Etc/GMT+3</item>
+        <item>Etc/GMT+4</item>
+        <item>Etc/GMT+5</item>
+        <item>Etc/GMT+6</item>
+        <item>Etc/GMT+7</item>
+        <item>Etc/GMT+8</item>
+        <item>Etc/GMT+9</item>
+        <item>Etc/GMT0</item>
+        <item>Etc/GMT-0</item>
+        <item>Etc/GMT-1</item>
+        <item>Etc/GMT-10</item>
+        <item>Etc/GMT-11</item>
+        <item>Etc/GMT-12</item>
+        <item>Etc/GMT-13</item>
+        <item>Etc/GMT-14</item>
+        <item>Etc/GMT-2</item>
+        <item>Etc/GMT-3</item>
+        <item>Etc/GMT-4</item>
+        <item>Etc/GMT-5</item>
+        <item>Etc/GMT-6</item>
+        <item>Etc/GMT-7</item>
+        <item>Etc/GMT-8</item>
+        <item>Etc/GMT-9</item>
+        <item>Etc/UTC</item>
+    </string-array>
+    <string-array name="value_autorefresh_minutes">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="value_chat_background">
+        <item>Default</item>
+        <item>Grey</item>
+    </string-array>
+    <string-array name="value_chat_background_opacity">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="value_chat_delay">
+        <item>auto</item>
+        <item>0</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
+        <item>4500</item>
+        <item>5000</item>
+    </string-array>
+    <string-array name="value_chat_height">
+        <item>100</item>
+        <item>75</item>
+        <item>66</item>
+        <item>50</item>
+        <item>33</item>
+    </string-array>
+    <string-array name="display_chat_height">
+        <item>Full height</item>
+        <item>75 %</item>
+        <item>66 %</item>
+        <item>50 %</item>
+        <item>33 %</item>
+    </string-array>
+    <string-array name="value_chat_vertical">
+        <item>top</item>
+        <item>middle</item>
+        <item>bottom</item>
+    </string-array>
+    <string-array name="display_chat_vertical">
+        <item>Top</item>
+        <item>Middle</item>
+        <item>Bottom</item>
+    </string-array>
+    <string-array name="value_chat_font_size">
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="value_chat_input_box_position">
+        <item>0</item>
+        <item>150</item>
+        <item>500</item>
+    </string-array>
+    <string-array name="value_chat_position">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="value_chat_size2">
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="value_chat_width">
+        <item>0</item>
+        <item>100</item>
+        <item>150</item>
+        <item>175</item>
+        <item>200</item>
+        <item>225</item>
+        <item>250</item>
+        <item>275</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+    </string-array>
+    <string-array name="value_emote_size">
+        <item>0</item>
+        <item>1</item>
+        <item>28</item>
+        <item>31</item>
+        <item>34</item>
+        <item>37</item>
+        <item>40</item>
+        <item>43</item>
+        <item>46</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+    </string-array>
+    <string-array name="value_deleted_style">
+        <item>strike</item>
+        <item>grey</item>
+        <item>hide</item>
+        <item>normal</item>
+    </string-array>
+    <string-array name="value_hide_modded_message">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="value_languages">
+        <item>en</item>
+        <item>da</item>
+        <item>de</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>it</item>
+        <item>hu</item>
+        <item>nl</item>
+        <item>no</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>sk</item>
+        <item>fi</item>
+        <item>sv</item>
+        <item>vi</item>
+        <item>tr</item>
+        <item>cs</item>
+        <item>el</item>
+        <item>bg</item>
+        <item>ru</item>
+        <item>ar</item>
+        <item>th</item>
+        <item>zh</item>
+        <item>zh-hk</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>asl</item>
+        <item>other</item>
+    </string-array>
+    <string-array name="value_multiview_size">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="value_notification_animation">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="value_notification_duration">
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+        <item>6000</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>9000</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="value_notification_font_size">
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+    <string-array name="value_notification_position">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="value_notification_type">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="value_proxy_server">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="value_remote_shortcut">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+    <string-array name="value_stream_autorefresh">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="value_stream_preview_quality">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="value_time_format">
+        <item>h:mm a</item>
+        <item>H:mm</item>
+    </string-array>
+    <string-array name="value_video_card_size">
+        <item>normal</item>
+        <item>small</item>
+    </string-array>
+    <!-- Player behaviour (settings group "In the player") -->
+    <string-array name="display_player_controls_timeout">
+        <item>@string/settings_player_timeout_5</item>
+        <item>@string/settings_player_timeout_8</item>
+        <item>@string/settings_player_timeout_15</item>
+        <item>@string/settings_player_timeout_30</item>
+    </string-array>
+    <string-array name="value_player_controls_timeout" translatable="false">
+        <item>5</item>
+        <item>8</item>
+        <item>15</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="display_player_bar_labels">
+        <item>@string/settings_player_bar_labels_highlighted</item>
+        <item>@string/settings_player_bar_labels_all</item>
+    </string-array>
+    <string-array name="value_player_bar_labels" translatable="false">
+        <item>highlighted</item>
+        <item>all</item>
+    </string-array>
+    <string-array name="display_player_end_of_stream">
+        <item>@string/settings_player_end_countdown</item>
+        <item>@string/settings_player_end_suggest</item>
+        <item>@string/settings_player_end_off</item>
+    </string-array>
+    <string-array name="value_player_end_of_stream" translatable="false">
+        <item>countdown</item>
+        <item>suggest</item>
+        <item>off</item>
+    </string-array>
+    <!-- Chat layout (docs/chat_plan.md phase 3); side by side is the default -->
+    <string-array name="display_chat_layout">
+        <item>@string/chat_layout_side_by_side</item>
+        <item>@string/chat_layout_overlay</item>
+        <item>@string/chat_layout_transparent</item>
+    </string-array>
+    <string-array name="value_chat_layout" translatable="false">
+        <item>side_by_side</item>
+        <item>overlay</item>
+        <item>transparent</item>
+    </string-array>
+    <string-array name="value_video_quality">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="value_video_scale_mode">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="value_vod_auto_hide_days">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
+    <string-array name="settings_mqtt_interval_values" translatable="false">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+    </string-array>
+    <string-array name="settings_chat_highlight_color_values" translatable="false">
+        <item>purple</item>
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>blue</item>
+    </string-array>
+    <string-array name="display_splash_style">
+        <item>Logo, name and greeting</item>
+        <item>Logo only</item>
+        <item>Off</item>
+    </string-array>
+    <string-array name="value_splash_style" translatable="false">
+        <item>full</item>
+        <item>logo</item>
+        <item>off</item>
+    </string-array>
+    <string-array name="display_splash_min">
+        <item>As short as possible</item>
+        <item>0.3 s</item>
+        <item>0.6 s</item>
+        <item>1 s</item>
+        <item>1.5 s</item>
+    </string-array>
+    <string-array name="value_splash_min" translatable="false">
+        <item>0</item>
+        <item>300</item>
+        <item>600</item>
+        <item>1000</item>
+        <item>1500</item>
+    </string-array>
+    <string-array name="display_theme_corners">
+        <item>From the skin</item>
+        <item>Square</item>
+        <item>Small</item>
+        <item>Normal</item>
+        <item>Round</item>
+        <item>Very round</item>
+    </string-array>
+    <string-array name="value_theme_corners" translatable="false">
+        <item>skin</item>
+        <item>0</item>
+        <item>0.4</item>
+        <item>1</item>
+        <item>1.6</item>
+        <item>2.4</item>
+    </string-array>
+    <string-array name="display_theme_focus_style">
+        <item>From the skin</item>
+        <item>Frame</item>
+        <item>Glow</item>
+        <item>Only grow</item>
+    </string-array>
+    <string-array name="value_theme_focus_style" translatable="false">
+        <item>skin</item>
+        <item>border</item>
+        <item>glow</item>
+        <item>scale</item>
+    </string-array>
+    <string-array name="display_theme_focus_scale">
+        <item>From the skin</item>
+        <item>None</item>
+        <item>Slight</item>
+        <item>Normal</item>
+        <item>Strong</item>
+    </string-array>
+    <string-array name="value_theme_focus_scale" translatable="false">
+        <item>skin</item>
+        <item>1.0</item>
+        <item>1.04</item>
+        <item>1.08</item>
+        <item>1.12</item>
+    </string-array>
+    <string-array name="display_theme_border">
+        <item>From the skin</item>
+        <item>None</item>
+        <item>1 dp</item>
+        <item>2 dp</item>
+        <item>3 dp</item>
+        <item>4 dp</item>
+    </string-array>
+    <string-array name="value_theme_border" translatable="false">
+        <item>skin</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="display_theme_glass">
+        <item>From the skin</item>
+        <item>Off (solid)</item>
+        <item>Faint</item>
+        <item>Normal</item>
+        <item>Strong</item>
+    </string-array>
+    <string-array name="value_theme_glass" translatable="false">
+        <item>skin</item>
+        <item>0</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.6</item>
+    </string-array>
+    <string-array name="display_theme_hero_dim">
+        <item>From the skin</item>
+        <item>Light</item>
+        <item>Slight</item>
+        <item>Normal</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="value_theme_hero_dim" translatable="false">
+        <item>skin</item>
+        <item>0.6</item>
+        <item>0.8</item>
+        <item>1.0</item>
+        <item>1.15</item>
+    </string-array>
+    <string-array name="display_theme_background_style">
+        <item>From the skin</item>
+        <item>Solid</item>
+        <item>Gradient</item>
+        <item>Accent tint</item>
+    </string-array>
+    <string-array name="value_theme_background_style" translatable="false">
+        <item>skin</item>
+        <item>solid</item>
+        <item>gradient</item>
+        <item>tint</item>
+    </string-array>
+    <string-array name="display_theme_font">
+        <item>From the skin</item>
+        <item>Inter</item>
+        <item>System</item>
+        <item>Serif</item>
+        <item>Typewriter</item>
+    </string-array>
+    <string-array name="value_theme_font" translatable="false">
+        <item>skin</item>
+        <item>inter</item>
+        <item>sans</item>
+        <item>serif</item>
+        <item>mono</item>
+    </string-array>
+    <string-array name="display_theme_text_scale">
+        <item>From the skin</item>
+        <item>85 %</item>
+        <item>92 %</item>
+        <item>100 %</item>
+        <item>110 %</item>
+        <item>120 %</item>
+        <item>130 %</item>
+    </string-array>
+    <string-array name="value_theme_text_scale" translatable="false">
+        <item>skin</item>
+        <item>0.85</item>
+        <item>0.92</item>
+        <item>1</item>
+        <item>1.1</item>
+        <item>1.2</item>
+        <item>1.3</item>
+    </string-array>
+    <string-array name="display_theme_animations">
+        <item>From the skin</item>
+        <item>On</item>
+        <item>Off</item>
+    </string-array>
+    <string-array name="value_theme_animations" translatable="false">
+        <item>skin</item>
+        <item>on</item>
+        <item>off</item>
+    </string-array>
+    <string-array name="display_player_replay_seconds">
+        <item>15 s</item>
+        <item>30 s</item>
+        <item>45 s</item>
+        <item>60 s</item>
+    </string-array>
+    <string-array name="value_player_replay_seconds" translatable="false">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="display_chat_animation">
+        <item>Off (hard cut)</item>
+        <item>Fade in</item>
+        <item>Slide (default)</item>
+        <item>Slide slowly</item>
+    </string-array>
+    <string-array name="value_chat_animation" translatable="false">
+        <item>off</item>
+        <item>fade</item>
+        <item>slide</item>
+        <item>slow</item>
+    </string-array>
+    <string-array name="display_chat_merge_repeats">
+        <item>Off</item>
+        <item>Within 5 s</item>
+        <item>Within 10 s</item>
+        <item>Within 30 s</item>
+    </string-array>
+    <string-array name="value_chat_merge_repeats" translatable="false">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="display_hours" translatable="false">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+        <item>06:00</item>
+        <item>07:00</item>
+        <item>08:00</item>
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>18:00</item>
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
+    </string-array>
+    <string-array name="value_hours" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+    <string-array name="display_chat_text_shadow">
+        <item>Automatic (transparent chat only)</item>
+        <item>Always</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="value_chat_text_shadow" translatable="false">
+        <item>auto</item>
+        <item>on</item>
+        <item>off</item>
+    </string-array>
+</resources>

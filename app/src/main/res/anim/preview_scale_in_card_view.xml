@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scale android:duration="200" android:pivotX="50.0%" android:pivotY="50.0%" android:fromXScale="100.0%" android:toXScale="@dimen/peekview_card_preview_scale" android:fromYScale="100.0%" android:toYScale="@dimen/peekview_card_preview_scale"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

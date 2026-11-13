@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Statistics page: what was watched -->
+<resources>
+    <string name="stats_title">Your viewing</string>
+    <string name="stats_tab_week">Last week</string>
+    <string name="stats_tab_30_days">Last 30 days</string>
+    <string name="stats_tab_year">Last year</string>
+    <string name="stats_tab_month">Month</string>
+    <string name="stats_loading">Loading …</string>
+    <string name="stats_empty">Nothing recorded for this period yet. Recording started with version 1.21; the page fills as you watch (a session counts from one minute).</string>
+    <!-- %1$s = difference such as "+2 h 05 min" -->
+    <string name="stats_vs_before">%1$s compared with the period before</string>
+    <plurals name="stats_days">
+        <item quantity="one">Watched on %d day</item>
+        <item quantity="other">Watched on %d days</item>
+    </plurals>
+    <plurals name="stats_sessions">
+        <item quantity="one">%d session</item>
+        <item quantity="other">%d sessions</item>
+    </plurals>
+    <string name="stats_longest">Longest: %1$s</string>
+    <string name="stats_top_channels">Most watched channels</string>
+    <string name="stats_top_categories">Most watched categories</string>
+    <!-- %1$d, %2$d = percent -->
+    <string name="stats_live_share">Live %1$d %% · Recordings %2$d %%</string>
+    <string name="stats_time_of_day">Time of day (start of a session)</string>
+    <!-- %1$s = hour such as "20:00" -->
+    <string name="stats_time_of_day_peak">Time of day (start of a session), most at %1$s</string>
+    <string name="stats_delete">Delete statistics</string>
+    <string name="stats_delete_confirm">Really delete? OK again</string>
+    <string name="stats_hint">Stored only on this device, not in backups. Switch off in the settings.</string>
+    <string name="home_nav_stats">Statistics</string>
+    <!-- %1$s = duration such as "42 h 15 min" -->
+    <string name="home_stats_card_title">Your last 30 days: %1$s</string>
+    <string name="home_stats_card_top">Most watched: %1$s</string>
+    <string name="home_stats_card_hint">More under Statistics on the left</string>
+</resources>

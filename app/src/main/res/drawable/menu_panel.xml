@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Surface of the player menus in the new style (step 7), colours as TvColors.Surface -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#F217171C" />
+    <corners android:radius="16dp" />
+</shape>

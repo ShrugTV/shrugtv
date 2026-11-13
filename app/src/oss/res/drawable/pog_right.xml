@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Gift symbol for the gifted-sub notice in the public edition, own drawing;
+     the homelab edition keeps its Pog emotes (decision in ) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp" android:height="32dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FFFFFF" android:pathData="M6,16H42V24H6Z M9,26H39V43H9Z" />
+    <path android:fillColor="#9146FF" android:pathData="M21,16H27V43H21Z" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="3" android:strokeLineJoin="round" android:pathData="M24,15C20,6 12,7 14,13C15,15 20,15 24,15C28,15 33,15 34,13C36,7 28,6 24,15Z" />
+</vector>

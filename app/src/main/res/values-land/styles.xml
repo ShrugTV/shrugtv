@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="@style/Base.Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
+        <item name="android:layout_gravity">start|bottom</item>
+    </style>
+</resources>

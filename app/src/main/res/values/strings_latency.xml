@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Low latency setting -->
+<resources>
+    <string name="settings_low_latency">Low latency</string>
+    <string name="settings_low_latency_summary">Plays closer to live, like the Twitch website. Turn off if the stream buffers often.</string>
+    <string name="settings_match_frame_rate">Match frame rate</string>
+    <string name="settings_match_frame_rate_summary">Switches the TV to 50 Hz for 50 fps streams so pans do not judder. The screen goes black for a moment when it switches.</string>
+</resources>

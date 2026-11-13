@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Backup up to Android 11 (fullBackupContent): settings yes, sign-in no. User.xml holds
+          TOKEN and REFRESH_TOKEN; they do not belong in a cloud backup ( point 3). -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="User.xml" />
+    <exclude domain="sharedpref" path="Mqtt.xml" />
+    <exclude domain="sharedpref" path="CompanionDevices.xml" />
+    <exclude domain="database" path="watch_stats" />
+    <exclude domain="database" path="watch_stats-journal" />
+    <exclude domain="database" path="watch_stats-wal" />
+    <exclude domain="database" path="watch_stats-shm" />
+</full-backup-content>

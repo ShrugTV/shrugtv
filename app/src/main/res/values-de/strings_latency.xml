@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Einstellung niedrige Latenz -->
+<resources>
+    <string name="settings_low_latency">Niedrige Latenz</string>
+    <string name="settings_low_latency_summary">Spielt näher am Live-Geschehen, wie auf der Twitch-Website. Ausschalten, wenn der Stream oft puffert.</string>
+    <string name="settings_match_frame_rate">Bildwiederholrate anpassen</string>
+    <string name="settings_match_frame_rate_summary">Schaltet den Fernseher bei 50-fps-Streams auf 50 Hz, damit Schwenks nicht ruckeln. Beim Umschalten ist das Bild kurz schwarz.</string>
+</resources>

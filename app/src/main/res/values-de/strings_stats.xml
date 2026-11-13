@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Statistikseite: was geschaut wurde -->
+<resources>
+    <string name="stats_title">Dein Schauverhalten</string>
+    <string name="stats_tab_week">Letzte Woche</string>
+    <string name="stats_tab_30_days">Letzte 30 Tage</string>
+    <string name="stats_tab_year">Letztes Jahr</string>
+    <string name="stats_tab_month">Monat</string>
+    <string name="stats_loading">Lädt …</string>
+    <string name="stats_empty">Für diesen Zeitraum ist noch nichts aufgezeichnet. Die Aufzeichnung begann mit Version 1.21; die Seite füllt sich beim Schauen (eine Sitzung zählt ab einer Minute).</string>
+    <string name="stats_vs_before">%1$s gegenüber dem Zeitraum davor</string>
+    <plurals name="stats_days">
+        <item quantity="one">An %d Tag geschaut</item>
+        <item quantity="other">An %d Tagen geschaut</item>
+    </plurals>
+    <plurals name="stats_sessions">
+        <item quantity="one">%d Sitzung</item>
+        <item quantity="other">%d Sitzungen</item>
+    </plurals>
+    <string name="stats_longest">Längste: %1$s</string>
+    <string name="stats_top_channels">Meistgeschaute Kanäle</string>
+    <string name="stats_top_categories">Meistgeschaute Kategorien</string>
+    <string name="stats_live_share">Live %1$d %% · Aufzeichnungen %2$d %%</string>
+    <string name="stats_time_of_day">Tageszeit (Beginn einer Sitzung)</string>
+    <string name="stats_time_of_day_peak">Tageszeit (Beginn einer Sitzung), am meisten um %1$s</string>
+    <string name="stats_delete">Statistik löschen</string>
+    <string name="stats_delete_confirm">Wirklich löschen? Nochmal OK</string>
+    <string name="stats_hint">Nur auf diesem Gerät gespeichert, nicht in Sicherungen. In den Einstellungen abschaltbar.</string>
+    <string name="home_nav_stats">Statistik</string>
+    <string name="home_stats_card_title">Deine letzten 30 Tage: %1$s</string>
+    <string name="home_stats_card_top">Meistgeschaut: %1$s</string>
+    <string name="home_stats_card_hint">Mehr unter Statistik links</string>
+</resources>

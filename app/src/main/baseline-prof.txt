@@ -1,0 +1,26 @@
+# Baseline Profile for ShrugTV - Critical code paths for AOT compilation
+# Generated: 2026-10-30
+
+# API Layer
+HSPLcom/shrug/shrugtv/api/helix/HelixApi;-><init>(...)V
+HSPLcom/shrug/shrugtv/api/helix/HelixApi;->get(...)Lcom/shrug/shrugtv/net/Http$Response;
+HSPLcom/shrug/shrugtv/api/gql/GqlApi;-><init>(...)V
+HSPLcom/shrug/shrugtv/api/gql/GqlApi;->query(...)Lcom/shrug/shrugtv/net/Http$Response;
+
+# Chat Layer
+HSPLcom/shrug/shrugtv/chat/ChatMessageProcessor;->process(...)Lcom/shrug/shrugtv/chat/ChatMessage;
+HSPLcom/shrug/shrugtv/chat/ChatMessageProcessor;->filter(...)Z
+
+# Player Layer
+HSPLcom/shrug/shrugtv/ui/tv/player/PlayerViewModel;->play(...)V
+HSPLcom/shrug/shrugtv/ui/tv/player/PlayerViewModel;->togglePlayPause(...)V
+HSPLcom/shrug/shrugtv/player/PlayerFactory;->create(...)Landroidx/media3/exoplayer/ExoPlayer;
+
+# Parser Layer
+HSPLcom/shrug/shrugtv/api/helix/HelixParser;->parse(...)Ljava/util/List;
+HSPLcom/shrug/shrugtv/api/gql/GqlParser;->parse(...)Ljava/util/List;
+
+# UI Layer
+HSPLcom/shrug/shrugtv/activities/MainActivity;->onCreate(...)V
+HSPLcom/shrug/shrugtv/ui/tv/home/HomeScreenKt;->HomeScreen(...)V
+HSPLcom/shrug/shrugtv/ui/tv/player/PlayerScreenKt;->PlayerScreen(...)V

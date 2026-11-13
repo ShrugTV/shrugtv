@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VOD control bar in the new style: dark gradient, wide progress bar in the
+     accent colour, round buttons (pause white), chapters and speed as labelled pills; white when focused.
+     Before: the Media3 default (white dot on a grey line, "CHAPTERS (0)", purple focus square).
+     IDs unchanged: Media3 and VODPlayerActivity bind them as before. -->
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View android:id="@id/exo_controls_background" android:layout_width="0.0dp" android:layout_height="0.0dp" />
+    <FrameLayout android:layout_gravity="bottom" android:id="@id/exo_bottom_bar" android:background="@drawable/player_bg_gradient_dark" android:layout_width="match_parent" android:layout_height="140.0dp" android:layoutDirection="ltr">
+        <androidx.media3.ui.DefaultTimeBar android:id="@id/exo_progress" android:layout_gravity="top" android:layout_marginTop="30.0dp" android:layout_marginStart="32.0dp" android:layout_marginEnd="32.0dp" android:layout_width="match_parent" android:layout_height="26.0dp"
+            app:bar_height="5dp" app:played_color="#FFBF94FF" app:unplayed_color="#38FFFFFF" app:buffered_color="#59FFFFFF" app:scrubber_color="#FFFFFFFF" app:scrubber_enabled_size="14dp" app:scrubber_dragged_size="20dp" />
+        <LinearLayout android:layout_gravity="start|bottom" android:id="@id/exo_time" android:layout_marginStart="36.0dp" android:layout_marginBottom="30.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layoutDirection="ltr">
+            <TextView android:id="@id/exo_position" style="@style/ExoStyledControls.TimeText.Position" android:fontFamily="@font/inter_semibold" android:textColor="#FFEFEFF1" android:textSize="15sp" />
+            <TextView style="@style/ExoStyledControls.TimeText.Separator" android:fontFamily="@font/inter_regular" android:textColor="#FFADADB8" android:textSize="15sp" />
+            <TextView android:id="@id/exo_duration" style="@style/ExoStyledControls.TimeText.Duration" android:fontFamily="@font/inter_regular" android:textColor="#FFADADB8" android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout android:layout_gravity="center|bottom" android:gravity="center_vertical" android:layout_marginBottom="18.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton android:id="@id/exo_rew" style="@style/ExoMediaButton.Rewind" android:background="@drawable/vod_round" android:tint="@color/playerbutton_symbol" android:padding="10dp" android:scaleType="fitCenter" android:layout_marginEnd="12dp" android:layout_width="46.0dp" android:layout_height="46.0dp" />
+            <ImageButton android:id="@id/exo_play_pause" style="@style/ExoStyledControls.Button.Center.PlayPause" android:background="@drawable/vod_round" android:tint="@color/playerbutton_symbol" android:padding="12dp" android:scaleType="fitCenter" android:layout_width="58.0dp" android:layout_height="58.0dp" />
+            <ImageButton android:id="@id/exo_ffwd" style="@style/ExoMediaButton.FastForward" android:background="@drawable/vod_round" android:tint="@color/playerbutton_symbol" android:padding="10dp" android:scaleType="fitCenter" android:layout_marginStart="12dp" android:layout_width="46.0dp" android:layout_height="46.0dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_gravity="end|bottom" android:gravity="center_vertical" android:layout_marginEnd="32.0dp" android:layout_marginBottom="24.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <Button android:id="@id/Chapters" android:background="@drawable/vod_pill" android:textColor="@color/playerbutton_symbol" android:textAllCaps="false" android:fontFamily="@font/inter_semibold" android:textSize="14sp" android:minWidth="0dp" android:minHeight="0dp" android:layout_width="wrap_content" android:layout_height="40.0dp" android:paddingStart="18.0dp" android:paddingEnd="18.0dp" android:layout_marginEnd="10dp" />
+            <Button android:id="@id/btn_PlaybackSpeed" android:background="@drawable/vod_pill" android:textColor="@color/playerbutton_symbol" android:textAllCaps="false" android:fontFamily="@font/inter_semibold" android:textSize="14sp" android:minWidth="0dp" android:minHeight="0dp" android:layout_width="wrap_content" android:layout_height="40.0dp" android:paddingStart="18.0dp" android:paddingEnd="18.0dp" />
+        </LinearLayout>
+    </FrameLayout>
+</merge>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Round buttons of the VOD bar: glass circle, white in focus -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/playerbutton_round_focus" />
+    <item android:state_focused="true" android:drawable="@drawable/playerbutton_round_focus" />
+    <item android:drawable="@drawable/playerbutton_round" />
+</selector>

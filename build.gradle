@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.10.1'
+        // Kotlin and Compose compiler for the Compose-for-TV interface;
+        // beide Plugins immer in derselben Version
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.21'
+        classpath 'org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.4.21'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:2.4.21'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // YouTubeExtractor, MPAndroidChart, ViewTooltip, colormath
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

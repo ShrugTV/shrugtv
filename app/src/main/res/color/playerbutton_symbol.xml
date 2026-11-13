@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Symbol colour of the player buttons: dark on a white focus circle, otherwise light -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:color="#FF0B0B0E" />
+    <item android:state_focused="true" android:color="#FF0B0B0E" />
+    <item android:color="#FFEFEFF1" />
+</selector>

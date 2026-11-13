@@ -1,0 +1,147 @@
+{
+ "type": "emote_set.update",
+ "body": {
+  "id": "01FWHJF3A8000272ZDN060M3D7",
+  "kind": 3,
+  "pushed": [
+   {
+    "key": "emotes",
+    "index": 955,
+    "type": "object",
+    "value": {
+     "id": "01M5ZEF72ZZ13QVTJ5Z5V358XQ",
+     "name": "Howdy",
+     "flags": 0,
+     "timestamp": 1793130470495,
+     "actor_id": "01JS1WRYZ2GWA8KQT6A7HYN7Q6",
+     "data": {
+      "id": "01M5ZEF72ZZ13QVTJ5Z5V358XQ",
+      "name": "Howdy",
+      "flags": 0,
+      "lifecycle": 3,
+      "state": [],
+      "listed": false,
+      "animated": false,
+      "owner": {
+       "id": "entfernt"
+      },
+      "host": {
+       "url": "//cdn.7tv.app/emote/01M5ZEF72ZZ13QVTJ5Z5V358XQ",
+       "files": [
+        {
+         "name": "1x.webp",
+         "static_name": "1x.webp",
+         "width": 51,
+         "height": 32,
+         "frame_count": 1,
+         "size": 3148,
+         "format": "WEBP"
+        },
+        {
+         "name": "2x.webp",
+         "static_name": "2x.webp",
+         "width": 102,
+         "height": 64,
+         "frame_count": 1,
+         "size": 9940,
+         "format": "WEBP"
+        },
+        {
+         "name": "3x.webp",
+         "static_name": "3x.webp",
+         "width": 153,
+         "height": 96,
+         "frame_count": 1,
+         "size": 19330,
+         "format": "WEBP"
+        },
+        {
+         "name": "4x.webp",
+         "static_name": "4x.webp",
+         "width": 204,
+         "height": 128,
+         "frame_count": 1,
+         "size": 30144,
+         "format": "WEBP"
+        },
+        {
+         "name": "1x.avif",
+         "static_name": "1x.avif",
+         "width": 51,
+         "height": 32,
+         "frame_count": 1,
+         "size": 1208,
+         "format": "AVIF"
+        },
+        {
+         "name": "2x.avif",
+         "static_name": "2x.avif",
+         "width": 102,
+         "height": 64,
+         "frame_count": 1,
+         "size": 2730,
+         "format": "AVIF"
+        },
+        {
+         "name": "3x.avif",
+         "static_name": "3x.avif",
+         "width": 153,
+         "height": 96,
+         "frame_count": 1,
+         "size": 4361,
+         "format": "AVIF"
+        },
+        {
+         "name": "4x.avif",
+         "static_name": "4x.avif",
+         "width": 204,
+         "height": 128,
+         "frame_count": 1,
+         "size": 6204,
+         "format": "AVIF"
+        },
+        {
+         "name": "1x.png",
+         "static_name": "1x.png",
+         "width": 51,
+         "height": 32,
+         "frame_count": 1,
+         "size": 4927,
+         "format": "PNG"
+        },
+        {
+         "name": "2x.png",
+         "static_name": "2x.png",
+         "width": 102,
+         "height": 64,
+         "frame_count": 1,
+         "size": 16556,
+         "format": "PNG"
+        },
+        {
+         "name": "3x.png",
+         "static_name": "3x.png",
+         "width": 153,
+         "height": 96,
+         "frame_count": 1,
+         "size": 33753,
+         "format": "PNG"
+        },
+        {
+         "name": "4x.png",
+         "static_name": "4x.png",
+         "width": 204,
+         "height": 128,
+         "frame_count": 1,
+         "size": 55197,
+         "format": "PNG"
+        }
+       ]
+      }
+     },
+     "origin_id": null
+    }
+   }
+  ]
+ }
+}

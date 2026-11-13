@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom row of the player bar: five frequent actions and "More", round and
+     labelled. The other buttons live in the "More" menu (include_player_more.xml). IDs as in the
+     original, PlayerActivity binds clicks, icons and shortcuts to them as before. -->
+<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:nextFocusUp="@id/ButtonVideoQuality" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonVideoQuality" android:tag="@string/tooltip_video_quality" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_baseline_high_quality_24px" android:contentDescription="@string/tooltip_video_quality" />
+        <TextView style="@style/KnopfText" android:text="@string/player_btn_quality" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:nextFocusUp="@id/ButtonChatOnOFF" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonChatOnOFF" android:tag="@string/tooltip_show_chat" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_baseline_chat_24px" android:contentDescription="@string/tooltip_show_chat" />
+        <TextView style="@style/KnopfText" android:text="@string/player_btn_chat" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:nextFocusUp="@id/ButtonChannelProfile" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonChannelProfile" android:tag="@string/tooltip_channel_profile" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_baseline_person_24px" android:contentDescription="@string/tooltip_channel_profile" />
+        <TextView style="@style/KnopfText" android:text="@string/player_btn_channel" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:nextFocusUp="@id/ButtonFollow" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonFollow" android:tag="@string/tooltip_follow" android:background="@drawable/playerbutton_selector" android:src="@drawable/ic_follow_outline" android:contentDescription="@string/tooltip_follow" />
+        <TextView style="@style/KnopfText" android:text="@string/player_btn_follow" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:nextFocusUp="@id/ButtonSearch" android:tint="@color/playerbutton_symbol" android:id="@id/ButtonSearch" android:tag="@string/tooltip_search" android:background="@drawable/playerbutton_selector" android:src="@drawable/magnify" android:scaleType="fitCenter" android:contentDescription="@string/tooltip_search" />
+        <TextView style="@style/KnopfText" android:text="@string/player_btn_search" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="64dp" android:layout_height="wrap_content">
+        <ImageButton android:id="@+id/ButtonMore" android:tint="@color/playerbutton_symbol" android:background="@drawable/playerbutton_selector" android:layout_width="44dp" android:layout_height="44dp" android:padding="10dp" android:scaleType="fitCenter" android:src="@drawable/ic_more" android:contentDescription="Mehr" />
+        <TextView style="@style/KnopfText" android:text="@string/player_more" />
+    </LinearLayout>
+</LinearLayout>

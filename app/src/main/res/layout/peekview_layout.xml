@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Channel switcher in the player. Tabs (PeekRowIndicator) 52 dp above the row: the focused card
+     grows upwards beyond the row and otherwise covered the title.
+     Since  tabs instead of radio circles on the left; PeekTitle is invisible and
+     supplies the text of the active tab. -->
+<androidx.constraintlayout.widget.ConstraintLayout android:orientation="vertical" android:id="@id/PeekLayout" android:background="@drawable/player_bg_gradient_dark" android:visibility="gone" android:clipChildren="false" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:scaleY="0.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.recyclerview.widget.RecyclerView android:layout_gravity="top" android:orientation="horizontal" android:id="@id/PeekRecyclerView" android:paddingBottom="20.0dp" android:focusable="true" android:clipChildren="false" android:clipToPadding="false" android:layout_width="match_parent" android:layout_height="150.0dp" android:layout_marginTop="10.0dp" android:layout_marginStart="40.0dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" />
+    <TextView android:visibility="gone" android:textSize="18.0sp" android:fontFamily="@font/inter_bold" android:textColor="#EFEFF1" android:id="@id/PeekTitle" android:paddingTop="20.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="52.0dp" android:paddingStart="35.0dp" app:layout_constraintBottom_toTopOf="@id/PeekRecyclerView" app:layout_constraintStart_toEndOf="@id/PeekRowIndicator" app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/PeekRowIndicator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingTop="20.0dp" android:layout_marginBottom="52.0dp" android:layout_marginStart="48.0dp" app:layout_constraintBottom_toTopOf="@id/PeekRecyclerView" app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

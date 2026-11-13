@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adjust mode for chat and multiview: styles and texts.
+     German texts: values-de/strings_player.xml. -->
+<resources>
+    <style name="AdjustKey">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/adjust_key</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="AdjustText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">22dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#FFDEDEE3</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <string name="adjust_key_back">Back</string>
+    <string name="adjust_ok_fine">Width and height</string>
+    <string name="adjust_ok_coarse">Position and size</string>
+    <string name="adjust_measures">Width %1$d %% · height %2$d %% of the picture</string>
+</resources>

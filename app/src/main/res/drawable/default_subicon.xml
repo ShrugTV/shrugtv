@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chat badge, own drawing; replaces the bitmap from the apktool export -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp" android:height="72dp" android:viewportWidth="72" android:viewportHeight="72">
+    <path android:fillColor="#8205B4" android:pathData="M12,0H60A12,12 0,0 1,72,12V60A12,12 0,0 1,60,72H12A12,12 0,0 1,0,60V12A12,12 0,0 1,12,0Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M36.0,15.0L41.6,30.3L57.9,30.9L45.0,40.9L49.5,56.6L36.0,47.5L22.5,56.6L27.0,40.9L14.1,30.9L30.4,30.3Z" />
+</vector>

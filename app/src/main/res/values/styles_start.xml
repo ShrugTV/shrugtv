@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Start window: app background with the ShrugTV logo instead of the red of the old
+         theme AppTheme_Red. ShrugTV.Start for the home screen, AppTheme_Shrug for the activities without a theme of
+         their own (player, login). From Android 12 on, values-v31 adds the system splash attributes. -->
+    <color name="shrug_start_background">#FF0B0B0E</color>
+    <style name="ShrugTV.Start" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashscreenContent">@drawable/splash_logo</item>
+        <item name="android:colorBackground">@color/shrug_start_background</item>
+    </style>
+    <style name="AppTheme_Shrug" parent="@style/AppTheme_DarkGrey">
+        <item name="android:windowBackground">@color/shrug_start_background</item>
+        <item name="android:windowSplashscreenContent">@drawable/splash_logo</item>
+    </style>
+</resources>
