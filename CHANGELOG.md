@@ -2,6 +2,11 @@
 
 All notable changes of ShrugTV, newest first. Versions follow [SemVer](https://semver.org).
 
+## 2.1.2 – 2026-11-13
+
+### Fixed
+- Repository: the GitHub build check (Android CI) runs again; `gradlew` was not marked executable, so every run failed at the first step.
+
 ## 2.1.1 – 2026-11-13
 
 ### New
