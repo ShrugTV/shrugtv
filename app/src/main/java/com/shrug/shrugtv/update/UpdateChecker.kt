@@ -62,6 +62,11 @@ object UpdateChecker {
         return UpdateCheck.available(BuildConfig.VERSION_NAME, json, skipped)?.let { Result.Available(it) } ?: Result.UpToDate
     }
 
+    /** "Skip this version": no notice for it any more; a later version is announced again. */
+    fun skip(ctx: Context, version: String) {
+        store(ctx).edit().putString("skipped", version).apply()
+    }
+
     /** True once per found version, so the start-up notice does not repeat on every launch. */
     fun markNotified(ctx: Context, version: String): Boolean {
         val s = store(ctx)

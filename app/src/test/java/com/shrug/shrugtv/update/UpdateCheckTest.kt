@@ -63,4 +63,31 @@ class UpdateCheckTest {
         assertNull(UpdateCheck.available("2.0.0", answer("v2.1.0"), "2.1.0"))
         assertNull(UpdateCheck.available("2.1.0", answer("v2.1.0"), null))
     }
+
+    @Test
+    fun `apk address and checksum come from the release`() {
+        val sha = "a".repeat(64)
+        val json = """{"tag_name":"v2.2.0","html_url":"https://example.test/r","body":"Notes\n\nSHA-256 of `shrugtv-2.2.0.apk`: `$sha`",
+            "assets":[{"name":"shrugtv.apk","browser_download_url":"https://example.test/latest.apk"},
+                      {"name":"shrugtv-2.2.0.apk","browser_download_url":"https://example.test/2.2.0.apk"}]}"""
+        val r = UpdateCheck.parseRelease(json)!!
+        assertEquals("https://example.test/2.2.0.apk", r.apkUrl)
+        assertEquals(sha, r.sha256)
+    }
+
+    @Test
+    fun `release without checksum or file has none`() {
+        val r = UpdateCheck.parseRelease(answer("v2.2.0"))!!
+        assertEquals("", r.apkUrl)
+        assertEquals("", r.sha256)
+        assertEquals("", UpdateCheck.checksumIn("SHA-256 of `x`: `abc`"))
+    }
+
+    @Test
+    fun `release notes are shortened for the dialog`() {
+        val notes = "### New\n- First **bold** change with `code`\n- Second\n\nSHA-256 of x: abc"
+        assertEquals("New\n• First bold change with code\n• Second", UpdateCheck.shortNotes(notes))
+        assertEquals("", UpdateCheck.shortNotes(""))
+        assertTrue(UpdateCheck.shortNotes((1..20).joinToString("\n") { "line $it" }).endsWith("…"))
+    }
 }

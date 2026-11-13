@@ -46,7 +46,13 @@ internal object SettingsActions {
                         com.shrug.shrugtv.update.UpdateChecker.Result.UpToDate -> a.getString(R.string.update_up_to_date)
                         com.shrug.shrugtv.update.UpdateChecker.Result.Failed -> a.getString(R.string.update_failed)
                     })
-                    android.os.Handler(android.os.Looper.getMainLooper()).post { hint(ctx, text, 8000L) }
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        if (r is com.shrug.shrugtv.update.UpdateChecker.Result.Available) {
+                            a.startActivity(com.shrug.shrugtv.update.UpdateActivity.intent(a, r.release))
+                        } else {
+                            hint(ctx, text, 8000L)
+                        }
+                    }
                 }.start()
                 return true
             }

@@ -318,6 +318,7 @@
     </PreferenceScreen>
     <PreferenceScreen android:icon="@drawable/ic_baseline_info_24px" android:title="@string/pref_title_about" android:key="pref_app_info">
         <SwitchPreference android:title="@string/settings_update_check" android:key="pref_update_check" android:summary="@string/settings_update_check_summary" android:defaultValue="false" />
+        <SwitchPreference android:title="@string/settings_update_install" android:key="pref_update_install" android:summary="@string/settings_update_install_summary" android:dependency="pref_update_check" android:defaultValue="false" />
         <Preference android:title="@string/settings_update_check_now" android:key="pref_update_check_now" android:summary="@string/settings_update_check_now_summary" android:dependency="pref_update_check" />
         <SwitchPreference android:title="@string/settings_show_advanced" android:key="pref_show_advanced" android:summary="@string/settings_show_advanced_summary" android:defaultValue="false" />
         <Preference android:title="@string/settings_clear_caches" android:key="pref_clear_caches" android:summary="@string/settings_clear_caches_summary" />

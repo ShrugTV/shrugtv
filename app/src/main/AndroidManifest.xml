@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- Public edition only: install updates from inside the app; the private edition gets a duplicate of a permission it has -->
+    <uses-permission android:name="${installPermission}"/>
     <uses-permission android:name="com.android.providers.tv.permission.READ_EPG_DATA"/>
     <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -66,6 +68,7 @@
         <activity android:name="com.shrug.shrugtv.activities.DebugActivity" android:screenOrientation="sensorLandscape" android:theme="@style/LeanbackPreferencesRed"/>
         <activity android:name="com.shrug.shrugtv.ui.tv.dialogs.FollowQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name="com.shrug.shrugtv.ui.tv.dialogs.ChatQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.shrug.shrugtv.update.UpdateActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name="com.shrug.shrugtv.companion.CompanionQrActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name="com.shrug.shrugtv.companion.CompanionDevicesActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <receiver android:enabled="true" android:exported="true" android:name="com.shrug.shrugtv.channels.RunOnInstallReceiver">

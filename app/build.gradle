@@ -54,7 +54,8 @@ android {
         minSdkVersion 26
         //noinspection ExpiringTargetSdkVersion,ExpiredTargetSdkVersion
         targetSdkVersion 35
-        versionCode gitCount
+        // -PversionCodeOverride=N only for update tests (the installer replaces a build with a higher code from a lower one)
+        versionCode (findProperty('versionCodeOverride') ? (findProperty('versionCodeOverride') as int) : gitCount)
         versionName appVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -64,6 +65,10 @@ android {
         buildConfigField "boolean", "AD_FREE", edition == 'homelab' ? 'true' : 'false'
         // Update check: only the public edition asks; the private one is rolled out by tools/deploy.sh.
         // The release API of the public repository; Gitea and Codeberg answer with the same fields.
+        // Install updates inside the app: needs REQUEST_INSTALL_PACKAGES, which only the public edition holds
+        buildConfigField "boolean", "UPDATE_INSTALL", edition == 'oss' ? 'true' : 'false'
+        // The private edition gets a permission it already has (a no-op), so the manifest stays one file for both editions
+        manifestPlaceholders = [installPermission: edition == 'oss' ? 'android.permission.REQUEST_INSTALL_PACKAGES' : 'android.permission.ACCESS_NETWORK_STATE']
         buildConfigField "boolean", "UPDATE_CHECK", edition == 'oss' ? 'true' : 'false'
         buildConfigField "String", "UPDATE_SOURCE", edition == 'oss' ? '"https://api.github.com/repos/ShrugTV/shrugtv/releases/latest"' : '""'
     }

@@ -2,6 +2,12 @@
 
 All notable changes of ShrugTV, newest first. Versions follow [SemVer](https://semver.org).
 
+## 2.2.0 – 2026-11-13
+
+### New
+- Public edition: Settings → App → "Install updates in the app" (off by default) adds an "Install now" button to the update card: the app downloads the release, checks its SHA-256 and opens the system installer, where you confirm; it needs the system permission "Install unknown apps" for ShrugTV once. The private edition never has this permission.
+- Update check: "Check now" shows a card for a newer version with the changes, a QR code to the release page and the buttons "Later" and "Skip this version"; the update texts are translated into all languages.
+
 ## 2.1.2 – 2026-11-13
 
 ### Fixed

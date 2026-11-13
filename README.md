@@ -73,7 +73,10 @@ Keys can differ slightly between remotes; every setting page has a short guide w
 3. Open Downloader, enter the code **`4727814`** (or the address `aftv.news/4727814`) and press *Go*.
 4. When the download is done, choose *Install*, then *Open*.
 
-The code always points to the newest release. To update, run it again; the app keeps its settings because every release
+The code always points to the newest release. To update, run it again, or switch on *Settings → App → Check for updates* and
+*Install updates in the app*: the update card then has an *Install now* button. The app downloads the release, checks its
+SHA-256 and opens the system installer, where you confirm; the first time you also have to allow *Install unknown apps*
+for ShrugTV. Installing never happens without that confirmation.  the app keeps its settings because every release
 is signed with the same key. Releases are also listed on the [release page](https://github.com/ShrugTV/shrugtv/releases).
 
 ### With adb
@@ -155,7 +158,7 @@ and, to be signed, `keystore.file` and `keystore.password` (or `SHRUGTV_KEYSTORE
 
 **Which devices work?** Android TV, Google TV and Fire TV with Android 8 or newer, controlled with a normal remote.
 
-**Is my data sent anywhere?** Only to Twitch, the optional update check (GitHub, off by default) and, for emotes, to the emote services you see in chat (7TV, BTTV, FFZ). Statistics never leave the TV.
+**Is my data sent anywhere?** Only to Twitch, the optional update check and update download (GitHub, both off by default) and, for emotes, to the emote services you see in chat (7TV, BTTV, FFZ). Statistics never leave the TV.
 
 **Why does sign-in fail in my own build?** The build has no Twitch client ID; see [Build](#build).
 

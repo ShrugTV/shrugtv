@@ -22,7 +22,7 @@ To show third-party emotes in the chat, the app loads emote lists and images fro
 
 ## Only when you switch it on
 
-Chat history: recent-messages.robotty.de supplies the last chat messages of a channel. Home Assistant: the app connects to the MQTT broker you enter. Phone page: the app opens a small web page in your home network. All three are off until you enable them in the settings. Update check (public version): the app asks api.github.com for the newest release; GitHub sees your IP address. It is off until you enable it.
+Chat history: recent-messages.robotty.de supplies the last chat messages of a channel. Home Assistant: the app connects to the MQTT broker you enter. Phone page: the app opens a small web page in your home network. All three are off until you enable them in the settings. Update check (public version): the app asks api.github.com for the newest release; GitHub sees your IP address. It is off until you enable it. Install updates (optional): when you tap "Install now", the app downloads the release file from GitHub.
 
 ## Your rights
 

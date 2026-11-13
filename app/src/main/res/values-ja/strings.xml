@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">エモートサービス</string>
     <string name="info_privacy_emotes">チャットにサードパーティのエモートを表示するため、アプリはBetterTTV(api.betterttv.net、cdn.betterttv.net、sockets.betterttv.net)、FrankerFaceZ(api.frankerfacez.com、cdn.frankerfacez.com)、7TV(7tv.io、cdn.7tv.app、events.7tv.io)からエモートの一覧と画像を読み込みます。これらのサービスは、あなたが視聴しているチャンネルを知ることになります。法的根拠: GDPR第6条第1項(f)、Twitchと同じチャット表示。</string>
     <string name="info_privacy_h_optional">オンにした場合のみ</string>
-    <string name="info_privacy_optional">チャット履歴: recent-messages.robotty.de がチャンネルの直近のチャットメッセージを提供します。Home Assistant: アプリは入力したMQTTブローカーに接続します。スマホ用ページ: アプリは家庭内ネットワークで小さなウェブページを公開します。この3つは、設定で有効にするまでオフです。 アップデートの確認(公開版):アプリが api.github.com に最新バージョンを問い合わせ、GitHub には IP アドレスが見えます。有効にするまでオフです。</string>
+    <string name="info_privacy_optional">チャット履歴: recent-messages.robotty.de がチャンネルの直近のチャットメッセージを提供します。Home Assistant: アプリは入力したMQTTブローカーに接続します。スマホ用ページ: アプリは家庭内ネットワークで小さなウェブページを公開します。この3つは、設定で有効にするまでオフです。 アップデートの確認(公開版):アプリが api.github.com に最新バージョンを問い合わせ、GitHub には IP アドレスが見えます。有効にするまでオフです。 アップデートのインストール(任意):「今すぐインストール」をタップすると、アプリが GitHub からバージョンのファイルをダウンロードします。</string>
     <string name="info_privacy_h_proxy">プロキシ</string>
     <string name="info_privacy_proxy">設定でプロキシを選ぶと、ライブ配信のプレイリストはTwitchから直接ではなく、そのサーバー経由で取得されます。</string>
     <string name="info_privacy_h_rights">あなたの権利</string>
@@ -1265,4 +1265,26 @@
         <item quantity="other">%d セッション</item>
     </plurals>
     <string name="player_chapters_count">%1$d チャプター</string>
+    <string name="settings_update_check">アップデートを確認</string>
+    <string name="settings_update_check_summary">1日1回、ShrugTV の GitHub リリースページに新しいバージョンがあるか問い合わせて知らせます。次の設定がなければ、ダウンロードやインストールは一切行いません。GitHub には IP アドレスが見えます。初期設定はオフです。</string>
+    <string name="settings_update_check_now">今すぐ確認</string>
+    <string name="settings_update_check_now_summary">1日の制限なしですぐに問い合わせます</string>
+    <string name="update_available">バージョン %1$s が利用できます: %2$s</string>
+    <string name="update_up_to_date">ShrugTV は最新です</string>
+    <string name="update_failed">アップデートを確認できませんでした。後でもう一度お試しください</string>
+    <string name="update_title">バージョン %1$s が利用できます</string>
+    <string name="update_hint">コードをスキャンしてスマートフォンでリリースページを開くか、Downloader アプリ(コード 4727814)でインストールしてください。自動ではインストールされません。</string>
+    <string name="update_later">あとで</string>
+    <string name="update_skip">このバージョンをスキップ</string>
+    <string name="settings_update_install">アプリ内でアップデートをインストール</string>
+    <string name="settings_update_install_summary">アップデートのカードに「今すぐインストール」ボタンを追加します。アプリが GitHub から新しいバージョンをダウンロードして確認し、システムのインストーラーを開くので、そこで確定します。ShrugTV に「提供元不明のアプリのインストール」のシステム権限が必要です。初期設定はオフです。</string>
+    <string name="update_install">今すぐインストール</string>
+    <string name="update_downloading">ダウンロード中 … %1$d %%</string>
+    <string name="update_verifying">ダウンロードを確認中 …</string>
+    <string name="update_need_permission">次の画面で ShrugTV にアプリのインストールを許可してから、戻ってもう一度お試しください</string>
+    <string name="update_permission_unavailable">このテレビにはその権限の画面がありません。システム設定で ShrugTV の「提供元不明のアプリのインストール」を有効にするか、Downloader のコードを使ってください</string>
+    <string name="update_no_file">このリリースにはアプリのチェックサムまたはファイルがありません。QR コードか Downloader のコードを使ってください</string>
+    <string name="update_bad_checksum">ダウンロードがチェックサムと一致しなかったため削除しました</string>
+    <string name="update_install_failed">インストールに失敗しました: %1$s</string>
+    <string name="update_download_failed">ダウンロードに失敗しました。後でもう一度お試しください</string>
 </resources>

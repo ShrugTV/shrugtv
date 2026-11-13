@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Servicios de emotes</string>
     <string name="info_privacy_emotes">Para mostrar emotes de terceros en el chat, la app carga listas e imágenes de emotes de BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) y 7TV (7tv.io, cdn.7tv.app, events.7tv.io). Estos servicios saben qué canal estás viendo. Base jurídica: art. 6, apdo. 1, letra f) del RGPD, el chat mostrado como en Twitch.</string>
     <string name="info_privacy_h_optional">Solo si lo activas</string>
-    <string name="info_privacy_optional">Historial del chat: recent-messages.robotty.de suministra los últimos mensajes del chat de un canal. Home Assistant: la app se conecta al broker MQTT que indiques. Página del móvil: la app abre una pequeña página web en tu red doméstica. Las tres funciones están desactivadas hasta que las actives en los ajustes. Búsqueda de actualizaciones (versión pública): la app consulta api.github.com por la versión más reciente; GitHub ve tu dirección IP. Está desactivada hasta que la actives.</string>
+    <string name="info_privacy_optional">Historial del chat: recent-messages.robotty.de suministra los últimos mensajes del chat de un canal. Home Assistant: la app se conecta al broker MQTT que indiques. Página del móvil: la app abre una pequeña página web en tu red doméstica. Las tres funciones están desactivadas hasta que las actives en los ajustes. Búsqueda de actualizaciones (versión pública): la app consulta api.github.com por la versión más reciente; GitHub ve tu dirección IP. Está desactivada hasta que la actives. Instalar actualizaciones (opcional): al pulsar «Instalar ahora», la app descarga el archivo de la versión de GitHub.</string>
     <string name="info_privacy_h_proxy">Proxy</string>
     <string name="info_privacy_proxy">Si eliges un proxy en los ajustes, las listas de reproducción de los directos se piden a través de ese servidor en lugar de directamente a Twitch.</string>
     <string name="info_privacy_h_rights">Tus derechos</string>
@@ -1279,4 +1279,26 @@
         <item quantity="other">%d sesiones</item>
     </plurals>
     <string name="player_chapters_count">%1$d capítulos</string>
+    <string name="settings_update_check">Buscar actualizaciones</string>
+    <string name="settings_update_check_summary">Una vez al día la app consulta en la página de versiones de ShrugTV en GitHub si hay una versión más nueva y te avisa. Sin el ajuste siguiente no descarga ni instala nada; GitHub ve tu dirección IP. Desactivado por defecto.</string>
+    <string name="settings_update_check_now">Comprobar ahora</string>
+    <string name="settings_update_check_now_summary">Consulta de inmediato, sin el límite diario</string>
+    <string name="update_available">La versión %1$s está disponible: %2$s</string>
+    <string name="update_up_to_date">ShrugTV está actualizado</string>
+    <string name="update_failed">No se pudo buscar actualizaciones, inténtalo más tarde</string>
+    <string name="update_title">La versión %1$s está disponible</string>
+    <string name="update_hint">Escanea el código para abrir la página de la versión en tu móvil, o instálala con la app Downloader (código 4727814). No se instala nada automáticamente.</string>
+    <string name="update_later">Más tarde</string>
+    <string name="update_skip">Omitir esta versión</string>
+    <string name="settings_update_install">Instalar actualizaciones en la app</string>
+    <string name="settings_update_install_summary">Añade el botón «Instalar ahora» a la tarjeta de actualización: la app descarga la nueva versión de GitHub, la comprueba y abre el instalador del sistema, donde confirmas. Necesita el permiso del sistema «Instalar apps desconocidas» para ShrugTV. Desactivado por defecto.</string>
+    <string name="update_install">Instalar ahora</string>
+    <string name="update_downloading">Descargando … %1$d %%</string>
+    <string name="update_verifying">Comprobando la descarga …</string>
+    <string name="update_need_permission">Permite a ShrugTV instalar apps en la pantalla siguiente, vuelve y inténtalo de nuevo</string>
+    <string name="update_permission_unavailable">Este televisor no tiene pantalla para ese permiso. Activa «Instalar apps desconocidas» para ShrugTV en los ajustes del sistema o usa el código de Downloader</string>
+    <string name="update_no_file">Esta versión no tiene suma de comprobación ni archivo para la app. Usa el código QR o el código de Downloader</string>
+    <string name="update_bad_checksum">La descarga no coincide con su suma de comprobación y se ha borrado</string>
+    <string name="update_install_failed">Error al instalar: %1$s</string>
+    <string name="update_download_failed">Error de descarga, inténtalo más tarde</string>
 </resources>

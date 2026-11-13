@@ -93,7 +93,7 @@ object SettingsModel {
     private val hiddenPages: Set<String?> = if (BuildConfig.AD_FREE) emptySet() else setOf("pref_ProxyServer")
 
     /** Entries the private edition leaves out: it is rolled out by tools/deploy.sh and never asks for updates. */
-    private val hiddenKeys: Set<String> = if (BuildConfig.UPDATE_CHECK) emptySet() else setOf("pref_update_check", "pref_update_check_now")
+    private val hiddenKeys: Set<String> = if (BuildConfig.UPDATE_CHECK) emptySet() else setOf("pref_update_check", "pref_update_check_now", "pref_update_install")
 
     fun load(context: Context, xmlRes: Int, standards: MutableMap<String, Any?>): Entry.Page {
         val p = context.resources.getXml(xmlRes)

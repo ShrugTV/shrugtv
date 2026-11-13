@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Сервисы эмоутов</string>
     <string name="info_privacy_emotes">Чтобы показывать сторонние эмоуты в чате, приложение загружает списки и изображения эмоутов с BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) и 7TV (7tv.io, cdn.7tv.app, events.7tv.io). Они узнают, какой канал вы смотрите. Правовое основание: ст. 6(1)(f) GDPR, показ чата как на Twitch.</string>
     <string name="info_privacy_h_optional">Только при включении</string>
-    <string name="info_privacy_optional">История чата: recent-messages.robotty.de предоставляет последние сообщения чата канала. Home Assistant: приложение подключается к указанному вами MQTT-брокеру. Страница для телефона: приложение открывает небольшую веб-страницу в вашей домашней сети. Всё это выключено, пока вы не включите в настройках. Проверка обновлений (публичная версия): приложение запрашивает у api.github.com последнюю версию; GitHub видит ваш IP-адрес. Она выключена, пока вы её не включите.</string>
+    <string name="info_privacy_optional">История чата: recent-messages.robotty.de предоставляет последние сообщения чата канала. Home Assistant: приложение подключается к указанному вами MQTT-брокеру. Страница для телефона: приложение открывает небольшую веб-страницу в вашей домашней сети. Всё это выключено, пока вы не включите в настройках. Проверка обновлений (публичная версия): приложение запрашивает у api.github.com последнюю версию; GitHub видит ваш IP-адрес. Она выключена, пока вы её не включите. Установка обновлений (по желанию): при нажатии «Установить сейчас» приложение скачивает файл версии с GitHub.</string>
     <string name="info_privacy_h_proxy">Прокси</string>
     <string name="info_privacy_proxy">Если вы выберете прокси в настройках, плейлисты прямых трансляций запрашиваются через этот сервер, а не напрямую у Twitch.</string>
     <string name="info_privacy_h_rights">Ваши права</string>
@@ -1286,4 +1286,26 @@
         <item quantity="other">%d сеанса</item>
     </plurals>
     <string name="player_chapters_count">Глав: %1$d</string>
+    <string name="settings_update_check">Проверять обновления</string>
+    <string name="settings_update_check_summary">Раз в сутки приложение спрашивает на странице релизов ShrugTV на GitHub, есть ли новая версия, и сообщает вам. Без следующей настройки ничего не скачивает и не устанавливает; GitHub видит ваш IP-адрес. По умолчанию выключено.</string>
+    <string name="settings_update_check_now">Проверить сейчас</string>
+    <string name="settings_update_check_now_summary">Спрашивает сразу, без суточного ограничения</string>
+    <string name="update_available">Доступна версия %1$s: %2$s</string>
+    <string name="update_up_to_date">ShrugTV обновлён до последней версии</string>
+    <string name="update_failed">Не удалось проверить обновления, попробуйте позже</string>
+    <string name="update_title">Доступна версия %1$s</string>
+    <string name="update_hint">Отсканируйте код, чтобы открыть страницу релиза на телефоне, или установите через приложение Downloader (код 4727814). Автоматически ничего не устанавливается.</string>
+    <string name="update_later">Позже</string>
+    <string name="update_skip">Пропустить эту версию</string>
+    <string name="settings_update_install">Устанавливать обновления в приложении</string>
+    <string name="settings_update_install_summary">Добавляет на карточку обновления кнопку «Установить сейчас»: приложение скачивает новую версию с GitHub, проверяет её и открывает установщик системы, где вы подтверждаете. Нужно системное разрешение «Установка неизвестных приложений» для ShrugTV. По умолчанию выключено.</string>
+    <string name="update_install">Установить сейчас</string>
+    <string name="update_downloading">Загрузка … %1$d %%</string>
+    <string name="update_verifying">Проверка загрузки …</string>
+    <string name="update_need_permission">Разрешите ShrugTV устанавливать приложения на следующем экране, вернитесь и повторите</string>
+    <string name="update_permission_unavailable">На этом телевизоре нет экрана для этого разрешения. Включите «Установка неизвестных приложений» для ShrugTV в системных настройках или используйте код Downloader</string>
+    <string name="update_no_file">У этого релиза нет контрольной суммы или файла для приложения. Используйте QR-код или код Downloader</string>
+    <string name="update_bad_checksum">Загруженный файл не совпадает с контрольной суммой и удалён</string>
+    <string name="update_install_failed">Не удалось установить: %1$s</string>
+    <string name="update_download_failed">Не удалось скачать, попробуйте позже</string>
 </resources>
