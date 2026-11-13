@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Emote hizmetleri</string>
     <string name="info_privacy_emotes">Sohbette üçüncü taraf emote\'ları göstermek için uygulama emote listelerini ve resimlerini BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) ve 7TV\'den (7tv.io, cdn.7tv.app, events.7tv.io) yükler. Bunlar hangi kanalı izlediğinizi öğrenir. Hukuki dayanak: GDPR m. 6(1)(f), sohbetin Twitch\'teki gibi gösterilmesi.</string>
     <string name="info_privacy_h_optional">Yalnızca açtığınızda</string>
-    <string name="info_privacy_optional">Sohbet geçmişi: recent-messages.robotty.de bir kanalın son sohbet mesajlarını sağlar. Home Assistant: uygulama girdiğiniz MQTT aracısına bağlanır. Telefon sayfası: uygulama ev ağınızda küçük bir web sayfası açar. Üçü de ayarlardan etkinleştirene kadar kapalıdır.</string>
+    <string name="info_privacy_optional">Sohbet geçmişi: recent-messages.robotty.de bir kanalın son sohbet mesajlarını sağlar. Home Assistant: uygulama girdiğiniz MQTT aracısına bağlanır. Telefon sayfası: uygulama ev ağınızda küçük bir web sayfası açar. Üçü de ayarlardan etkinleştirene kadar kapalıdır. Güncelleme denetimi (genel sürüm): uygulama en yeni sürümü api.github.com\'dan sorar; GitHub IP adresinizi görür. Siz açana kadar kapalıdır.</string>
     <string name="info_privacy_h_proxy">Proxy</string>
     <string name="info_privacy_proxy">Ayarlarda bir proxy seçerseniz canlı yayın oynatma listeleri doğrudan Twitch yerine o sunucu üzerinden istenir.</string>
     <string name="info_privacy_h_rights">Haklarınız</string>

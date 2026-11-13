@@ -92,6 +92,9 @@ object SettingsModel {
     /** Pages the public edition leaves out: the HLS proxy only exists to avoid ads. */
     private val hiddenPages: Set<String?> = if (BuildConfig.AD_FREE) emptySet() else setOf("pref_ProxyServer")
 
+    /** Entries the private edition leaves out: it is rolled out by tools/deploy.sh and never asks for updates. */
+    private val hiddenKeys: Set<String> = if (BuildConfig.UPDATE_CHECK) emptySet() else setOf("pref_update_check", "pref_update_check_now")
+
     fun load(context: Context, xmlRes: Int, standards: MutableMap<String, Any?>): Entry.Page {
         val p = context.resources.getXml(xmlRes)
         val stack = ArrayDeque<MutableList<Entry>>()
@@ -118,7 +121,7 @@ object SettingsModel {
                             heads.addLast { children -> Entry.Category(title, children) }
                         }
                         else -> {
-                            val e = leaf(context, p, tag, key, title, summary, dep)
+                            val e = if (key in hiddenKeys) null else leaf(context, p, tag, key, title, summary, dep)
                             if (e != null) {
                                 stack.last().add(e)
                                 if (key != null) standards[key] = defaultValue(e)

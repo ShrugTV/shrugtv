@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Serviços de emotes</string>
     <string name="info_privacy_emotes">Para mostrar emotes de terceiros no chat, o app carrega listas e imagens de emotes do BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), do FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) e do 7TV (7tv.io, cdn.7tv.app, events.7tv.io). Eles ficam sabendo qual canal você está assistindo. Base legal: Art. 6(1)(f) do GDPR, o chat exibido como na Twitch.</string>
     <string name="info_privacy_h_optional">Somente se você ativar</string>
-    <string name="info_privacy_optional">Histórico do chat: recent-messages.robotty.de fornece as últimas mensagens do chat de um canal. Home Assistant: o app se conecta ao broker MQTT que você informar. Página do celular: o app abre uma pequena página web na sua rede doméstica. Os três ficam desativados até você ativá-los nas configurações.</string>
+    <string name="info_privacy_optional">Histórico do chat: recent-messages.robotty.de fornece as últimas mensagens do chat de um canal. Home Assistant: o app se conecta ao broker MQTT que você informar. Página do celular: o app abre uma pequena página web na sua rede doméstica. Os três ficam desativados até você ativá-los nas configurações. Verificação de atualizações (versão pública): o app consulta api.github.com pela versão mais recente; o GitHub vê o seu endereço IP. Fica desligada até você ativá-la.</string>
     <string name="info_privacy_h_proxy">Proxy</string>
     <string name="info_privacy_proxy">Se você escolher um proxy nas configurações, as playlists das transmissões ao vivo são solicitadas por esse servidor em vez de diretamente da Twitch.</string>
     <string name="info_privacy_h_rights">Seus direitos</string>

@@ -827,6 +827,13 @@
     <string name="settings_quiet_on">Ruhezeiten</string>
     <string name="settings_quiet_from">Von</string>
     <string name="settings_quiet_to">Bis</string>
+    <string name="settings_update_check">Nach Updates suchen</string>
+    <string name="settings_update_check_summary">Einmal am Tag fragt die App auf der ShrugTV-Release-Seite bei GitHub nach, ob es eine neuere Version gibt, und sagt es dir. Sie lädt oder installiert nie etwas; GitHub sieht deine IP-Adresse. Standardmäßig aus.</string>
+    <string name="settings_update_check_now">Jetzt prüfen</string>
+    <string name="settings_update_check_now_summary">Fragt sofort nach, ohne das Tageslimit</string>
+    <string name="update_available">Version %1$s ist da: %2$s</string>
+    <string name="update_up_to_date">ShrugTV ist auf dem neuesten Stand</string>
+    <string name="update_failed">Update-Prüfung nicht möglich, versuche es später noch einmal</string>
     <string name="settings_clear_caches">Zwischenspeicher leeren</string>
     <string name="settings_clear_caches_summary">Löscht gespeicherte Bilder, Emote-Bilder und die gespeicherte Startseite; sie laden bei Bedarf neu</string>
     <string name="settings_caches_cleared">Zwischenspeicher geleert</string>

@@ -62,6 +62,10 @@ android {
         buildConfigField "String", "EDITION", "\"${edition}\""
         // Ad blocker and proxy only in the private edition; R8 removes the code guarded by it
         buildConfigField "boolean", "AD_FREE", edition == 'homelab' ? 'true' : 'false'
+        // Update check: only the public edition asks; the private one is rolled out by tools/deploy.sh.
+        // The release API of the public repository; Gitea and Codeberg answer with the same fields.
+        buildConfigField "boolean", "UPDATE_CHECK", edition == 'oss' ? 'true' : 'false'
+        buildConfigField "String", "UPDATE_SOURCE", edition == 'oss' ? '"https://api.github.com/repos/ShrugTV/shrugtv/releases/latest"' : '""'
     }
 
     sourceSets {

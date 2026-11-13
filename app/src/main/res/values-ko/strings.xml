@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">이모티콘 서비스</string>
     <string name="info_privacy_emotes">채팅에 타사 이모티콘을 표시하기 위해 앱은 BetterTTV(api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ(api.frankerfacez.com, cdn.frankerfacez.com), 7TV(7tv.io, cdn.7tv.app, events.7tv.io)에서 이모티콘 목록과 이미지를 불러와요. 이 서비스들은 사용자가 어떤 채널을 보고 있는지 알 수 있어요. 법적 근거: GDPR 제6조 제1항 (f)호, Twitch와 같은 채팅 표시.</string>
     <string name="info_privacy_h_optional">켠 경우에만</string>
-    <string name="info_privacy_optional">채팅 기록: recent-messages.robotty.de가 채널의 마지막 채팅 메시지를 제공해요. Home Assistant: 앱이 입력한 MQTT 브로커에 연결해요. 휴대폰 페이지: 앱이 집 네트워크에서 작은 웹 페이지를 열어요. 세 가지 모두 설정에서 켜기 전까지 꺼져 있어요.</string>
+    <string name="info_privacy_optional">채팅 기록: recent-messages.robotty.de가 채널의 마지막 채팅 메시지를 제공해요. Home Assistant: 앱이 입력한 MQTT 브로커에 연결해요. 휴대폰 페이지: 앱이 집 네트워크에서 작은 웹 페이지를 열어요. 세 가지 모두 설정에서 켜기 전까지 꺼져 있어요. 업데이트 확인(공개 버전): 앱이 api.github.com 에 최신 버전을 물어보며, GitHub 는 IP 주소를 볼 수 있습니다. 켜기 전까지는 꺼져 있습니다.</string>
     <string name="info_privacy_h_proxy">프록시</string>
     <string name="info_privacy_proxy">설정에서 프록시를 고르면 라이브 스트림 재생 목록을 Twitch에서 직접 받지 않고 해당 서버를 통해 요청해요.</string>
     <string name="info_privacy_h_rights">사용자의 권리</string>

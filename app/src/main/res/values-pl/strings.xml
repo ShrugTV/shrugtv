@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Usługi emotek</string>
     <string name="info_privacy_emotes">Aby pokazywać emotki zewnętrzne na czacie, aplikacja wczytuje listy i obrazy emotek z BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) i 7TV (7tv.io, cdn.7tv.app, events.7tv.io). Dowiadują się, jaki kanał oglądasz. Podstawa prawna: art. 6 ust. 1 lit. f RODO, czat wyświetlany tak jak na Twitchu.</string>
     <string name="info_privacy_h_optional">Tylko po włączeniu</string>
-    <string name="info_privacy_optional">Historia czatu: recent-messages.robotty.de dostarcza ostatnie wiadomości czatu kanału. Home Assistant: aplikacja łączy się z wpisanym przez Ciebie brokerem MQTT. Strona na telefon: aplikacja otwiera małą stronę internetową w Twojej sieci domowej. Wszystkie trzy są wyłączone, dopóki nie włączysz ich w ustawieniach.</string>
+    <string name="info_privacy_optional">Historia czatu: recent-messages.robotty.de dostarcza ostatnie wiadomości czatu kanału. Home Assistant: aplikacja łączy się z wpisanym przez Ciebie brokerem MQTT. Strona na telefon: aplikacja otwiera małą stronę internetową w Twojej sieci domowej. Wszystkie trzy są wyłączone, dopóki nie włączysz ich w ustawieniach. Sprawdzanie aktualizacji (wersja publiczna): aplikacja pyta api.github.com o najnowszą wersję; GitHub widzi Twój adres IP. Jest wyłączone, dopóki go nie włączysz.</string>
     <string name="info_privacy_h_proxy">Proxy</string>
     <string name="info_privacy_proxy">Jeśli wybierzesz proxy w ustawieniach, playlisty transmisji na żywo są pobierane przez ten serwer, a nie bezpośrednio z Twitcha.</string>
     <string name="info_privacy_h_rights">Twoje prawa</string>

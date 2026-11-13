@@ -38,6 +38,18 @@ internal object SettingsActions {
                 hint(ctx, a.getString(R.string.settings_row_order_reset_done))
                 return true
             }
+            com.shrug.shrugtv.update.UpdateChecker.PREF_NOW -> {
+                Thread {
+                    val r = com.shrug.shrugtv.update.UpdateChecker.check(ctx, force = true)
+                    val text = (when (r) {
+                        is com.shrug.shrugtv.update.UpdateChecker.Result.Available -> a.getString(R.string.update_available, r.release.version, r.release.url)
+                        com.shrug.shrugtv.update.UpdateChecker.Result.UpToDate -> a.getString(R.string.update_up_to_date)
+                        com.shrug.shrugtv.update.UpdateChecker.Result.Failed -> a.getString(R.string.update_failed)
+                    })
+                    android.os.Handler(android.os.Looper.getMainLooper()).post { hint(ctx, text, 8000L) }
+                }.start()
+                return true
+            }
             "pref_clear_caches" -> {
                 clearCaches(ctx)
                 hint(ctx, a.getString(R.string.settings_caches_cleared))
@@ -129,8 +141,8 @@ internal object SettingsActions {
         hint(ctx, a.getString(if (on) R.string.settings_developer_mode_on else R.string.settings_developer_mode_off))
     }
 
-    private fun hint(ctx: Context, text: String) {
-        ToastNotification(ctx, text, NotificationSettings(20.0f, 5, 2000L), 1)
+    private fun hint(ctx: Context, text: String, ms: Long = 2000L) {
+        ToastNotification(ctx, text, NotificationSettings(20.0f, 5, ms), 1)
     }
 
     private fun testNotification(a: Activity) {

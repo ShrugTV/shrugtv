@@ -99,9 +99,24 @@ class MainApp : Application() {
         cleanupVodHistoryAsync()
         scheduleRecommendationWorker()
         initRemoteConfig()
+        checkForUpdate()
 
         if (Build.VERSION.SDK_INT >= 24) {
             Log.i("Start", "Application ready after ${SystemClock.elapsedRealtime() - Process.getStartElapsedRealtime()} ms since process start")
+        }
+    }
+
+    /** Public edition, only with the switch on: at most once a day, one notice per found version. */
+    private fun checkForUpdate() {
+        if (!com.shrug.shrugtv.update.UpdateChecker.enabled(this)) return
+        Threads.doInBackground {
+            val r = com.shrug.shrugtv.update.UpdateChecker.check(this, force = false)
+            if (r is com.shrug.shrugtv.update.UpdateChecker.Result.Available && com.shrug.shrugtv.update.UpdateChecker.markNotified(this, r.release.version)) {
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    com.shrug.shrugtv.notification.ToastNotification(this, getString(R.string.update_available, r.release.version, r.release.url),
+                        com.shrug.shrugtv.notification.NotificationSettings(20.0f, 5, 8000L), 1)
+                }
+            }
         }
     }
 

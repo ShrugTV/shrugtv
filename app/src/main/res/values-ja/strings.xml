@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">エモートサービス</string>
     <string name="info_privacy_emotes">チャットにサードパーティのエモートを表示するため、アプリはBetterTTV(api.betterttv.net、cdn.betterttv.net、sockets.betterttv.net)、FrankerFaceZ(api.frankerfacez.com、cdn.frankerfacez.com)、7TV(7tv.io、cdn.7tv.app、events.7tv.io)からエモートの一覧と画像を読み込みます。これらのサービスは、あなたが視聴しているチャンネルを知ることになります。法的根拠: GDPR第6条第1項(f)、Twitchと同じチャット表示。</string>
     <string name="info_privacy_h_optional">オンにした場合のみ</string>
-    <string name="info_privacy_optional">チャット履歴: recent-messages.robotty.de がチャンネルの直近のチャットメッセージを提供します。Home Assistant: アプリは入力したMQTTブローカーに接続します。スマホ用ページ: アプリは家庭内ネットワークで小さなウェブページを公開します。この3つは、設定で有効にするまでオフです。</string>
+    <string name="info_privacy_optional">チャット履歴: recent-messages.robotty.de がチャンネルの直近のチャットメッセージを提供します。Home Assistant: アプリは入力したMQTTブローカーに接続します。スマホ用ページ: アプリは家庭内ネットワークで小さなウェブページを公開します。この3つは、設定で有効にするまでオフです。 アップデートの確認(公開版):アプリが api.github.com に最新バージョンを問い合わせ、GitHub には IP アドレスが見えます。有効にするまでオフです。</string>
     <string name="info_privacy_h_proxy">プロキシ</string>
     <string name="info_privacy_proxy">設定でプロキシを選ぶと、ライブ配信のプレイリストはTwitchから直接ではなく、そのサーバー経由で取得されます。</string>
     <string name="info_privacy_h_rights">あなたの権利</string>

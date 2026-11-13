@@ -16,6 +16,10 @@
 
 > ShrugTV is an unofficial client. It is not affiliated with, endorsed by or sponsored by Twitch. Twitch is a trademark of its owner.
 
+> **Made with AI.** A large part of ShrugTV was developed with the help of AI coding assistants: much of the code, the tests,
+> the documentation and the translations. The author directs the work, tests the app on real TVs and reviews the results, but
+> AI-written code can contain mistakes. Please report anything that looks wrong.
+
 **Contents:** [Why ShrugTV](#why-shrugtv) · [Features](#features) · [Remote control](#remote-control) · [Install](#install) · [Settings](#settings-with-a-live-preview) · [Languages](#languages) · [Phone companion](#phone-companion) · [Build](#build) · [FAQ](#faq) · [Privacy](#privacy) · [Contributing](#contributing) · [Licence](#licence)
 
 ---
@@ -61,10 +65,11 @@ Keys can differ slightly between remotes; every setting page has a short guide w
 
 ## Install
 
-1. **With adb (works today).** Enable developer options and network debugging on the TV, then:
+1. **With adb.** Download `shrugtv-<version>.apk` from the [latest release](https://github.com/ShrugTV/shrugtv/releases/latest),
+   enable developer options and network debugging on the TV, then:
    ```bash
    adb connect <tv-ip>:5555
-   adb install -r app-release.apk
+   adb install -r shrugtv-<version>.apk
    ```
 2. **With the Downloader app (planned).** A short code will be published with the first release, so no PC is needed.
 3. **Build it yourself.** See [Build](#build).
@@ -134,16 +139,19 @@ and, to be signed, `keystore.file` and `keystore.password` (or `SHRUGTV_KEYSTORE
 
 **Which devices work?** Android TV, Google TV and Fire TV with Android 8 or newer, controlled with a normal remote.
 
-**Is my data sent anywhere?** Only to Twitch and, for emotes, to the emote services you see in chat (7TV, BTTV, FFZ). Statistics never leave the TV.
+**Is my data sent anywhere?** Only to Twitch, the optional update check (GitHub, off by default) and, for emotes, to the emote services you see in chat (7TV, BTTV, FFZ). Statistics never leave the TV.
 
 **Why does sign-in fail in my own build?** The build has no Twitch client ID; see [Build](#build).
+
+**Is this code written by AI?** To a large part, yes, see the note at the top. The result is covered by unit tests and used daily on a Fire TV; bugs are still possible, issues and pull requests are welcome.
 
 **The text in my language looks off.** Please open an issue or a pull request; see [Languages](#languages).
 
 ## Privacy
 
 No telemetry, no analytics, no crash reporter. Viewing statistics stay in a local database and are not part of
-backups. The phone companion is only reachable inside your home network. Details: [PRIVACY.md](PRIVACY.md), also in the
+backups. The optional update check (off by default, Settings → App) asks `api.github.com` for the newest release once a day;
+GitHub sees your IP address, nothing is downloaded or installed. The phone companion is only reachable inside your home network. Details: [PRIVACY.md](PRIVACY.md), also in the
 app under Settings → About ShrugTV.
 
 ## Changes

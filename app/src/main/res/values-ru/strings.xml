@@ -361,7 +361,7 @@
     <string name="info_privacy_h_emotes">Сервисы эмоутов</string>
     <string name="info_privacy_emotes">Чтобы показывать сторонние эмоуты в чате, приложение загружает списки и изображения эмоутов с BetterTTV (api.betterttv.net, cdn.betterttv.net, sockets.betterttv.net), FrankerFaceZ (api.frankerfacez.com, cdn.frankerfacez.com) и 7TV (7tv.io, cdn.7tv.app, events.7tv.io). Они узнают, какой канал вы смотрите. Правовое основание: ст. 6(1)(f) GDPR, показ чата как на Twitch.</string>
     <string name="info_privacy_h_optional">Только при включении</string>
-    <string name="info_privacy_optional">История чата: recent-messages.robotty.de предоставляет последние сообщения чата канала. Home Assistant: приложение подключается к указанному вами MQTT-брокеру. Страница для телефона: приложение открывает небольшую веб-страницу в вашей домашней сети. Всё это выключено, пока вы не включите в настройках.</string>
+    <string name="info_privacy_optional">История чата: recent-messages.robotty.de предоставляет последние сообщения чата канала. Home Assistant: приложение подключается к указанному вами MQTT-брокеру. Страница для телефона: приложение открывает небольшую веб-страницу в вашей домашней сети. Всё это выключено, пока вы не включите в настройках. Проверка обновлений (публичная версия): приложение запрашивает у api.github.com последнюю версию; GitHub видит ваш IP-адрес. Она выключена, пока вы её не включите.</string>
     <string name="info_privacy_h_proxy">Прокси</string>
     <string name="info_privacy_proxy">Если вы выберете прокси в настройках, плейлисты прямых трансляций запрашиваются через этот сервер, а не напрямую у Twitch.</string>
     <string name="info_privacy_h_rights">Ваши права</string>
