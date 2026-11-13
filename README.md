@@ -65,14 +65,30 @@ Keys can differ slightly between remotes; every setting page has a short guide w
 
 ## Install
 
-1. **With adb.** Download `shrugtv-<version>.apk` from the [latest release](https://github.com/ShrugTV/shrugtv/releases/latest),
-   enable developer options and network debugging on the TV, then:
-   ```bash
-   adb connect <tv-ip>:5555
-   adb install -r shrugtv-<version>.apk
-   ```
-2. **With the Downloader app (planned).** A short code will be published with the first release, so no PC is needed.
-3. **Build it yourself.** See [Build](#build).
+### Fire TV, Android TV and Google TV with the Downloader app (no PC needed)
+
+1. Install **Downloader** (by AFTVnews) from the TV's app store.
+2. Allow it to install apps: on Fire TV *Settings → My Fire TV → Developer options → Install unknown apps → Downloader → On*
+   (on Android TV and Google TV the system asks the first time).
+3. Open Downloader, enter the code **`4727814`** (or the address `aftv.news/4727814`) and press *Go*.
+4. When the download is done, choose *Install*, then *Open*.
+
+The code always points to the newest release. To update, run it again; the app keeps its settings because every release
+is signed with the same key. Releases are also listed on the [release page](https://github.com/ShrugTV/shrugtv/releases).
+
+### With adb
+
+Download `shrugtv-<version>.apk` from the [latest release](https://github.com/ShrugTV/shrugtv/releases/latest),
+enable developer options and network debugging on the TV, then:
+
+```bash
+adb connect <tv-ip>:5555
+adb install -r shrugtv-<version>.apk
+```
+
+### Build it yourself
+
+See [Build](#build).
 
 **Sign in** with *Login (Code)*: the TV shows a code and a QR code, you approve on your phone at `twitch.tv/activate`.
 Your password is never typed on the TV.

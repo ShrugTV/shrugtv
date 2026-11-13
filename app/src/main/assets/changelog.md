@@ -1,5 +1,10 @@
 <!-- Generated from CHANGELOG.md by tools/changelog_app.py; do not edit by hand. -->
 
+## 2.1.1 – 2026-11-13
+
+### New
+- Install with the Downloader app on Fire TV, Android TV and Google TV: enter the code 4727814, no PC needed; the README has the steps and the code always loads the newest release.
+
 ## 2.1.0 – 2026-11-13
 
 ### New

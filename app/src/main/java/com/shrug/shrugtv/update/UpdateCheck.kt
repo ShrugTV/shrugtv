@@ -4,8 +4,8 @@ import com.google.gson.JsonParser
 
 /**
  * Update check of the public edition: is there a newer release than the running one?
- * Pure logic, no Android and no network, so it can be tested with sample answers. The GitHub and Gitea APIs
- * (Codeberg) APIs share the fields `tag_name`, `html_url`, `body`, `draft` and `prerelease`.
+ * Pure logic, no Android and no network, so it can be tested with sample answers. The GitHub and Gitea
+ * (Codeberg) release APIs share the fields `tag_name`, `html_url`, `body`, `draft` and `prerelease`.
  */
 object UpdateCheck {
 
