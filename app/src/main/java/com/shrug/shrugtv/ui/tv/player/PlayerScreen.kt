@@ -102,7 +102,11 @@ fun PlayerScreen(
     // Chat layout (docs/chat_plan.md phase 3): side by side is the default; "Adjust chat" changes it live
     val chatAppearance by viewModel.chatAppearance.collectAsState()
     val chatLayout = chatAppearance.layout
-    val chatShown = isChatVisible
+    val chatUnavailable by viewModel.chatUnavailable.collectAsState()
+    val clipSourceReady by viewModel.clipSourceReady.collectAsState()
+    val clipTitle by viewModel.clipTitle.collectAsState()
+    val clipNav by viewModel.clipNav.collectAsState()
+    val chatShown = isChatVisible && !chatUnavailable
     val lastBackAt = remember { longArrayOf(0L) }
     val sideBySide = chatShown && chatLayout == com.shrug.shrugtv.chat.ChatLayout.SIDE_BY_SIDE
     val chatWidth = chatAppearance.widthDp(chatAppearance.textSizeSp).dp
@@ -686,6 +690,28 @@ fun PlayerScreen(
             }
         }
 
+        // The title of a clip stays on screen (setting "Show the clip title"); while the bar is open the info corner takes its place
+        AnimatedVisibility(
+            visible = movie?.isClip == true && viewModel.showClipTitle && !clipTitle.isNullOrEmpty() && overlay != PlayerOverlayType.CONTROLS,
+            enter = fadeIn(androidx.compose.animation.core.tween(CONTROLS_ANIM_MS)),
+            exit = fadeOut(androidx.compose.animation.core.tween(CONTROLS_ANIM_MS)),
+            modifier = Modifier.align(Alignment.TopStart).then(videoPadding)
+        ) {
+            androidx.compose.foundation.layout.Column(
+                modifier = Modifier
+                    .burnInDrift(burnIn, "info")
+                    .padding(24.dp)
+                    .clip(com.shrug.shrugtv.ui.tv.TvShapes.r(12.dp))
+                    .background(Color.Black.copy(alpha = 0.55f))
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .widthIn(max = 560.dp)
+            ) {
+                Text(clipTitle.orEmpty(), fontFamily = Inter, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.White, maxLines = 2)
+                val where = clipNav?.let { " · ${it.first} / ${it.second}" }.orEmpty()
+                Text(movie?.displayName.orEmpty() + where, fontFamily = Inter, fontSize = 13.sp, color = TvColors.glass(0.75f))
+            }
+        }
+
         // Centre of the video area: seek HUD, loading note and error box one under the other, never on
         // top of each other
         androidx.compose.foundation.layout.Column(
@@ -830,6 +856,12 @@ fun PlayerScreen(
             onSearchClick = { viewModel.setOverlay(PlayerOverlayType.SEARCH) },
             onSpeedClick = { viewModel.setOverlay(PlayerOverlayType.SPEED) },
             onChaptersClick = { viewModel.setOverlay(PlayerOverlayType.CHAPTERS) },
+            onJumpToSource = if (movie?.isClip == true) ({ viewModel.jumpToClipSource() }) else null,
+            sourceAvailable = clipSourceReady,
+            onPreviousClip = if (clipNav != null) ({ viewModel.playClipStep(-1) }) else null,
+            hasPreviousClip = (clipNav?.first ?: 1) > 1,
+            onNextClip = if (clipNav != null) ({ viewModel.playClipStep(1) }) else null,
+            hasNextClip = clipNav?.let { it.first < it.second } == true,
             onPreviousCategoryClick = { viewModel.jumpChapter(-1) },
             onNextCategoryClick = { viewModel.jumpChapter(1) },
             onMoreAction = { action ->

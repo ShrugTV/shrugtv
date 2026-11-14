@@ -1301,4 +1301,10 @@
     <string name="update_bad_checksum">Il download non corrisponde al checksum ed è stato eliminato</string>
     <string name="update_install_failed">Installazione non riuscita: %1$s</string>
     <string name="update_download_failed">Download non riuscito, riprova più tardi</string>
+    <string name="home_update_card">La versione %1$s è disponibile</string>
+    <string name="home_update_card_hint">Impostazioni → App → Controlla ora</string>
+    <string name="settings_companion_skin">Skin della TV sulla pagina del telefono</string>
+    <string name="settings_companion_skin_summary">La pagina del telefono e del browser usa i colori della skin scelta sulla TV e la segue quando la cambi; disattivato: la pagina mantiene il proprio aspetto chiaro o scuro</string>
+    <string name="settings_mqtt_entities_followed">Canali seguiti</string>
+    <string name="settings_mqtt_entities_followed_summary">Due sensori con i canali che segui e chi è in diretta (titolo, gioco, spettatori) come attributi, per una dashboard dinamica; il topic si aggiorna ogni minuto finché l’app è aperta</string>
 </resources>

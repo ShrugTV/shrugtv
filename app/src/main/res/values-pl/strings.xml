@@ -1308,4 +1308,10 @@
     <string name="update_bad_checksum">Pobrany plik nie zgadza się z sumą kontrolną i został usunięty</string>
     <string name="update_install_failed">Instalacja nie powiodła się: %1$s</string>
     <string name="update_download_failed">Pobieranie nie powiodło się, spróbuj później</string>
+    <string name="home_update_card">Dostępna jest wersja %1$s</string>
+    <string name="home_update_card_hint">Ustawienia → Aplikacja → Sprawdź teraz</string>
+    <string name="settings_companion_skin">Motyw telewizora na stronie telefonu</string>
+    <string name="settings_companion_skin_summary">Strona na telefonie i w przeglądarce używa kolorów motywu wybranego na telewizorze i podąża za jego zmianą; wyłączone: strona zachowuje własny jasny lub ciemny wygląd</string>
+    <string name="settings_mqtt_entities_followed">Obserwowane kanały</string>
+    <string name="settings_mqtt_entities_followed_summary">Dwa czujniki z kanałami, które obserwujesz, i informacją, kto jest na żywo (tytuł, gra, widzowie), jako atrybuty, do dynamicznego panelu; temat jest odświeżany co minutę, dopóki aplikacja jest otwarta</string>
 </resources>

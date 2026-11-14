@@ -18,6 +18,8 @@ class EnglishOnlyTest {
         "yml", "yaml", "js", "css", "html", "pro", "kts", "txt")
     private val skippedFiles = setOf(
         "CHANGELOG.md", "app/src/main/assets/changelog.md", "app/src/main/assets/companion/app.js",
+        // The sync state holds the texts of the changelog (which quotes German UI words as examples), written by tools/publish.py
+        "publish/state.json",
         "tools/i18n.py", "app/src/main/res/values/language_shrugtv.xml", "app/src/main/res/values/arrays.xml",
         "app/src/main/java/com/shrug/shrugtv/session/AppState.kt",
         "app/src/test/java/com/shrug/shrugtv/chat/ChatHighlightsTest.kt", "app/src/test/java/com/shrug/shrugtv/chat/ChatPrefsTest.kt",

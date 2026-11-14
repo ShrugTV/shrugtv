@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Clips page, home row and settings -->
+<resources>
+    <string name="clips_title">Clips from your channels</string>
+    <string name="clips_loading">Loading clips …</string>
+    <string name="clips_empty">No clips found. Try a longer period or more channels.</string>
+    <string name="clips_empty_favorites">No clips from your favorites. Star channels, or switch to everyone you follow.</string>
+    <string name="clips_source_followed">All followed</string>
+    <string name="clips_source_favorites">Favorites</string>
+    <string name="clips_period_day">24 hours</string>
+    <string name="clips_period_week">7 days</string>
+    <string name="clips_period_month">30 days</string>
+    <string name="clips_period_year">Year</string>
+    <string name="clips_period_all">All time</string>
+    <string name="clips_sort_views">Most viewed</string>
+    <string name="clips_sort_relative">Relative to channel size</string>
+    <string name="clips_sort_shortest">Shortest</string>
+    <string name="clips_sort_newest">Newest</string>
+    <string name="home_row_clips">Top clips from your channels</string>
+    <string name="home_nav_clips">Clips</string>
+    <string name="settings_clips_screen">Clips</string>
+    <string name="settings_clips_screen_summary">Best clips of the channels you follow</string>
+    <string name="settings_clips_tip">The Clips page (side bar, play symbol) and the home row show the best clips of your channels in one list. Choose whose clips, how far back and how they are sorted. "Relative to channel size" compares each clip with the other clips of its own channel, so a good clip of a small channel can rank next to one of a big channel. The same choices are on the page itself. The list grows while you scroll, and when a clip ends, the next one starts by itself, through the whole list.</string>
+    <string name="settings_clips_source">Channels</string>
+    <string name="settings_clips_period">Time frame</string>
+    <string name="settings_clips_sort">Sort by</string>
+    <string name="settings_clips_count">Clips per load</string>
+    <string name="settings_clips_seen">Clips I already opened</string>
+    <string name="settings_clips_autoplay">Play the next clip</string>
+    <string name="settings_clips_autoplay_summary">When a clip ends, the next one of the list it was opened from starts</string>
+    <string name="settings_clips_queue_seen">Clips I already opened in the queue</string>
+    <string name="settings_clips_language">Language of the clips</string>
+    <string name="settings_clips_show_title">Show the clip title</string>
+    <string name="settings_clips_show_title_summary">The title of a playing clip stays in the corner; with the bar open the channel info shows it</string>
+    <string name="settings_clips_row">Show on the home screen</string>
+    <string name="settings_clips_row_summary">A row with the best clips; the order of the rows is set under Row order</string>
+    <string-array name="display_clips_source">
+        <item>All channels I follow</item>
+        <item>Favorites only</item>
+    </string-array>
+    <string-array name="value_clips_source" translatable="false">
+        <item>followed</item>
+        <item>favorites</item>
+    </string-array>
+    <string-array name="display_clips_period">
+        <item>Last 24 hours</item>
+        <item>Last 7 days</item>
+        <item>Last 30 days</item>
+        <item>Last year</item>
+        <item>All time</item>
+    </string-array>
+    <string-array name="value_clips_period" translatable="false">
+        <item>day</item>
+        <item>week</item>
+        <item>month</item>
+        <item>year</item>
+        <item>all</item>
+    </string-array>
+    <string-array name="display_clips_sort">
+        <item>Most viewed</item>
+        <item>Relative to channel size</item>
+        <item>Newest</item>
+        <item>Shortest first</item>
+    </string-array>
+    <string-array name="display_clips_seen">
+        <item>Show normally</item>
+        <item>Dim them</item>
+        <item>Hide them</item>
+    </string-array>
+    <string-array name="display_clips_queue_seen">
+        <item>Skip them</item>
+        <item>Play them too</item>
+    </string-array>
+    <string-array name="value_clips_queue_seen" translatable="false">
+        <item>skip</item>
+        <item>include</item>
+    </string-array>
+    <string-array name="value_clips_seen" translatable="false">
+        <item>show</item>
+        <item>dim</item>
+        <item>hide</item>
+    </string-array>
+    <string-array name="display_clips_language">
+        <item>Every language</item>
+        <item>Only my stream language</item>
+    </string-array>
+    <string-array name="value_clips_language" translatable="false">
+        <item>all</item>
+        <item>app</item>
+    </string-array>
+    <string-array name="value_clips_sort" translatable="false">
+        <item>views</item>
+        <item>relative</item>
+        <item>newest</item>
+        <item>shortest</item>
+    </string-array>
+    <string-array name="value_clips_count" translatable="false">
+        <item>20</item>
+        <item>40</item>
+        <item>60</item>
+    </string-array>
+</resources>

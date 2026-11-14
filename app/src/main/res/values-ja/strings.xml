@@ -1287,4 +1287,10 @@
     <string name="update_bad_checksum">ダウンロードがチェックサムと一致しなかったため削除しました</string>
     <string name="update_install_failed">インストールに失敗しました: %1$s</string>
     <string name="update_download_failed">ダウンロードに失敗しました。後でもう一度お試しください</string>
+    <string name="home_update_card">バージョン %1$s が利用できます</string>
+    <string name="home_update_card_hint">設定 → アプリ → 今すぐ確認</string>
+    <string name="settings_companion_skin">電話ページにテレビのスキンを使う</string>
+    <string name="settings_companion_skin_summary">スマートフォンとブラウザのページが、テレビで選んだスキンの色を使い、変更にも追従します。オフの場合、ページは独自の明るい／暗い表示のままです</string>
+    <string name="settings_mqtt_entities_followed">フォロー中のチャンネル</string>
+    <string name="settings_mqtt_entities_followed_summary">フォロー中のチャンネルと配信中の人（タイトル、ゲーム、視聴者数）を属性として持つ2つのセンサー。動的なダッシュボード用で、アプリを開いている間は毎分トピックが更新されます</string>
 </resources>

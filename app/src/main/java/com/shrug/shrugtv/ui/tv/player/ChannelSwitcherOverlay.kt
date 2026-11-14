@@ -139,16 +139,7 @@ fun ChannelSwitcherOverlay(
                     launch {
                         val loaded = withContext(Dispatchers.IO) {
                             try {
-                                when (tab) {
-                                    ChannelSwitcherTab.FOLLOWED -> HomeData.followedLive(context)
-                                    ChannelSwitcherTab.SAME_GAME, ChannelSwitcherTab.SAME_GAME_LANGUAGE -> {
-                                        val id = gameId.await()
-                                        if (id > 0L) HomeData.gameStreams(context, id, tab == ChannelSwitcherTab.SAME_GAME_LANGUAGE) else emptyList()
-                                    }
-                                    ChannelSwitcherTab.HISTORY -> HomeData.liveHistory(context)
-                                    ChannelSwitcherTab.TOP_STREAMS -> HomeData.topStreams(context)
-                                    ChannelSwitcherTab.TOP_LANGUAGE -> HomeData.languageStreams(context)
-                                }
+                                SwitcherLists.load(context, tab) { gameId.await() }
                             } catch (e: Exception) {
                                 emptyList()
                             }

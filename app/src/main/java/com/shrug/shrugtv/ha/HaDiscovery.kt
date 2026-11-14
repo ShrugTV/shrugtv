@@ -34,6 +34,8 @@ class HaDiscovery(
     val availabilityTopic = "$base/availability"
     val stateTopic = "$base/state"
     val eventTopic = "$base/event"
+    /** Followed channels and who is live (retained), only with the group [FOLLOWED]. */
+    val followedTopic = "$base/followed"
     fun commandTopic(name: String) = "$base/cmd/$name"
     val commandWildcard = "$base/cmd/#"
 
@@ -106,6 +108,25 @@ class HaDiscovery(
             addProperty("state_topic", eventTopic)
             add("event_types", arr(*HubEvent.TYPES.toTypedArray()))
             addProperty("icon", "mdi:bell-ring-outline")
+        })
+
+        // Followed channels for dashboards: the channel lists are attributes of two sensors
+        group = FOLLOWED
+        add("sensor", "live_channels", entity("live_channels", "Live channels").apply {
+            addProperty("state_topic", followedTopic)
+            addProperty("value_template", "{{ value_json.live_count }}")
+            addProperty("json_attributes_topic", followedTopic)
+            addProperty("json_attributes_template", "{{ {'channels': value_json.live, 'updated': value_json.updated} | tojson }}")
+            addProperty("state_class", "measurement")
+            addProperty("icon", "mdi:broadcast")
+        })
+        add("sensor", "followed_channels", entity("followed_channels", "Followed channels").apply {
+            addProperty("state_topic", followedTopic)
+            addProperty("value_template", "{{ value_json.followed_count }}")
+            addProperty("json_attributes_topic", followedTopic)
+            addProperty("json_attributes_template", "{{ {'channels': value_json.followed, 'updated': value_json.updated} | tojson }}")
+            addProperty("state_class", "measurement")
+            addProperty("icon", "mdi:heart-multiple")
         })
 
         // Controls; removed again (empty config) when commands are switched off
@@ -185,7 +206,9 @@ class HaDiscovery(
         const val PREVIEW = "preview"
         const val EVENTS = "events"
         const val CONTROLS = "controls"
-        val GROUPS = listOf(INFO, AVATAR, PREVIEW, EVENTS, CONTROLS)
+        /** Followed channels and who is live; off by default. */
+        const val FOLLOWED = "followed"
+        val GROUPS = listOf(INFO, AVATAR, PREVIEW, EVENTS, FOLLOWED, CONTROLS)
 
         /** Topic-safe device id from the name in the settings ("Wohnzimmer TV" -> "wohnzimmer_tv"). */
         @JvmStatic

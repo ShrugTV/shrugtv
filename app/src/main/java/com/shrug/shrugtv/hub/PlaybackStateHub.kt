@@ -40,6 +40,8 @@ data class PlaybackSnapshot(
     val multiview: Boolean = false,
     /** Stream volume 0-100 (not the TV volume). */
     val volume: Int = 100,
+    /** "Audio only" is the current quality (black screen, sound only). */
+    val audioOnly: Boolean = false,
     val followed: Boolean = false,
     val favorite: Boolean = false
 ) {
@@ -72,6 +74,7 @@ data class PlaybackSnapshot(
         addProperty("chat_layout", chatLayout)
         addProperty("multiview", multiview)
         addProperty("volume", volume)
+        addProperty("audio_only", audioOnly)
         addProperty("followed", followed)
         addProperty("favorite", favorite)
         addProperty("app_version", appVersion)
@@ -126,6 +129,9 @@ interface PlayerCommands {
     fun setChatVisible(visible: Boolean)
     fun setChatLayout(value: String)
     fun setVolume(percent: Int)
+    /** Instant replay: jumps back by the replay length of the settings (live streams only). */
+    fun replay()
+    fun setAudioOnly(on: Boolean)
     fun sendChat(text: String)
     fun showNotice(title: String, text: String?, imageUrl: String?, seconds: Int)
 }
@@ -145,6 +151,10 @@ object PlaybackStateHub {
     @Volatile
     var chatLines: StateFlow<List<com.shrug.shrugtv.ui.tv.player.ChatLine>>? = null
 
+    /** Badge image URL by set and version in the open player's channel, or null; set by the player for the phone chat. */
+    @Volatile
+    var badgeUrl: ((String, String) -> String?)? = null
+
     fun publish(snapshot: PlaybackSnapshot) {
         _state.value = snapshot
     }
@@ -158,6 +168,7 @@ object PlaybackStateHub {
         if (commands === owner) {
             commands = null
             chatLines = null
+            badgeUrl = null
             _state.value = PlaybackSnapshot.IDLE
         }
     }

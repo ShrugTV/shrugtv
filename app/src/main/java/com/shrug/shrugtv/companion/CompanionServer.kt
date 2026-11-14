@@ -47,6 +47,10 @@ class CompanionServer(
         private const val COOKIE = "shrugtv_sid"
         private const val MAX_SETTINGS_BODY = 64_000
 
+        /** How long a channel list of the switcher may take for the phone page; tests set it short. */
+        @JvmStatic
+        var listTimeoutMs = 8_000L
+
         /** LAN, loopback and link-local only (IPv4 and IPv6). */
         @JvmStatic
         fun isPrivateAddress(ip: String?): Boolean {
@@ -126,7 +130,11 @@ class CompanionServer(
         "/api/settings", "/api/settings/action", "/api/mqtt", "/api/design" -> settings(uri, session)
         "/api/devices", "/api/devices/remove" -> devicesApi(uri, session)
         "/api/log" -> log(session)
+        "/api/update", "/api/update/check", "/api/update/install" -> update(uri, session)
+        "/api/theme" -> json(SkinApi.theme(context))
         "/api/live" -> json(JsonObject().apply { add("items", liveCards()) })
+        "/api/lists" -> lists(session)
+        "/api/favorites", "/api/favorite" -> favorites(uri, session)
         "/api/search" -> {
             val q = session.parameters["q"]?.firstOrNull()?.trim()?.take(100) ?: ""
             json(JsonObject().apply { add("items", if (q.isEmpty()) JsonArray() else searchCards(q)) })
@@ -156,6 +164,49 @@ class CompanionServer(
             val key = body.get("key")?.takeIf { it.isJsonPrimitive }?.asString ?: ""
             json(SettingsApi.action(context, key))
         }
+    }
+
+    /** The channel ids marked with the star in ShrugTV (same list as on the TV). */
+    private fun favoriteIds(): Set<String> = try {
+        com.shrug.shrugtv.database.AppDatabase.getInstance(context).favoriteChannelDao().allChannelIds.toSet()
+    } catch (e: Exception) {
+        com.shrug.shrugtv.session.AppState.favoriteChannelIds.toSet()
+    }
+
+    /**
+     * Stars from the phone: `GET /api/favorites` lists the ids, `POST /api/favorite {"id":"<user id>",
+     * "on":true|false}` sets or removes one. The star decides which channels a Home Assistant dashboard shows first
+     * (field `favorite` of the MQTT list). Needs "Allow settings from the browser" like the other changes.
+     */
+    private fun favorites(uri: String, session: IHTTPSession): Response {
+        if (uri == "/api/favorites") return json(JsonObject().apply { add("ids", JsonArray().apply { favoriteIds().sorted().forEach { add(it) } }) })
+        if (session.method != Method.POST) return json(JsonObject().apply { addProperty("error", "method") }, Response.Status.BAD_REQUEST)
+        val body = try { JsonParser.parseString(readBody(session)).asJsonObject } catch (e: Exception) { null }
+        if (!sameOrigin(session)) return json(JsonObject().apply { addProperty("error", "origin") }, Response.Status.FORBIDDEN)
+        if (!SettingsApi.allowed(context)) return json(JsonObject().apply { addProperty("error", "disabled") }, Response.Status.FORBIDDEN)
+        val id = body?.get("id")?.takeIf { it.isJsonPrimitive }?.asString
+        val on = body?.get("on")?.takeIf { it.isJsonPrimitive }?.asBoolean
+        if (id == null || !Regex("^[0-9]{1,12}$").matches(id) || on == null) {
+            return json(JsonObject().apply { addProperty("error", "bad request") }, Response.Status.BAD_REQUEST)
+        }
+        val done = java.util.concurrent.CountDownLatch(1)
+        val callback = object : com.shrug.shrugtv.apihelpers.FavoriteChangedCallback {
+            override fun onChanged() { done.countDown() }
+        }
+        if (on) com.shrug.shrugtv.apihelpers.FavoriteChannels.setFavorite(context, id, callback)
+        else com.shrug.shrugtv.apihelpers.FavoriteChannels.removeFavorite(context, id, callback)
+        done.await(3, java.util.concurrent.TimeUnit.SECONDS)
+        return json(JsonObject().apply { addProperty("ok", true); addProperty("id", id); addProperty("favorite", on) })
+    }
+
+    /** Version and update menu (UpdateApi); checking and installing need a POST from this page and "Allow settings from the browser". */
+    private fun update(uri: String, session: IHTTPSession): Response {
+        if (uri == "/api/update") return json(UpdateApi.info(context))
+        if (session.method != Method.POST) return json(JsonObject().apply { addProperty("error", "method") }, Response.Status.BAD_REQUEST)
+        readBody(session) // unread body bytes would be taken for the next request on a kept-alive connection
+        if (!sameOrigin(session)) return json(JsonObject().apply { addProperty("error", "origin") }, Response.Status.FORBIDDEN)
+        if (!SettingsApi.allowed(context)) return json(JsonObject().apply { addProperty("error", "disabled") }, Response.Status.FORBIDDEN)
+        return json(if (uri == "/api/update/check") UpdateApi.check(context) else UpdateApi.install(context))
     }
 
     /** Remembered devices: list (with the asking device marked) and removing one. */
@@ -217,12 +268,14 @@ class CompanionServer(
 
     private fun stateJson(): JsonObject = PlaybackStateHub.state.value.toJson(System.currentTimeMillis(), BuildConfig.VERSION_NAME).apply {
         addProperty("chat_allowed", chatAllowed())
+        PlaybackStateHub.state.value.userId?.let { addProperty("favorite", it in favoriteIds()) }
         addProperty("player_open", PlaybackStateHub.commands != null)
         addProperty("settings_allowed", SettingsApi.allowed(context))
         addProperty("log_allowed", PreferenceManager.getDefaultSharedPreferences(context).getBoolean("pref_companion_log", true))
     }
 
-    private fun card(m: Movie): JsonObject = JsonObject().apply {
+    private fun card(m: Movie, favs: Set<String> = favoriteIds()): JsonObject = JsonObject().apply {
+        if (m.userId > 0) addProperty("id", m.userId.toString())
         addProperty("login", m.login)
         addProperty("name", m.displayName.ifEmpty { m.login ?: "" })
         addProperty("category", m.gameName)
@@ -230,7 +283,7 @@ class CompanionServer(
         addProperty("viewers", m.viewerCount)
         addProperty("image", m.cardImageUrl)
         addProperty("avatar", m.avatarUrl)
-        addProperty("favorite", m.isFavorite)
+        addProperty("favorite", m.isFavorite || (m.userId > 0 && m.userId.toString() in favs))
     }
 
     private fun liveCards(): JsonArray = JsonArray().apply {
@@ -239,14 +292,53 @@ class CompanionServer(
         } catch (e: Exception) {
             emptyList()
         }
-        list.sortedByDescending { it.isFavorite }.take(50).forEach { add(card(it)) }
+        val favs = favoriteIds()
+        list.sortedByDescending { it.isFavorite || it.userId.toString() in favs }.take(50).forEach { add(card(it, favs)) }
+    }
+
+    /**
+     * One list of the channel switcher on the TV for the phone: `?name=followed|same_game|
+     * same_game_language|history|top_streams|top_language`; answers with the lists switched on in the TV settings and the
+     * channels of the asked one, without the one that is playing.
+     */
+    private fun lists(session: IHTTPSession): Response {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val enabled = com.shrug.shrugtv.ui.tv.player.SwitcherNav.enabled { prefs.getBoolean(it.key, true) }
+        val name = session.parameters["name"]?.firstOrNull() ?: "followed"
+        val tab = com.shrug.shrugtv.ui.tv.player.ChannelSwitcherTab.values().firstOrNull { it.name.lowercase() == name }
+            ?: return json(JsonObject().apply { addProperty("error", "unknown list") }, Response.Status.NOT_FOUND)
+        val playing = PlaybackStateHub.state.value.login.orEmpty()
+        val movies = try {
+            runBlocking {
+                // Without a network or a login the lists never answer: the page gets an empty list instead of waiting
+                kotlinx.coroutines.withTimeoutOrNull(listTimeoutMs) {
+                    com.shrug.shrugtv.ui.tv.player.SwitcherLists.load(context, tab) {
+                        if (playing.isNotEmpty()) com.shrug.shrugtv.ui.tv.home.HomeData.gameIdOfLogin(context, playing) else 0L
+                    }
+                } ?: emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+        return json(JsonObject().apply {
+            addProperty("name", tab.name.lowercase())
+            add("enabled", JsonArray().apply { enabled.forEach { add(it.name.lowercase()) } })
+            addProperty("playing", playing.isNotEmpty())
+            add("items", JsonArray().apply {
+                val favs = favoriteIds()
+                movies.filter { it.login != null && !it.login.equals(playing, ignoreCase = true) }.take(50).forEach { add(card(it, favs)) }
+            })
+        })
     }
 
     private fun searchCards(q: String): JsonArray = JsonArray().apply {
+        val favs = favoriteIds()
         val json = HelixApi.searchChannels(context, URLEncoder.encode(q, "UTF-8"), false) ?: return@apply
         for (e in json.getAsJsonArray("data") ?: return@apply) {
             val o = e.asJsonObject
             add(JsonObject().apply {
+                val id = o.get("id")?.asString
+                if (id != null) { addProperty("id", id); addProperty("favorite", id in favs) }
                 addProperty("login", o.get("broadcaster_login")?.asString)
                 addProperty("name", o.get("display_name")?.asString)
                 addProperty("category", o.get("game_name")?.asString)
@@ -264,12 +356,21 @@ class CompanionServer(
             "/", "/index.html" -> "index.html"
             "/app.js" -> "app.js"
             "/app.css" -> "app.css"
-            "/manifest.json" -> "manifest.json"
+            "/manifest.json" -> return manifest()
             // Browsers ask for /favicon.ico by themselves; the PNG is the app icon (shrug figure)
             "/favicon.png", "/favicon.ico" -> "favicon.png"
             else -> return text(Response.Status.NOT_FOUND, "not found")
         }
-        val bytes = context.assets.open("companion/$name").use { it.readBytes() }
+        var bytes = context.assets.open("companion/$name").use { it.readBytes() }
+        // Cache buster: the page asks for app.js and app.css with a checksum of the file, so a changed file is always fetched anew
+        if (name == "index.html") {
+            var html = String(bytes, Charsets.UTF_8)
+            for (file in listOf("app.js", "app.css")) {
+                val v = context.assets.open("companion/$file").use { java.util.zip.CRC32().apply { update(it.readBytes()) }.value.toString(16) }
+                html = html.replace("\"/$file\"", "\"/$file?v=$v\"")
+            }
+            bytes = html.toByteArray(Charsets.UTF_8)
+        }
         val mime = when {
             name.endsWith(".html") -> "text/html; charset=utf-8"
             name.endsWith(".js") -> "application/javascript; charset=utf-8"
@@ -281,6 +382,15 @@ class CompanionServer(
             addHeader("Cache-Control", "no-cache")
             addHeader("X-Content-Type-Options", "nosniff")
             addHeader("Referrer-Policy", "no-referrer")
+        }
+    }
+
+    /** Web app manifest: the colours follow the skin of the TV when "TV skin on the phone page" is on, so the installed icon matches. */
+    private fun manifest(): Response {
+        val bytes = SkinApi.manifest(context).toByteArray(Charsets.UTF_8)
+        return newFixedLengthResponse(Response.Status.OK, "application/manifest+json; charset=utf-8", bytes.inputStream(), bytes.size.toLong()).apply {
+            addHeader("Cache-Control", "no-cache")
+            addHeader("X-Content-Type-Options", "nosniff")
         }
     }
 

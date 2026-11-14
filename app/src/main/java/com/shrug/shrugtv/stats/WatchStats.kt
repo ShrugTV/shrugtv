@@ -30,7 +30,17 @@ sealed class StatsRange {
     }
 }
 
-data class Ranked(val name: String, val seconds: Long)
+/** One line of a top list: [seconds] watched in [sessions] sessions. */
+data class Ranked(val name: String, val seconds: Long, val sessions: Int = 0)
+
+/** What a top list is sorted by (setting "Rank by"). */
+enum class RankBy { TIME, SESSIONS }
+
+/** What one bar of the activity chart stands for. */
+enum class BucketUnit { DAY, MONTH }
+
+/** Playing time of one day (or one month, [BucketUnit.MONTH]) starting at [start]. */
+data class Bucket(val start: LocalDate, val seconds: Long)
 
 /** Figures of one period. */
 data class PeriodStats(
@@ -45,9 +55,22 @@ data class PeriodStats(
     /** Seconds per local hour of the day at which the session started (24 entries). */
     val secPerHour: LongArray,
     /** Total of the period right before this one; negative = nothing to compare (no data before). */
-    val previousTotalSec: Long
+    val previousTotalSec: Long,
+    /** One bar per day of the period, or per month for the year view ( makeover). */
+    val buckets: List<Bucket> = emptyList(),
+    val bucketUnit: BucketUnit = BucketUnit.DAY,
+    /** Clips watched in the period, the time they played, and the channels most of them came from. */
+    val clipCount: Int = 0,
+    val clipSec: Long = 0L,
+    val topClipChannels: List<Ranked> = emptyList()
 ) {
+    /** Average length of a clip watched, 0 without clips. */
+    val clipAverageSec: Long get() = if (clipCount > 0) clipSec / clipCount else 0L
+
     val isEmpty: Boolean get() = sessions == 0
+
+    /** The bar with the most playing time, null without data. */
+    val busiest: Bucket? get() = buckets.maxByOrNull { it.seconds }?.takeIf { it.seconds > 0 }
 
     /** The hour with the most playing time, null without data. */
     val peakHour: Int? get() = secPerHour.withIndex().maxByOrNull { it.value }?.takeIf { it.value > 0 }?.index
@@ -55,7 +78,9 @@ data class PeriodStats(
     override fun equals(other: Any?): Boolean = other is PeriodStats && other.totalSec == totalSec &&
         other.daysWatched == daysWatched && other.sessions == sessions && other.topChannels == topChannels &&
         other.topCategories == topCategories && other.liveSec == liveSec && other.vodSec == vodSec &&
-        other.longestSec == longestSec && other.secPerHour.contentEquals(secPerHour) && other.previousTotalSec == previousTotalSec
+        other.longestSec == longestSec && other.secPerHour.contentEquals(secPerHour) && other.previousTotalSec == previousTotalSec &&
+        other.buckets == buckets && other.bucketUnit == bucketUnit && other.clipCount == clipCount && other.clipSec == clipSec &&
+        other.topClipChannels == topClipChannels
 
     override fun hashCode(): Int = totalSec.hashCode() * 31 + sessions
 }
@@ -69,7 +94,10 @@ object WatchStats {
      * first day with any data: the comparison is only meaningful if the previous period reaches back
      * that far.
      */
-    fun compute(rows: List<WatchSessionData>, range: StatsRange, today: LocalDate, oldest: LocalDate?): PeriodStats {
+    fun compute(
+        rows: List<WatchSessionData>, range: StatsRange, today: LocalDate, oldest: LocalDate?,
+        top: Int = TOP, rankBy: RankBy = RankBy.TIME
+    ): PeriodStats {
         val (from, to) = range.bounds(today)
         val (pFrom, pTo) = range.previous(today)
         val inRange = rows.filter { inside(it, from, to) }
@@ -83,16 +111,37 @@ object WatchStats {
             totalSec = inRange.sumOf { it.playedSec },
             daysWatched = inRange.map { it.day }.distinct().size,
             sessions = inRange.size,
-            topChannels = rank(inRange, { (if (it.channelId > 0) "id:${it.channelId}" else "login:${it.login.lowercase()}") }) {
+            topChannels = rank(inRange, top, rankBy, { (if (it.channelId > 0) "id:${it.channelId}" else "login:${it.login.lowercase()}") }) {
                 it.channelName.ifBlank { it.login }
             },
-            topCategories = rank(inRange.filter { it.category.isNotBlank() }, { it.category.lowercase() }) { it.category },
+            topCategories = rank(inRange.filter { it.category.isNotBlank() }, top, rankBy, { it.category.lowercase() }) { it.category },
             liveSec = inRange.filter { !it.isVod }.sumOf { it.playedSec },
-            vodSec = inRange.filter { it.isVod }.sumOf { it.playedSec },
+            // Clips are recordings too, but have their own figures
+            vodSec = inRange.filter { it.isVod && !it.isClip }.sumOf { it.playedSec },
             longestSec = inRange.maxOfOrNull { it.playedSec } ?: 0L,
             secPerHour = perHour,
-            previousTotalSec = if (comparable) before else -1L
+            previousTotalSec = if (comparable) before else -1L,
+            buckets = buckets(inRange, range, from, to),
+            bucketUnit = if (monthly(range)) BucketUnit.MONTH else BucketUnit.DAY,
+            clipCount = inRange.count { it.isClip },
+            clipSec = inRange.filter { it.isClip }.sumOf { it.playedSec },
+            topClipChannels = rank(inRange.filter { it.isClip }, top, RankBy.SESSIONS, { (if (it.channelId > 0) "id:${it.channelId}" else "login:${it.login.lowercase()}") }) {
+                it.channelName.ifBlank { it.login }
+            }
         )
+    }
+
+    /** More than two months wide: one bar per month, otherwise one per day. */
+    private fun monthly(range: StatsRange) = range is StatsRange.Rolling && range.days > 62
+
+    private fun buckets(rows: List<WatchSessionData>, range: StatsRange, from: LocalDate, to: LocalDate): List<Bucket> {
+        if (monthly(range)) {
+            val sums = rows.groupBy { YearMonth.from(LocalDate.parse(it.day)) }.mapValues { e -> e.value.sumOf { it.playedSec } }
+            return generateSequence(YearMonth.from(from)) { if (it < YearMonth.from(to)) it.plusMonths(1) else null }
+                .map { Bucket(it.atDay(1), sums[it] ?: 0L) }.toList()
+        }
+        val sums = rows.groupBy { it.day }.mapValues { e -> e.value.sumOf { it.playedSec } }
+        return generateSequence(from) { if (it < to) it.plusDays(1) else null }.map { Bucket(it, sums[it.toString()] ?: 0L) }.toList()
     }
 
     /** The oldest month that has data and the current one, for the month picker. */
@@ -107,9 +156,18 @@ object WatchStats {
         return !d.isBefore(from) && !d.isAfter(to)
     }
 
-    private fun rank(rows: List<WatchSessionData>, key: (WatchSessionData) -> String, label: (WatchSessionData) -> String): List<Ranked> =
+    /** The four parts of the day (night, morning, afternoon, evening: six hours each) from the 24 hours. */
+    @JvmStatic
+    fun dayParts(secPerHour: LongArray): LongArray = LongArray(4) { part -> (part * 6 until part * 6 + 6).sumOf { secPerHour.getOrElse(it) { 0L } } }
+
+    private fun rank(
+        rows: List<WatchSessionData>, top: Int, rankBy: RankBy, key: (WatchSessionData) -> String, label: (WatchSessionData) -> String
+    ): List<Ranked> =
         rows.groupBy(key).values
-            .map { group -> Ranked(label(group.maxByOrNull { it.id }!!), group.sumOf { it.playedSec }) }
-            .sortedWith(compareByDescending<Ranked> { it.seconds }.thenBy { it.name.lowercase() })
-            .take(TOP)
+            .map { group -> Ranked(label(group.maxByOrNull { it.id }!!), group.sumOf { it.playedSec }, group.size) }
+            .sortedWith(
+                (if (rankBy == RankBy.SESSIONS) compareByDescending<Ranked> { it.sessions }.thenByDescending { it.seconds }
+                else compareByDescending<Ranked> { it.seconds }).thenBy { it.name.lowercase() }
+            )
+            .take(top.coerceIn(1, 20))
 }

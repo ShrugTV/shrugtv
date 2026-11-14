@@ -20,6 +20,9 @@ class VodChatPacer(private val now: () -> Long) {
 
     /** A message from a loaded page; pages overlap, so a repeated id is ignored. */
     fun onMessage(m: ChatMessage) {
+        // A page asked for before a jump can arrive after it (clip to its recording, seek): what lies far behind the position
+        // is useless and must not move the point where the next page is asked for
+        if (lastPosition >= 0 && m.vodOffsetSeconds < lastPosition - STALE_SECONDS) return
         val id = m.messageId
         if (id != null && !seen.add(id)) return
         val offset = m.vodOffsetSeconds.toLong()

@@ -1287,4 +1287,10 @@
     <string name="update_bad_checksum">다운로드가 체크섬과 일치하지 않아 삭제했습니다</string>
     <string name="update_install_failed">설치 실패: %1$s</string>
     <string name="update_download_failed">다운로드 실패, 나중에 다시 시도하세요</string>
+    <string name="home_update_card">버전 %1$s 을(를) 사용할 수 있습니다</string>
+    <string name="home_update_card_hint">설정 → 앱 → 지금 확인</string>
+    <string name="settings_companion_skin">휴대전화 페이지에 TV 스킨 적용</string>
+    <string name="settings_companion_skin_summary">휴대전화와 브라우저 페이지가 TV에서 고른 스킨의 색을 사용하고 변경 시 따라갑니다. 끄면 페이지는 자체 밝은/어두운 모습을 유지합니다</string>
+    <string name="settings_mqtt_entities_followed">팔로우한 채널</string>
+    <string name="settings_mqtt_entities_followed_summary">팔로우한 채널과 방송 중인 채널(제목, 게임, 시청자 수)을 속성으로 가진 센서 2개로, 동적 대시보드용입니다. 앱이 열려 있는 동안 토픽이 1분마다 갱신됩니다</string>
 </resources>

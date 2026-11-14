@@ -21,6 +21,11 @@ class Movie : Serializable {
     var selectedQuality: String? = null
     var description: String? = null
     var isFavorite: Boolean = false
+    /** A clip that was opened before; cards draw it dimmed. */
+    var clipSeen: Boolean = false
+    /** The recording a clip was cut from and the second where the clip starts in it (for the chat of the clip); 0 = not known. */
+    var clipVideoId: Long = 0L
+    var clipOffsetSeconds: Int = 0
     var durationText: String? = null
         private set
     private var resumePositionSeconds: Int = 0

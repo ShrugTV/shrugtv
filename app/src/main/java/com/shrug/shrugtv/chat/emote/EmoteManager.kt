@@ -603,6 +603,9 @@ class EmoteManager @JvmOverloads constructor(
         return urls
     }
 
+    /** Image URL of a badge (set and version) once the badge sets are loaded; null if unknown. For the phone companion. */
+    fun badgeUrl(setId: String, version: String): String? = badgeUrls["$setId/$version"]
+
     /** Badge image for a set and version, null if unknown. Blocking on first use (chat thread). */
     fun badgeDrawable(setId: String, version: String): Drawable? {
         val key = "$setId/$version"

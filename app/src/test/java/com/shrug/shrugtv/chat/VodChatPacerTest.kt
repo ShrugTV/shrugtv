@@ -66,6 +66,15 @@ class VodChatPacerTest {
     }
 
     @Test
+    fun `a page that arrives after a jump does not move the fetch point`() {
+        pacer.tick(15.0)
+        pacer.tick(1820.0) // the jump, e.g. from a clip to its recording
+        pacer.onMessage(msg(40)); pacer.onMessage(msg(60)) // late answer for the old position
+        clock += 3000
+        assertEquals(1821L, pacer.tick(1821.0).fetchOffset) // at the position, not behind the late messages (61)
+    }
+
+    @Test
     fun `a jump starts over`() {
         pacer.tick(100.0)
         pacer.onMessage(msg(150))

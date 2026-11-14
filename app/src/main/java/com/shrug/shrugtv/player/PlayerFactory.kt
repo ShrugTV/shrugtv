@@ -7,6 +7,7 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.AdaptiveTrackSelection
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.exoplayer.upstream.DefaultBandwidthMeter
@@ -72,8 +73,11 @@ object PlayerFactory {
             .setDefaultRequestProperties(TWITCH_HEADERS)
             .setTransferListener(bandwidthMeter)
 
-        val mediaSourceFactory = HlsMediaSource.Factory(dataSourceFactory)
-            .setPlaylistParserFactory(TwitchHlsPlaylistParserFactory())
+        // Streams and VODs are HLS, clips are MP4 files
+        val mediaSourceFactory = ClipAwareMediaSourceFactory(
+            HlsMediaSource.Factory(dataSourceFactory).setPlaylistParserFactory(TwitchHlsPlaylistParserFactory()),
+            ProgressiveMediaSource.Factory(dataSourceFactory),
+        )
 
         return ExoPlayer.Builder(context)
             .setTrackSelector(trackSelector)

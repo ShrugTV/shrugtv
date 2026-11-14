@@ -1308,4 +1308,10 @@
     <string name="update_bad_checksum">Загруженный файл не совпадает с контрольной суммой и удалён</string>
     <string name="update_install_failed">Не удалось установить: %1$s</string>
     <string name="update_download_failed">Не удалось скачать, попробуйте позже</string>
+    <string name="home_update_card">Доступна версия %1$s</string>
+    <string name="home_update_card_hint">Настройки → Приложение → Проверить сейчас</string>
+    <string name="settings_companion_skin">Скин телевизора на странице телефона</string>
+    <string name="settings_companion_skin_summary">Страница на телефоне и в браузере использует цвета скина, выбранного на телевизоре, и следует за его изменением; выключено: страница сохраняет собственный светлый или тёмный вид</string>
+    <string name="settings_mqtt_entities_followed">Отслеживаемые каналы</string>
+    <string name="settings_mqtt_entities_followed_summary">Два датчика с каналами, на которые вы подписаны, и тем, кто в эфире (название, игра, зрители), в виде атрибутов, для динамической панели; тема обновляется каждую минуту, пока приложение открыто</string>
 </resources>

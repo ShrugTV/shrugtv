@@ -23,6 +23,7 @@ object WatchStatsStore {
             channelName = s.channelName
             category = s.category
             isVod = s.isVod
+            isClip = s.isClip
             playedSec = s.playedSec
             day = s.day
             hour = s.hour
@@ -33,7 +34,7 @@ object WatchStatsStore {
         dao(context)?.between(from.toString(), to.toString())?.map {
             WatchSessionData(
                 id = it.id, channelId = it.channelId, login = it.channelLogin ?: "", channelName = it.channelName ?: "",
-                category = it.category ?: "", isVod = it.isVod, playedSec = it.playedSec, day = it.day, hour = it.hour
+                category = it.category ?: "", isVod = it.isVod, isClip = it.isClip, playedSec = it.playedSec, day = it.day, hour = it.hour
             )
         } ?: emptyList()
 
@@ -50,8 +51,8 @@ object WatchStatsStore {
         dao(context)?.deleteAll()
     }
 
-    /** Once at app start: drops what is older than [KEEP_MONTHS]. */
+    /** Once at app start: drops what is older than the months to keep (setting, default [KEEP_MONTHS]). */
     fun prune(context: Context, today: LocalDate) {
-        dao(context)?.deleteBefore(today.minusMonths(KEEP_MONTHS).toString())
+        dao(context)?.deleteBefore(today.minusMonths(StatsPrefs.keepMonths(context)).toString())
     }
 }

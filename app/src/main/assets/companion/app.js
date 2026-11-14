@@ -16,6 +16,30 @@ const T = {
     viewers: n => `${n.toLocaleString()} viewers`, since: m => `live for ${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} h`,
     behind: s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} behind`, removed: 'message removed', offlineCh: 'offline',
     tabSettings: 'Settings', tabRemoteShort: 'Remote', tabChatShort: 'Chat', tabFindShort: 'Find', tabPlayerShort: 'Player', tabSettingsShort: 'Settings',
+    remoteMode: 'Remote mode', modePad: 'Touchpad', modeKeys: 'Keys', padLabel: 'Touchpad: swipe for arrows, tap for OK',
+    padHint: 'Swipe = arrow keys\nTap = OK · Two fingers = Back', replay: '⟲ Replay', audioOnly: 'Audio only',
+    recent: 'Recently watched', replyTo: n => `Reply to ${n}`, replyCancel: 'Cancel reply', emotes: 'Emotes',
+    noEmotes: 'No emotes seen in this chat yet. They appear here as soon as someone uses one.', quickAdd: 'Add a quick phrase',
+    quickNew: 'New quick phrase (max. 60 characters)', quickRemove: t => `Remove "${t}" from the quick phrases?`,
+    chatHint: 'Tap a message to answer it with @name. Hold a quick phrase to remove it.',
+    tabUpdate: 'Version', tabUpdateShort: 'Info', verInstalled: 'Installed', verEdition: 'Edition', verEditionPublic: 'Public', verEditionPrivate: 'Private',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Last checked', verNever: 'not yet', verCurrent: 'You have the newest version.',
+    verUnknown: 'Not checked yet.', verUnsupported: 'This edition is not updated from the app, and there is no check for new versions here.',
+    verAvailable: v => `Version ${v} is available`, verCheck: 'Check now', verChecking: 'Checking …', verInstall: 'Install update',
+    verInstallConfirm: v => `Download version ${v} and start the installation on the TV? The TV asks you to confirm.`,
+    verRelease: 'Release page', verInstallOff: 'Installing from the app is off. Switch it on in the TV settings: App → Install updates in the app.',
+    verAutoOff: 'The daily check is off (Settings → About → Check for updates); "Check now" works anyway.',
+    verDownloading: p => `Downloading … ${p} %`, verVerifying: 'Checked. Confirm the installation on the TV with OK.',
+    verErrors: { disabled: 'Installing from the app is switched off.', none: 'No newer version known. Check first.', need_permission: 'Allow "Install unknown apps" for ShrugTV on the TV, then try again.',
+      permission_unavailable: 'This TV has no screen for "Install unknown apps".', no_file: 'The release has no installable file.', bad_checksum: 'The checksum does not match, nothing was installed.',
+      download_failed: 'The download failed.' },
+    verNotes: 'What is new',
+    favAdd: 'Mark as favorite', favRemove: 'Remove from favorites', favFailed: 'The star could not be saved.',
+    listsLabel: 'Lists of the channel switcher', listFollowed: 'Followed', listSameGame: 'Same category', listSameGameLanguage: 'Same category, my language',
+    listHistory: 'Recently watched', listTopStreams: 'Top streams', listTopLanguage: 'Top in my language',
+    listEmpty: 'Nothing in this list right now.', listNeedsPlaying: 'This list needs a running stream: it shows the category of the channel that is playing.',
+    homeTitle: 'On the home screen', homeHint: 'Open this page as an app icon:',
+    homeIos: 'iPhone: Safari → Share → Add to Home Screen.', homeAndroid: 'Android: Chrome menu ⋮ → Add to Home screen.',
     searchChannels: 'Channel name', tabLog: 'Log',
     logOff: 'The log in the browser is switched off on the TV (Settings → Phone & browser → Log in the browser).',
     logAbout: "ShrugTV's own log on this TV, live. Tokens and passwords are always removed. Click a line for details.",
@@ -27,7 +51,7 @@ const T = {
     logTime: 'Time', logTag: 'Source', logThread: 'Process/thread', logMessage: 'Message', settingsOff: 'Changing settings from the browser is switched off on the TV (Settings → Phone & browser).',
     settingsSearch: 'Search settings', export: 'Save to file', import: 'Load from file', saved: 'Saved', notSaved: 'Not saved: value not allowed',
     imported: (n, m) => `${n} settings loaded` + (m ? `, ${m} skipped` : ''), importBad: 'This is not a ShrugTV settings file.',
-    run: 'Run', done: 'Done', tvOnly: 'Only on the TV', noScreen: 'Open ShrugTV on the TV first.', noResults: 'No settings found.',
+    moveUp: 'Move up', run: 'Run', done: 'Done', tvOnly: 'Only on the TV', noScreen: 'Open ShrugTV on the TV first.', noResults: 'No settings found.',
     secretSet: 'stored – type to replace', secretEmpty: 'not set', on: 'On', off: 'Off', status: 'Status',
     pinned: 'Pinned', pin: 'Pin to the sidebar', unpin: 'Unpin', noPins: 'Pin settings with ☆ to find them here.',
     exported: n => `${n} settings saved to the file (without MQTT and companion, they belong to this TV).`,
@@ -48,28 +72,52 @@ const T = {
     offline: 'TV nicht erreichbar. Ist ShrugTV offen?', tabRemote: 'Fernbedienung', tabChat: 'Chat', tabFind: 'Suchen', tabPlayer: 'Player',
     up: 'Hoch', down: 'Runter', left: 'Links', right: 'Rechts', back: 'Zurück', more: 'Mehr', playPause: 'Play/Pause',
     prev: '◀ Kanal', live: 'Live', next: 'Kanal ▶', volume: 'Stream-Lautstärke', message: 'Nachricht', send: 'Senden',
-    chatOff: 'Chat-Schreiben vom Handy ist in den Einstellungen des TVs ausgeschaltet.', search: 'Suchen', liveNow: 'Jetzt live',
+    chatOff: 'Chatten vom Handy ist in den Einstellungen des TVs ausgeschaltet.', search: 'Suchen', liveNow: 'Jetzt live',
     results: 'Ergebnisse', quality: 'Qualität', chatLayout: 'Chat-Layout', layoutSide: 'Neben dem Video',
     layoutOverlay: 'Über dem Video', layoutTransparent: 'Transparent', chatOn: 'Chat an', chatOffBtn: 'Chat aus',
     stats: 'Statistik', close: 'Player schließen', openTwitch: 'Auf Twitch öffnen', nothing: 'Es läuft nichts',
     viewers: n => `${n.toLocaleString('de-DE')} Zuschauer`, since: m => `seit ${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} h`,
     behind: s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} zurück`, removed: 'Nachricht entfernt', offlineCh: 'offline',
     tabSettings: 'Einstellungen', tabRemoteShort: 'Steuern', tabChatShort: 'Chat', tabFindShort: 'Suchen', tabPlayerShort: 'Player', tabSettingsShort: 'Optionen',
+    remoteMode: 'Fernbedienung', modePad: 'Touchpad', modeKeys: 'Tasten', padLabel: 'Touchpad: wischen für Pfeile, tippen für OK',
+    padHint: 'Wischen = Pfeiltasten\nTippen = OK · Zwei Finger = Zurück', replay: '⟲ Replay', audioOnly: 'Nur Audio',
+    recent: 'Zuletzt gesehen', replyTo: n => `Antwort an ${n}`, replyCancel: 'Antwort abbrechen', emotes: 'Emotes',
+    noEmotes: 'In diesem Chat wurde noch kein Emote gesehen. Sie erscheinen hier, sobald jemand eins benutzt.', quickAdd: 'Schnellnachricht hinzufügen',
+    quickNew: 'Neue Schnellnachricht (höchstens 60 Zeichen)', quickRemove: t => `„${t}“ aus den Schnellnachrichten entfernen?`,
+    chatHint: 'Nachricht antippen, um mit @Name zu antworten. Schnellnachricht gedrückt halten zum Entfernen.',
+    tabUpdate: 'Version', tabUpdateShort: 'Info', verInstalled: 'Installiert', verEdition: 'Edition', verEditionPublic: 'Öffentlich', verEditionPrivate: 'Privat',
+    verDevice: 'Fernseher', verAndroid: 'Android', verLastCheck: 'Zuletzt geprüft', verNever: 'noch nicht', verCurrent: 'Du hast die neueste Version.',
+    verUnknown: 'Noch nicht geprüft.', verUnsupported: 'Diese Edition wird nicht aus der App aktualisiert, und es gibt hier keine Prüfung auf neue Versionen.',
+    verAvailable: v => `Version ${v} ist verfügbar`, verCheck: 'Jetzt prüfen', verChecking: 'Prüfe …', verInstall: 'Update installieren',
+    verInstallConfirm: v => `Version ${v} laden und die Installation am Fernseher starten? Der Fernseher fragt dich nach der Bestätigung.`,
+    verRelease: 'Release-Seite', verInstallOff: 'Das Installieren aus der App ist aus. Am Fernseher einschalten: App → Updates in der App installieren.',
+    verAutoOff: 'Die tägliche Prüfung ist aus (Einstellungen → Über → Nach Updates suchen); „Jetzt prüfen“ geht trotzdem.',
+    verDownloading: p => `Lade … ${p} %`, verVerifying: 'Geprüft. Bestätige die Installation am Fernseher mit OK.',
+    verErrors: { disabled: 'Das Installieren aus der App ist ausgeschaltet.', none: 'Keine neuere Version bekannt. Erst prüfen.', need_permission: 'Erlaube am Fernseher „Unbekannte Apps installieren“ für ShrugTV und versuche es erneut.',
+      permission_unavailable: 'Dieser Fernseher hat keinen Bildschirm für „Unbekannte Apps installieren“.', no_file: 'Das Release hat keine installierbare Datei.', bad_checksum: 'Die Prüfsumme stimmt nicht, es wurde nichts installiert.',
+      download_failed: 'Der Download ist fehlgeschlagen.' },
+    verNotes: 'Das ist neu',
+    favAdd: 'Als Favorit markieren', favRemove: 'Aus den Favoriten nehmen', favFailed: 'Der Stern konnte nicht gespeichert werden.',
+    listsLabel: 'Listen des Kanalwechslers', listFollowed: 'Gefolgt', listSameGame: 'Gleiche Kategorie', listSameGameLanguage: 'Gleiche Kategorie, meine Sprache',
+    listHistory: 'Zuletzt gesehen', listTopStreams: 'Top-Streams', listTopLanguage: 'Top in meiner Sprache',
+    listEmpty: 'Gerade nichts in dieser Liste.', listNeedsPlaying: 'Diese Liste braucht einen laufenden Stream: sie zeigt die Kategorie des Channels, der gerade läuft.',
+    homeTitle: 'Auf dem Startbildschirm', homeHint: 'Diese Seite als App-Symbol öffnen:',
+    homeIos: 'iPhone: Safari → Teilen → Zum Home-Bildschirm.', homeAndroid: 'Android: Chrome-Menü ⋮ → Zum Startbildschirm hinzufügen.',
     searchChannels: 'Kanalname', tabLog: 'Log',
     logOff: 'Das Log im Browser ist am TV ausgeschaltet (Einstellungen → Handy & Browser → Log im Browser).',
     logAbout: 'Das eigene Log von ShrugTV auf diesem TV, live. Tokens und Passwörter werden immer entfernt. Zeile anklicken für Details.',
     logSearch: 'Log durchsuchen', logSource: 'Quelle', logAllSources: 'Alle Quellen', logLevel: 'Stufe',
     logAll: 'Alle', logErrors: 'Fehler', logWarnings: 'Warnungen', logInfo: 'Info', logDebug: 'Debug',
-    logPause: 'Pause', logResume: 'Weiter', logCopy: 'Kopieren', logExport: 'Als .txt sichern', logPrivate: 'Private Details ausblenden',
-    logLatest: 'Zum Neuesten ↓', logCopied: n => `${n} Zeilen kopiert`, logSaved: n => `${n} Zeilen gesichert`,
+    logPause: 'Pause', logResume: 'Weiter', logCopy: 'Kopieren', logExport: 'Als .txt speichern', logPrivate: 'Private Details ausblenden',
+    logLatest: 'Zum Neuesten ↓', logCopied: n => `${n} Zeilen kopiert`, logSaved: n => `${n} Zeilen gespeichert`,
     logShown: (n, total) => `${n} von ${total} Zeilen`, logEmpty: 'Keine passenden Zeilen.', logPaused: 'pausiert',
     logTime: 'Zeit', logTag: 'Quelle', logThread: 'Prozess/Thread', logMessage: 'Nachricht', settingsOff: 'Einstellungen vom Browser sind am TV ausgeschaltet (Einstellungen → Handy & Browser).',
-    settingsSearch: 'Einstellungen suchen', export: 'In Datei sichern', import: 'Aus Datei laden', saved: 'Gespeichert', notSaved: 'Nicht gespeichert: Wert nicht erlaubt',
+    settingsSearch: 'Einstellungen suchen', export: 'In Datei speichern', import: 'Aus Datei laden', saved: 'Gespeichert', notSaved: 'Nicht gespeichert: Wert nicht erlaubt',
     imported: (n, m) => `${n} Einstellungen geladen` + (m ? `, ${m} übersprungen` : ''), importBad: 'Das ist keine ShrugTV-Einstellungsdatei.',
-    run: 'Ausführen', done: 'Erledigt', tvOnly: 'Nur am TV', noScreen: 'Öffne zuerst ShrugTV am TV.', noResults: 'Keine Einstellungen gefunden.',
+    moveUp: 'Nach oben', run: 'Ausführen', done: 'Erledigt', tvOnly: 'Nur am TV', noScreen: 'Öffne zuerst ShrugTV am TV.', noResults: 'Keine Einstellungen gefunden.',
     secretSet: 'gespeichert – tippen zum Ersetzen', secretEmpty: 'nicht gesetzt', on: 'An', off: 'Aus', status: 'Status',
     pinned: 'Angeheftet', pin: 'An die Seitenleiste heften', unpin: 'Lösen', noPins: 'Hefte Einstellungen mit ☆ an, um sie hier zu finden.',
-    exported: n => `${n} Einstellungen in die Datei gesichert (ohne MQTT und Companion, die gehören zu diesem TV).`,
+    exported: n => `${n} Einstellungen in die Datei gespeichert (ohne MQTT und Handy & Browser, die gehören zu diesem TV).`,
     searchHint: '/ oder Strg+K: suchen', theme: 'Hell oder dunkel', guide: 'Anleitung', guideShow: 'Anleitung zeigen',
     connection: 'Verbindung', mqttBroker: 'MQTT-Broker', noBroker: 'keine Broker-Adresse', entities: n => `${n} Entitäten`,
     lastPublish: s => `gesendet ${ago(s, 'de')}`, connectedFor: s => `verbunden seit ${ago(s, 'de', true)}`, deviceId: 'Geräte-ID',
@@ -105,7 +153,7 @@ const T = {
     logTime: 'Hora', logTag: 'Origen', logThread: 'Proceso/hilo', logMessage: 'Mensaje', settingsOff: 'Cambiar los ajustes desde el navegador está desactivado en el TV (Ajustes → Móvil y navegador).',
     settingsSearch: 'Buscar ajustes', export: 'Guardar en archivo', import: 'Cargar desde archivo', saved: 'Guardado', notSaved: 'No guardado: valor no permitido',
     imported: (n, m) => `${n} ajustes cargados` + (m ? `, ${m} omitidos` : ''), importBad: 'Este no es un archivo de ajustes de ShrugTV.',
-    run: 'Ejecutar', done: 'Listo', tvOnly: 'Solo en el TV', noScreen: 'Abre primero ShrugTV en el TV.', noResults: 'No se encontraron ajustes.',
+    moveUp: 'Subir', run: 'Ejecutar', done: 'Listo', tvOnly: 'Solo en el TV', noScreen: 'Abre primero ShrugTV en el TV.', noResults: 'No se encontraron ajustes.',
     secretSet: 'guardado – escribe para reemplazar', secretEmpty: 'sin definir', on: 'Activado', off: 'Desactivado', status: 'Estado',
     pinned: 'Fijados', pin: 'Fijar en la barra lateral', unpin: 'Desfijar', noPins: 'Fija ajustes con ☆ para encontrarlos aquí.',
     exported: n => `${n} ajustes guardados en el archivo (sin MQTT ni móvil, pertenecen a este TV).`,
@@ -118,7 +166,31 @@ const T = {
     designBad: 'Ese no es un archivo de diseño de ShrugTV.', designNone: 'Aún no hay temas propios.', designSaved: n => `Guardado como ${n}.`, designImported: n => `Importado como ${n}.`,
     deviceSeen: (seen, paired) => `último uso ${seen} · emparejado ${paired}`, removeDevice: n => `¿Eliminar ${n}? Necesitará de nuevo el código QR o el PIN.`,
     noDevices: 'Aún no hay dispositivos recordados.', rememberOff: '"Recordar dispositivos conectados" está desactivado: los dispositivos necesitan un código tras cada inicio de la app.', nameTaken: 'nombre usado por otro TV, código añadido', noTls: 'sin TLS', reachable: 'accesible',
-    mqttStates: { connected: 'conectado', connecting: 'conectando …', off: 'desactivado', 'no broker address': 'sin dirección de broker' }
+    mqttStates: { connected: 'conectado', connecting: 'conectando …', off: 'desactivado', 'no broker address': 'sin dirección de broker' },
+    remoteMode: 'Modo de mando', modePad: 'Panel táctil', modeKeys: 'Teclas', padLabel: 'Panel táctil: desliza para las flechas, toca para OK',
+    padHint: 'Deslizar = flechas\nTocar = OK · Dos dedos = Atrás', replay: '⟲ Repetición', audioOnly: 'Solo audio',
+    recent: 'Vistos recientemente', replyTo: n => `Responder a ${n}`, replyCancel: 'Cancelar respuesta', emotes: 'Emotes',
+    noEmotes: 'Aún no se ha visto ningún emote en este chat. Aparecen aquí en cuanto alguien usa uno.', quickAdd: 'Añadir una frase rápida',
+    quickNew: 'Nueva frase rápida (máx. 60 caracteres)', quickRemove: t => `¿Eliminar "${t}" de las frases rápidas?`,
+    chatHint: 'Toca un mensaje para responder con @nombre. Mantén pulsada una frase rápida para eliminarla.',
+    tabUpdate: 'Versión', tabUpdateShort: 'Info', verInstalled: 'Instalada', verEdition: 'Edición', verEditionPublic: 'Pública', verEditionPrivate: 'Privada',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Última comprobación', verNever: 'aún no', verCurrent: 'Tienes la versión más reciente.',
+    verUnknown: 'Aún no se ha comprobado.', verUnsupported: 'Esta edición no se actualiza desde la app y aquí no hay comprobación de versiones nuevas.',
+    verAvailable: v => `Hay una versión ${v} disponible`, verCheck: 'Comprobar ahora', verChecking: 'Comprobando …', verInstall: 'Instalar actualización',
+    verInstallConfirm: v => `¿Descargar la versión ${v} e iniciar la instalación en el TV? El TV te pedirá que la confirmes.`,
+    verRelease: 'Página de la versión', verInstallOff: 'La instalación desde la app está desactivada. Actívala en los ajustes del TV: App → Instalar actualizaciones en la app.',
+    verAutoOff: 'La comprobación diaria está desactivada (Ajustes → Acerca de → Buscar actualizaciones); "Comprobar ahora" funciona igualmente.',
+    verDownloading: p => `Descargando … ${p} %`, verVerifying: 'Verificado. Confirma la instalación en el TV con OK.',
+    verErrors: { disabled: 'La instalación desde la app está desactivada.', none: 'No se conoce ninguna versión más reciente. Comprueba primero.', need_permission: 'Permite "Instalar apps desconocidas" para ShrugTV en el TV y vuelve a intentarlo.',
+      permission_unavailable: 'Este TV no tiene pantalla para "Instalar apps desconocidas".', no_file: 'La versión no tiene ningún archivo instalable.', bad_checksum: 'La suma de comprobación no coincide, no se instaló nada.',
+      download_failed: 'La descarga ha fallado.' },
+    verNotes: 'Novedades',
+    favAdd: 'Marcar como favorito', favRemove: 'Quitar de favoritos', favFailed: 'No se pudo guardar la estrella.',
+    listsLabel: 'Listas del cambiador de canales', listFollowed: 'Seguidos', listSameGame: 'Misma categoría', listSameGameLanguage: 'Misma categoría, mi idioma',
+    listHistory: 'Vistos recientemente', listTopStreams: 'Streams más vistos', listTopLanguage: 'Más vistos en mi idioma',
+    listEmpty: 'Ahora mismo no hay nada en esta lista.', listNeedsPlaying: 'Esta lista necesita un stream en reproducción: muestra la categoría del canal que se está viendo.',
+    homeTitle: 'En la pantalla de inicio', homeHint: 'Abre esta página como icono de app:',
+    homeIos: 'iPhone: Safari → Compartir → Añadir a pantalla de inicio.', homeAndroid: 'Android: menú de Chrome ⋮ → Añadir a pantalla de inicio.'
   },
   fr: {
     pairText: 'Scannez le code QR sur la TV, ou saisissez le code PIN qui y est affiché.', pinLabel: 'PIN', connect: 'Connecter',
@@ -144,7 +216,7 @@ const T = {
     logTime: 'Heure', logTag: 'Source', logThread: 'Processus/thread', logMessage: 'Message', settingsOff: 'La modification des réglages depuis le navigateur est désactivée sur la TV (Réglages → Téléphone et navigateur).',
     settingsSearch: 'Rechercher dans les réglages', export: 'Enregistrer dans un fichier', import: 'Charger depuis un fichier', saved: 'Enregistré', notSaved: 'Non enregistré : valeur non autorisée',
     imported: (n, m) => `${n} réglages chargés` + (m ? `, ${m} ignorés` : ''), importBad: 'Ce n\'est pas un fichier de réglages ShrugTV.',
-    run: 'Exécuter', done: 'Terminé', tvOnly: 'Uniquement sur la TV', noScreen: 'Ouvrez d\'abord ShrugTV sur la TV.', noResults: 'Aucun réglage trouvé.',
+    moveUp: 'Monter', run: 'Exécuter', done: 'Terminé', tvOnly: 'Uniquement sur la TV', noScreen: 'Ouvrez d\'abord ShrugTV sur la TV.', noResults: 'Aucun réglage trouvé.',
     secretSet: 'enregistré – saisissez pour remplacer', secretEmpty: 'non défini', on: 'Activé', off: 'Désactivé', status: 'État',
     pinned: 'Épinglés', pin: 'Épingler à la barre latérale', unpin: 'Désépingler', noPins: 'Épinglez des réglages avec ☆ pour les retrouver ici.',
     exported: n => `${n} réglages enregistrés dans le fichier (sans MQTT ni téléphone et navigateur, qui appartiennent à cette TV).`,
@@ -157,7 +229,31 @@ const T = {
     designBad: 'Ce n\'est pas un fichier de design ShrugTV.', designNone: 'Aucun thème personnel pour l\'instant.', designSaved: n => `Enregistré sous ${n}.`, designImported: n => `Importé sous ${n}.`,
     deviceSeen: (seen, paired) => `dernière utilisation ${seen} · associé ${paired}`, removeDevice: n => `Supprimer ${n} ? Il aura de nouveau besoin du code QR ou du PIN.`,
     noDevices: 'Aucun appareil mémorisé pour l\'instant.', rememberOff: '« Mémoriser les appareils connectés » est désactivé : les appareils ont besoin d\'un code après chaque démarrage de l\'application.', nameTaken: 'nom utilisé par une autre TV, code ajouté', noTls: 'sans TLS', reachable: 'accessible',
-    mqttStates: { connected: 'connecté', connecting: 'connexion …', off: 'désactivé', 'no broker address': 'pas d\'adresse de broker' }
+    mqttStates: { connected: 'connecté', connecting: 'connexion …', off: 'désactivé', 'no broker address': 'pas d\'adresse de broker' },
+    remoteMode: 'Mode télécommande', modePad: 'Pavé tactile', modeKeys: 'Touches', padLabel: 'Pavé tactile : glissez pour les flèches, touchez pour OK',
+    padHint: 'Glisser = flèches\nToucher = OK · Deux doigts = Retour', replay: '⟲ Replay', audioOnly: 'Audio seul',
+    recent: 'Vu récemment', replyTo: n => `Répondre à ${n}`, replyCancel: 'Annuler la réponse', emotes: 'Émotes',
+    noEmotes: "Aucune émote vue dans ce chat pour l'instant. Elles apparaissent ici dès que quelqu'un en utilise une.", quickAdd: 'Ajouter une phrase rapide',
+    quickNew: 'Nouvelle phrase rapide (60 caractères max.)', quickRemove: t => `Supprimer « ${t} » des phrases rapides ?`,
+    chatHint: "Touchez un message pour répondre avec @nom. Maintenez une phrase rapide pour la supprimer.",
+    tabUpdate: 'Version', tabUpdateShort: 'Info', verInstalled: 'Installée', verEdition: 'Édition', verEditionPublic: 'Publique', verEditionPrivate: 'Privée',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Dernière vérification', verNever: 'pas encore', verCurrent: 'Vous avez la version la plus récente.',
+    verUnknown: 'Pas encore vérifié.', verUnsupported: "Cette édition n'est pas mise à jour depuis l'app, et il n'y a pas de recherche de nouvelles versions ici.",
+    verAvailable: v => `La version ${v} est disponible`, verCheck: 'Vérifier maintenant', verChecking: 'Vérification …', verInstall: 'Installer la mise à jour',
+    verInstallConfirm: v => `Télécharger la version ${v} et lancer l'installation sur la TV ? La TV vous demande de confirmer.`,
+    verRelease: 'Page de la version', verInstallOff: "L'installation depuis l'app est désactivée. Activez-la dans les réglages de la TV : App → Installer les mises à jour dans l'app.",
+    verAutoOff: 'La vérification quotidienne est désactivée (Réglages → À propos → Rechercher des mises à jour) ; « Vérifier maintenant » fonctionne quand même.',
+    verDownloading: p => `Téléchargement … ${p} %`, verVerifying: "Vérifié. Confirmez l'installation sur la TV avec OK.",
+    verErrors: { disabled: "L'installation depuis l'app est désactivée.", none: "Aucune version plus récente connue. Vérifiez d'abord.", need_permission: 'Autorisez « Installer des apps inconnues » pour ShrugTV sur la TV, puis réessayez.',
+      permission_unavailable: "Cette TV n'a pas d'écran pour « Installer des apps inconnues ».", no_file: "La version n'a aucun fichier installable.", bad_checksum: "La somme de contrôle ne correspond pas, rien n'a été installé.",
+      download_failed: 'Le téléchargement a échoué.' },
+    verNotes: 'Nouveautés',
+    favAdd: 'Marquer comme favori', favRemove: 'Retirer des favoris', favFailed: "L'étoile n'a pas pu être enregistrée.",
+    listsLabel: 'Listes du sélecteur de chaînes', listFollowed: 'Suivies', listSameGame: 'Même catégorie', listSameGameLanguage: 'Même catégorie, ma langue',
+    listHistory: 'Vu récemment', listTopStreams: 'Top streams', listTopLanguage: 'Top dans ma langue',
+    listEmpty: 'Rien dans cette liste pour le moment.', listNeedsPlaying: "Cette liste nécessite un stream en cours : elle montre la catégorie de la chaîne qui est lue.",
+    homeTitle: "Sur l'écran d'accueil", homeHint: "Ouvrez cette page comme une icône d'app :",
+    homeIos: "iPhone : Safari → Partager → Sur l'écran d'accueil.", homeAndroid: "Android : menu de Chrome ⋮ → Ajouter à l'écran d'accueil."
   },
   pt: {
     pairText: 'Escaneie o QR code na TV ou digite o PIN exibido lá.', pinLabel: 'PIN', connect: 'Conectar',
@@ -183,7 +279,7 @@ const T = {
     logTime: 'Hora', logTag: 'Origem', logThread: 'Processo/thread', logMessage: 'Mensagem', settingsOff: 'Alterar configurações pelo navegador está desativado na TV (Configurações → Celular e navegador).',
     settingsSearch: 'Buscar configurações', export: 'Salvar em arquivo', import: 'Carregar de arquivo', saved: 'Salvo', notSaved: 'Não salvo: valor não permitido',
     imported: (n, m) => `${n} configurações carregadas` + (m ? `, ${m} ignoradas` : ''), importBad: 'Este não é um arquivo de configurações do ShrugTV.',
-    run: 'Executar', done: 'Concluído', tvOnly: 'Só na TV', noScreen: 'Abra o ShrugTV na TV primeiro.', noResults: 'Nenhuma configuração encontrada.',
+    moveUp: 'Subir', run: 'Executar', done: 'Concluído', tvOnly: 'Só na TV', noScreen: 'Abra o ShrugTV na TV primeiro.', noResults: 'Nenhuma configuração encontrada.',
     secretSet: 'armazenado – digite para substituir', secretEmpty: 'não definido', on: 'Ligado', off: 'Desligado', status: 'Status',
     pinned: 'Fixadas', pin: 'Fixar na barra lateral', unpin: 'Desafixar', noPins: 'Fixe configurações com ☆ para encontrá-las aqui.',
     exported: n => `${n} configurações salvas no arquivo (sem MQTT e celular, que pertencem a esta TV).`,
@@ -196,7 +292,31 @@ const T = {
     designBad: 'Este não é um arquivo de design do ShrugTV.', designNone: 'Nenhum tema próprio ainda.', designSaved: n => `Salvo como ${n}.`, designImported: n => `Importado como ${n}.`,
     deviceSeen: (seen, paired) => `último uso ${seen} · pareado ${paired}`, removeDevice: n => `Remover ${n}? Ele precisará do QR code ou do PIN de novo.`,
     noDevices: 'Nenhum dispositivo lembrado ainda.', rememberOff: '"Lembrar dispositivos conectados" está desativado: os dispositivos precisam de um código a cada início do app.', nameTaken: 'nome usado por outra TV, código adicionado', noTls: 'sem TLS', reachable: 'acessível',
-    mqttStates: { connected: 'conectado', connecting: 'conectando …', off: 'desligado', 'no broker address': 'sem endereço do broker' }
+    mqttStates: { connected: 'conectado', connecting: 'conectando …', off: 'desligado', 'no broker address': 'sem endereço do broker' },
+    remoteMode: 'Modo do controle', modePad: 'Touchpad', modeKeys: 'Teclas', padLabel: 'Touchpad: deslize para as setas, toque para OK',
+    padHint: 'Deslizar = setas\nToque = OK · Dois dedos = Voltar', replay: '⟲ Replay', audioOnly: 'Só áudio',
+    recent: 'Assistidos recentemente', replyTo: n => `Responder a ${n}`, replyCancel: 'Cancelar resposta', emotes: 'Emotes',
+    noEmotes: 'Nenhum emote visto neste chat ainda. Eles aparecem aqui assim que alguém usar um.', quickAdd: 'Adicionar uma frase rápida',
+    quickNew: 'Nova frase rápida (máx. 60 caracteres)', quickRemove: t => `Remover "${t}" das frases rápidas?`,
+    chatHint: 'Toque numa mensagem para responder com @nome. Segure uma frase rápida para removê-la.',
+    tabUpdate: 'Versão', tabUpdateShort: 'Info', verInstalled: 'Instalada', verEdition: 'Edição', verEditionPublic: 'Pública', verEditionPrivate: 'Privada',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Última verificação', verNever: 'ainda não', verCurrent: 'Você tem a versão mais recente.',
+    verUnknown: 'Ainda não verificado.', verUnsupported: 'Esta edição não é atualizada pelo app, e aqui não há verificação de novas versões.',
+    verAvailable: v => `A versão ${v} está disponível`, verCheck: 'Verificar agora', verChecking: 'Verificando …', verInstall: 'Instalar atualização',
+    verInstallConfirm: v => `Baixar a versão ${v} e iniciar a instalação na TV? A TV pede que você confirme.`,
+    verRelease: 'Página da versão', verInstallOff: 'A instalação pelo app está desativada. Ative nas configurações da TV: App → Instalar atualizações no app.',
+    verAutoOff: 'A verificação diária está desativada (Configurações → Sobre → Verificar atualizações); "Verificar agora" funciona mesmo assim.',
+    verDownloading: p => `Baixando … ${p} %`, verVerifying: 'Verificado. Confirme a instalação na TV com OK.',
+    verErrors: { disabled: 'A instalação pelo app está desativada.', none: 'Nenhuma versão mais nova conhecida. Verifique primeiro.', need_permission: 'Permita "Instalar apps desconhecidos" para o ShrugTV na TV e tente de novo.',
+      permission_unavailable: 'Esta TV não tem tela para "Instalar apps desconhecidos".', no_file: 'A versão não tem nenhum arquivo instalável.', bad_checksum: 'A soma de verificação não confere, nada foi instalado.',
+      download_failed: 'O download falhou.' },
+    verNotes: 'Novidades',
+    favAdd: 'Marcar como favorito', favRemove: 'Remover dos favoritos', favFailed: 'Não foi possível salvar a estrela.',
+    listsLabel: 'Listas do seletor de canais', listFollowed: 'Seguidos', listSameGame: 'Mesma categoria', listSameGameLanguage: 'Mesma categoria, meu idioma',
+    listHistory: 'Assistidos recentemente', listTopStreams: 'Top transmissões', listTopLanguage: 'Top no meu idioma',
+    listEmpty: 'Nada nesta lista agora.', listNeedsPlaying: 'Esta lista precisa de uma transmissão em andamento: ela mostra a categoria do canal que está passando.',
+    homeTitle: 'Na tela inicial', homeHint: 'Abra esta página como ícone de app:',
+    homeIos: 'iPhone: Safari → Compartilhar → Adicionar à Tela de Início.', homeAndroid: 'Android: menu do Chrome ⋮ → Adicionar à tela inicial.'
   },
   ru: {
     pairText: 'Отсканируйте QR-код на телевизоре или введите показанный там PIN.', pinLabel: 'PIN', connect: 'Подключиться',
@@ -222,7 +342,7 @@ const T = {
     logTime: 'Время', logTag: 'Источник', logThread: 'Процесс/поток', logMessage: 'Сообщение', settingsOff: 'Изменение настроек из браузера отключено на телевизоре (Настройки → Телефон и браузер).',
     settingsSearch: 'Поиск по настройкам', export: 'Сохранить в файл', import: 'Загрузить из файла', saved: 'Сохранено', notSaved: 'Не сохранено: недопустимое значение',
     imported: (n, m) => `Загружено настроек: ${n}` + (m ? `, пропущено: ${m}` : ''), importBad: 'Это не файл настроек ShrugTV.',
-    run: 'Выполнить', done: 'Готово', tvOnly: 'Только на телевизоре', noScreen: 'Сначала откройте ShrugTV на телевизоре.', noResults: 'Настройки не найдены.',
+    moveUp: 'Выше', run: 'Выполнить', done: 'Готово', tvOnly: 'Только на телевизоре', noScreen: 'Сначала откройте ShrugTV на телевизоре.', noResults: 'Настройки не найдены.',
     secretSet: 'сохранено – введите, чтобы заменить', secretEmpty: 'не задано', on: 'Вкл.', off: 'Выкл.', status: 'Состояние',
     pinned: 'Закреплённые', pin: 'Закрепить на боковой панели', unpin: 'Открепить', noPins: 'Закрепляйте настройки значком ☆, чтобы находить их здесь.',
     exported: n => `Настроек сохранено в файл: ${n} (без MQTT и компаньона, они относятся к этому телевизору).`,
@@ -235,7 +355,31 @@ const T = {
     designBad: 'Это не файл оформления ShrugTV.', designNone: 'Своих тем пока нет.', designSaved: n => `Сохранено как ${n}.`, designImported: n => `Импортировано как ${n}.`,
     deviceSeen: (seen, paired) => `использовалось: ${seen} · сопряжено: ${paired}`, removeDevice: n => `Удалить ${n}? Ему снова понадобится QR-код или PIN.`,
     noDevices: 'Пока нет запомненных устройств.', rememberOff: '«Запоминать подключённые устройства» выключено: после каждого запуска приложения устройствам нужен код.', nameTaken: 'имя занято другим телевизором, добавлен код', noTls: 'без TLS', reachable: 'доступно',
-    mqttStates: { connected: 'подключено', connecting: 'подключение …', off: 'выкл.', 'no broker address': 'нет адреса брокера' }
+    mqttStates: { connected: 'подключено', connecting: 'подключение …', off: 'выкл.', 'no broker address': 'нет адреса брокера' },
+    remoteMode: 'Режим пульта', modePad: 'Тачпад', modeKeys: 'Кнопки', padLabel: 'Тачпад: проведите пальцем для стрелок, коснитесь для OK',
+    padHint: 'Свайп = стрелки\nКасание = OK · Два пальца = Назад', replay: '⟲ Повтор', audioOnly: 'Только звук',
+    recent: 'Недавно смотрели', replyTo: n => `Ответить ${n}`, replyCancel: 'Отменить ответ', emotes: 'Смайлы',
+    noEmotes: 'В этом чате пока не было смайлов. Они появятся здесь, как только кто-нибудь отправит один.', quickAdd: 'Добавить быструю фразу',
+    quickNew: 'Новая быстрая фраза (до 60 символов)', quickRemove: t => `Удалить «${t}» из быстрых фраз?`,
+    chatHint: 'Коснитесь сообщения, чтобы ответить через @имя. Удерживайте быструю фразу, чтобы удалить её.',
+    tabUpdate: 'Версия', tabUpdateShort: 'Инфо', verInstalled: 'Установлена', verEdition: 'Выпуск', verEditionPublic: 'Публичный', verEditionPrivate: 'Личный',
+    verDevice: 'Телевизор', verAndroid: 'Android', verLastCheck: 'Последняя проверка', verNever: 'ещё не было', verCurrent: 'У вас самая новая версия.',
+    verUnknown: 'Ещё не проверялось.', verUnsupported: 'Этот выпуск не обновляется из приложения, и проверки новых версий здесь нет.',
+    verAvailable: v => `Доступна версия ${v}`, verCheck: 'Проверить сейчас', verChecking: 'Проверка …', verInstall: 'Установить обновление',
+    verInstallConfirm: v => `Скачать версию ${v} и начать установку на телевизоре? Телевизор попросит подтвердить.`,
+    verRelease: 'Страница выпуска', verInstallOff: 'Установка из приложения отключена. Включите её в настройках телевизора: Приложение → Устанавливать обновления из приложения.',
+    verAutoOff: 'Ежедневная проверка отключена (Настройки → О приложении → Проверять обновления); «Проверить сейчас» всё равно работает.',
+    verDownloading: p => `Загрузка … ${p} %`, verVerifying: 'Проверено. Подтвердите установку на телевизоре кнопкой OK.',
+    verErrors: { disabled: 'Установка из приложения отключена.', none: 'Более новая версия неизвестна. Сначала выполните проверку.', need_permission: 'Разрешите ShrugTV «Установку неизвестных приложений» на телевизоре и повторите попытку.',
+      permission_unavailable: 'На этом телевизоре нет экрана «Установка неизвестных приложений».', no_file: 'В выпуске нет файла для установки.', bad_checksum: 'Контрольная сумма не совпадает, ничего не установлено.',
+      download_failed: 'Не удалось скачать.' },
+    verNotes: 'Что нового',
+    favAdd: 'Добавить в избранное', favRemove: 'Убрать из избранного', favFailed: 'Не удалось сохранить звёздочку.',
+    listsLabel: 'Списки переключателя каналов', listFollowed: 'Подписки', listSameGame: 'Та же категория', listSameGameLanguage: 'Та же категория, мой язык',
+    listHistory: 'Недавно смотрели', listTopStreams: 'Популярные трансляции', listTopLanguage: 'Популярное на моём языке',
+    listEmpty: 'Сейчас в этом списке ничего нет.', listNeedsPlaying: 'Для этого списка нужна идущая трансляция: он показывает категорию воспроизводимого канала.',
+    homeTitle: 'На главном экране', homeHint: 'Откройте эту страницу как значок приложения:',
+    homeIos: 'iPhone: Safari → Поделиться → На экран «Домой».', homeAndroid: 'Android: меню Chrome ⋮ → Добавить на главный экран.'
   },
   tr: {
     pairText: 'TV\'deki QR kodunu tarayın veya orada gösterilen PIN\'i girin.', pinLabel: 'PIN', connect: 'Bağlan',
@@ -261,7 +405,7 @@ const T = {
     logTime: 'Zaman', logTag: 'Kaynak', logThread: 'İşlem/iş parçacığı', logMessage: 'Mesaj', settingsOff: 'Tarayıcıdan ayar değiştirme TV\'de kapalı (Ayarlar → Telefon ve tarayıcı).',
     settingsSearch: 'Ayarlarda ara', export: 'Dosyaya kaydet', import: 'Dosyadan yükle', saved: 'Kaydedildi', notSaved: 'Kaydedilmedi: değere izin verilmiyor',
     imported: (n, m) => `${n} ayar yüklendi` + (m ? `, ${m} atlandı` : ''), importBad: 'Bu bir ShrugTV ayar dosyası değil.',
-    run: 'Çalıştır', done: 'Bitti', tvOnly: 'Yalnızca TV\'de', noScreen: 'Önce TV\'de ShrugTV\'yi açın.', noResults: 'Ayar bulunamadı.',
+    moveUp: 'Yukarı taşı', run: 'Çalıştır', done: 'Bitti', tvOnly: 'Yalnızca TV\'de', noScreen: 'Önce TV\'de ShrugTV\'yi açın.', noResults: 'Ayar bulunamadı.',
     secretSet: 'saklandı – değiştirmek için yazın', secretEmpty: 'ayarlanmadı', on: 'Açık', off: 'Kapalı', status: 'Durum',
     pinned: 'Sabitlenenler', pin: 'Kenar çubuğuna sabitle', unpin: 'Sabitlemeyi kaldır', noPins: 'Ayarları ☆ ile sabitleyin, burada bulun.',
     exported: n => `${n} ayar dosyaya kaydedildi (MQTT ve companion hariç, onlar bu TV'ye aittir).`,
@@ -274,7 +418,31 @@ const T = {
     designBad: 'Bu bir ShrugTV tasarım dosyası değil.', designNone: 'Henüz kendi temanız yok.', designSaved: n => `${n} olarak kaydedildi.`, designImported: n => `${n} olarak içe aktarıldı.`,
     deviceSeen: (seen, paired) => `son kullanım ${seen} · eşleşme ${paired}`, removeDevice: n => `${n} kaldırılsın mı? Tekrar QR kodu veya PIN gerekecek.`,
     noDevices: 'Henüz hatırlanan cihaz yok.', rememberOff: '"Bağlı cihazları hatırla" kapalı: cihazlar her uygulama başlangıcından sonra kod ister.', nameTaken: 'ad başka bir TV tarafından kullanılıyor, kod eklendi', noTls: 'TLS olmadan', reachable: 'erişilebilir',
-    mqttStates: { connected: 'bağlı', connecting: 'bağlanıyor …', off: 'kapalı', 'no broker address': 'aracı adresi yok' }
+    mqttStates: { connected: 'bağlı', connecting: 'bağlanıyor …', off: 'kapalı', 'no broker address': 'aracı adresi yok' },
+    remoteMode: 'Kumanda modu', modePad: 'Dokunmatik yüzey', modeKeys: 'Tuşlar', padLabel: 'Dokunmatik yüzey: oklar için kaydırın, Tamam için dokunun',
+    padHint: 'Kaydır = ok tuşları\nDokun = Tamam · İki parmak = Geri', replay: '⟲ Tekrar', audioOnly: 'Yalnızca ses',
+    recent: 'Son izlenenler', replyTo: n => `${n} kişisine yanıt ver`, replyCancel: 'Yanıtı iptal et', emotes: 'Emojiler',
+    noEmotes: 'Bu sohbette henüz emoji görülmedi. Biri kullanır kullanmaz burada görünür.', quickAdd: 'Hızlı ifade ekle',
+    quickNew: 'Yeni hızlı ifade (en fazla 60 karakter)', quickRemove: t => `"${t}" hızlı ifadelerden kaldırılsın mı?`,
+    chatHint: 'Bir mesaja dokunarak @ad ile yanıtlayın. Kaldırmak için bir hızlı ifadeye basılı tutun.',
+    tabUpdate: 'Sürüm', tabUpdateShort: 'Bilgi', verInstalled: 'Yüklü', verEdition: 'Sürüm türü', verEditionPublic: 'Herkese açık', verEditionPrivate: 'Özel',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Son kontrol', verNever: 'henüz yok', verCurrent: 'En yeni sürüme sahipsiniz.',
+    verUnknown: 'Henüz kontrol edilmedi.', verUnsupported: 'Bu sürüm türü uygulamadan güncellenmez ve burada yeni sürüm kontrolü yoktur.',
+    verAvailable: v => `${v} sürümü hazır`, verCheck: 'Şimdi kontrol et', verChecking: 'Kontrol ediliyor …', verInstall: 'Güncellemeyi yükle',
+    verInstallConfirm: v => `${v} sürümü indirilip TV\'de kurulum başlatılsın mı? TV sizden onay ister.`,
+    verRelease: 'Sürüm sayfası', verInstallOff: "Uygulamadan kurulum kapalı. TV ayarlarından açın: Uygulama → Güncellemeleri uygulamadan yükle.",
+    verAutoOff: 'Günlük kontrol kapalı (Ayarlar → Hakkında → Güncellemeleri denetle); "Şimdi kontrol et" yine de çalışır.',
+    verDownloading: p => `İndiriliyor … %${p}`, verVerifying: "Doğrulandı. Kurulumu TV'de Tamam ile onaylayın.",
+    verErrors: { disabled: 'Uygulamadan kurulum kapalı.', none: 'Bilinen daha yeni sürüm yok. Önce kontrol edin.', need_permission: 'TV\'de ShrugTV için "Bilinmeyen uygulamaları yükle" iznini verin, sonra tekrar deneyin.',
+      permission_unavailable: 'Bu TV\'de "Bilinmeyen uygulamaları yükle" ekranı yok.', no_file: 'Sürümde yüklenebilir dosya yok.', bad_checksum: 'Sağlama toplamı uyuşmuyor, hiçbir şey yüklenmedi.',
+      download_failed: 'İndirme başarısız oldu.' },
+    verNotes: 'Yenilikler',
+    favAdd: 'Favori olarak işaretle', favRemove: 'Favorilerden kaldır', favFailed: 'Yıldız kaydedilemedi.',
+    listsLabel: 'Kanal değiştiricinin listeleri', listFollowed: 'Takip edilenler', listSameGame: 'Aynı kategori', listSameGameLanguage: 'Aynı kategori, benim dilim',
+    listHistory: 'Son izlenenler', listTopStreams: 'En çok izlenen yayınlar', listTopLanguage: 'Dilimde en çok izlenenler',
+    listEmpty: 'Bu listede şu an bir şey yok.', listNeedsPlaying: 'Bu liste çalışan bir yayın gerektirir: oynatılan kanalın kategorisini gösterir.',
+    homeTitle: 'Ana ekranda', homeHint: 'Bu sayfayı uygulama simgesi olarak açın:',
+    homeIos: 'iPhone: Safari → Paylaş → Ana Ekrana Ekle.', homeAndroid: 'Android: Chrome menüsü ⋮ → Ana ekrana ekle.'
   },
   it: {
     pairText: 'Inquadra il codice QR sul TV oppure inserisci il PIN mostrato lì.', pinLabel: 'PIN', connect: 'Connetti',
@@ -300,7 +468,7 @@ const T = {
     logTime: 'Ora', logTag: 'Origine', logThread: 'Processo/thread', logMessage: 'Messaggio', settingsOff: 'La modifica delle impostazioni dal browser è disattivata sul TV (Impostazioni → Telefono e browser).',
     settingsSearch: 'Cerca nelle impostazioni', export: 'Salva su file', import: 'Carica da file', saved: 'Salvato', notSaved: 'Non salvato: valore non consentito',
     imported: (n, m) => `${n} impostazioni caricate` + (m ? `, ${m} saltate` : ''), importBad: 'Questo non è un file di impostazioni di ShrugTV.',
-    run: 'Esegui', done: 'Fatto', tvOnly: 'Solo sul TV', noScreen: 'Apri prima ShrugTV sul TV.', noResults: 'Nessuna impostazione trovata.',
+    moveUp: 'Sposta su', run: 'Esegui', done: 'Fatto', tvOnly: 'Solo sul TV', noScreen: 'Apri prima ShrugTV sul TV.', noResults: 'Nessuna impostazione trovata.',
     secretSet: 'salvato – scrivi per sostituire', secretEmpty: 'non impostato', on: 'Attivo', off: 'Disattivato', status: 'Stato',
     pinned: 'Fissate', pin: 'Fissa nella barra laterale', unpin: 'Rimuovi dai fissati', noPins: 'Fissa le impostazioni con ☆ per trovarle qui.',
     exported: n => `${n} impostazioni salvate nel file (senza MQTT e telefono, che appartengono a questo TV).`,
@@ -313,7 +481,31 @@ const T = {
     designBad: 'Questo non è un file di design di ShrugTV.', designNone: 'Ancora nessun tema personale.', designSaved: n => `Salvato come ${n}.`, designImported: n => `Importato come ${n}.`,
     deviceSeen: (seen, paired) => `ultimo utilizzo ${seen} · associato ${paired}`, removeDevice: n => `Rimuovere ${n}? Servirà di nuovo il codice QR o il PIN.`,
     noDevices: 'Ancora nessun dispositivo ricordato.', rememberOff: '"Ricorda i dispositivi collegati" è disattivato: i dispositivi richiedono un codice a ogni avvio dell\'app.', nameTaken: 'nome usato da un altro TV, codice aggiunto', noTls: 'senza TLS', reachable: 'raggiungibile',
-    mqttStates: { connected: 'connesso', connecting: 'connessione …', off: 'disattivato', 'no broker address': 'nessun indirizzo del broker' }
+    mqttStates: { connected: 'connesso', connecting: 'connessione …', off: 'disattivato', 'no broker address': 'nessun indirizzo del broker' },
+    remoteMode: 'Modalità telecomando', modePad: 'Touchpad', modeKeys: 'Tasti', padLabel: 'Touchpad: scorri per le frecce, tocca per OK',
+    padHint: 'Scorrere = frecce\nToccare = OK · Due dita = Indietro', replay: '⟲ Replay', audioOnly: 'Solo audio',
+    recent: 'Visti di recente', replyTo: n => `Rispondi a ${n}`, replyCancel: 'Annulla risposta', emotes: 'Emote',
+    noEmotes: 'Nessuna emote vista in questa chat finora. Compaiono qui non appena qualcuno ne usa una.', quickAdd: 'Aggiungi una frase rapida',
+    quickNew: 'Nuova frase rapida (max. 60 caratteri)', quickRemove: t => `Rimuovere "${t}" dalle frasi rapide?`,
+    chatHint: 'Tocca un messaggio per rispondere con @nome. Tieni premuta una frase rapida per rimuoverla.',
+    tabUpdate: 'Versione', tabUpdateShort: 'Info', verInstalled: 'Installata', verEdition: 'Edizione', verEditionPublic: 'Pubblica', verEditionPrivate: 'Privata',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: 'Ultimo controllo', verNever: 'non ancora', verCurrent: 'Hai la versione più recente.',
+    verUnknown: 'Non ancora controllato.', verUnsupported: "Questa edizione non si aggiorna dall'app e qui non c'è il controllo delle nuove versioni.",
+    verAvailable: v => `È disponibile la versione ${v}`, verCheck: 'Controlla ora', verChecking: 'Controllo in corso …', verInstall: "Installa l'aggiornamento",
+    verInstallConfirm: v => `Scaricare la versione ${v} e avviare l'installazione sul TV? Il TV ti chiede di confermare.`,
+    verRelease: 'Pagina della versione', verInstallOff: "L'installazione dall'app è disattivata. Attivala nelle impostazioni del TV: App → Installa aggiornamenti nell'app.",
+    verAutoOff: 'Il controllo giornaliero è disattivato (Impostazioni → Info → Cerca aggiornamenti); "Controlla ora" funziona comunque.',
+    verDownloading: p => `Download in corso … ${p} %`, verVerifying: "Verificato. Conferma l'installazione sul TV con OK.",
+    verErrors: { disabled: "L'installazione dall'app è disattivata.", none: 'Nessuna versione più recente nota. Controlla prima.', need_permission: 'Consenti "Installa app sconosciute" per ShrugTV sul TV, poi riprova.',
+      permission_unavailable: 'Questo TV non ha una schermata per "Installa app sconosciute".', no_file: 'La versione non ha alcun file installabile.', bad_checksum: 'Il checksum non corrisponde, non è stato installato nulla.',
+      download_failed: 'Il download non è riuscito.' },
+    verNotes: 'Novità',
+    favAdd: 'Segna come preferito', favRemove: 'Rimuovi dai preferiti', favFailed: 'Non è stato possibile salvare la stella.',
+    listsLabel: 'Liste del cambio canale', listFollowed: 'Seguiti', listSameGame: 'Stessa categoria', listSameGameLanguage: 'Stessa categoria, nella mia lingua',
+    listHistory: 'Visti di recente', listTopStreams: 'Stream più visti', listTopLanguage: 'Più visti nella mia lingua',
+    listEmpty: "In questo momento non c'è nulla in questa lista.", listNeedsPlaying: 'Questa lista richiede uno stream in riproduzione: mostra la categoria del canale in corso.',
+    homeTitle: 'Nella schermata Home', homeHint: 'Apri questa pagina come icona di app:',
+    homeIos: 'iPhone: Safari → Condividi → Aggiungi alla schermata Home.', homeAndroid: 'Android: menu di Chrome ⋮ → Aggiungi a schermata Home.'
   },
   ja: {
     pairText: 'テレビのQRコードを読み取るか、表示されているPINを入力してください。', pinLabel: 'PIN', connect: '接続',
@@ -339,7 +531,7 @@ const T = {
     logTime: '時刻', logTag: '発生源', logThread: 'プロセス/スレッド', logMessage: 'メッセージ', settingsOff: 'ブラウザからの設定変更は、テレビでオフになっています(設定 → スマホとブラウザ)。',
     settingsSearch: '設定を検索', export: 'ファイルに保存', import: 'ファイルから読み込み', saved: '保存しました', notSaved: '保存されませんでした: 値が許可されていません',
     imported: (n, m) => `${n} 件の設定を読み込みました` + (m ? `(${m} 件スキップ)` : ''), importBad: 'ShrugTVの設定ファイルではありません。',
-    run: '実行', done: '完了', tvOnly: 'テレビでのみ', noScreen: '先にテレビでShrugTVを開いてください。', noResults: '設定が見つかりません。',
+    moveUp: '上へ', run: '実行', done: '完了', tvOnly: 'テレビでのみ', noScreen: '先にテレビでShrugTVを開いてください。', noResults: '設定が見つかりません。',
     secretSet: '保存済み - 入力すると置き換わります', secretEmpty: '未設定', on: 'オン', off: 'オフ', status: '状態',
     pinned: 'ピン留め', pin: 'サイドバーにピン留め', unpin: 'ピン留めを解除', noPins: '☆ で設定をピン留めすると、ここに表示されます。',
     exported: n => `${n} 件の設定をファイルに保存しました(MQTTとコンパニオンはこのテレビ専用のため含まれません)。`,
@@ -352,7 +544,31 @@ const T = {
     designBad: 'ShrugTVのデザインファイルではありません。', designNone: 'オリジナルスキンはまだありません。', designSaved: n => `「${n}」として保存しました。`, designImported: n => `「${n}」としてインポートしました。`,
     deviceSeen: (seen, paired) => `最終利用 ${seen} · ペアリング ${paired}`, removeDevice: n => `${n}を削除しますか? 再びQRコードまたはPINが必要になります。`,
     noDevices: '記憶されているデバイスはまだありません。', rememberOff: '「接続したデバイスを記憶」がオフです。アプリの起動のたびにコードが必要です。', nameTaken: '他のテレビが使用中の名前のため、コードを追加しました', noTls: 'TLSなし', reachable: '到達可能',
-    mqttStates: { connected: '接続済み', connecting: '接続中…', off: 'オフ', 'no broker address': 'ブローカーのアドレスなし' }
+    mqttStates: { connected: '接続済み', connecting: '接続中…', off: 'オフ', 'no broker address': 'ブローカーのアドレスなし' },
+    remoteMode: 'リモコンモード', modePad: 'タッチパッド', modeKeys: 'キー', padLabel: 'タッチパッド: スワイプで矢印、タップでOK',
+    padHint: 'スワイプ = 矢印キー\nタップ = OK · 2本指 = 戻る', replay: '⟲ リプレイ', audioOnly: '音声のみ',
+    recent: '最近見たもの', replyTo: n => `${n}に返信`, replyCancel: '返信をキャンセル', emotes: 'エモート',
+    noEmotes: 'このチャットではまだエモートが見つかっていません。誰かが使うとすぐここに表示されます。', quickAdd: 'クイックフレーズを追加',
+    quickNew: '新しいクイックフレーズ(60文字まで)', quickRemove: t => `「${t}」をクイックフレーズから削除しますか?`,
+    chatHint: 'メッセージをタップすると @名前 で返信できます。クイックフレーズを長押しすると削除できます。',
+    tabUpdate: 'バージョン', tabUpdateShort: '情報', verInstalled: 'インストール済み', verEdition: 'エディション', verEditionPublic: '公開版', verEditionPrivate: '非公開版',
+    verDevice: 'テレビ', verAndroid: 'Android', verLastCheck: '最終確認', verNever: 'まだありません', verCurrent: '最新バージョンです。',
+    verUnknown: 'まだ確認していません。', verUnsupported: 'このエディションはアプリからは更新されず、ここでは新バージョンの確認もできません。',
+    verAvailable: v => `バージョン ${v} が利用できます`, verCheck: '今すぐ確認', verChecking: '確認中 …', verInstall: 'アップデートをインストール',
+    verInstallConfirm: v => `バージョン ${v} をダウンロードして、テレビでインストールを開始しますか? テレビで確認が求められます。`,
+    verRelease: 'リリースページ', verInstallOff: 'アプリからのインストールはオフです。テレビの設定でオンにしてください: アプリ → アプリからアップデートをインストール。',
+    verAutoOff: '毎日の確認はオフです(設定 → 情報 → アップデートを確認)。「今すぐ確認」は使えます。',
+    verDownloading: p => `ダウンロード中 … ${p} %`, verVerifying: '確認しました。テレビでOKを押してインストールを承認してください。',
+    verErrors: { disabled: 'アプリからのインストールはオフです。', none: '新しいバージョンは見つかっていません。先に確認してください。', need_permission: 'テレビでShrugTVに「不明なアプリのインストール」を許可してから、もう一度お試しください。',
+      permission_unavailable: 'このテレビには「不明なアプリのインストール」の画面がありません。', no_file: 'このリリースにはインストールできるファイルがありません。', bad_checksum: 'チェックサムが一致しないため、何もインストールされませんでした。',
+      download_failed: 'ダウンロードに失敗しました。' },
+    verNotes: '新機能',
+    favAdd: 'お気に入りに追加', favRemove: 'お気に入りから削除', favFailed: '星を保存できませんでした。',
+    listsLabel: 'チャンネル切り替えのリスト', listFollowed: 'フォロー中', listSameGame: '同じカテゴリ', listSameGameLanguage: '同じカテゴリ(自分の言語)',
+    listHistory: '最近見たもの', listTopStreams: '人気の配信', listTopLanguage: '自分の言語の人気配信',
+    listEmpty: '今このリストには何もありません。', listNeedsPlaying: 'このリストには再生中の配信が必要です。再生中のチャンネルのカテゴリを表示します。',
+    homeTitle: 'ホーム画面に追加', homeHint: 'このページをアプリのアイコンとして開く:',
+    homeIos: 'iPhone: Safari → 共有 → ホーム画面に追加。', homeAndroid: 'Android: Chromeのメニュー ⋮ → ホーム画面に追加。'
   },
   ko: {
     pairText: 'TV의 QR 코드를 스캔하거나 TV에 표시된 PIN을 입력하세요.', pinLabel: 'PIN', connect: '연결',
@@ -378,7 +594,7 @@ const T = {
     logTime: '시간', logTag: '출처', logThread: '프로세스/스레드', logMessage: '메시지', settingsOff: '브라우저에서 설정 변경이 TV에서 꺼져 있어요 (설정 → 휴대폰 및 브라우저).',
     settingsSearch: '설정 검색', export: '파일로 저장', import: '파일에서 불러오기', saved: '저장됨', notSaved: '저장되지 않음: 허용되지 않는 값',
     imported: (n, m) => `설정 ${n}개를 불러왔어요` + (m ? `, ${m}개는 건너뜀` : ''), importBad: 'ShrugTV 설정 파일이 아니에요.',
-    run: '실행', done: '완료', tvOnly: 'TV에서만 가능', noScreen: '먼저 TV에서 ShrugTV를 여세요.', noResults: '설정을 찾을 수 없어요.',
+    moveUp: '위로', run: '실행', done: '완료', tvOnly: 'TV에서만 가능', noScreen: '먼저 TV에서 ShrugTV를 여세요.', noResults: '설정을 찾을 수 없어요.',
     secretSet: '저장됨 – 입력하면 교체', secretEmpty: '설정되지 않음', on: '켜짐', off: '꺼짐', status: '상태',
     pinned: '고정됨', pin: '사이드바에 고정', unpin: '고정 해제', noPins: '☆로 설정을 고정하면 여기에서 찾을 수 있어요.',
     exported: n => `설정 ${n}개를 파일에 저장했어요 (MQTT와 연동 정보는 이 TV에 속하므로 제외).`,
@@ -391,7 +607,31 @@ const T = {
     designBad: 'ShrugTV 디자인 파일이 아니에요.', designNone: '나만의 스킨이 아직 없어요.', designSaved: n => `${n}(으)로 저장했어요.`, designImported: n => `${n}(으)로 가져왔어요.`,
     deviceSeen: (seen, paired) => `마지막 사용 ${seen} · 연결 ${paired}`, removeDevice: n => `${n}을(를) 삭제할까요? 다시 QR 코드나 PIN이 필요해요.`,
     noDevices: '기억된 기기가 아직 없어요.', rememberOff: '"연결된 기기 기억"이 꺼져 있어요: 앱을 시작할 때마다 기기에 코드가 필요해요.', nameTaken: '다른 TV가 사용 중인 이름이라 코드를 추가했어요', noTls: 'TLS 없음', reachable: '연결 가능',
-    mqttStates: { connected: '연결됨', connecting: '연결 중 …', off: '꺼짐', 'no broker address': '브로커 주소 없음' }
+    mqttStates: { connected: '연결됨', connecting: '연결 중 …', off: '꺼짐', 'no broker address': '브로커 주소 없음' },
+    remoteMode: '리모컨 모드', modePad: '터치패드', modeKeys: '버튼', padLabel: '터치패드: 밀어서 방향키, 탭하면 확인',
+    padHint: '밀기 = 방향키\n탭 = 확인 · 두 손가락 = 뒤로', replay: '⟲ 다시보기', audioOnly: '오디오만',
+    recent: '최근 시청', replyTo: n => `${n}에게 답장`, replyCancel: '답장 취소', emotes: '이모티콘',
+    noEmotes: '이 채팅에서는 아직 이모티콘이 보이지 않았어요. 누군가 사용하면 바로 여기에 나타나요.', quickAdd: '빠른 문구 추가',
+    quickNew: '새 빠른 문구 (최대 60자)', quickRemove: t => `빠른 문구에서 "${t}"를 삭제할까요?`,
+    chatHint: '메시지를 탭하면 @이름으로 답장할 수 있어요. 빠른 문구를 길게 누르면 삭제돼요.',
+    tabUpdate: '버전', tabUpdateShort: '정보', verInstalled: '설치됨', verEdition: '에디션', verEditionPublic: '공개', verEditionPrivate: '비공개',
+    verDevice: 'TV', verAndroid: 'Android', verLastCheck: '마지막 확인', verNever: '아직 없음', verCurrent: '최신 버전이에요.',
+    verUnknown: '아직 확인하지 않았어요.', verUnsupported: '이 에디션은 앱에서 업데이트되지 않고, 여기서는 새 버전 확인도 없어요.',
+    verAvailable: v => `버전 ${v}을(를) 사용할 수 있어요`, verCheck: '지금 확인', verChecking: '확인하는 중 …', verInstall: '업데이트 설치',
+    verInstallConfirm: v => `버전 ${v}을(를) 내려받아 TV에서 설치를 시작할까요? TV에서 확인을 요청해요.`,
+    verRelease: '릴리스 페이지', verInstallOff: '앱에서 설치가 꺼져 있어요. TV 설정에서 켜 주세요: 앱 → 앱에서 업데이트 설치.',
+    verAutoOff: '매일 확인이 꺼져 있어요 (설정 → 정보 → 업데이트 확인). "지금 확인"은 그래도 작동해요.',
+    verDownloading: p => `내려받는 중 … ${p} %`, verVerifying: '확인했어요. TV에서 확인 버튼으로 설치를 승인해 주세요.',
+    verErrors: { disabled: '앱에서 설치가 꺼져 있어요.', none: '알려진 새 버전이 없어요. 먼저 확인해 주세요.', need_permission: 'TV에서 ShrugTV에 "출처를 알 수 없는 앱 설치"를 허용한 뒤 다시 시도해 주세요.',
+      permission_unavailable: '이 TV에는 "출처를 알 수 없는 앱 설치" 화면이 없어요.', no_file: '이 릴리스에는 설치할 수 있는 파일이 없어요.', bad_checksum: '체크섬이 일치하지 않아 아무것도 설치되지 않았어요.',
+      download_failed: '내려받기에 실패했어요.' },
+    verNotes: '새로운 기능',
+    favAdd: '즐겨찾기로 표시', favRemove: '즐겨찾기에서 삭제', favFailed: '별을 저장하지 못했어요.',
+    listsLabel: '채널 전환 목록', listFollowed: '팔로우 중', listSameGame: '같은 카테고리', listSameGameLanguage: '같은 카테고리, 내 언어',
+    listHistory: '최근 시청', listTopStreams: '인기 스트림', listTopLanguage: '내 언어 인기 스트림',
+    listEmpty: '지금은 이 목록에 아무것도 없어요.', listNeedsPlaying: '이 목록은 재생 중인 스트림이 필요해요. 재생 중인 채널의 카테고리를 보여줘요.',
+    homeTitle: '홈 화면에', homeHint: '이 페이지를 앱 아이콘으로 열어 보세요:',
+    homeIos: 'iPhone: Safari → 공유 → 홈 화면에 추가.', homeAndroid: 'Android: Chrome 메뉴 ⋮ → 홈 화면에 추가.'
   },
   zh: {
     pairText: '请扫描电视上的二维码,或输入电视上显示的 PIN。', pinLabel: 'PIN', connect: '连接',
@@ -417,7 +657,7 @@ const T = {
     logTime: '时间', logTag: '来源', logThread: '进程/线程', logMessage: '消息', settingsOff: '电视上已关闭从浏览器更改设置(设置 → 手机和浏览器)。',
     settingsSearch: '搜索设置', export: '保存到文件', import: '从文件加载', saved: '已保存', notSaved: '未保存:不允许该值',
     imported: (n, m) => `已加载 ${n} 项设置` + (m ? `,跳过 ${m} 项` : ''), importBad: '这不是 ShrugTV 设置文件。',
-    run: '运行', done: '完成', tvOnly: '仅限电视', noScreen: '请先在电视上打开 ShrugTV。', noResults: '未找到设置。',
+    moveUp: '上移', run: '运行', done: '完成', tvOnly: '仅限电视', noScreen: '请先在电视上打开 ShrugTV。', noResults: '未找到设置。',
     secretSet: '已保存 – 输入可替换', secretEmpty: '未设置', on: '开', off: '关', status: '状态',
     pinned: '已固定', pin: '固定到侧边栏', unpin: '取消固定', noPins: '用 ☆ 固定设置,即可在这里找到它们。',
     exported: n => `已将 ${n} 项设置保存到文件(不含 MQTT 和手机连接,它们属于这台电视)。`,
@@ -430,7 +670,31 @@ const T = {
     designBad: '这不是 ShrugTV 设计文件。', designNone: '还没有自定义主题。', designSaved: n => `已保存为 ${n}。`, designImported: n => `已导入为 ${n}。`,
     deviceSeen: (seen, paired) => `上次使用 ${seen} · 配对于 ${paired}`, removeDevice: n => `移除 ${n}?之后需要重新使用二维码或 PIN。`,
     noDevices: '尚未记住任何设备。', rememberOff: '“记住已连接的设备”已关闭:每次应用启动后设备都需要验证码。', nameTaken: '名称已被另一台电视使用,已加短码', noTls: '未使用 TLS', reachable: '可连接',
-    mqttStates: { connected: '已连接', connecting: '连接中 …', off: '关', 'no broker address': '无代理地址' }
+    mqttStates: { connected: '已连接', connecting: '连接中 …', off: '关', 'no broker address': '无代理地址' },
+    remoteMode: '遥控模式', modePad: '触控板', modeKeys: '按键', padLabel: '触控板:滑动为方向键,轻点为确定',
+    padHint: '滑动 = 方向键\n轻点 = 确定 · 双指 = 返回', replay: '⟲ 回放', audioOnly: '仅音频',
+    recent: '最近观看', replyTo: n => `回复 ${n}`, replyCancel: '取消回复', emotes: '表情',
+    noEmotes: '这个聊天里还没有出现过表情。有人使用后会立即显示在这里。', quickAdd: '添加快捷短语',
+    quickNew: '新快捷短语(最多 60 个字符)', quickRemove: t => `从快捷短语中移除“${t}”?`,
+    chatHint: '轻点消息即可用 @名称 回复。长按快捷短语可将其移除。',
+    tabUpdate: '版本', tabUpdateShort: '信息', verInstalled: '已安装', verEdition: '版本类型', verEditionPublic: '公开版', verEditionPrivate: '私有版',
+    verDevice: '电视', verAndroid: 'Android', verLastCheck: '上次检查', verNever: '尚未检查', verCurrent: '已是最新版本。',
+    verUnknown: '尚未检查。', verUnsupported: '此版本类型不能通过应用更新,这里也没有新版本检查。',
+    verAvailable: v => `有可用的新版本 ${v}`, verCheck: '立即检查', verChecking: '正在检查 …', verInstall: '安装更新',
+    verInstallConfirm: v => `下载版本 ${v} 并在电视上开始安装?电视会要求你确认。`,
+    verRelease: '发布页面', verInstallOff: '已关闭通过应用安装。请在电视设置中开启:应用 → 通过应用安装更新。',
+    verAutoOff: '每日检查已关闭(设置 → 关于 → 检查更新);“立即检查”仍可使用。',
+    verDownloading: p => `正在下载 … ${p} %`, verVerifying: '已校验。请在电视上按确定键确认安装。',
+    verErrors: { disabled: '已关闭通过应用安装。', none: '没有已知的新版本。请先检查。', need_permission: '请在电视上允许 ShrugTV“安装未知应用”,然后重试。',
+      permission_unavailable: '这台电视没有“安装未知应用”的界面。', no_file: '该版本没有可安装的文件。', bad_checksum: '校验值不匹配,未安装任何内容。',
+      download_failed: '下载失败。' },
+    verNotes: '新增内容',
+    favAdd: '标为收藏', favRemove: '取消收藏', favFailed: '无法保存星标。',
+    listsLabel: '换台列表', listFollowed: '已关注', listSameGame: '相同分类', listSameGameLanguage: '相同分类,我的语言',
+    listHistory: '最近观看', listTopStreams: '热门直播', listTopLanguage: '我的语言中的热门',
+    listEmpty: '此列表目前没有内容。', listNeedsPlaying: '此列表需要有正在播放的直播:它显示当前播放频道的分类。',
+    homeTitle: '添加到主屏幕', homeHint: '将此页面作为应用图标打开:',
+    homeIos: 'iPhone:Safari → 分享 → 添加到主屏幕。', homeAndroid: 'Android:Chrome 菜单 ⋮ → 添加到主屏幕。'
   },
   pl: {
     pairText: 'Zeskanuj kod QR na telewizorze lub wpisz wyświetlony tam PIN.', pinLabel: 'PIN', connect: 'Połącz',
@@ -456,7 +720,7 @@ const T = {
     logTime: 'Czas', logTag: 'Źródło', logThread: 'Proces/wątek', logMessage: 'Wiadomość', settingsOff: 'Zmiana ustawień z przeglądarki jest wyłączona na telewizorze (Ustawienia → Telefon i przeglądarka).',
     settingsSearch: 'Szukaj w ustawieniach', export: 'Zapisz do pliku', import: 'Wczytaj z pliku', saved: 'Zapisano', notSaved: 'Nie zapisano: niedozwolona wartość',
     imported: (n, m) => `Wczytano ustawień: ${n}` + (m ? `, pominięto: ${m}` : ''), importBad: 'To nie jest plik ustawień ShrugTV.',
-    run: 'Uruchom', done: 'Gotowe', tvOnly: 'Tylko na telewizorze', noScreen: 'Najpierw otwórz ShrugTV na telewizorze.', noResults: 'Nie znaleziono ustawień.',
+    moveUp: 'W górę', run: 'Uruchom', done: 'Gotowe', tvOnly: 'Tylko na telewizorze', noScreen: 'Najpierw otwórz ShrugTV na telewizorze.', noResults: 'Nie znaleziono ustawień.',
     secretSet: 'zapisano – wpisz, aby zastąpić', secretEmpty: 'nie ustawiono', on: 'Wł.', off: 'Wył.', status: 'Status',
     pinned: 'Przypięte', pin: 'Przypnij do paska bocznego', unpin: 'Odepnij', noPins: 'Przypnij ustawienia przez ☆, aby znaleźć je tutaj.',
     exported: n => `Zapisano ustawień do pliku: ${n} (bez MQTT i aplikacji towarzyszącej, bo należą do tego telewizora).`,
@@ -469,7 +733,31 @@ const T = {
     designBad: 'To nie jest plik wyglądu ShrugTV.', designNone: 'Brak własnych motywów.', designSaved: n => `Zapisano jako ${n}.`, designImported: n => `Zaimportowano jako ${n}.`,
     deviceSeen: (seen, paired) => `ostatnio użyte ${seen} · sparowane ${paired}`, removeDevice: n => `Usunąć ${n}? Będzie potrzebować kodu QR lub PIN-u ponownie.`,
     noDevices: 'Nie zapamiętano jeszcze żadnych urządzeń.', rememberOff: '„Zapamiętuj połączone urządzenia” jest wyłączone: urządzenia potrzebują kodu po każdym uruchomieniu aplikacji.', nameTaken: 'nazwa używana przez inny telewizor, dodano kod', noTls: 'bez TLS', reachable: 'dostępny',
-    mqttStates: { connected: 'połączono', connecting: 'łączenie …', off: 'wyłączone', 'no broker address': 'brak adresu brokera' }
+    mqttStates: { connected: 'połączono', connecting: 'łączenie …', off: 'wyłączone', 'no broker address': 'brak adresu brokera' },
+    remoteMode: 'Tryb pilota', modePad: 'Panel dotykowy', modeKeys: 'Przyciski', padLabel: 'Panel dotykowy: przesuń palcem dla strzałek, dotknij dla OK',
+    padHint: 'Przesunięcie = strzałki\nDotknięcie = OK · Dwa palce = Wstecz', replay: '⟲ Powtórka', audioOnly: 'Tylko dźwięk',
+    recent: 'Ostatnio oglądane', replyTo: n => `Odpowiedz do ${n}`, replyCancel: 'Anuluj odpowiedź', emotes: 'Emotki',
+    noEmotes: 'Na tym czacie nie widziano jeszcze żadnych emotek. Pojawią się tutaj, gdy ktoś jakiejś użyje.', quickAdd: 'Dodaj szybką frazę',
+    quickNew: 'Nowa szybka fraza (maks. 60 znaków)', quickRemove: t => `Usunąć "${t}" z szybkich fraz?`,
+    chatHint: 'Dotknij wiadomości, aby odpowiedzieć przez @nazwa. Przytrzymaj szybką frazę, aby ją usunąć.',
+    tabUpdate: 'Wersja', tabUpdateShort: 'Info', verInstalled: 'Zainstalowana', verEdition: 'Edycja', verEditionPublic: 'Publiczna', verEditionPrivate: 'Prywatna',
+    verDevice: 'Telewizor', verAndroid: 'Android', verLastCheck: 'Ostatnie sprawdzenie', verNever: 'jeszcze nie', verCurrent: 'Masz najnowszą wersję.',
+    verUnknown: 'Jeszcze nie sprawdzono.', verUnsupported: 'Ta edycja nie jest aktualizowana z aplikacji, a sprawdzania nowych wersji tu nie ma.',
+    verAvailable: v => `Dostępna jest wersja ${v}`, verCheck: 'Sprawdź teraz', verChecking: 'Sprawdzanie …', verInstall: 'Zainstaluj aktualizację',
+    verInstallConfirm: v => `Pobrać wersję ${v} i rozpocząć instalację na telewizorze? Telewizor poprosi o potwierdzenie.`,
+    verRelease: 'Strona wydania', verInstallOff: 'Instalowanie z aplikacji jest wyłączone. Włącz je w ustawieniach telewizora: Aplikacja → Instaluj aktualizacje w aplikacji.',
+    verAutoOff: 'Codzienne sprawdzanie jest wyłączone (Ustawienia → O aplikacji → Sprawdzaj aktualizacje); "Sprawdź teraz" i tak działa.',
+    verDownloading: p => `Pobieranie … ${p} %`, verVerifying: 'Sprawdzono. Potwierdź instalację na telewizorze przyciskiem OK.',
+    verErrors: { disabled: 'Instalowanie z aplikacji jest wyłączone.', none: 'Brak znanej nowszej wersji. Najpierw sprawdź.', need_permission: 'Zezwól ShrugTV na "Instalowanie nieznanych aplikacji" na telewizorze i spróbuj ponownie.',
+      permission_unavailable: 'Ten telewizor nie ma ekranu "Instalowanie nieznanych aplikacji".', no_file: 'Wydanie nie ma pliku do zainstalowania.', bad_checksum: 'Suma kontrolna się nie zgadza, nic nie zainstalowano.',
+      download_failed: 'Pobieranie nie powiodło się.' },
+    verNotes: 'Co nowego',
+    favAdd: 'Oznacz jako ulubiony', favRemove: 'Usuń z ulubionych', favFailed: 'Nie udało się zapisać gwiazdki.',
+    listsLabel: 'Listy przełącznika kanałów', listFollowed: 'Obserwowane', listSameGame: 'Ta sama kategoria', listSameGameLanguage: 'Ta sama kategoria, mój język',
+    listHistory: 'Ostatnio oglądane', listTopStreams: 'Najpopularniejsze transmisje', listTopLanguage: 'Najpopularniejsze w moim języku',
+    listEmpty: 'Na tej liście na razie nic nie ma.', listNeedsPlaying: 'Ta lista wymaga trwającej transmisji: pokazuje kategorię odtwarzanego kanału.',
+    homeTitle: 'Na ekranie głównym', homeHint: 'Otwórz tę stronę jako ikonę aplikacji:',
+    homeIos: 'iPhone: Safari → Udostępnij → Dodaj do ekranu początkowego.', homeAndroid: 'Android: menu Chrome ⋮ → Dodaj do ekranu głównego.'
   },
 };
 // "55 s ago" / "vor 55 s"; plain duration with bare = true
@@ -485,7 +773,8 @@ function ago(s, lang, bare) {
 // The browser's language if the page has it, English otherwise
 const LANG = ['en', 'de', 'es', 'fr', 'pt', 'it', 'pl', 'tr', 'ru', 'ja', 'ko', 'zh']
   .find(c => (navigator.language || 'en').toLowerCase().startsWith(c) && T[c]) || 'en';
-const L = T[LANG];
+// Texts a language does not have yet show in English
+const L = new Proxy(T[LANG], { get: (t, k) => (k in t ? t[k] : T.en[k]) });
 document.documentElement.lang = LANG;
 
 const $ = id => document.getElementById(id);
@@ -523,6 +812,8 @@ async function start() {
     render(s);
     connect();
     routeFromHash();
+    updateBadge();
+    loadSkin();
   } catch (e) {
     showPair(location.search.includes('expired') ? L.expired : '');
   }
@@ -545,7 +836,7 @@ function connect() {
     const msg = JSON.parse(ev.data);
     if (msg.t === 'state') render(msg.d);
     else if (msg.t === 'chat') addChat(msg.d.lines);
-    else if (msg.t === 'settings') settingsChanged(msg.d.key);
+    else if (msg.t === 'settings') { settingsChanged(msg.d.key); if (/^pref_(theme_|skin$|custom_skins$|companion_skin$)/.test(msg.d.key || '')) loadSkin(); }
   };
   ws.onclose = ev => {
     $('offline').hidden = false;
@@ -590,6 +881,12 @@ function render(s) {
   $('layout').value = s.chat_layout || 'side_by_side';
   $('chat-form').hidden = !s.chat_allowed;
   $('chat-off').hidden = !!s.chat_allowed;
+  $('btn-replay').hidden = s.kind !== 'live';
+  const ao = $('btn-audio');
+  ao.hidden = !active;
+  ao.setAttribute('aria-pressed', String(!!s.audio_only));
+  if (active && s.login) rememberChannel(s);
+  paintNowStar();
   $('open-twitch').href = s.login ? `https://www.twitch.tv/${encodeURIComponent(s.login)}` : '#';
 }
 
@@ -606,6 +903,8 @@ function addChat(lines) {
     const div = document.createElement('div');
     div.className = 'msg' + (l.no ? ' notice' : '') + (l.hl ? ' hl' : '');
     div.dataset.id = l.id;
+    if (l.n && !l.no) div.dataset.name = l.n;
+    for (const e of l.e || []) noteEmote((l.x || '').slice(e[0], e[1] + 1), e[2]);
     if (l.r) {
       const r = document.createElement('span');
       r.className = 'r';
@@ -613,6 +912,14 @@ function addChat(lines) {
       div.append(r);
     }
     if (l.n && !l.no) {
+      for (const url of l.b || []) {
+        if (!/^https:\/\//.test(url)) continue;
+        const b = document.createElement('img');
+        b.className = 'b';
+        b.src = url;
+        b.alt = '';
+        div.append(b);
+      }
       const n = document.createElement('span');
       n.className = 'n';
       n.style.color = /^#[0-9A-F]{6}$/i.test(l.c) ? l.c : '';
@@ -654,9 +961,12 @@ function withEmotes(text, emotes) {
 
 $('chat-form').addEventListener('submit', ev => {
   ev.preventDefault();
-  const text = $('chat-input').value.trim();
-  if (text) cmd('chat_message', text);
+  let text = $('chat-input').value.trim();
+  if (text && replyTo && !/^@/.test(text)) text = `@${replyTo} ${text}`;
+  if (text) cmd('chat_message', text.slice(0, 500));
   $('chat-input').value = '';
+  setReply(null);
+  showEmotes(false);
 });
 
 // ---------------------------------------------------------------- find
@@ -671,7 +981,7 @@ function renderCards(items, title) {
     const t = document.createElement('div');
     t.className = 't';
     const name = document.createElement('div');
-    name.textContent = (it.favorite ? '★ ' : '') + (it.name || it.login) + (it.live === false ? ` · ${L.offlineCh}` : '');
+    name.textContent = (it.name || it.login) + (it.live === false ? ` · ${L.offlineCh}` : '');
     name.style.fontWeight = '700';
     const meta = document.createElement('div');
     meta.className = 'muted';
@@ -686,25 +996,60 @@ function renderCards(items, title) {
     b.append(img, t);
     b.addEventListener('click', () => { if (it.login) cmd('watch', it.login); });
     li.append(b);
+    if (it.id && /^[0-9]{1,12}$/.test(it.id)) {
+      li.classList.add('has-star');
+      li.append(starButton(it.id, !!it.favorite));
+    }
     return li;
   }));
 }
 
+// The lists of the TV's channel switcher: the same channels, one tap starts one on the TV
+const LIST_KEYS = { followed: 'listFollowed', same_game: 'listSameGame', same_game_language: 'listSameGameLanguage',
+  history: 'listHistory', top_streams: 'listTopStreams', top_language: 'listTopLanguage' };
+let currentList = 'followed';
+let listEnabled = Object.keys(LIST_KEYS);
+
+function renderListChips() {
+  $('lists').replaceChildren(...listEnabled.filter(n => LIST_KEYS[n]).map(n => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = L[LIST_KEYS[n]];
+    b.setAttribute('aria-pressed', String(n === currentList && !$('search').value.trim()));
+    b.addEventListener('click', () => { $('search').value = ''; currentList = n; loadLive(); });
+    return b;
+  }));
+}
+
 async function loadLive() {
-  try { renderCards((await api('/api/live')).items, L.liveNow); } catch (e) { /* not paired or offline */ }
+  renderListChips();
+  try {
+    const r = await api('/api/lists?name=' + encodeURIComponent(currentList));
+    if (Array.isArray(r.enabled)) { listEnabled = r.enabled; if (!listEnabled.includes(currentList)) currentList = listEnabled[0] || 'followed'; renderListChips(); }
+    renderCards(r.items || [], L[LIST_KEYS[currentList]] || L.liveNow);
+    let empty = $('cards-empty');
+    if (!empty) { empty = document.createElement('p'); empty.id = 'cards-empty'; empty.className = 'muted'; $('cards').after(empty); }
+    const needsPlaying = (currentList === 'same_game' || currentList === 'same_game_language') && !r.playing;
+    empty.textContent = (r.items || []).length ? '' : (needsPlaying ? L.listNeedsPlaying : L.listEmpty);
+  } catch (e) { /* not paired or offline */ }
 }
 
 $('search-form').addEventListener('submit', async ev => {
   ev.preventDefault();
   const q = $('search').value.trim();
   if (!q) { loadLive(); return; }
-  try { renderCards((await api('/api/search?q=' + encodeURIComponent(q))).items, L.results); } catch (e) { /* ignore */ }
+  try {
+    renderCards((await api('/api/search?q=' + encodeURIComponent(q))).items, L.results);
+    renderListChips();
+    const e = $('cards-empty');
+    if (e) e.textContent = '';
+  } catch (e) { /* ignore */ }
 });
 
 // ---------------------------------------------------------------- tabs, deep links and controls
 // Every tab and settings group has its own address: #remote, #chat, #find, #player, #settings,
 // #settings/<group key>, #settings/pinned (bookmarkable, like Glasshouse's ?tab=…)
-const TABS = ['remote', 'chat', 'find', 'player', 'settings', 'log'];
+const TABS = ['remote', 'chat', 'find', 'player', 'update', 'settings', 'log'];
 let currentTab = 'remote';
 
 function showTab(name, updateHash) {
@@ -718,6 +1063,7 @@ function showTab(name, updateHash) {
   if (name === 'find') loadLive();
   if (name === 'settings') loadSettings();
   if (name === 'log') logStart(); else logStop();
+  if (name === 'update') updateStart(); else updateStop();
   if (updateHash !== false) setHash();
 }
 
@@ -911,7 +1257,7 @@ function renderSettings() {
 }
 
 // ---------------------------------------------------------------- MQTT connection card
-const MQTT_GROUPS = { pref_mqtt_entities_info: 'info', pref_mqtt_entities_avatar: 'avatar', pref_mqtt_entities_preview: 'preview', pref_mqtt_entities_events: 'events', pref_mqtt_commands: 'controls' };
+const MQTT_GROUPS = { pref_mqtt_entities_info: 'info', pref_mqtt_entities_avatar: 'avatar', pref_mqtt_entities_preview: 'preview', pref_mqtt_entities_events: 'events', pref_mqtt_entities_followed: 'followed', pref_mqtt_commands: 'controls' };
 let mqttTimer = null;
 
 function mqttCard() {
@@ -1173,7 +1519,7 @@ function renderEntry(e) {
   head.className = 'set-head';
   const title = document.createElement(e.type === 'action' ? 'span' : 'label');
   title.className = 'set-title';
-  title.textContent = e.title;
+  title.textContent = e.place ? `${e.place}. ${e.title}` : e.title;
   if (e.type !== 'action') title.htmlFor = id;
   head.append(title);
   if (e.key && e.type !== 'action') head.append(pinButton(e));
@@ -1250,7 +1596,7 @@ function renderEntry(e) {
   } else if (e.run) {
     control = document.createElement('button');
     control.type = 'button';
-    control.textContent = L.run;
+    control.textContent = e.place ? L.moveUp : L.run;
     control.addEventListener('click', () => runAction(e, row));
   }
   if (control) {
@@ -1474,8 +1820,13 @@ async function save(e, value, row, control) {
 async function runAction(e, row) {
   try {
     const res = await postJson('/api/settings/action', { key: e.key });
-    if (res.ok) flash(row, res.message ? `${L.status}: ${res.message}` : L.done);
-    else flash(row, res.error === 'no_screen' ? L.noScreen : L.tvOnly, true);
+    if (res.ok) {
+      flash(row, res.message ? `${L.status}: ${res.message}` : L.done);
+      // The home rows list is sorted by place: load it again
+      if (e.place || e.key === 'pref_row_order_reset') setTimeout(loadSettings, 300);
+    } else {
+      flash(row, res.error === 'no_screen' ? L.noScreen : L.tvOnly, true);
+    }
   } catch (err) { flash(row, L.offline, true); }
 }
 
@@ -1797,3 +2148,380 @@ $('log-export').addEventListener('click', () => {
 });
 
 start();
+
+
+// ---------------------------------------------------------------- remote: touchpad, audio only, recent channels
+const buzz = ms => { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) { /* not supported */ } };
+
+function setMode(mode) {
+  const pad = mode === 'pad';
+  $('pad').hidden = !pad;
+  $('dpad').hidden = pad;
+  $('mode-pad').setAttribute('aria-pressed', String(pad));
+  $('mode-keys').setAttribute('aria-pressed', String(!pad));
+  store('shrugtv.remote', JSON.stringify(mode));
+}
+$('mode-pad').addEventListener('click', () => setMode('pad'));
+$('mode-keys').addEventListener('click', () => setMode('keys'));
+setMode(load('shrugtv.remote', matchMedia('(pointer:coarse)').matches ? 'pad' : 'keys') === 'pad' ? 'pad' : 'keys');
+
+(function padInit() {
+  const el = $('pad');
+  const arrow = $('pad-arrow');
+  const STEP = 34; // pixels of dragging per key press, so a long swipe scrolls
+  const pointers = new Map();
+  let most = 0, moved = false, sx = 0, sy = 0, timer = 0;
+  const flash = k => {
+    arrow.textContent = { up: '▲', down: '▼', left: '◀', right: '▶', ok: '●', back: '↩' }[k] || '';
+    arrow.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(() => arrow.classList.remove('show'), 60);
+  };
+  el.addEventListener('pointerdown', ev => {
+    ev.preventDefault();
+    try { el.setPointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
+    pointers.set(ev.pointerId, 1);
+    most = Math.max(most, pointers.size);
+    if (pointers.size === 1) { moved = false; sx = ev.clientX; sy = ev.clientY; }
+    el.classList.add('on');
+  });
+  el.addEventListener('pointermove', ev => {
+    if (!pointers.has(ev.pointerId) || pointers.size !== 1) return;
+    const dx = ev.clientX - sx, dy = ev.clientY - sy;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < STEP) return;
+    moved = true;
+    const k = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+    key(k); flash(k); buzz(8);
+    sx = ev.clientX; sy = ev.clientY;
+  });
+  const up = ev => {
+    if (!pointers.delete(ev.pointerId)) return;
+    if (pointers.size > 0) return;
+    el.classList.remove('on');
+    if (!moved && ev.type === 'pointerup') {
+      const k = most >= 2 ? 'back' : 'ok';
+      key(k); flash(k); buzz(k === 'back' ? 20 : 15);
+    }
+    most = 0;
+  };
+  el.addEventListener('pointerup', up);
+  el.addEventListener('pointercancel', up);
+  el.addEventListener('contextmenu', ev => ev.preventDefault());
+  // Keyboard on a computer: arrows, Enter, Escape while the pad has the focus
+  el.addEventListener('keydown', ev => {
+    const k = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', Enter: 'ok', ' ': 'ok', Escape: 'back' }[ev.key];
+    if (k) { ev.preventDefault(); key(k); flash(k); }
+  });
+})();
+
+$('btn-audio').addEventListener('click', () => { cmd('audio_only', state.audio_only ? 'OFF' : 'ON'); buzz(10); });
+$('btn-replay').addEventListener('click', () => buzz(10));
+for (const b of document.querySelectorAll('.row button, .k')) b.addEventListener('click', () => buzz(8));
+
+// Last channels, kept in this browser
+let lastLogin = null;
+function recentList() {
+  const r = load('shrugtv.recent', []);
+  return Array.isArray(r) ? r : [];
+}
+function rememberChannel(s) {
+  if (s.login === lastLogin) return;
+  lastLogin = s.login;
+  const list = recentList().filter(c => c.login !== s.login);
+  list.unshift({ login: s.login, name: s.channel || s.login, avatar: s.avatar_url || '' });
+  store('shrugtv.recent', list.slice(0, 8));
+  renderRecent();
+}
+function renderRecent() {
+  const list = recentList().filter(c => c.login !== state.login && /^[A-Za-z0-9_]{1,25}$/.test(c.login || ''));
+  $('recent-box').hidden = list.length === 0;
+  $('recent').replaceChildren(...list.map(c => {
+    const b = document.createElement('button');
+    if (/^https:\/\//.test(c.avatar)) { const i = document.createElement('img'); i.alt = ''; i.src = c.avatar; b.append(i); }
+    b.append(document.createTextNode(c.name || c.login));
+    b.addEventListener('click', () => { cmd('watch', c.login); buzz(10); });
+    return b;
+  }));
+}
+renderRecent();
+
+// ---------------------------------------------------------------- stars: favorites
+const favorites = new Map(); // user id -> true/false as last set from here
+function paintStar(b, id, on) {
+  b.textContent = on ? '★' : '☆';
+  b.setAttribute('aria-pressed', String(on));
+  b.setAttribute('aria-label', on ? L.favRemove : L.favAdd);
+  b.title = on ? L.favRemove : L.favAdd;
+}
+async function setFavorite(id, on) {
+  const r = await api('/api/favorite', { method: 'POST', body: JSON.stringify({ id, on }) });
+  if (!r.ok) throw new Error('favorite');
+  favorites.set(id, on);
+}
+function starButton(id, initial) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'star';
+  paintStar(b, id, favorites.has(id) ? favorites.get(id) : initial);
+  b.addEventListener('click', async ev => {
+    ev.stopPropagation();
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    paintStar(b, id, on);
+    buzz(10);
+    try { await setFavorite(id, on); } catch (e) { paintStar(b, id, !on); alert(L.favFailed); }
+  });
+  return b;
+}
+function paintNowStar() {
+  const b = $('now-star');
+  const id = state.user_id;
+  b.hidden = !id;
+  if (id) paintStar(b, id, favorites.has(id) ? favorites.get(id) : !!state.favorite);
+}
+$('now-star').addEventListener('click', async () => {
+  const id = state.user_id;
+  if (!id) return;
+  const on = $('now-star').getAttribute('aria-pressed') !== 'true';
+  paintStar($('now-star'), id, on);
+  buzz(10);
+  try { await setFavorite(id, on); } catch (e) { paintStar($('now-star'), id, !on); alert(L.favFailed); }
+});
+
+// ---------------------------------------------------------------- chat: reply, emotes, quick phrases
+let replyTo = null;
+function setReply(name) {
+  replyTo = name;
+  $('reply-bar').hidden = !name;
+  $('reply-text').textContent = name ? L.replyTo(name) : '';
+  if (name) $('chat-input').focus();
+}
+$('reply-x').addEventListener('click', () => setReply(null));
+$('chat').addEventListener('click', ev => {
+  const msg = ev.target.closest('.msg');
+  if (msg && msg.dataset.name) { setReply(msg.dataset.name); buzz(10); }
+});
+
+// Emotes seen in this chat (name -> image), most recent last
+const seenEmotes = new Map();
+function noteEmote(name, url) {
+  if (!name || name.length > 40 || !/^https:\/\//.test(url)) return;
+  seenEmotes.delete(name);
+  seenEmotes.set(name, url);
+  if (seenEmotes.size > 150) seenEmotes.delete(seenEmotes.keys().next().value);
+  if (!$('emotes').hidden) emoteDirty = true;
+}
+let emoteDirty = false;
+function renderEmotes() {
+  const box = $('emotes');
+  if (seenEmotes.size === 0) {
+    const p = document.createElement('p');
+    p.className = 'muted';
+    p.textContent = L.noEmotes;
+    box.replaceChildren(p);
+    return;
+  }
+  box.replaceChildren(...[...seenEmotes].reverse().map(([name, url]) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.title = name;
+    const i = document.createElement('img');
+    i.src = url;
+    i.alt = name;
+    b.append(i);
+    b.addEventListener('click', () => {
+      const input = $('chat-input');
+      const at = input.selectionStart == null ? input.value.length : input.selectionStart;
+      const before = input.value.slice(0, at), after = input.value.slice(input.selectionEnd == null ? at : input.selectionEnd);
+      const pad = before && !/\s$/.test(before) ? ' ' : '';
+      input.value = (before + pad + name + ' ' + after).slice(0, 500);
+      const pos = (before + pad + name + ' ').length;
+      input.focus();
+      try { input.setSelectionRange(pos, pos); } catch (e) { /* ignore */ }
+      buzz(8);
+    });
+    return b;
+  }));
+}
+function showEmotes(on) {
+  $('emotes').hidden = !on;
+  $('emote-btn').setAttribute('aria-expanded', String(on));
+  if (on) { renderEmotes(); emoteDirty = false; }
+}
+$('emote-btn').addEventListener('click', () => showEmotes($('emotes').hidden));
+setInterval(() => { if (emoteDirty && !$('emotes').hidden) { renderEmotes(); emoteDirty = false; } }, 2000);
+
+const QUICK_DEFAULT = ['GG', 'o/', '❤', 'LUL'];
+function quickList() {
+  const q = load('shrugtv.quick', null);
+  return Array.isArray(q) ? q.filter(t => typeof t === 'string').slice(0, 12) : QUICK_DEFAULT.slice();
+}
+function renderQuick() {
+  const list = quickList();
+  const chips = list.map(text => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = text;
+    let hold = 0, held = false;
+    b.addEventListener('pointerdown', () => { held = false; hold = setTimeout(() => {
+      held = true;
+      if (confirm(L.quickRemove(text))) { store('shrugtv.quick', quickList().filter(t => t !== text)); renderQuick(); }
+    }, 650); });
+    for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) b.addEventListener(ev, () => clearTimeout(hold));
+    b.addEventListener('click', () => { if (!held && state.chat_allowed !== false) { cmd('chat_message', text); buzz(10); } });
+    return b;
+  });
+  const add = document.createElement('button');
+  add.type = 'button';
+  add.className = 'add';
+  add.textContent = '+';
+  add.setAttribute('aria-label', L.quickAdd);
+  add.addEventListener('click', () => {
+    const t = (prompt(L.quickNew) || '').trim().slice(0, 60);
+    if (t && !quickList().includes(t)) { store('shrugtv.quick', quickList().concat(t).slice(0, 12)); renderQuick(); }
+  });
+  $('quick').replaceChildren(...chips, add);
+}
+renderQuick();
+
+// ---------------------------------------------------------------- version and update
+let updTimer = 0;
+let updInfo = null;
+
+function updateStop() { clearInterval(updTimer); updTimer = 0; }
+function updateStart() {
+  updateStop();
+  updateLoad();
+  updTimer = setInterval(() => {
+    const busy = updInfo && (updInfo.checking || ['downloading', 'verifying'].includes(updInfo.install.phase));
+    if (busy || Date.now() % 30000 < 3000) updateLoad();
+  }, 1500);
+}
+async function updateLoad() {
+  try { updInfo = await api('/api/update'); } catch (e) { return; }
+  updateRender();
+}
+async function updatePost(path) {
+  try {
+    updInfo = await api(path, { method: 'POST', body: '{}' });
+    updateRender();
+  } catch (e) { /* offline or not paired */ }
+}
+
+function fmtTime(ms) {
+  if (!ms) return L.verNever;
+  const d = new Date(ms);
+  return d.toLocaleString(LANG, { dateStyle: 'medium', timeStyle: 'short' });
+}
+function mk(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+function fact(dl, k, v) { dl.append(mk('dt', null, k), mk('dd', null, v)); }
+
+function updateRender() {
+  const u = updInfo;
+  if (!u) return;
+  document.querySelector('[data-tab=update] .new-dot').hidden = u.status !== 'available';
+
+  const cur = mk('div', 'card');
+  cur.append(mk('h2', null, L.verInstalled), mk('div', 'ver', 'ShrugTV ' + u.version));
+  const dl = mk('dl', 'facts');
+  fact(dl, L.verEdition, u.edition === 'public' ? L.verEditionPublic : L.verEditionPrivate);
+  fact(dl, L.verDevice, u.device || '?');
+  fact(dl, L.verAndroid, u.android || '?');
+  if (u.check_supported) fact(dl, L.verLastCheck, fmtTime(u.last_check));
+  cur.append(dl);
+
+  const box = mk('div', 'card' + (u.status === 'available' ? ' hot' : ''));
+  const btns = mk('div', 'btns');
+  const inst = u.install || {};
+  if (u.status === 'unsupported') {
+    box.append(mk('p', 'muted', L.verUnsupported));
+  } else {
+    if (u.status === 'available') {
+      box.append(mk('h2', null, L.verAvailable(u.latest.version)));
+      if (u.latest.notes) { box.append(mk('div', 'muted', L.verNotes), mk('p', 'notes', u.latest.notes)); }
+    } else {
+      box.append(mk('div', 'stat', (u.status === 'current' ? '✓ ' : '') + (u.status === 'current' ? L.verCurrent : L.verUnknown)));
+    }
+    if (u.checking) box.append(mk('p', 'muted', L.verChecking));
+    const working = ['downloading', 'verifying'].includes(inst.phase);
+    if (inst.phase === 'downloading') {
+      box.append(mk('p', 'stat', L.verDownloading(inst.percent)));
+      const bar = mk('div', 'bar'); const i = mk('i'); i.style.width = inst.percent + '%'; bar.append(i); box.append(bar);
+    } else if (inst.phase === 'verifying') {
+      box.append(mk('p', 'stat', L.verVerifying));
+    } else if (inst.phase === 'error') {
+      const known = L.verErrors[inst.message];
+      box.append(mk('p', 'error', known || inst.message));
+    }
+    const check = mk('button', null, u.checking ? L.verChecking : L.verCheck);
+    check.type = 'button';
+    check.disabled = !!u.checking || working;
+    check.addEventListener('click', () => updatePost('/api/update/check'));
+    if (u.status === 'available' && u.install_enabled && u.latest.installable) {
+      const go = mk('button', 'primary', L.verInstall);
+      go.type = 'button';
+      go.disabled = working;
+      go.addEventListener('click', () => { if (confirm(L.verInstallConfirm(u.latest.version))) updatePost('/api/update/install'); });
+      btns.append(go);
+    }
+    btns.append(check);
+    if (u.status === 'available' && /^https:\/\//.test(u.latest.url || '')) {
+      const a = mk('a', 'btn', L.verRelease);
+      a.href = u.latest.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      btns.append(a);
+    }
+    box.append(btns);
+    if (u.status === 'available' && u.install_supported && !u.install_enabled) box.append(mk('p', 'muted', L.verInstallOff));
+    if (!u.check_enabled) box.append(mk('p', 'muted', L.verAutoOff));
+  }
+  const home = mk('div', 'card install-hint');
+  home.append(mk('h2', null, L.homeTitle), mk('div', 'muted', L.homeHint));
+  const ol = mk('ol');
+  ol.append(mk('li', null, L.homeIos), mk('li', null, L.homeAndroid));
+  home.append(ol);
+  $('upd').replaceChildren(cur, box, home);
+}
+
+// The red dot on the tab: asked once at the start (the TV answers from its last check, no network call)
+function updateBadge() { api('/api/update').then(u => { updInfo = u; updateRender(); }).catch(() => {}); }
+
+
+// ---------------------------------------------------------------- skin of the TV on this page
+const SKIN_VARS = ['--bg', '--surface', '--surface2', '--text', '--muted', '--accent', '--accent2', '--live', '--on-accent', '--focus', '--on-focus',
+  '--border', '--press', '--placeholder', '--line', '--switch-off', '--tip-bg', '--tip-text', '--hl', '--behind', '--deleted'];
+const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, t) => { const x = rgb(a), y = rgb(b); return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
+const alpha = (h, t) => `rgba(${rgb(h).join(',')},${t})`;
+let skinOn = false;
+
+function applySkin(s) {
+  const root = document.documentElement;
+  const valid = s && s.on && s.colors && Object.values(s.colors).every(v => /^#[0-9A-F]{6}$/i.test(v));
+  skinOn = !!valid;
+  $('theme').hidden = skinOn;
+  if (!valid) {
+    for (const v of SKIN_VARS) root.style.removeProperty(v);
+    let t = 'dark';
+    try { if (localStorage.getItem('shrugtv.theme') === 'light') t = 'light'; } catch (e) { /* private mode */ }
+    applyTheme(t);
+    return;
+  }
+  const c = s.colors;
+  const set = {
+    '--bg': c.background, '--surface': c.surface, '--surface2': c.surfaceHigh, '--text': c.text, '--muted': c.textMuted,
+    '--accent': c.accent, '--accent2': c.accentLight, '--live': c.live, '--on-accent': c.onAccent, '--focus': c.text, '--on-focus': c.background,
+    '--border': mix(c.surfaceHigh, c.text, 0.12), '--press': mix(c.surfaceHigh, c.text, 0.12), '--placeholder': c.surfaceHigh,
+    '--line': mix(c.surface, c.text, 0.10), '--switch-off': mix(c.surfaceHigh, c.text, 0.22), '--tip-bg': alpha(c.accent, 0.14),
+    '--tip-text': c.accentLight, '--hl': alpha(c.accent, 0.2), '--behind': mix(c.surfaceHigh, c.text, 0.3), '--deleted': c.textMuted
+  };
+  for (const [k, v] of Object.entries(set)) root.style.setProperty(k, v);
+  root.dataset.theme = s.dark ? 'dark' : 'light';
+  document.querySelector('meta[name=theme-color]').content = c.background;
+}
+async function loadSkin() {
+  try { applySkin(await api('/api/theme')); } catch (e) { /* offline or not paired */ }
+}

@@ -16,7 +16,9 @@ data class WatchSessionData(
     /** Local date of the start, `yyyy-MM-dd`. */
     val day: String,
     /** Local hour of the start, 0-23. */
-    val hour: Int
+    val hour: Int,
+    /** A clip (also [isVod]); counted on its own and from [WatchSessionTracker.MIN_CLIP_SECONDS] on. */
+    val isClip: Boolean = false
 )
 
 /**
@@ -36,7 +38,7 @@ class WatchSessionTracker(
     private val save: (WatchSessionData) -> Unit,
     private val zone: () -> ZoneId = { ZoneId.systemDefault() }
 ) {
-    private class Open(val start: WatchSessionData) {
+    private class Open(var start: WatchSessionData) {
         var playedMs = 0L
         var playingSince = -1L
     }
@@ -44,7 +46,7 @@ class WatchSessionTracker(
     private var open: Open? = null
 
     /** Starts a session; an open one ends first. Nothing is recorded while the switch is off. */
-    fun start(channelId: Int, login: String, channelName: String, category: String, isVod: Boolean, playingNow: Boolean) {
+    fun start(channelId: Int, login: String, channelName: String, category: String, isVod: Boolean, playingNow: Boolean, isClip: Boolean = false) {
         stop()
         if (!enabled()) return
         val at = epochMs()
@@ -52,9 +54,20 @@ class WatchSessionTracker(
         open = Open(
             WatchSessionData(
                 id = at, channelId = channelId, login = login, channelName = channelName, category = category,
-                isVod = isVod, playedSec = 0, day = local.toLocalDate().toString(), hour = local.hour
+                isVod = isVod, playedSec = 0, day = local.toLocalDate().toString(), hour = local.hour, isClip = isClip
             )
         ).also { if (playingNow) it.playingSince = elapsedMs() }
+    }
+
+    /** The channel of the running session became known later (a clip opened by link); only fills in what was empty. */
+    fun updateChannel(channelId: Int, login: String, channelName: String) {
+        val s = open ?: return
+        val d = s.start
+        s.start = d.copy(
+            channelId = if (d.channelId > 0) d.channelId else channelId,
+            login = d.login.ifBlank { login },
+            channelName = d.channelName.ifBlank { channelName }
+        )
     }
 
     /** The player started or stopped playing. */
@@ -74,7 +87,7 @@ class WatchSessionTracker(
         val s = open ?: return
         if (!enabled()) return
         val sec = playedSec(s)
-        if (sec >= MIN_SECONDS) save(s.start.copy(playedSec = sec))
+        if (sec >= minSeconds(s.start)) save(s.start.copy(playedSec = sec))
     }
 
     /** Ends the session and writes it if it is long enough. */
@@ -83,8 +96,11 @@ class WatchSessionTracker(
         open = null
         if (!enabled()) return
         val sec = playedSec(s)
-        if (sec >= MIN_SECONDS) save(s.start.copy(playedSec = sec))
+        if (sec >= minSeconds(s.start)) save(s.start.copy(playedSec = sec))
     }
+
+    /** A clip lasts seconds, so it counts much sooner than a stretch of a stream. */
+    private fun minSeconds(d: WatchSessionData) = if (d.isClip) MIN_CLIP_SECONDS else MIN_SECONDS
 
     private fun playedSec(s: Open): Long {
         val running = if (s.playingSince >= 0) elapsedMs() - s.playingSince else 0L
@@ -94,6 +110,9 @@ class WatchSessionTracker(
     companion object {
         /** Shorter sessions do not count (decided 2026-11-04). */
         const val MIN_SECONDS = 60L
+
+        /** A clip counts after this many seconds of watching. */
+        const val MIN_CLIP_SECONDS = 5L
         const val CHECKPOINT_MS = 60_000L
     }
 }

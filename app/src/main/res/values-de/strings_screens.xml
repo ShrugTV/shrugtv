@@ -45,9 +45,9 @@
     <string name="settings_developer_mode_off">Entwicklermodus aus</string>
 
     <!-- Channel page -->
-    <string name="channel_past_broadcasts">Vergangene Übertragungen</string>
+    <string name="channel_past_broadcasts">Frühere Streams</string>
     <string name="channel_highlights">Highlights</string>
-    <string name="channel_uploads">Hochgeladen</string>
+    <string name="channel_uploads">Uploads</string>
     <string name="channel_clips">Beliebte Clips (7 Tage)</string>
     <plurals name="channel_viewers">
         <item quantity="one">%1$,d Zuschauer</item>
@@ -89,16 +89,16 @@
     <string name="settings_pref_select_language">Sprache wählen</string>
     <string name="settings_pref_live_history">Live-Verlauf</string>
     <string name="settings_pref_watch_stats_category">Statistik</string>
-    <string name="settings_pref_watch_stats">Schaustatistik aufzeichnen</string>
+    <string name="settings_pref_watch_stats">Watchtime-Statistik aufzeichnen</string>
     <string name="settings_pref_watch_stats_card">Rückblick zum Monatsanfang</string>
     <string name="settings_pref_watch_stats_card_summary">In den ersten Tagen eines Monats zeigt die Startseite einmal eine Karte mit deinen letzten 30 Tagen.</string>
-    <string name="settings_pref_watch_stats_summary">Zählt, welche Kanäle du wie lange schaust, nur auf diesem Gerät und nicht in Sicherungen. Der Knopf „Statistik“ auf der Startseite zeigt es, dort wird auch gelöscht. Eine Sitzung zählt ab einer Minute.</string>
+    <string name="settings_pref_watch_stats_summary">Zählt, welche Kanäle du wie lange schaust, nur auf diesem Gerät und nicht in Backups. Der Button „Statistik“ auf der Startseite zeigt es, dort wird auch gelöscht. Eine Sitzung zählt ab einer Minute.</string>
     <string name="settings_pref_start_last_channel">Beim Start den letzten Kanal öffnen</string>
     <string name="settings_pref_start_last_channel_summary">Beim Start der App öffnet sich gleich der Stream, den du zuletzt geschaut hast, wenn er live ist; sonst landest du auf der Startseite. „Zurück“ aus dem Player führt auf die Startseite. Gemerkt werden nur Streams, die du bei eingeschalteter Einstellung startest, nur auf diesem Gerät.</string>
     <string name="settings_pref_followed">Gefolgt</string>
     <string name="settings_pref_followed_games">Gefolgte Kategorien</string>
     <string name="settings_pref_followed_channels">Gefolgte Kanäle</string>
-    <string name="settings_pref_past_broadcasts">Vergangene Übertragungen</string>
+    <string name="settings_pref_past_broadcasts">Frühere Streams</string>
     <string name="settings_pref_vod_history_row">VOD-Verlauf</string>
     <string name="settings_pref_top_games">Top-Kategorien</string>
     <string name="settings_pref_top_streamers">Top-Streamer</string>
@@ -130,8 +130,8 @@
     <string name="settings_pref_side_by_side">Video und Chat standardmäßig nebeneinander</string>
     <string name="settings_pref_side_by_side_on">Chat-Overlay ist dann nicht verfügbar</string>
     <string name="settings_pref_side_by_side_scale">Skalierung bei Video und Chat nebeneinander</string>
-    <string name="settings_pref_hide_bottom_buttons">Steuerknöpfe beim Start des Streams ausblenden</string>
-    <string name="settings_pref_show_tooltips">Hinweise an den Steuerknöpfen zeigen</string>
+    <string name="settings_pref_hide_bottom_buttons">Steuer-Buttons beim Start des Streams ausblenden</string>
+    <string name="settings_pref_show_tooltips">Hinweise an den Steuer-Buttons zeigen</string>
     <string name="settings_pref_keep_screen_on">Bildschirm anlassen</string>
     <string name="settings_pref_stream_navigation_summary">Zwischen Streams wechseln mit den Pfeiltasten links und rechts</string>
     <string name="settings_pref_navigation_cards">Vorschaukarten beim Streamwechsel zeigen</string>
@@ -541,21 +541,21 @@
     <string name="settings_player_info_corner">Kanal-Infos oben links</string>
     <string name="settings_player_info_corner_summary">Profilbild, Zuschauer, Laufzeit, Kategorie und Titel, solange die Steuerleiste offen ist</string>
     <string name="settings_player_bar_labels">Namen in der Steuerleiste</string>
-    <string name="settings_player_bar_labels_highlighted">Nur unter dem markierten Knopf (mehr Knöpfe passen hin)</string>
-    <string name="settings_player_bar_labels_all">Unter jedem Knopf</string>
+    <string name="settings_player_bar_labels_highlighted">Nur unter dem markierten Button (mehr Buttons passen hin)</string>
+    <string name="settings_player_bar_labels_all">Unter jedem Button</string>
     <string name="settings_switcher_screen">Kanalwechsler</string>
     <string name="settings_switcher_screen_summary">Welche Listen Hoch/Runter durchschaltet</string>
     <string name="settings_switcher_category">Listen</string>
     <string name="settings_switcher_tip">Hoch im Player öffnet den Kanalwechsler. Ist „Hoch/Runter wechselt die Kanalliste“ an, zeigt jedes weitere Hoch die nächste Liste und Runter die vorherige; Runter in der ersten Liste schließt ihn. Schalte Listen aus, die du nie brauchst: Sie werden übersprungen. Sind alle aus, bleibt „Gefolgt“. Gilt ab dem nächsten Öffnen des Kanalwechslers.</string>
     <string name="settings_switcher_updown">Hoch/Runter wechselt die Kanalliste</string>
-    <string name="settings_switcher_updown_summary">Im Kanalwechsler zeigt Hoch die nächste Liste (Gefolgt, Gleiche Kategorie, Gleiche Kategorie in deiner Sprache, Zuletzt geschaut, Top-Streams, Top in deiner Sprache) und Runter die vorherige; Links/Rechts blättern in den Karten. Aus: die Listen sind Knöpfe</string>
+    <string name="settings_switcher_updown_summary">Im Kanalwechsler zeigt Hoch die nächste Liste (Gefolgt, Gleiche Kategorie, Gleiche Kategorie in deiner Sprache, Zuletzt geschaut, Top-Streams, Top in deiner Sprache) und Runter die vorherige; Links/Rechts blättern in den Karten. Aus: die Listen sind Buttons</string>
     <string name="settings_player_back_to_live">„Zurück zu Live“ anbieten</string>
-    <string name="settings_player_audio_only_screen">Dunkles Bild bei „Nur Ton“</string>
+    <string name="settings_player_audio_only_screen">Dunkles Bild bei „Nur Audio“</string>
     <string name="settings_player_audio_only_screen_summary">Bei der Qualität „Nur Audio“ (oder der gelben Taste) ersetzt ein schwarzes Bild mit Uhr, Kanal und Titel das Video; es wandert jede Minute. Aus: schlicht schwarz</string>
     <string name="settings_player_burn_in">Einbrennschutz</string>
     <string name="settings_player_burn_in_summary">Uhr, Chat und Infoecke wandern langsam um wenige Pixel (für OLED-Fernseher)</string>
-    <string name="settings_player_rest_after">Ruhebild nach einer Pause</string>
-    <string name="settings_player_burn_in_tip">Nur Ton: im Qualitätsmenü „Nur Audio“ wählen oder die gelbe Taste drücken; OK bringt das Bild zurück, der Chat bleibt nutzbar. Ruhebild: nach langer Pause wird das Bild dunkel, Uhr und Kanal wechseln den Platz; jede Taste geht weiter.</string>
+    <string name="settings_player_rest_after">Bildschirmschoner nach einer Pause</string>
+    <string name="settings_player_burn_in_tip">Nur Audio: im Qualitätsmenü „Nur Audio“ wählen oder die gelbe Taste drücken; OK bringt das Bild zurück, der Chat bleibt nutzbar. Bildschirmschoner: nach langer Pause wird das Bild dunkel, Uhr und Kanal wechseln den Platz; jede Taste geht weiter.</string>
     <string-array name="display_player_rest_after">
         <item>Nie</item>
         <item>Nach 5 Minuten</item>
@@ -564,15 +564,15 @@
     </string-array>
     <string name="settings_player_live_rewind">Live-Streams zurückspulen (Aufzeichnung)</string>
     <string name="settings_player_self_heal">Hängenden Stream neu laden</string>
-    <string name="settings_player_self_heal_summary">Puffert das Bild 10 Sekunden lang oder steht es still, obwohl es laufen soll, wird der Stream neu geladen (live am Live-Rand, Aufzeichnungen an derselben Stelle), höchstens dreimal; danach erscheint der Fehler. Werbepausen zählen nicht.</string>
-    <string name="settings_player_live_rewind_summary">Hoch in der Steuerleiste wählt einen Zeitstrahl ab Streamstart an; links/rechts darauf springt in die Aufzeichnung, die Twitch während der Sendung anlegt, mit Chat und Kategorien. „Live“ führt zurück. Aus: nur das kurze Live-Fenster lässt sich zurückspulen.</string>
-    <string name="settings_player_back_to_live_summary">Mehr als 30 s hinter dem Live-Rand (z. B. nach einer Pause): graues LIVE mit Rückstand und ein „Live“-Knopf in der Steuerleiste</string>
+    <string name="settings_player_self_heal_summary">Puffert das Bild 10 Sekunden lang oder steht es still, obwohl es laufen soll, wird der Stream neu geladen (live am aktuellen Stand, Aufzeichnungen an derselben Stelle), höchstens dreimal; danach erscheint der Fehler. Werbepausen zählen nicht.</string>
+    <string name="settings_player_live_rewind_summary">Hoch in der Steuerleiste wählt eine Zeitleiste ab Streamstart an; links/rechts darauf springt in die Aufzeichnung, die Twitch während der Sendung anlegt, mit Chat und Kategorien. „Live“ führt zurück. Aus: nur das kurze Live-Fenster lässt sich zurückspulen.</string>
+    <string name="settings_player_back_to_live_summary">Mehr als 30 s hinter Live (z. B. nach einer Pause): graues LIVE mit Rückstand und ein „Live“-Button in der Steuerleiste</string>
     <string name="settings_player_end_of_stream">Wenn ein Live-Stream endet</string>
     <string name="settings_player_end_countdown">Nach 15 s zum nächsten gefolgten Live-Kanal wechseln</string>
     <string name="settings_player_end_suggest">Nächsten Kanal nur vorschlagen (OK wechselt)</string>
     <string name="settings_player_end_off">Nichts tun</string>
     <string name="settings_player_raid_summary">Raidet der Kanal einen anderen, bietet eine Karte an mitzugehen: OK geht mit, Zurück bleibt</string>
-    <string name="settings_chat_layout_tip">Wo der Chat steht, stellst du unter Chat → Layout → „Chat-Layout“ ein: neben dem Video (nichts wird verdeckt), über dem Video oder transparent. Im Player schaltet der Knopf „Chat-Layout“ in der Leiste mit einem Druck zwischen neben dem Video und über dem Video um; „Mehr“ → „Chat anpassen“ ändert Layout, Breite und Seite direkt mit ◀ ▶.</string>
+    <string name="settings_chat_layout_tip">Wo der Chat steht, stellst du unter Chat → Layout → „Chat-Layout“ ein: neben dem Video (nichts wird verdeckt), über dem Video oder transparent. Im Player schaltet der Button „Chat-Layout“ in der Leiste mit einem Druck zwischen neben dem Video und über dem Video um; „Mehr“ → „Chat anpassen“ ändert Layout, Breite und Seite direkt mit ◀ ▶.</string>
     <string name="settings_chat_highlight_tip">Wörter oder Nutzernamen mit Komma trennen, Groß-/Kleinschreibung egal. Wörter bekommen einen Hintergrund, Nachrichten dieser Nutzer (und von Streamer, Moderatoren oder VIPs, wenn eingeschaltet) einen Streifen links und einen leichten Hintergrund, alles in der Farbe der Hervorhebung. Erwähnungen deines eigenen Namens werden immer markiert.</string>
     <string name="settings_mqtt_category">Home Assistant (MQTT)</string>
     <string name="settings_mqtt_connection_category">Verbindung</string>
@@ -609,6 +609,8 @@
     <string name="settings_mqtt_entities_avatar_summary">Profilbild des Kanals, der gerade läuft</string>
     <string name="settings_mqtt_entities_preview">Stream-Vorschau</string>
     <string name="settings_mqtt_entities_preview_summary">Ausschnitt aus dem Stream, Twitch aktualisiert ihn alle paar Minuten</string>
+    <string name="settings_mqtt_entities_followed">Gefolgte Kanäle</string>
+    <string name="settings_mqtt_entities_followed_summary">Zwei Sensoren mit den Kanälen, denen du folgst, und wer live ist (Titel, Spiel, Zuschauer) als Attribute, für ein dynamisches Dashboard; das Topic wird jede Minute aktualisiert, solange die App offen ist</string>
     <string name="settings_mqtt_entities_events">Ereignisse</string>
     <string name="settings_mqtt_entities_events_summary">Raid, Stream beendet, gefolgter Kanal live, Werbepause – für Automationen</string>
     <string-array name="settings_mqtt_interval_names">
@@ -618,14 +620,16 @@
         <item>5 Minuten</item>
     </string-array>
     <string name="settings_companion_category">Handy &amp; Browser</string>
-    <string name="settings_companion_tip">Das Handy als Fernbedienung und Tastatur, ohne App: 1. Einschalten. 2. „Handy verbinden“ wählen (oder „Handy“ im Mehr-Menü des Players) und den QR-Code mit einem Handy im selben WLAN scannen. 3. Auf dem Handy: sehen, was läuft, den TV steuern, den Chat lesen und mit der Handytastatur schreiben, Kanäle suchen und an den TV schicken. 4. Am Computer: die beim QR-Code angezeigte Adresse im Browser öffnen und die PIN eingeben; im Reiter „Einstellungen“ lassen sich dort alle Einstellungen dieser App mit Maus und Tastatur ändern: Gruppen in der Seitenleiste, Suche mit / oder Strg+K, ☆ heftet eine Einstellung an, jede Gruppe hat eine eigene Adresse für Lesezeichen, Sicherung in eine Datei (ohne MQTT und Companion, die gehören zu diesem TV), hell oder dunkel. 5. Reiter „Log“: was ShrugTV gerade tut, live; nach Stufe und Quelle filtern, suchen, Zeile anklicken für Details, kopieren oder für einen Fehlerbericht sichern. Gekoppelte Geräte werden gemerkt und verbinden sich ohne Code wieder (Liste unter „Verbundene Geräte“). Nur im Heimnetz, nur solange ShrugTV offen ist.</string>
-    <string name="settings_companion_enabled">Handy-Begleiter</string>
+    <string name="settings_companion_tip">Das Handy als Fernbedienung und Tastatur, ohne App: 1. Einschalten. 2. „Handy verbinden“ wählen (oder „Handy“ im Mehr-Menü des Players) und den QR-Code mit einem Handy im selben WLAN scannen. 3. Auf dem Handy: sehen, was läuft, den TV steuern, den Chat lesen und mit der Handytastatur schreiben, Kanäle suchen und an den TV schicken. 4. Am Computer: die beim QR-Code angezeigte Adresse im Browser öffnen und die PIN eingeben; im Reiter „Einstellungen“ lassen sich dort alle Einstellungen dieser App mit Maus und Tastatur ändern: Gruppen in der Seitenleiste, Suche mit / oder Strg+K, ☆ heftet eine Einstellung an, jede Gruppe hat eine eigene Adresse für Lesezeichen, Backup in eine Datei (ohne MQTT und Companion, die gehören zu diesem TV), hell oder dunkel. 5. Reiter „Log“: was ShrugTV gerade tut, live; nach Stufe und Quelle filtern, suchen, Zeile anklicken für Details, kopieren oder für einen Fehlerbericht sichern. Gekoppelte Geräte werden gemerkt und verbinden sich ohne Code wieder (Liste unter „Verbundene Geräte“). Nur im Heimnetz, nur solange ShrugTV offen ist.</string>
+    <string name="settings_companion_enabled">Handy &amp; Browser</string>
     <string name="settings_companion_pair">Handy verbinden</string>
     <string name="settings_companion_pair_summary">Zeigt einen QR-Code und eine PIN für das Handy</string>
     <string name="settings_companion_chat">Chat vom Handy erlauben</string>
     <string name="settings_companion_chat_summary">Nachrichten gehen über das Twitch-Konto dieses TVs</string>
     <string name="settings_companion_settings">Einstellungen vom Browser erlauben</string>
     <string name="settings_companion_settings_summary">Verbundene Handys und Computer können alle Einstellungen dieser App ändern</string>
+    <string name="settings_companion_skin">TV-Skin auf der Handy-Seite</string>
+    <string name="settings_companion_skin_summary">Die Seite für Handy und Browser trägt die Farben des Skins vom Fernseher und folgt, wenn du ihn änderst; aus: die Seite behält ihr eigenes dunkles oder helles Aussehen</string>
     <string name="settings_companion_log">Log im Browser</string>
     <string name="settings_companion_log_summary">Reiter „Log“: das eigene Log von ShrugTV, live, mit Filtern, Suche und Export für Fehlerberichte. Tokens und Passwörter werden immer entfernt.</string>
     <string name="settings_companion_disconnect">Alle Geräte vergessen</string>
@@ -644,7 +648,7 @@
     <string name="settings_chat_look_tip">Macht den Chat vom Sofa aus besser lesbar (wie die 7TV-Browsererweiterung): Namensfarben (wie gewählt, lesbar gemacht oder alle in der Akzentfarbe), abwechselnder Zeilenhintergrund, eine dünne Linie zwischen den Nachrichten, kompakter Abstand für mehr Nachrichten auf dem Schirm und Badges an oder aus. Gilt ab dem nächsten geöffneten Kanal.</string>
     <string name="settings_clock_summary">Zeigt die Uhrzeit oben rechts, solange die Leiste des Players offen ist. Format und Datum darunter; die Weltuhren haben noch keine Wirkung.</string>
     <string name="settings_vod_chapters">VOD-Kategorien</string>
-    <string name="settings_vod_chapters_summary">Markiert die Kategorien (Spiele) einer Aufzeichnung im Zeitstrahl und bietet Knöpfe und Tasten (Kanal hoch/runter, Weiter/Zurück), um zur nächsten oder vorigen zu springen. Wiederholtes Links/Rechts springt in wachsenden Schritten.</string>
+    <string name="settings_vod_chapters_summary">Markiert die Kategorien (Spiele) einer Aufzeichnung auf der Zeitleiste und bietet Buttons und Tasten (Kanal hoch/runter, Weiter/Zurück), um zur nächsten oder vorigen zu springen. Wiederholtes Links/Rechts springt in wachsenden Schritten.</string>
     <string name="settings_chat_vod_chat">Chat bei Aufzeichnungen</string>
     <string name="settings_chat_vod_chat_summary">Zeigt beim Abspielen einer Aufzeichnung (VOD) den Chat von damals, im Takt mit dem Bild. Nur lesen.</string>
     <string name="settings_chat_alternate">Abwechselnde Zeilen</string>
@@ -690,7 +694,7 @@
         <item>Grün</item>
         <item>Blau</item>
     </string-array>
-    <string name="settings_pref_theme_accent_summary">Farbe für Fokus, Fortschritt, Knöpfe und Hervorhebungen im Chat. OK öffnet die Auswahl: 30 Farben, Feinjustieren mit Links/Rechts oder ein Farbcode.</string>
+    <string name="settings_pref_theme_accent_summary">Farbe für Fokus, Fortschritt, Buttons und Hervorhebungen im Chat. OK öffnet die Auswahl: 30 Farben, Feinjustieren mit Links/Rechts oder ein Farbcode.</string>
     <string-array name="display_splash_style">
         <item>Logo, Name und Begrüßung</item>
         <item>Nur Logo</item>
@@ -837,7 +841,7 @@
     <string name="update_later">Später</string>
     <string name="update_skip">Diese Version überspringen</string>
     <string name="settings_update_install">Updates in der App installieren</string>
-    <string name="settings_update_install_summary">Fügt der Update-Karte den Knopf „Jetzt installieren“ hinzu: Die App lädt die neue Version von GitHub, prüft sie und öffnet den Installer des Systems, wo du bestätigst. Braucht die Systemfreigabe „Unbekannte Apps installieren“ für ShrugTV. Standardmäßig aus.</string>
+    <string name="settings_update_install_summary">Fügt der Update-Karte den Button „Jetzt installieren“ hinzu: Die App lädt die neue Version von GitHub, prüft sie und öffnet den Installer des Systems, wo du bestätigst. Braucht die Systemfreigabe „Unbekannte Apps installieren“ für ShrugTV. Standardmäßig aus.</string>
     <string name="update_install">Jetzt installieren</string>
     <string name="update_downloading">Lade herunter … %1$d %%</string>
     <string name="update_verifying">Prüfe den Download …</string>
@@ -849,9 +853,9 @@
     <string name="update_download_failed">Download fehlgeschlagen, versuche es später noch einmal</string>
     <string name="update_up_to_date">ShrugTV ist auf dem neuesten Stand</string>
     <string name="update_failed">Update-Prüfung nicht möglich, versuche es später noch einmal</string>
-    <string name="settings_clear_caches">Zwischenspeicher leeren</string>
+    <string name="settings_clear_caches">Cache leeren</string>
     <string name="settings_clear_caches_summary">Löscht gespeicherte Bilder, Emote-Bilder und die gespeicherte Startseite; sie laden bei Bedarf neu</string>
-    <string name="settings_caches_cleared">Zwischenspeicher geleert</string>
+    <string name="settings_caches_cleared">Cache geleert</string>
     <string-array name="display_chat_text_shadow">
         <item>Automatisch (nur bei transparentem Chat)</item>
         <item>Immer</item>
@@ -882,11 +886,11 @@
     <string name="theme_text_muted">Nebentext</string>
     <string name="theme_text_muted_summary">Beschreibungen, Zuschauerzahlen und Hinweise.</string>
     <string name="theme_live">Live</string>
-    <string name="theme_live_summary">LIVE-Abzeichen und die Live-Markierung im Player.</string>
+    <string name="theme_live_summary">LIVE-Badge und die Live-Markierung im Player.</string>
     <string name="theme_focus">Fokus</string>
     <string name="theme_focus_summary">Rahmen und Leuchten der gewählten Karte oder Zeile.</string>
     <string name="theme_corners">Ecken</string>
-    <string name="theme_corners_summary">Rundung von Karten, Knöpfen, Menüs und Abzeichen, von eckig bis sehr rund.</string>
+    <string name="theme_corners_summary">Rundung von Karten, Buttons, Menüs und Badges, von eckig bis sehr rund.</string>
     <string name="theme_focus_style">Fokus-Art</string>
     <string name="theme_focus_style_summary">Wie die gewählte Karte sich zeigt: Rahmen, weiches Leuchten in der Fokusfarbe oder nur Vergrößern.</string>
     <string name="theme_focus_scale">Vergrößerung beim Fokus</string>
@@ -894,7 +898,7 @@
     <string name="theme_border">Fokusrahmen</string>
     <string name="theme_border_summary">Breite des Rahmens um die gewählte Karte oder Zeile.</string>
     <string name="theme_glass">Glasflächen</string>
-    <string name="theme_glass_summary">Die durchscheinenden Knöpfe und Flächen, z. B. in der Player-Leiste. Aus lässt sie verschwinden.</string>
+    <string name="theme_glass_summary">Die durchscheinenden Buttons und Flächen, z. B. in der Player-Leiste. Aus lässt sie verschwinden.</string>
     <string name="theme_hero_dim">Abdunklung hinter dem großen Bild</string>
     <string name="theme_hero_dim_summary">Wie stark das obere Bild der Startseite hinter seinem Text ausblendet.</string>
     <string name="theme_background_style">Seitenhintergrund</string>
@@ -935,9 +939,9 @@
         <item>45 s</item>
         <item>60 s</item>
     </string-array>
-    <string name="settings_player_replay">Knopf „Nochmal“</string>
-    <string name="settings_player_replay_summary">In Live-Streams zeigt die Leiste „Nochmal“ gleich nach „Qualität“: Es springt ein Stück zurück (wenn nötig in die Aufzeichnung) und kehrt von selbst zu live zurück, sobald das Stück gelaufen ist. „Live“, Umschalten oder Spulen beenden es vorher.</string>
-    <string name="settings_player_replay_seconds">Länge der Wiederholung</string>
+    <string name="settings_player_replay">„Replay“-Button</string>
+    <string name="settings_player_replay_summary">In Live-Streams zeigt die Leiste „Replay“ gleich nach „Qualität“: Es springt ein Stück zurück (wenn nötig in die Aufzeichnung) und kehrt von selbst zu live zurück, sobald das Stück gelaufen ist. „Live“, Umschalten oder Spulen beenden es vorher.</string>
+    <string name="settings_player_replay_seconds">Länge des Replays</string>
     <string name="skin_custom">Eigener Skin</string>
     <string-array name="display_chat_animation">
         <item>Aus (harter Schnitt)</item>
@@ -956,4 +960,6 @@
     <string name="settings_chat_name_colors">Namensfarben</string>
     <string name="settings_chat_merge_repeats">Gleiche Nachrichten zusammenfassen</string>
     <string name="settings_chat_merge_repeats_summary">Schreiben viele denselben Text (z. B. „!100“), bleibt die erste Zeile stehen und zeigt „×12“ statt zwölf Zeilen. Groß-/Kleinschreibung und Leerzeichen zählen nicht; der Zähler läuft weiter, solange der Text innerhalb der gewählten Zeit wiederkommt. Gilt ab dem nächsten Chatstart.</string>
+    <string name="home_update_card">Version %1$s ist da</string>
+    <string name="home_update_card_hint">Einstellungen → App → Jetzt prüfen</string>
 </resources>

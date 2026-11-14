@@ -106,7 +106,7 @@ class CompanionServerTest {
     fun `web app is served, unknown files are not`() {
         val r = get("/")
         assertEquals(200, r.code)
-        assertTrue(r.body!!.string().contains("<script src=\"/app.js\">"))
+        assertTrue(r.body!!.string().contains("<script src=\"/app.js?v="))
         assertEquals(200, get("/app.js").code)
         assertEquals(404, get("/../secrets").code)
     }
@@ -200,6 +200,41 @@ class CompanionServerTest {
     }
 
     @Test
+    fun `home rows are sorted and moved from the browser without a screen`() {
+        val cookie = pairedCookie()
+        fun places(): Map<String, Int> {
+            val tree = JsonParser.parseString(get("/api/settings", cookie).body!!.string()).asJsonObject
+            return allLeaves(tree).filter { it.get("key")?.asString?.startsWith("pref_row_move_") == true }
+                .associate { it.get("key").asString to it.get("place").asInt }
+        }
+        val before = places()
+        assertEquals(9, before.size)
+        assertEquals(1, before.getValue("pref_row_move_followed_live"))
+        assertEquals(2, before.getValue("pref_row_move_live_history"))
+        // The first one in the tree is the one in first place
+        val tree = JsonParser.parseString(get("/api/settings", cookie).body!!.string()).asJsonObject
+        val order = allLeaves(tree).mapNotNull { it.get("key")?.asString }.filter { it.startsWith("pref_row_move_") }
+        assertEquals("pref_row_move_followed_live", order.first())
+        // "Move up" on the second row: it becomes the first
+        val res = JsonParser.parseString(post("/api/settings/action", """{"key":"pref_row_move_live_history"}""", cookie).body!!.string()).asJsonObject
+        assertTrue(res.get("ok").asBoolean)
+        val after = places()
+        assertEquals(1, after.getValue("pref_row_move_live_history"))
+        assertEquals(2, after.getValue("pref_row_move_followed_live"))
+        val order2 = allLeaves(JsonParser.parseString(get("/api/settings", cookie).body!!.string()).asJsonObject)
+            .mapNotNull { it.get("key")?.asString }.filter { it.startsWith("pref_row_move_") }
+        assertEquals("pref_row_move_live_history", order2.first())
+        // Reset
+        assertTrue(JsonParser.parseString(post("/api/settings/action", """{"key":"pref_row_order_reset"}""", cookie).body!!.string()).asJsonObject.get("ok").asBoolean)
+        assertEquals(before, places())
+        // Clearing the caches needs the main thread, which the server thread must not use directly
+        assertTrue(JsonParser.parseString(post("/api/settings/action", """{"key":"pref_clear_caches"}""", cookie).body!!.string()).asJsonObject.get("ok").asBoolean)
+        // A button that really needs the TV still says so
+        val tv = JsonParser.parseString(post("/api/settings/action", """{"key":"pref_request_draw_over_permission"}""", cookie).body!!.string()).asJsonObject
+        assertEquals("tv_only", tv.get("error").asString)
+    }
+
+    @Test
     fun `foreign origins and switched off settings are refused`() {
         val cookie = pairedCookie()
         assertEquals(403, post("/api/settings", """{"values":{"pref_companion_chat":false}}""", cookie, "http://evil.example").code)
@@ -226,6 +261,88 @@ class CompanionServerTest {
         val prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationProvider.getApplicationContext<Context>())
         assertEquals("overlay", prefs.getString("pref_chat_layout", null))
         assertTrue(prefs.getString("pref_mqtt_url", "").isNullOrEmpty())
+    }
+
+    @Test
+    fun `version page needs pairing and installing needs the switch and our own origin`() {
+        assertEquals(401, get("/api/update").code)
+        val cookie = pairedCookie()
+        val r = get("/api/update", cookie)
+        assertEquals(200, r.code)
+        val json = JsonParser.parseString(r.body!!.string()).asJsonObject
+        assertEquals(com.shrug.shrugtv.BuildConfig.VERSION_NAME, json.get("version").asString)
+        assertTrue(json.has("status") && json.has("install") && json.has("install_enabled"))
+        // Without a switch the install never starts, a foreign origin is refused, a GET is not a command
+        assertEquals(400, get("/api/update/install", cookie).code)
+        assertEquals(403, post("/api/update/install", "{}", cookie, "http://evil.example").code)
+        val answer = JsonParser.parseString(post("/api/update/install", "{}", cookie, "http://127.0.0.1:$port").body!!.string()).asJsonObject
+        assertFalse(answer.get("install_enabled").asBoolean)
+        PreferenceManager.getDefaultSharedPreferences(ApplicationProvider.getApplicationContext<Context>())
+            .edit().putBoolean(SettingsApi.ALLOW_KEY, false).commit()
+        assertEquals(403, post("/api/update/check", "{}", cookie).code)
+    }
+
+    @Test
+    fun `skin colours reach the page and the manifest follows them, the switch turns it off`() {
+        assertEquals(401, get("/api/theme").code)
+        val cookie = pairedCookie()
+        val theme = JsonParser.parseString(get("/api/theme", cookie).body!!.string()).asJsonObject
+        assertTrue(theme.get("on").asBoolean)
+        val colors = theme.getAsJsonObject("colors")
+        for (k in listOf("background", "surface", "surfaceHigh", "text", "textMuted", "accent", "accentLight", "onAccent", "live")) {
+            assertTrue(k, colors.get(k).asString.matches(Regex("#[0-9A-F]{6}")))
+        }
+        val manifest = JsonParser.parseString(get("/manifest.json").body!!.string()).asJsonObject
+        assertEquals(colors.get("background").asString, manifest.get("theme_color").asString)
+        PreferenceManager.getDefaultSharedPreferences(ApplicationProvider.getApplicationContext<Context>())
+            .edit().putBoolean(SkinApi.PREF, false).commit()
+        val off = JsonParser.parseString(get("/api/theme", cookie).body!!.string()).asJsonObject
+        assertFalse(off.get("on").asBoolean)
+        assertFalse(off.has("colors"))
+        assertEquals("#0B0B0E", JsonParser.parseString(get("/manifest.json").body!!.string()).asJsonObject.get("theme_color").asString)
+    }
+
+    @Test
+    fun `the page asks for script and style with a version, and those addresses still work`() {
+        val html = get("/").body!!.string()
+        val js = Regex("""src="(/app\.js\?v=[0-9a-f]+)"""").find(html)?.groupValues?.get(1)
+        val css = Regex("""href="(/app\.css\?v=[0-9a-f]+)"""").find(html)?.groupValues?.get(1)
+        assertNotNull(js)
+        assertNotNull(css)
+        assertEquals(200, get(js!!).code)
+        assertEquals(200, get(css!!).code)
+    }
+
+    @Test
+    fun `switcher lists need pairing, follow the TV settings and refuse unknown names`() {
+        assertEquals(401, get("/api/lists").code)
+        CompanionServer.listTimeoutMs = 300L
+        val cookie = pairedCookie()
+        val r = JsonParser.parseString(get("/api/lists?name=top_streams", cookie).body!!.string()).asJsonObject
+        assertEquals("top_streams", r.get("name").asString)
+        assertTrue(r.has("items") && r.has("playing"))
+        assertEquals(6, r.getAsJsonArray("enabled").size())
+        assertEquals(404, get("/api/lists?name=nonsense", cookie).code)
+        PreferenceManager.getDefaultSharedPreferences(ApplicationProvider.getApplicationContext<Context>())
+            .edit().putBoolean("pref_switcher_list_top_language", false).commit()
+        val off = JsonParser.parseString(get("/api/lists", cookie).body!!.string()).asJsonObject
+        assertEquals(5, off.getAsJsonArray("enabled").size())
+        assertFalse(off.getAsJsonArray("enabled").map { it.asString }.contains("top_language"))
+    }
+
+    @Test
+    fun `stars from the phone are checked and stored`() {
+        assertEquals(401, get("/api/favorites").code)
+        val cookie = pairedCookie()
+        val own = "http://127.0.0.1:$port"
+        assertEquals(400, post("/api/favorite", """{"id":"abc","on":true}""", cookie, own).code)
+        assertEquals(400, post("/api/favorite", """{"id":"123"}""", cookie, own).code)
+        assertEquals(403, post("/api/favorite", """{"id":"123","on":true}""", cookie, "http://evil.example").code)
+        assertEquals(200, post("/api/favorite", """{"id":"4242","on":true}""", cookie, own).code)
+        fun ids() = JsonParser.parseString(get("/api/favorites", cookie).body!!.string()).asJsonObject.getAsJsonArray("ids").map { it.asString }
+        assertTrue(ids().contains("4242"))
+        assertEquals(200, post("/api/favorite", """{"id":"4242","on":false}""", cookie, own).code)
+        assertFalse(ids().contains("4242"))
     }
 
     @Test

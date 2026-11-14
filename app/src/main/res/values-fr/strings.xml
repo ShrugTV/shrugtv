@@ -1301,4 +1301,10 @@
     <string name="update_bad_checksum">Le téléchargement ne correspond pas à sa somme de contrôle et a été supprimé</string>
     <string name="update_install_failed">Échec de l\'installation : %1$s</string>
     <string name="update_download_failed">Échec du téléchargement, réessayez plus tard</string>
+    <string name="home_update_card">La version %1$s est disponible</string>
+    <string name="home_update_card_hint">Réglages → App → Vérifier maintenant</string>
+    <string name="settings_companion_skin">Skin du téléviseur sur la page du téléphone</string>
+    <string name="settings_companion_skin_summary">La page du téléphone et du navigateur prend les couleurs du skin choisi sur le téléviseur et le suit quand vous le changez ; désactivé : la page garde son propre aspect clair ou sombre</string>
+    <string name="settings_mqtt_entities_followed">Chaînes suivies</string>
+    <string name="settings_mqtt_entities_followed_summary">Deux capteurs avec les chaînes que vous suivez et celles en direct (titre, jeu, spectateurs) comme attributs, pour un tableau de bord dynamique ; le sujet est mis à jour chaque minute tant que l’appli est ouverte</string>
 </resources>

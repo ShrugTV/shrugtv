@@ -36,6 +36,33 @@ class WatchSessionTrackerTest {
     }
 
     @Test
+    fun `a clip counts after five seconds and is marked`() {
+        tracker.start(7, "lirik", "LIRIK", "", true, true, isClip = true)
+        pass(4)
+        tracker.stop()
+        assertTrue(saved.isEmpty())
+        tracker.start(7, "lirik", "LIRIK", "", true, true, isClip = true)
+        pass(23)
+        tracker.stop()
+        assertEquals(1, saved.size)
+        assertEquals(23L, saved.single().playedSec)
+        assertTrue(saved.single().isClip)
+        assertTrue(saved.single().isVod)
+    }
+
+    @Test
+    fun `a channel that becomes known later is filled in, a known one stays`() {
+        tracker.start(0, "", "", "", true, true, isClip = true)
+        pass(10)
+        tracker.updateChannel(22, "forsen", "forsen")
+        tracker.updateChannel(99, "other", "Other")
+        tracker.stop()
+        val s = saved.single()
+        assertEquals(22, s.channelId)
+        assertEquals("forsen", s.channelName)
+    }
+
+    @Test
     fun `a session under a minute is dropped`() {
         begin()
         pass(59)

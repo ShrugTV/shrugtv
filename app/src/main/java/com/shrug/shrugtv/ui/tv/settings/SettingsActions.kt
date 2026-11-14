@@ -133,7 +133,7 @@ internal object SettingsActions {
     fun afterSwitch(ctx: Context, key: String, on: Boolean) = Unit
 
     /** Pictures (Glide, memory and disk) and the saved home screen; everything comes back when it is needed. */
-    private fun clearCaches(ctx: Context) {
+    internal fun clearCaches(ctx: Context) {
         com.bumptech.glide.Glide.get(ctx).clearMemory()
         Thread {
             try { com.bumptech.glide.Glide.get(ctx).clearDiskCache() } catch (e: Exception) { com.shrug.shrugtv.telemetry.CrashReporter.recordException(e) }

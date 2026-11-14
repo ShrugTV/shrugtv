@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.onFocusChanged
@@ -204,9 +205,13 @@ fun StreamCard(m: Movie, click: () -> Unit, focus: () -> Unit = {}, longPress: (
 }
 
 @Composable
-fun VodCard(m: Movie, click: () -> Unit, longPress: (() -> Unit)? = null, width: Dp = 160.dp, focus: () -> Unit = {}) =
-    WideCard(m, click, focus = focus, longPress = longPress, width = width, corner = {}, bottom = m.durationText ?: "", row2 = m.title ?: "",
-        bottom2 = if (m.isClip && m.viewCount > 0) number(m.viewCount) else "", progress = m.resumeProgressPercent)
+fun VodCard(m: Movie, click: () -> Unit, longPress: (() -> Unit)? = null, width: Dp = 160.dp, focus: () -> Unit = {}) {
+    // A clip that was opened before is drawn dimmed, if the setting asks for it
+    androidx.compose.foundation.layout.Box(Modifier.alpha(if (m.clipSeen) 0.4f else 1f)) {
+        WideCard(m, click, focus = focus, longPress = longPress, width = width, corner = {}, bottom = m.durationText ?: "", row2 = m.title ?: "",
+            bottom2 = if (m.isClip && m.viewCount > 0) number(m.viewCount) else "", progress = m.resumeProgressPercent)
+    }
+}
 
 @Composable
 fun ChannelCard(m: Movie, click: () -> Unit, longPress: (() -> Unit)? = null) {

@@ -26,7 +26,10 @@ object Destinations {
             Enums.ContentType.STREAM -> watch(a, m)
             Enums.ContentType.CHANNEL -> channel(a, m)
             Enums.ContentType.GAME -> category(a, m)
-            else -> a.startActivity(Intent(a, PlayerActivity::class.java).putExtra(movieExtra(a), m).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+            else -> {
+                if (m.isClip) com.shrug.shrugtv.clips.ClipsSeen.mark(a.applicationContext, m.clipSlug)
+                a.startActivity(Intent(a, PlayerActivity::class.java).putExtra(movieExtra(a), m).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+            }
         }
     }
 

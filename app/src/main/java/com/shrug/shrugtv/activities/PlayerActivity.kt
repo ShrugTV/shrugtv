@@ -130,6 +130,21 @@ open class PlayerActivity : ComponentActivity() {
             }
         }
 
+        // shrugtv://clip/<slug>: one Twitch clip
+        if (scheme == "shrugtv" && host == "clip") {
+            val slug = uri.lastPathSegment?.takeIf { it.isNotBlank() } ?: return null
+            val clip = Movie().apply {
+                setClipSlug(slug)
+                this.itemType = Enums.ContentType.VOD
+            }
+            // shrugtv://clip/<slug>?queue=<slug>,<slug>: these clips follow one after the other
+            val more = uri.getQueryParameter("queue").orEmpty().split(',').map { it.trim() }.filter { it.isNotEmpty() && it != slug }.take(50)
+            com.shrug.shrugtv.clips.ClipQueue.set(listOf(clip) + more.map { q ->
+                Movie().apply { setClipSlug(q); this.itemType = Enums.ContentType.VOD }
+            })
+            return clip
+        }
+
         if (scheme == "channel" && host == "com.shrug.shrugtv") {
             val segments = uri.pathSegments
             // channel://com.shrug.shrugtv/startstream/<id>; a single segment used to crash (B9)

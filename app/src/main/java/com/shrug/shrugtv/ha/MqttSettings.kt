@@ -66,6 +66,7 @@ data class MqttSettings(
                     if (prefs.getBoolean("pref_mqtt_entities_avatar", true)) add(HaDiscovery.AVATAR)
                     if (prefs.getBoolean("pref_mqtt_entities_preview", true)) add(HaDiscovery.PREVIEW)
                     if (prefs.getBoolean("pref_mqtt_entities_events", true)) add(HaDiscovery.EVENTS)
+                    if (prefs.getBoolean("pref_mqtt_entities_followed", false)) add(HaDiscovery.FOLLOWED)
                     add(HaDiscovery.CONTROLS) // switched by "Allow control from Home Assistant"
                 },
                 deviceHash = hash

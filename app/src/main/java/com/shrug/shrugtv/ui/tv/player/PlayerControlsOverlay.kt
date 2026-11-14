@@ -43,6 +43,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -97,7 +98,10 @@ enum class PlayerMoreAction(val iconRes: Int, val titleRes: Int) {
 }
 
 /** One entry of the control bar; moves into the "More" menu when the bar is too narrow. */
-private class BarItem(val iconRes: Int, val label: String, val onClick: () -> Unit)
+private class BarItem(val iconRes: Int, val label: String, val onClick: () -> Unit) {
+    /** false: drawn dimmed, OK does nothing (a button whose thing does not exist right now). */
+    var enabled: Boolean = true
+}
 
 private val BAR_BUTTON_WIDTH = 76.dp
 private val BAR_BUTTON_GAP = 6.dp
@@ -158,6 +162,14 @@ fun PlayerControlsOverlay(
     onJumpToLive: (() -> Unit)? = null,
     /** "Replay": jump back a little in a live stream, then live again. */
     onReplay: (() -> Unit)? = null,
+    /** On a clip: jump to the place in the recording it was cut from; [sourceAvailable] false while unknown or if the recording is gone. */
+    onJumpToSource: (() -> Unit)? = null,
+    sourceAvailable: Boolean = false,
+    /** In a clip queue: the neighbours in the list; dimmed at the ends. */
+    onPreviousClip: (() -> Unit)? = null,
+    hasPreviousClip: Boolean = false,
+    onNextClip: (() -> Unit)? = null,
+    hasNextClip: Boolean = false,
     // Owned by the caller so that the highlighted button survives a submenu (B34) and the menu key
     // can open "More" directly (B37)
     buttonFocusIndex: androidx.compose.runtime.MutableState<Int> = remember { mutableStateOf(0) },
@@ -205,6 +217,15 @@ fun PlayerControlsOverlay(
         items.add(BarItem(R.drawable.exo_icon_rewind, stringResource(R.string.player_btn_back10)) { onSeekRelative(-10_000L) })
         items.add(BarItem(R.drawable.exo_icon_fastforward, stringResource(R.string.player_btn_forward10)) { onSeekRelative(10_000L) })
         items.add(BarItem(R.drawable.exo_ic_speed, stringResource(R.string.player_panel_speed), onSpeedClick))
+        if (onPreviousClip != null) {
+            items.add(BarItem(R.drawable.exo_icon_previous, stringResource(R.string.player_btn_prev_clip), onPreviousClip).also { it.enabled = hasPreviousClip })
+        }
+        if (onNextClip != null) {
+            items.add(BarItem(R.drawable.exo_icon_next, stringResource(R.string.player_btn_next_clip), onNextClip).also { it.enabled = hasNextClip })
+        }
+        if (onJumpToSource != null) {
+            items.add(BarItem(R.drawable.ic_clip_source, stringResource(R.string.player_btn_clip_source), onJumpToSource).also { it.enabled = sourceAvailable })
+        }
         if (chapters.isNotEmpty()) {
             items.add(BarItem(R.drawable.exo_icon_previous, stringResource(R.string.player_btn_prev_category), onPreviousCategoryClick))
             items.add(BarItem(R.drawable.exo_icon_next, stringResource(R.string.player_btn_next_category), onNextCategoryClick))
@@ -336,7 +357,7 @@ fun PlayerControlsOverlay(
                         firstItemFocusRequester = moreMenuFocusRequester,
                         onAction = { item ->
                             showMoreMenu = false
-                            item.onClick()
+                            if (item.enabled) item.onClick()
                         },
                         onDismiss = { showMoreMenu = false }
                     )
@@ -448,11 +469,12 @@ fun PlayerControlsOverlay(
                                 iconRes = item.iconRes,
                                 label = item.label,
                                 onClick = item.onClick,
+                                enabled = item.enabled,
                                 width = shownWidths[index],
                                 highlighted = !timelineFocused && index == buttonFocusIndex.value,
                                 compact = compact
                             )
-                            buttonActions.add(item.onClick)
+                            buttonActions.add { if (item.enabled) item.onClick() }
                         }
                         SideEffect {
                             buttonCount.value = shown.size
@@ -524,6 +546,7 @@ private fun PlayerRoundButton(
     label: String,
     @Suppress("UNUSED_PARAMETER") onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     width: Dp = BAR_BUTTON_WIDTH,
     highlighted: Boolean = false,
     compact: Boolean = false
@@ -535,7 +558,7 @@ private fun PlayerRoundButton(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.width(width)
+        modifier = modifier.width(width).alpha(if (enabled) 1f else 0.35f)
     ) {
         Box(
             modifier = Modifier

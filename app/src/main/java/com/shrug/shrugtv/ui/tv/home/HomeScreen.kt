@@ -117,6 +117,7 @@ class HomeActions(
     val search: () -> Unit,
     val settings: () -> Unit,
     val stats: () -> Unit = {},
+    val clips: () -> Unit = {},
     val profile: () -> Unit,
     val contextMenu: (Movie) -> Unit = {},
     /** The row list is scrolling (true) or at rest (false); the hero waits for it. */
@@ -127,7 +128,8 @@ private val HeroHeight = 340.dp
 private val RowStart = 262.dp
 
 @Composable
-fun HomeScreen(z: HomeState, hero: () -> Movie?, a: HomeActions, statsCard: () -> com.shrug.shrugtv.stats.StatsCardData? = { null }) {
+fun HomeScreen(z: HomeState, hero: () -> Movie?, a: HomeActions, statsCard: () -> com.shrug.shrugtv.stats.StatsCardData? = { null },
+               updateCard: () -> String? = { null }) {
     // Fixed remote-control paths: vertically the icon bar is closer to the hero buttons than the first
     // row; without these, key down jumped into the bar (2026-10-21).
     val heroFocus = remember { FocusRequester() }
@@ -172,6 +174,7 @@ fun HomeScreen(z: HomeState, hero: () -> Movie?, a: HomeActions, statsCard: () -
 
         NavBar(a, bar, Modifier.align(Alignment.CenterStart).padding(start = 16.dp).focusGroup())
         StatsCardOverlay(statsCard, Modifier.align(Alignment.TopEnd))
+        UpdateCardOverlay(updateCard, Modifier.align(Alignment.BottomEnd))
     }
 }
 
@@ -202,6 +205,23 @@ private fun StatsCardOverlay(card: () -> com.shrug.shrugtv.stats.StatsCardData?,
             stringResource(R.string.home_stats_card_hint), fontFamily = Inter, fontSize = 12.sp,
             color = TvColors.glass(0.6f), modifier = Modifier.padding(top = 2.dp)
         )
+    }
+}
+
+/** "Version X is available": like the stats card it only informs and goes by itself, no focus, no keys. */
+@Composable
+private fun UpdateCardOverlay(version: () -> String?, modifier: Modifier) {
+    val v = version() ?: return
+    Column(
+        modifier
+            .padding(bottom = 28.dp, end = 40.dp)
+            .clip(TvShapes.r(16.dp))
+            .background(TvColors.Panel)
+            .border(1.dp, TvColors.Accent, TvShapes.r(16.dp))
+            .padding(horizontal = 22.dp, vertical = 14.dp)
+    ) {
+        Text(stringResource(R.string.home_update_card, v), fontFamily = Inter, fontWeight = FontWeight.Bold, fontSize = 17.sp, color = Color.White)
+        Text(stringResource(R.string.home_update_card_hint), fontFamily = Inter, fontSize = 12.sp, color = TvColors.glass(0.6f), modifier = Modifier.padding(top = 2.dp))
     }
 }
 
@@ -333,7 +353,7 @@ private fun CardRow(row: HomeRow, a: HomeActions, focus: FocusRequester?, upTarg
 private fun NavBar(a: HomeActions, start: FocusRequester, modifier: Modifier) {
     // Up/down fixed within the bar: otherwise geometry pulled focus from "Home" up back to "Watch"
     // (2026-10-21).
-    val r = remember { List(5) { FocusRequester() } }
+    val r = remember { List(6) { FocusRequester() } }
     fun chain(i: Int) = Modifier.focusProperties {
         up = if (i > 0) r[i - 1] else FocusRequester.Cancel
         down = if (i < r.lastIndex) r[i + 1] else FocusRequester.Cancel
@@ -341,9 +361,10 @@ private fun NavBar(a: HomeActions, start: FocusRequester, modifier: Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         NavButton(HomeIcons.Search, stringResource(R.string.home_nav_search), false, chain(0).focusRequester(r[0]), click = a.search)
         NavButton(HomeIcons.Start, stringResource(R.string.home_nav_home), true, chain(1).focusRequester(r[1]).focusRequester(start)) {}
-        NavButton(HomeIcons.Stats, stringResource(R.string.home_nav_stats), false, chain(2).focusRequester(r[2]), click = a.stats)
-        NavButton(HomeIcons.Settings, stringResource(R.string.home_nav_settings), false, chain(3).focusRequester(r[3]), click = a.settings)
-        NavButton(HomeIcons.Profile, stringResource(R.string.home_nav_profile), false, chain(4).focusRequester(r[4]), click = a.profile)
+        NavButton(HomeIcons.Clips, stringResource(R.string.home_nav_clips), false, chain(2).focusRequester(r[2]), click = a.clips)
+        NavButton(HomeIcons.Stats, stringResource(R.string.home_nav_stats), false, chain(3).focusRequester(r[3]), click = a.stats)
+        NavButton(HomeIcons.Settings, stringResource(R.string.home_nav_settings), false, chain(4).focusRequester(r[4]), click = a.settings)
+        NavButton(HomeIcons.Profile, stringResource(R.string.home_nav_profile), false, chain(5).focusRequester(r[5]), click = a.profile)
     }
 }
 

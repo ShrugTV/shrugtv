@@ -187,7 +187,8 @@ data class ChatPrefs(
                     sevenTvBadges = prefs.getBoolean("pref_chat_7tv_badges", true),
                     sevenTvPersonal = prefs.getBoolean("pref_chat_7tv_personal", true),
                     recentMessages = prefs.getBoolean("pref_chat_recent_messages", false),
-                    replyChars = replyCharsOf(prefs.getString("pref_chat_reply_chars", null))
+                    replyChars = // The TV slider stores a number, the browser a text: read either (getString crashed the player on the number)
+                    replyCharsOf(prefs.all["pref_chat_reply_chars"]?.toString())
                 ),
                 look = ChatLook(
                     alternate = prefs.getBoolean("pref_chat_alternate", false),

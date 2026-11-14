@@ -24,7 +24,7 @@ object HubCommandRouter {
     /** Names the integrations may send. */
     val NAMES = setOf(
         "play_pause", "play", "pause", "live", "next", "previous", "close", "watch", "quality",
-        "chat", "chat_layout", "volume", "chat_message", "notify"
+        "chat", "chat_layout", "volume", "chat_message", "notify", "replay", "audio_only"
     )
 
     /** Parsed command, or null if invalid. Pure: testable without Android. */
@@ -35,6 +35,8 @@ object HubCommandRouter {
         object Live : Command()
         data class Zap(val direction: Int) : Command()
         object Close : Command()
+        object Replay : Command()
+        data class AudioOnly(val on: Boolean) : Command()
         data class WatchLogin(val login: String) : Command()
         data class WatchVod(val videoId: Long, val positionSeconds: Int?) : Command()
         data class Quality(val name: String) : Command()
@@ -58,6 +60,12 @@ object HubCommandRouter {
             "next" -> Command.Zap(1)
             "previous" -> Command.Zap(-1)
             "close" -> Command.Close
+            "replay" -> Command.Replay
+            "audio_only" -> when (p.uppercase()) {
+                "ON", "TRUE", "1" -> Command.AudioOnly(true)
+                "OFF", "FALSE", "0" -> Command.AudioOnly(false)
+                else -> null
+            }
             "watch" -> parseWatch(p)
             "quality" -> p.takeIf { it.isNotEmpty() && it.length <= 40 }?.let { Command.Quality(it) }
             "chat" -> when (p.uppercase()) {
@@ -145,6 +153,8 @@ object HubCommandRouter {
             Command.Live -> player.jumpToLive()
             is Command.Zap -> player.zap(cmd.direction)
             Command.Close -> player.close()
+            Command.Replay -> player.replay()
+            is Command.AudioOnly -> player.setAudioOnly(cmd.on)
             is Command.WatchLogin -> player.watchLogin(cmd.login)
             is Command.WatchVod -> player.watchVod(cmd.videoId, cmd.positionSeconds)
             is Command.Quality -> player.selectQualityByName(cmd.name)

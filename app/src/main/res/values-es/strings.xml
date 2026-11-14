@@ -1301,4 +1301,10 @@
     <string name="update_bad_checksum">La descarga no coincide con su suma de comprobación y se ha borrado</string>
     <string name="update_install_failed">Error al instalar: %1$s</string>
     <string name="update_download_failed">Error de descarga, inténtalo más tarde</string>
+    <string name="home_update_card">La versión %1$s está disponible</string>
+    <string name="home_update_card_hint">Ajustes → App → Comprobar ahora</string>
+    <string name="settings_companion_skin">Skin del TV en la página del móvil</string>
+    <string name="settings_companion_skin_summary">La página del móvil y del navegador usa los colores del skin elegido en el TV y lo sigue al cambiarlo; desactivado: la página mantiene su propio aspecto claro u oscuro</string>
+    <string name="settings_mqtt_entities_followed">Canales seguidos</string>
+    <string name="settings_mqtt_entities_followed_summary">Dos sensores con los canales que sigues y quién está en directo (título, juego, espectadores) como atributos, para un panel dinámico; el tema se actualiza cada minuto mientras la app está abierta</string>
 </resources>

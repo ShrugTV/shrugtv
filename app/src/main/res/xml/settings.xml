@@ -22,12 +22,26 @@
                     <SwitchPreference android:title="@string/settings_pref_top_streamers" android:key="pref_show_top_streamers" android:defaultValue="true" />
                 </PreferenceCategory>
             </PreferenceScreen>
+            <PreferenceScreen android:icon="@drawable/ic_row_visibility" android:title="@string/settings_clips_screen" android:key="pref_clips_screen" android:summary="@string/settings_clips_screen_summary">
+                <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_clips_tip" />
+                <ListPreference android:entries="@array/display_clips_source" android:title="@string/settings_clips_source" android:key="pref_clips_source" android:summary="%s" android:defaultValue="followed" android:entryValues="@array/value_clips_source" />
+                <ListPreference android:entries="@array/display_clips_period" android:title="@string/settings_clips_period" android:key="pref_clips_period" android:summary="%s" android:defaultValue="week" android:entryValues="@array/value_clips_period" />
+                <ListPreference android:entries="@array/display_clips_sort" android:title="@string/settings_clips_sort" android:key="pref_clips_sort" android:summary="%s" android:defaultValue="views" android:entryValues="@array/value_clips_sort" />
+                <ListPreference android:entries="@array/display_clips_language" android:title="@string/settings_clips_language" android:key="pref_clips_language" android:summary="%s" android:defaultValue="all" android:entryValues="@array/value_clips_language" />
+                <ListPreference android:entries="@array/display_clips_seen" android:title="@string/settings_clips_seen" android:key="pref_clips_seen" android:summary="%s" android:defaultValue="dim" android:entryValues="@array/value_clips_seen" />
+                <SwitchPreference android:title="@string/settings_clips_show_title" android:key="pref_clips_show_title" android:summary="@string/settings_clips_show_title_summary" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_clips_autoplay" android:key="pref_clips_autoplay" android:summary="@string/settings_clips_autoplay_summary" android:defaultValue="true" />
+                <ListPreference android:entries="@array/display_clips_queue_seen" android:title="@string/settings_clips_queue_seen" android:key="pref_clips_queue_seen" android:summary="%s" android:dependency="pref_clips_autoplay" android:defaultValue="skip" android:entryValues="@array/value_clips_queue_seen" />
+                <ListPreference android:entries="@array/value_clips_count" android:title="@string/settings_clips_count" android:key="pref_clips_count" android:summary="%s" android:defaultValue="20" android:entryValues="@array/value_clips_count" />
+                <SwitchPreference android:title="@string/settings_clips_row" android:key="pref_clips_row" android:summary="@string/settings_clips_row_summary" android:defaultValue="true" />
+            </PreferenceScreen>
             <PreferenceScreen android:icon="@drawable/ic_row_visibility" android:title="@string/pref_title_row_order" android:key="pref_row_order_screen">
                 <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_row_order_tip" />
                 <Preference android:title="@string/home_row_followed_live" android:key="pref_row_move_followed_live" />
                 <Preference android:title="@string/home_row_live_history" android:key="pref_row_move_live_history" />
                 <Preference android:title="@string/home_row_continue_watching" android:key="pref_row_move_continue_watching" />
                 <Preference android:title="@string/home_row_followed_channels" android:key="pref_row_move_followed_channels" />
+                <Preference android:title="@string/home_row_clips" android:key="pref_row_move_clips" />
                 <Preference android:title="@string/home_row_followed_categories" android:key="pref_row_move_followed_categories" />
                 <Preference android:title="@string/home_row_past_broadcasts" android:key="pref_row_move_past_broadcasts" />
                 <Preference android:title="@string/home_row_top_categories" android:key="pref_row_move_top_categories" />
@@ -67,6 +81,36 @@
             <SwitchPreference android:title="@string/settings_pref_watch_stats" android:key="pref_watch_stats" android:summary="@string/settings_pref_watch_stats_summary" android:defaultValue="true" />
             <SwitchPreference android:title="@string/settings_pref_watch_stats_card" android:key="pref_watch_stats_card" android:summary="@string/settings_pref_watch_stats_card_summary" android:dependency="pref_watch_stats" android:defaultValue="true" />
         </PreferenceCategory>
+        <PreferenceScreen android:icon="@drawable/ic_row_visibility" android:title="@string/settings_stats_screen" android:key="pref_stats_screen" android:summary="@string/settings_stats_screen_summary">
+            <Preference android:title="@string/pref_tip" android:selectable="false" android:summary="@string/settings_stats_tip" />
+            <PreferenceCategory android:title="@string/settings_stats_cat_page">
+                <ListPreference android:entries="@array/display_stats_period" android:title="@string/settings_stats_period" android:key="pref_stats_default_period" android:summary="%s" android:defaultValue="week" android:entryValues="@array/value_stats_period" />
+                <ListPreference android:entries="@array/display_stats_time_format" android:title="@string/settings_stats_time_format" android:key="pref_stats_time_format" android:summary="%s" android:defaultValue="hm" android:entryValues="@array/value_stats_time_format" />
+                <SwitchPreference android:title="@string/settings_stats_compare" android:key="pref_stats_compare" android:summary="@string/settings_stats_compare_summary" android:defaultValue="true" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_stats_cat_cards">
+                <SwitchPreference android:title="@string/settings_stats_show_tiles" android:key="pref_stats_show_tiles" android:summary="@string/settings_stats_show_tiles_summary" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_activity" android:key="pref_stats_show_activity" android:summary="@string/settings_stats_show_activity_summary" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_hours" android:key="pref_stats_show_hours" android:summary="@string/settings_stats_show_hours_summary" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_channels" android:key="pref_stats_show_channels" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_categories" android:key="pref_stats_show_categories" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_live" android:key="pref_stats_show_live" android:summary="@string/settings_stats_show_live_summary" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_stats_show_clips" android:key="pref_stats_show_clips" android:summary="@string/settings_stats_show_clips_summary" android:defaultValue="true" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_stats_cat_lists">
+                <ListPreference android:entries="@array/display_stats_top_count" android:title="@string/settings_stats_top_count" android:key="pref_stats_top_count" android:summary="%s" android:defaultValue="5" android:entryValues="@array/value_stats_top_count" />
+                <ListPreference android:entries="@array/display_stats_rank_by" android:title="@string/settings_stats_rank_by" android:key="pref_stats_rank_by" android:summary="%s" android:defaultValue="time" android:entryValues="@array/value_stats_rank_by" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_stats_cat_charts">
+                <ListPreference android:entries="@array/display_stats_activity_style" android:title="@string/settings_stats_activity_style" android:key="pref_stats_activity_style" android:summary="%s" android:defaultValue="bars" android:entryValues="@array/value_stats_activity_style" />
+                <SwitchPreference android:title="@string/settings_stats_highlight" android:key="pref_stats_highlight_busiest" android:summary="@string/settings_stats_highlight_summary" android:defaultValue="true" />
+                <ListPreference android:entries="@array/display_stats_hours_style" android:title="@string/settings_stats_hours_style" android:key="pref_stats_hours_style" android:summary="%s" android:defaultValue="hours" android:entryValues="@array/value_stats_hours_style" />
+                <ListPreference android:entries="@array/display_stats_live_style" android:title="@string/settings_stats_live_style" android:key="pref_stats_live_style" android:summary="%s" android:defaultValue="ring" android:entryValues="@array/value_stats_live_style" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/settings_stats_cat_data">
+                <ListPreference android:entries="@array/display_stats_keep" android:title="@string/settings_stats_keep" android:key="pref_stats_keep_months" android:summary="@string/settings_stats_keep_summary" android:defaultValue="25" android:entryValues="@array/value_stats_keep" />
+            </PreferenceCategory>
+        </PreferenceScreen>
         <PreferenceCategory android:title="@string/settings_pref_live_history">
             <Preference android:icon="@drawable/trashcan" android:title="@string/settings_pref_clear_history" android:key="pref_live_channel_history_clear_history" />
         </PreferenceCategory>
@@ -286,6 +330,7 @@
                 <SwitchPreference android:title="@string/settings_mqtt_entities_avatar" android:key="pref_mqtt_entities_avatar" android:summary="@string/settings_mqtt_entities_avatar_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
                 <SwitchPreference android:title="@string/settings_mqtt_entities_preview" android:key="pref_mqtt_entities_preview" android:summary="@string/settings_mqtt_entities_preview_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
                 <SwitchPreference android:title="@string/settings_mqtt_entities_events" android:key="pref_mqtt_entities_events" android:summary="@string/settings_mqtt_entities_events_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_mqtt_entities_followed" android:key="pref_mqtt_entities_followed" android:summary="@string/settings_mqtt_entities_followed_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="false" />
                 <SwitchPreference android:title="@string/settings_mqtt_commands" android:key="pref_mqtt_commands" android:summary="@string/settings_mqtt_commands_summary" android:dependency="pref_mqtt_enabled" android:defaultValue="true" />
             </PreferenceCategory>
         </PreferenceScreen>
@@ -299,6 +344,7 @@
                 <Preference android:title="@string/companion_devices_title" android:key="pref_companion_devices" android:summary="@string/settings_companion_devices_summary" android:dependency="pref_companion_enabled" />
                 <SwitchPreference android:title="@string/settings_companion_chat" android:key="pref_companion_chat" android:summary="@string/settings_companion_chat_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
                 <SwitchPreference android:title="@string/settings_companion_settings" android:key="pref_companion_settings" android:summary="@string/settings_companion_settings_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
+                <SwitchPreference android:title="@string/settings_companion_skin" android:key="pref_companion_skin" android:summary="@string/settings_companion_skin_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
                 <SwitchPreference android:title="@string/settings_companion_log" android:key="pref_companion_log" android:summary="@string/settings_companion_log_summary" android:dependency="pref_companion_enabled" android:defaultValue="true" />
                 <Preference android:title="@string/settings_companion_disconnect" android:key="pref_companion_disconnect" android:summary="@string/settings_companion_disconnect_summary" android:dependency="pref_companion_enabled" />
             </PreferenceCategory>

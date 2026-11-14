@@ -105,6 +105,8 @@ object PlaybackStatusRules {
 
 class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.shrugtv.hub.PlayerCommands {
     companion object {
+        /** Wait this long after a clip started before the next one is loaded in the background. */
+        private const val PRELOAD_DELAY_MS = 3_000L
         private const val TAG = "PlayerViewModel"
         private const val HEALTH_TAG = "PlaybackHealth"
         /** Away from the player at least this long: a live stream is resolved again instead of resumed. */
@@ -137,6 +139,13 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
     val controlsTimeoutMs: Long =
         (playerPrefs.getString("pref_player_controls_timeout", "8")?.toLongOrNull() ?: 8L).coerceIn(3L, 120L) * 1000L
     val showInfoCorner: Boolean = playerPrefs.getBoolean("pref_player_info_corner", true)
+    /** The title of a clip stays on screen while it plays (setting "Show the clip title"). */
+    val showClipTitle: Boolean = playerPrefs.getBoolean("pref_clips_show_title", true)
+    private val _clipTitle = MutableStateFlow<String?>(null)
+    val clipTitle: StateFlow<String?> = _clipTitle.asStateFlow()
+    /** Place of the clip in the queue (1-based) and the length of the queue; null = no queue. */
+    private val _clipNav = MutableStateFlow<Pair<Int, Int>?>(null)
+    val clipNav: StateFlow<Pair<Int, Int>?> = _clipNav.asStateFlow()
     val offerBackToLive: Boolean = playerPrefs.getBoolean("pref_player_back_to_live", true)
     /** Clock, chat and info corner wander a few pixels. */
     val burnInProtection: Boolean = playerPrefs.getBoolean("pref_player_burn_in", false)
@@ -347,6 +356,7 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
      * and switch after a countdown. A raid offer wins.
      */
     private fun offerNextChannel() {
+        _currentMovie.value?.takeIf { it.isClip }?.let { playNextClip(it); return }
         if (_currentMovie.value?.archiveOfLive == true) {
             exitArchive()
             return
@@ -376,6 +386,97 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
             }
             if (_endSuggestion.value === next && _currentMovie.value === current) playEndSuggestion()
         }
+    }
+
+    /** The next clip of the queue, ready in its own player: address known, first seconds already loaded. */
+    private class Preloaded(val movie: Movie, val player: ExoPlayer)
+
+    private var preloaded: Preloaded? = null
+    private var preloadJob: Job? = null
+
+    private fun releasePreloaded() {
+        preloadJob?.cancel()
+        preloadJob = null
+        preloaded?.player?.release()
+        preloaded = null
+    }
+
+    /** The clip after [current] in the queue, or null (setting off, end of the list). */
+    private fun nextClipOf(current: Movie): Movie? {
+        val s = com.shrug.shrugtv.clips.ClipsSettings.load(appContext)
+        if (!s.autoplay) return null
+        val skip = if (s.queueSkipsSeen) com.shrug.shrugtv.clips.ClipsSeen.all(appContext) else emptySet()
+        return com.shrug.shrugtv.clips.ClipQueue.next(current, skip)
+    }
+
+    /**
+     * A few seconds after a clip started (so it does not compete for the line): look up the address of the next clip of the
+     * queue and let a second player load its first seconds paused, so the change is almost instant. The player is handed over
+     * by [playNextClip]; whatever is not used is released.
+     */
+    private fun preloadNextClip(current: Movie) {
+        releasePreloaded()
+        preloadJob = viewModelScope.launch {
+            delay(PRELOAD_DELAY_MS)
+            if (_currentMovie.value !== current) return@launch
+            val next = nextClipOf(current) ?: return@launch
+            val qualities = kotlinx.coroutines.suspendCancellableCoroutine<List<StreamQuality>?> { cont ->
+                val resolver = PlaybackUrlResolver(appContext, next.playbackId ?: next.clipSlug, Enums.PlaybackKind.VOD) { q, _ ->
+                    if (cont.isActive) cont.resume(q) {}
+                }
+                resolver.useStreamToken = false
+                resolver.start()
+            }
+            if (_currentMovie.value !== current || qualities.isNullOrEmpty()) return@launch
+            val player = PlayerFactory.createMainPlayer(appContext)
+            player.volume = 0f
+            player.playWhenReady = false
+            player.setMediaItem(MediaItem.fromUri(Uri.parse(masterQuality(qualities).url)))
+            player.prepare()
+            next.qualities = ArrayList(qualities)
+            preloaded = Preloaded(next, player)
+        }
+    }
+
+    /**
+     * A clip ended: the next clip of the list it was opened from starts after a short pause, unless the setting is off. Clips
+     * opened before are left out by default; every clip that starts counts as opened.
+     */
+    private fun playNextClip(current: Movie) {
+        if (endJob?.isActive == true) return
+        val next = nextClipOf(current) ?: return
+        if (preloaded?.movie?.clipSlug == next.clipSlug) {
+            startClip(next)
+            return
+        }
+        Log.i(TAG, "Next clip not preloaded (${if (preloaded == null) "nothing ready" else "other clip"}), loading it now")
+        endJob = viewModelScope.launch {
+            delay(1_200L)
+            if (_currentMovie.value !== current) return@launch
+            startClip(next)
+        }
+    }
+
+    /** Starts [clip] (counts as opened); from the preload if that holds it: in its own player, ready, no pause and no new lookup. */
+    private fun startClip(clip: Movie) {
+        com.shrug.shrugtv.clips.ClipsSeen.mark(appContext, clip.clipSlug)
+        val ready = preloaded?.takeIf { it.movie.clipSlug == clip.clipSlug }
+        if (ready == null) {
+            play(clip)
+            return
+        }
+        preloaded = null
+        Log.i(TAG, "Next clip taken over from the preload, ${ready.player.bufferedPosition} ms already loaded")
+        ready.player.volume = 1.0f
+        ready.player.playWhenReady = true
+        play(ready.movie, adoptedPlayer = ready.player)
+    }
+
+    /** The buttons "Previous clip" (-1) and "Next clip" (+1): the neighbour in the list the clip was opened from. */
+    fun playClipStep(step: Int) {
+        val current = _currentMovie.value?.takeIf { it.isClip } ?: return
+        val target = com.shrug.shrugtv.clips.ClipQueue.neighbor(current, step) ?: return
+        startClip(target)
     }
 
     /** OK on the "stream ended" card with a suggestion, or the countdown ran out. */
@@ -462,6 +563,12 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
 
     private val _isChatVisible = MutableStateFlow(chatPrefs.joinChat && chatPrefs.showChat)
     val isChatVisible: StateFlow<Boolean> = _isChatVisible.asStateFlow()
+    /** The clip on screen has no chat to show (its recording is gone, or recorded chat is off): the panel stays away. */
+    /** The recording a clip was cut from is known and still there: the button "Recording" works. */
+    private val _clipSourceReady = MutableStateFlow(false)
+    val clipSourceReady: StateFlow<Boolean> = _clipSourceReady.asStateFlow()
+    private val _chatUnavailable = MutableStateFlow(false)
+    val chatUnavailable: StateFlow<Boolean> = _chatUnavailable.asStateFlow()
 
     private val _stats = MutableStateFlow(PlayerStatsState())
     val stats: StateFlow<PlayerStatsState> = _stats.asStateFlow()
@@ -482,7 +589,8 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
             category = movie.gameName,
             // The recording of a live stream counts as live
             isVod = (movie.playbackType == Enums.PlaybackKind.VOD || movie.videoId > 0L) && !movie.archiveOfLive,
-            playingNow = mainPlayer.isPlaying
+            playingNow = mainPlayer.isPlaying,
+            isClip = movie.isClip
         )
     }
 
@@ -634,6 +742,7 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
         // Home Assistant (MQTT) and the phone companion read the player through the hub
         PlaybackStateHub.commands = this
         PlaybackStateHub.chatLines = chatViewModel.lines
+        PlaybackStateHub.badgeUrl = { set, version -> chatClient?.emoteManager?.badgeUrl(set, version) }
         viewModelScope.launch {
             @OptIn(kotlinx.coroutines.FlowPreview::class)
             merge(
@@ -697,6 +806,7 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
                 chatLayout = _chatAppearance.value.layout.value,
                 multiview = _isMultiview.value,
                 volume = _volume.value,
+                audioOnly = isAudioOnly,
                 followed = _isFollowed.value,
                 favorite = m.isFavorite
             )
@@ -744,6 +854,10 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
         val p = percent.coerceIn(0, 100)
         _volume.value = p
         mainPlayer.volume = p / 100f
+    }
+
+    override fun setAudioOnly(on: Boolean) {
+        if (on != isAudioOnly) toggleAudioOnly()
     }
 
     override fun sendChat(text: String) = sendChatMessage(text)
@@ -823,6 +937,10 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
 
     fun play(movie: Movie, adoptedPlayer: ExoPlayer? = null, restartChat: Boolean = true, resumeAtMs: Long? = null) {
         val request = ++playRequest
+        releasePreloaded()
+        if (movie.isClip) preloadNextClip(movie)
+        _clipTitle.value = if (movie.isClip) movie.title else null
+        _clipNav.value = if (movie.isClip) com.shrug.shrugtv.clips.ClipQueue.position(movie) else null
         health.reset(newItem = !healthReload)
         // A reload by the stall watch must not end "Audio only" (someone may be asleep to it)
         val keepAudioOnly = healthReload && isAudioOnly
@@ -872,6 +990,8 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
             old.removeListener(playerListener)
             old.release()
             adoptedPlayer.addListener(playerListener)
+            // An adopted player may be playing already (a preloaded clip): no "started playing" event will come for the watch time
+            watchTracker.playing(adoptedPlayer.isPlaying)
             adoptedPlayer.volume = 1.0f
             _mainPlayer.value = adoptedPlayer
             loadedMovie = movie
@@ -1508,7 +1628,7 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
      * Jumps back by the replay length (inside the live window, or into the recording like rewinding)
      * and returns to the live edge once that part has played again. Live, zapping or seeking by hand end it.
      */
-    fun replay() {
+    override fun replay() {
         val movie = _currentMovie.value ?: return
         if (isVod(movie) || movie.archiveOfLive) return
         val lengthMs = com.shrug.shrugtv.player.InstantReplay.lengthMs(playerPrefs.getString(com.shrug.shrugtv.player.InstantReplay.PREF_SECONDS, "30"))
@@ -1659,6 +1779,7 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
         chatClient?.stopChat()
         chatClient = null
         stopVodChat()
+        releasePreloaded()
         mainPlayer.removeListener(playerListener)
         mainPlayer.release()
         multiviewPlayer?.release()
@@ -1679,8 +1800,52 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
     private var vodChatVideoId = 0L
     private val vodPacer = com.shrug.shrugtv.chat.VodChatPacer { android.os.SystemClock.uptimeMillis() }
 
+    /** The recording whose chat goes along: the video itself, or the one a clip was cut from. */
+    private fun chatVideoOf(movie: Movie): Long = if (movie.isClip) movie.clipVideoId else movie.videoId
+
+    /** Second of the recording at which the player position 0 lies (a clip starts somewhere in the middle of it). */
+    private var vodChatBase = 0.0
+
+    /** A clip has no chat of its own: look up its recording and play that chat from where the clip starts. */
+    private fun startClipChat(movie: Movie) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val info = com.shrug.shrugtv.chat.ClipSource.fetch(appContext, movie.clipSlug)
+            withContext(Dispatchers.Main) {
+                if (_currentMovie.value !== movie) return@withContext
+                // The button to the recording needs the source even when the chat is off
+                _clipSourceReady.value = info != null
+                if (!chatPrefs.joinChat || !chatPrefs.vodChat || info == null) { _chatUnavailable.value = true }
+                if (info == null) return@withContext
+                movie.clipVideoId = info.videoId
+                movie.clipOffsetSeconds = info.offsetSeconds
+                if (movie.userId <= 0 && info.broadcasterId > 0) movie.userId = info.broadcasterId
+                if (movie.login.isNullOrEmpty()) info.login?.let { movie.login = it }
+                if (movie.displayName.isNullOrEmpty()) info.displayName?.let { movie.displayName = it }
+                if (movie.title.isNullOrEmpty()) info.title?.takeIf { it.isNotEmpty() }?.let { movie.title = it; _clipTitle.value = it }
+                // A clip opened by link started its watch session without a channel: fill it in
+                watchTracker.updateChannel(movie.userId, movie.login ?: "", movie.displayName.ifBlank { movie.login ?: "" })
+                startVodChat(movie)
+            }
+        }
+    }
+
+    /** The button "Recording" on a clip: the recording it was cut from, at the second where the clip starts. */
+    fun jumpToClipSource() {
+        val clip = _currentMovie.value?.takeIf { it.isClip && it.clipVideoId > 0L } ?: return
+        val recording = Movie().apply {
+            setVideoIdFromString(clip.clipVideoId.toString())
+            itemType = Enums.ContentType.VOD
+            userId = clip.userId
+            login = clip.login
+            displayName = clip.displayName
+        }
+        // Leaving the clips: the queue does not carry on in the recording
+        com.shrug.shrugtv.clips.ClipQueue.clear()
+        play(recording, resumeAtMs = clip.clipOffsetSeconds * 1000L)
+    }
+
     private fun startVodChat(movie: Movie) {
-        if (!chatPrefs.joinChat || !chatPrefs.vodChat || movie.videoId <= 0L || vodChatClient != null) return
+        if (!chatPrefs.joinChat || !chatPrefs.vodChat || chatVideoOf(movie) <= 0L || vodChatClient != null) return
         if (movie.userId <= 0) {
             // Opened by link (shrugtv://vod/<id>, Home Assistant): only the video id is known
             resolveVodOwner(movie)
@@ -1690,14 +1855,15 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
         val sink = com.shrug.shrugtv.chat.ChatUiSink { event ->
             if (event is com.shrug.shrugtv.chat.ChatUiEvent.Message) mainHandler.post { vodPacer.onMessage(event.message) }
         }
-        vodChatVideoId = movie.videoId
+        vodChatVideoId = chatVideoOf(movie)
+        vodChatBase = if (movie.isClip) movie.clipOffsetSeconds.toDouble() else 0.0
         vodChatClient =
             com.shrug.shrugtv.chat.ChatClient.Builder()
                 .context(appContext)
                 .uiSink(sink)
                 .channelId(movie.userId)
                 .channelName(movie.login ?: movie.displayName ?: "")
-                .vodId(movie.videoId)
+                .vodId(chatVideoOf(movie))
                 .badgeSize(chatBadgePx())
                 .emoteSize(chatEmotePx())
                 .animatedEmotes(chatPrefs.animatedEmotes)
@@ -1741,13 +1907,14 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
         vodChatClient?.stopChat()
         vodChatClient = null
         vodChatVideoId = 0L
+        vodChatBase = 0.0
         vodPacer.clear()
     }
 
     /** Once a second: follows seeks, releases what is due, fetches ahead. */
     private fun vodChatTick() {
         if (!_isChatVisible.value) return
-        val step = vodPacer.tick(mainPlayer.currentPosition / 1000.0)
+        val step = vodPacer.tick(vodChatBase + mainPlayer.currentPosition / 1000.0)
         if (step.reset) chatViewModel.clear()
         step.due.forEach { chatViewModel.addMessage(it) }
         step.fetchOffset?.let { offset ->
@@ -1757,13 +1924,26 @@ class PlayerViewModel(private val appContext: Context) : ViewModel(), com.shrug.
 
     private fun startChat(movie: Movie) {
         // play() restarts the chat for the same recording after a quality or handover change: keep it running
-        if (isVod(movie) && vodChatClient != null && vodChatVideoId == movie.videoId) return
+        // The same recording but another zero point (a clip, then its recording) needs a fresh start: the offsets differ
+        if (isVod(movie) && vodChatClient != null && vodChatVideoId == chatVideoOf(movie) &&
+            vodChatBase == (if (movie.isClip) movie.clipOffsetSeconds.toDouble() else 0.0)) return
         chatClient?.stopChat()
         chatClient = null
         stopVodChat()
         chatViewModel.clear()
         chatGeneration++
         chatDelay = null
+        _chatUnavailable.value = false
+        _clipSourceReady.value = false
+        if (movie.isClip) {
+            if (movie.clipVideoId > 0L) {
+                _clipSourceReady.value = true
+                if (!chatPrefs.joinChat || !chatPrefs.vodChat) _chatUnavailable.value = true else startVodChat(movie)
+            } else {
+                startClipChat(movie)
+            }
+            return
+        }
         if (isVod(movie)) {
             startVodChat(movie)
             return

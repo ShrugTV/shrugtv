@@ -5,6 +5,9 @@
     <!-- Player bar: labels under the buttons and in the "More" menu -->
     <string name="player_btn_quality">Quality</string>
     <string name="player_btn_chat">Chat</string>
+    <string name="player_btn_prev_clip">Previous clip</string>
+    <string name="player_btn_next_clip">Next clip</string>
+    <string name="player_btn_clip_source">Recording</string>
     <string name="player_btn_chat_layout">Chat layout</string>
     <string name="player_btn_channel">Channel</string>
     <string name="player_btn_follow">Follow</string>

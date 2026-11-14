@@ -1294,4 +1294,10 @@
     <string name="update_bad_checksum">İndirme sağlama toplamıyla uyuşmuyor ve silindi</string>
     <string name="update_install_failed">Yükleme başarısız: %1$s</string>
     <string name="update_download_failed">İndirme başarısız, daha sonra tekrar dene</string>
+    <string name="home_update_card">%1$s sürümü hazır</string>
+    <string name="home_update_card_hint">Ayarlar → Uygulama → Şimdi denetle</string>
+    <string name="settings_companion_skin">Telefon sayfasında TV teması</string>
+    <string name="settings_companion_skin_summary">Telefon ve tarayıcı sayfası, TV’de seçtiğiniz temanın renklerini kullanır ve değiştirdiğinizde onu izler; kapalıyken sayfa kendi açık veya koyu görünümünü korur</string>
+    <string name="settings_mqtt_entities_followed">Takip edilen kanallar</string>
+    <string name="settings_mqtt_entities_followed_summary">Takip ettiğiniz kanallarla kimin canlı yayında olduğunu (başlık, oyun, izleyici) öznitelik olarak veren iki sensör, dinamik bir pano için; uygulama açıkken konu her dakika güncellenir</string>
 </resources>

@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>Twitch on your TV, made for the remote.</b><br>
-  Live streams, VODs, chat and your followed channels, with settings you can see changing while you tune them.
+  Live streams, VODs, clips, chat and your followed channels, with settings you can see changing while you tune them.
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
 > the documentation and the translations. The author directs the work, tests the app on real TVs and reviews the results, but
 > AI-written code can contain mistakes. Please report anything that looks wrong.
 
-**Contents:** [Why ShrugTV](#why-shrugtv) · [Features](#features) · [Remote control](#remote-control) · [Install](#install) · [Settings](#settings-with-a-live-preview) · [Languages](#languages) · [Phone companion](#phone-companion) · [Build](#build) · [FAQ](#faq) · [Privacy](#privacy) · [Contributing](#contributing) · [Licence](#licence)
+**Contents:** [Why ShrugTV](#why-shrugtv) · [Highlights](#highlights) · [All features](#all-features) · [Remote control](#remote-control) · [Install](#install) · [Settings](#settings-with-a-live-preview) · [Languages](#languages) · [Phone companion](#phone-companion) · [Home Assistant](#home-assistant) · [Build](#build) · [FAQ](#faq) · [Privacy](#privacy) · [Contributing](#contributing) · [Licence](#licence)
 
 ---
 
@@ -28,11 +28,53 @@
 
 - **Built for the couch.** Every screen is reachable with arrows, OK and Back. No pointer, no keyboard needed.
 - **Fast to switch.** Up/Down in the player step through your followed channels, the same category, recent and top streams without going back to a list.
+- **More than a stream list.** Clips from everyone you follow that play one after the other, your own viewing statistics, a phone as a second remote, Home Assistant.
 - **Yours to style.** Ten skins, and every colour, corner, font and animation can be changed on its own, with a live preview next to the list.
 - **Private by default.** No telemetry, no analytics, no crash reporter, no third-party servers. The TV talks to Twitch directly.
 - **Open.** Apache-2.0, readable code, unit tests, and a build you can reproduce with your own Twitch application.
 
-## Features
+## Highlights
+
+### Clips from everyone you follow
+
+You do not have to open every channel to find a good clip. The **Clips** page (side bar, or a row on the home screen) lists the best clips of all channels you follow, or only your favorites, in one grid.
+
+<p align="center"><img src="docs/screenshots/clips.jpg" alt="The Clips page: choose a period and an order, then the best clips of your channels in one grid; clips you already watched are dimmed" width="85%"></p>
+<p align="center"><em>Sample data. Clips you already opened are dimmed (or hidden, as you like).</em></p>
+
+- **Pick a period and an order.** Last 24 hours, 7 days, 30 days, a year or all time; most viewed, newest, shortest, or **relative to channel size**: a clip is compared with the usual clips of its own channel, so a great moment of a small channel can rank next to one from a huge channel.
+- **It keeps going.** The list grows while you scroll, and with *Play the next clip* the clips run one after the other through the whole list. The next clip is loaded in the background, so the change is almost instant.
+- **Everything around the clip.** The title stays in the corner, the chat of the stream the clip came from replays along with it, *Previous clip* and *Next clip* sit in the control bar, and a *Recording* button jumps to that moment in the full video, as long as the video still exists.
+- **Your way.** Show, dim or hide clips you already opened, restrict the list to your language, choose how many load at once, show the list as a home row or not: every choice is under *Settings → Home → Clips* and on the page itself.
+
+### Your viewing, in numbers
+
+The statistics page shows what you watched: time with a comparison to the period before, days and sessions, the longest session, activity per day and per time of day, your most watched channels and categories, live against recordings, and a line for clips. Last week, 30 days, a year or any month. It is all stored on the TV only and is not part of backups.
+
+<p align="center"><img src="docs/screenshots/statistics.jpg" alt="The statistics page: time watched, activity per day, time of day, most watched channels and categories, clips" width="85%"></p>
+<p align="center"><em>Invented sample data.</em></p>
+
+### Switch channels without leaving the player
+
+Up opens a list of your followed channels, the same category, recent and top streams; Up and Down again cycle through the lists, Left and Right step through the channels. Behind a stream the rewind and *Replay* keys jump back and return to live with one key. **Multiview** shows two streams side by side, **Audio only** turns the TV into a radio (with burn-in protection for OLED panels), and **Quiet hours** silence the "is live" notices at night.
+
+### Chat that fits the screen
+
+Animated new messages, identical spam merged into one line with a counter, 7TV, BTTV and FFZ emotes, highlights and filters. The chat sits next to the video or over it; width, height, font and position are adjustable and show their result live.
+
+### Make it yours
+
+Ten skins, and below them every single value: colours, corners, focus style, glass, font, animations. Own skins can be saved from the phone browser and exchanged as files. Rows on the home screen can be shown, hidden and reordered, even from the phone.
+
+### Your phone as a second remote
+
+Open `http://<tv-ip>:8765` on a phone or PC in the same network: a remote with touchpad and keys, the chat with badges, replies and emotes, search, every setting with a keyboard, the log and a version tab with the update check. It is only reachable inside your home network, with or without a PIN.
+
+### Part of the smart home
+
+The TV shows up in **Home Assistant** (over MQTT discovery) with what is playing, controls and events for your automations. Everything stays in your network.
+
+## All features
 
 | | |
 |---|---|
@@ -41,10 +83,14 @@
 | **Channel switcher** | Up in the player opens a list of followed, same category, recent and top streams; Up/Down again cycles the list. |
 | **Replay and live rewind** | Jump back in a live stream and return to live with one key. |
 | **Chat** | Animated new messages, merged spam, 7TV, BTTV and FFZ emotes, highlights, filters, layout next to or over the video, adjustable width, height, font and position. |
+| **Clips** | The best clips of the channels you follow in one list, by period and order (also relative to channel size); page and home row, growing while you scroll, played one after the other with the next one preloaded, title, the chat of the original stream, previous and next clip, a jump to the recording. |
+| **Viewing statistics** | What you watch, with comparison, activity, time of day, top channels and categories, live against recordings and clips; kept on the device only. |
 | **Audio only** | Listen without the picture; burn-in protection keeps OLED TVs safe. |
 | **Quiet hours** | Silences "is live" notices at night. |
-| **Viewing statistics** | What you watch, kept on the device only. |
-| **Home Assistant** | Publishes what is playing over MQTT. |
+| **Skins and settings** | Ten skins, every value on its own, a live preview, a dot on every changed page and *Reset this page*. |
+| **Phone companion** | Remote, chat, search, all settings, own skins, log and updates in a browser on your phone. |
+| **Updates in the app** | Optional daily check; optionally the app downloads the new release, verifies its checksum and hands it to the system installer. |
+| **Home Assistant** | Publishes what is playing over MQTT and takes a few commands. |
 | **12 languages** | Chosen in the app, independent of the system language. |
 
 ## Remote control
@@ -76,7 +122,7 @@ Keys can differ slightly between remotes; every setting page has a short guide w
 The code always points to the newest release. To update, run it again, or switch on *Settings → App → Check for updates* and
 *Install updates in the app*: the update card then has an *Install now* button. The app downloads the release, checks its
 SHA-256 and opens the system installer, where you confirm; the first time you also have to allow *Install unknown apps*
-for ShrugTV. Installing never happens without that confirmation.  the app keeps its settings because every release
+for ShrugTV. Installing never happens without that confirmation. The app keeps its settings because every release
 is signed with the same key. Releases are also listed on the [release page](https://github.com/ShrugTV/shrugtv/releases).
 
 ### With adb
@@ -127,7 +173,18 @@ want a native speaker's eye: corrections are very welcome.
 
 ## Phone companion
 
-Open `http://<tv-ip>:8765` on a phone or PC in the same network to edit settings with a keyboard, send skins and read the changelog. It is only reachable inside your home network.
+Open `http://<tv-ip>:8765` on a phone or PC in the same network (*Settings → Connections → Phone & browser* shows the address and a QR code). You get:
+
+- a **remote** with touchpad and keys, and the volume of the stream,
+- the **chat** with badges, replies and emotes, and a search for channels and categories,
+- **every setting** with a keyboard, own skins, saving and restoring your settings as a file, and the order of the home rows,
+- the **log** of the app and a **version tab** with the update check.
+
+It is only reachable inside your home network; a PIN is optional and a list of remembered devices can be cleared at any time.
+
+## Home Assistant
+
+Switch on *Settings → Connections → Home Assistant (MQTT)* and enter your broker. The TV then appears in Home Assistant by itself (MQTT discovery) with what is playing, its controls and events you can use in automations. Commands from Home Assistant can be switched off. Nothing leaves your network.
 
 ## Build
 
@@ -157,6 +214,10 @@ and, to be signed, `keystore.file` and `keystore.password` (or `SHRUGTV_KEYSTORE
 **Does it need a Twitch account?** To follow channels and chat, yes. Sign-in uses Twitch's device-code flow.
 
 **Which devices work?** Android TV, Google TV and Fire TV with Android 8 or newer, controlled with a normal remote.
+
+**Where do the clips come from, and why does a clip have no chat?** From Twitch, for the channels you follow. A clip has no chat of its own; the app looks up the video it was cut from and replays that chat. When that video has expired (they last a few weeks), the clip plays without chat and the *Recording* button is dimmed.
+
+**Are my statistics sent anywhere?** No. They stay in a database on the TV, are not part of backups and can be deleted on the page.
 
 **Is my data sent anywhere?** Only to Twitch, the optional update check and update download (GitHub, both off by default) and, for emotes, to the emote services you see in chat (7TV, BTTV, FFZ). Statistics never leave the TV.
 

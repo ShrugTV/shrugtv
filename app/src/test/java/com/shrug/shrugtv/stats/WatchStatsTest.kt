@@ -19,11 +19,61 @@ class WatchStatsTest {
     private fun compute(rows: List<WatchSessionData>, range: StatsRange, oldest: String? = null) =
         WatchStats.compute(rows, range, today, (oldest ?: rows.minOfOrNull { it.day })?.let { LocalDate.parse(it) })
 
+    private fun clip(day: String, sec: Long, ch: Int, name: String) =
+        WatchSessionData(nextId++, ch, name.lowercase(), name, "", true, sec, day, 20, isClip = true)
+
+    @Test
+    fun `clips are counted on their own and are no recordings`() {
+        val rows = listOf(
+            s("2026-11-02", 3600, vod = true),
+            clip("2026-11-02", 30, 1, "A"), clip("2026-11-03", 20, 1, "A"), clip("2026-11-03", 40, 2, "B"),
+            s("2026-11-03", 1800)
+        )
+        val p = compute(rows, StatsRange.WEEK)
+        assertEquals(3, p.clipCount)
+        assertEquals(90L, p.clipSec)
+        assertEquals(30L, p.clipAverageSec)
+        assertEquals(3600L, p.vodSec) // the clips are not in the recordings
+        assertEquals(1800L, p.liveSec)
+        assertEquals(3600L + 90 + 1800, p.totalSec) // but in the total
+        assertEquals(listOf("A", "B"), p.topClipChannels.map { it.name })
+        assertEquals(2, p.topClipChannels.first().sessions)
+    }
+
+    @Test
+    fun `no clips, no average`() {
+        val p = compute(listOf(s("2026-11-02", 600)), StatsRange.WEEK)
+        assertEquals(0, p.clipCount)
+        assertEquals(0L, p.clipAverageSec)
+        assertTrue(p.topClipChannels.isEmpty())
+    }
+
     @Test
     fun `week covers seven days up to and including today`() {
         assertEquals(LocalDate.of(2026, 10, 29) to today, StatsRange.WEEK.bounds(today))
         val rows = listOf(s("2026-10-28", 3600), s("2026-10-29", 3600), s("2026-11-04", 3600), s("2026-11-05", 3600))
         assertEquals(7200L, compute(rows, StatsRange.WEEK).totalSec)
+    }
+
+    @Test
+    fun `the chart has one bar per day, one per month for a year, and knows the busiest one`() {
+        val rows = listOf(s("2026-10-30", 1800), s("2026-11-02", 7200), s("2026-11-02", 600), s("2026-05-12", 3600))
+        val week = compute(rows, StatsRange.WEEK)
+        assertEquals(BucketUnit.DAY, week.bucketUnit)
+        assertEquals(7, week.buckets.size)
+        assertEquals(today, week.buckets.last().start)
+        assertEquals(LocalDate.of(2026, 11, 2), week.busiest?.start)
+        assertEquals(7800L, week.busiest?.seconds)
+        assertEquals(30, compute(rows, StatsRange.DAYS_30).buckets.size)
+        val month = compute(rows, StatsRange.Month(YearMonth.of(2026, 11)))
+        assertEquals(30, month.buckets.size)
+        val year = compute(rows, StatsRange.YEAR)
+        assertEquals(BucketUnit.MONTH, year.bucketUnit)
+        assertEquals(13, year.buckets.size)
+        assertEquals(3600L, year.buckets.first { it.start == LocalDate.of(2026, 5, 1) }.seconds)
+        assertEquals(7800L, year.buckets.first { it.start == LocalDate.of(2026, 11, 1) }.seconds)
+        assertEquals(1800L, year.buckets.first { it.start == LocalDate.of(2026, 10, 1) }.seconds)
+        assertNull(compute(emptyList(), StatsRange.WEEK).busiest)
     }
 
     @Test
@@ -70,15 +120,34 @@ class WatchStatsTest {
         val rows = (1..7).map { s("2026-11-02", it * 100L, ch = it, name = "C$it") } + s("2026-11-03", 1000, ch = 7, name = "C7")
         val top = compute(rows, StatsRange.WEEK).topChannels
         assertEquals(5, top.size)
-        assertEquals(Ranked("C7", 1700), top[0])
+        assertEquals(Ranked("C7", 1700, 2), top[0])
         assertEquals("C6", top[1].name)
+    }
+
+    @Test
+    fun `the length of the top list and what it is sorted by can be chosen`() {
+        val rows = listOf(
+            s("2026-11-02", 5000, ch = 1, name = "Long"), s("2026-11-03", 100, ch = 2, name = "Often"),
+            s("2026-11-04", 100, ch = 2, name = "Often"), s("2026-11-05", 100, ch = 2, name = "Often"), s("2026-11-02", 50, ch = 3, name = "Rare")
+        )
+        val oldest = LocalDate.parse("2026-11-02")
+        assertEquals(listOf("Long", "Often", "Rare"), compute(rows, StatsRange.WEEK).topChannels.map { it.name })
+        assertEquals(listOf("Often", "Long", "Rare"), WatchStats.compute(rows, StatsRange.WEEK, today, oldest, 5, RankBy.SESSIONS).topChannels.map { it.name })
+        assertEquals(2, WatchStats.compute(rows, StatsRange.WEEK, today, oldest, 2, RankBy.TIME).topChannels.size)
+    }
+
+    @Test
+    fun `the day parts add up six hours each`() {
+        val hours = LongArray(24) { 10L }
+        hours[3] = 100; hours[8] = 200; hours[13] = 300; hours[22] = 400
+        assertEquals(listOf(150L, 250L, 350L, 450L), WatchStats.dayParts(hours).toList())
     }
 
     @Test
     fun `a channel without id is grouped by login and a blank category is left out`() {
         val rows = listOf(s("2026-11-02", 100, ch = 0, name = "Zed", cat = ""), s("2026-11-03", 200, ch = 0, name = "Zed", cat = ""))
         val p = compute(rows, StatsRange.WEEK)
-        assertEquals(listOf(Ranked("Zed", 300)), p.topChannels)
+        assertEquals(listOf(Ranked("Zed", 300, 2)), p.topChannels)
         assertTrue(p.topCategories.isEmpty())
     }
 

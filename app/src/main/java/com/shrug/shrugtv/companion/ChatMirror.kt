@@ -3,15 +3,16 @@ package com.shrug.shrugtv.companion
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.shrug.shrugtv.chat.ui.ChatColors
+import com.shrug.shrugtv.hub.PlaybackStateHub
 import com.shrug.shrugtv.ui.tv.player.ChatLine
 
 /**
  * Chat lines for the phone: name, readable colour, text and emote images by URL with their
- * positions; the phone renders them itself. Badges stay on the TV (they are drawables there).
+ * positions; the phone renders them itself. Twitch badges go by image URL; 7TV badges stay on the TV (drawables only).
  */
 object ChatMirror {
     @JvmStatic
-    fun line(l: ChatLine): JsonObject {
+    fun line(l: ChatLine, badgeUrl: ((String, String) -> String?)? = PlaybackStateHub.badgeUrl): JsonObject {
         val m = l.message
         val name = m.displayName ?: ""
         val color = ChatColors.readable(ChatColors.parse(m.color) ?: ChatColors.fallback(name))
@@ -35,6 +36,15 @@ object ChatMirror {
                 }
             }
             add("e", emotes)
+            val badges = JsonArray()
+            if (badgeUrl != null) {
+                for (b in m.badges.take(6)) {
+                    val url = badgeUrl(b.name, b.version) ?: continue
+                    if (url.startsWith("https://")) badges.add(url)
+                }
+            }
+            if (badges.size() > 0) add("b", badges)
+            m.chatterLogin?.takeIf { it.isNotEmpty() }?.let { addProperty("l", it) }
         }
     }
 }

@@ -45,7 +45,13 @@ object SettingsApi {
 
     /** Buttons that also make sense from the browser; all other buttons only work on the TV. */
     val BROWSER_ACTIONS = setOf("pref_notification_test", "pref_live_channel_history_clear_history", "pref_mqtt_status",
-        com.shrug.shrugtv.ui.tv.theme.ThemeSettings.ACTION_RESET)
+        com.shrug.shrugtv.ui.tv.theme.ThemeSettings.ACTION_RESET, "pref_clear_caches",
+        com.shrug.shrugtv.ui.tv.home.HomeRowOrder.RESET)
+
+    /** The buttons "move this home row up" only change a preference, so they run from the browser too. */
+    private fun isRowMove(key: String?) = key != null && key.startsWith(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.MOVE_PREFIX)
+
+    private fun runsInBrowser(key: String?) = key in BROWSER_ACTIONS || isRowMove(key)
 
     private val main = Handler(Looper.getMainLooper())
 
@@ -139,7 +145,7 @@ object SettingsApi {
         when (e) {
             is Entry.Page -> {
                 addProperty("type", "page")
-                add("children", JsonArray().apply { e.children.forEach { add(node(it, p, standards)) } })
+                add("children", JsonArray().apply { inRowOrder(e.children, p).forEach { add(node(it, p, standards)) } })
             }
             is Entry.Category -> {
                 addProperty("type", "category")
@@ -214,10 +220,25 @@ object SettingsApi {
             is Entry.Preview -> addProperty("type", "preview")
             is Entry.Action -> {
                 if (e.key == null && !e.selectable) addProperty("type", "tip") else addProperty("type", "action")
-                if (e.key in BROWSER_ACTIONS) addProperty("run", true)
+                if (runsInBrowser(e.key)) addProperty("run", true)
+                // Home rows: current place (1-based), so the page can show the order
+                if (isRowMove(e.key)) addProperty("place", com.shrug.shrugtv.ui.tv.home.HomeRowOrder.place(
+                    com.shrug.shrugtv.ui.tv.home.HomeRowOrder.DEFAULT, p.getString(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.PREF, null),
+                    e.key!!.removePrefix(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.MOVE_PREFIX)))
                 info(e.key)?.let { addProperty("info", it) }
             }
         }
+    }
+
+    /** The "move row" buttons sorted by their current place, all other entries stay where they are. */
+    private fun inRowOrder(children: List<Entry>, p: SharedPreferences): List<Entry> {
+        val moves = children.filter { isRowMove(it.key) }
+        if (moves.size < 2) return children
+        val saved = p.getString(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.PREF, null)
+        val sorted = moves.sortedBy { com.shrug.shrugtv.ui.tv.home.HomeRowOrder.place(
+            com.shrug.shrugtv.ui.tv.home.HomeRowOrder.DEFAULT, saved, it.key!!.removePrefix(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.MOVE_PREFIX)) }
+        val it = sorted.iterator()
+        return children.map { c -> if (isRowMove(c.key)) it.next() else c }
     }
 
     /** Runtime values the TV shows as summary (page "App info"). */
@@ -288,7 +309,22 @@ object SettingsApi {
     /** Runs one of [BROWSER_ACTIONS]; the others need the TV in front of you. */
     fun action(context: Context, key: String): JsonObject = JsonObject().apply {
         when {
-            key !in BROWSER_ACTIONS -> { addProperty("ok", false); addProperty("error", "tv_only") }
+            !runsInBrowser(key) -> { addProperty("ok", false); addProperty("error", "tv_only") }
+            // Home rows: the same change as OK on the TV; the home screen follows the preference
+            isRowMove(key) -> {
+                val H = com.shrug.shrugtv.ui.tv.home.HomeRowOrder
+                prefs(context).edit().putString(H.PREF, H.moveUp(H.DEFAULT, prefs(context).getString(H.PREF, null), key!!.removePrefix(H.MOVE_PREFIX))).apply()
+                addProperty("ok", true)
+            }
+            key == com.shrug.shrugtv.ui.tv.home.HomeRowOrder.RESET -> {
+                prefs(context).edit().remove(com.shrug.shrugtv.ui.tv.home.HomeRowOrder.PREF).apply()
+                addProperty("ok", true)
+            }
+            key == "pref_clear_caches" -> {
+                // Glide's memory cache may only be cleared on the main thread, the server answers on its own one
+                main.post { SettingsActions.clearCaches(context.applicationContext) }
+                addProperty("ok", true)
+            }
             key == "pref_mqtt_status" -> { addProperty("ok", true); addProperty("message", MqttBridge.status) }
             // Needs no TV in front: only preferences, the theme follows them
             key == com.shrug.shrugtv.ui.tv.theme.ThemeSettings.ACTION_RESET -> {

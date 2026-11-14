@@ -50,6 +50,9 @@ class DeepLinkActivity : Activity() {
             if (scheme == "shrugtv" && host == "vod") {
                 return PlayerActivity::class.java
             }
+            if (scheme == "shrugtv" && host == "clip") {
+                return PlayerActivity::class.java
+            }
             return null
         }
     }

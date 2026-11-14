@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Clips-Seite, Startseiten-Zeile und Einstellungen -->
+<resources>
+    <string name="clips_title">Clips deiner Kanäle</string>
+    <string name="clips_loading">Lade Clips …</string>
+    <string name="clips_empty">Keine Clips gefunden. Versuche einen längeren Zeitraum oder mehr Kanäle.</string>
+    <string name="clips_empty_favorites">Keine Clips deiner Favoriten. Markiere Kanäle mit dem Stern oder wechsle zu allen gefolgten.</string>
+    <string name="clips_source_followed">Alle gefolgten</string>
+    <string name="clips_source_favorites">Favoriten</string>
+    <string name="clips_period_day">24 Stunden</string>
+    <string name="clips_period_week">7 Tage</string>
+    <string name="clips_period_month">30 Tage</string>
+    <string name="clips_period_year">Jahr</string>
+    <string name="clips_period_all">Gesamt</string>
+    <string name="clips_sort_views">Meistgesehen</string>
+    <string name="clips_sort_relative">Nach Kanalgröße</string>
+    <string name="clips_sort_shortest">Kürzeste</string>
+    <string name="clips_sort_newest">Neueste</string>
+    <string name="home_row_clips">Top-Clips deiner Kanäle</string>
+    <string name="home_nav_clips">Clips</string>
+    <string name="settings_clips_screen">Clips</string>
+    <string name="settings_clips_screen_summary">Die besten Clips der Kanäle, denen du folgst</string>
+    <string name="settings_clips_tip">Die Seite Clips (Seitenleiste, Play-Symbol) und die Zeile auf der Startseite zeigen die besten Clips deiner Kanäle in einer Liste. Wähle, von welchen Kanälen, wie weit zurück und wie sortiert wird. „Nach Kanalgröße“ vergleicht jeden Clip mit den anderen Clips seines eigenen Kanals, so kann ein guter Clip eines kleinen Kanals neben dem eines großen Kanals landen. Dieselbe Auswahl gibt es auf der Seite selbst. Die Liste wächst beim Scrollen, und ist ein Clip zu Ende, startet der nächste von allein, durch die ganze Liste.</string>
+    <string name="settings_clips_source">Kanäle</string>
+    <string name="settings_clips_period">Zeitraum</string>
+    <string name="settings_clips_sort">Sortierung</string>
+    <string name="settings_clips_count">Clips pro Ladevorgang</string>
+    <string name="settings_clips_seen">Schon geöffnete Clips</string>
+    <string name="settings_clips_autoplay">Nächsten Clip abspielen</string>
+    <string name="settings_clips_autoplay_summary">Wenn ein Clip zu Ende ist, startet der nächste der Liste, aus der er geöffnet wurde</string>
+    <string name="settings_clips_queue_seen">Schon geöffnete Clips in der Warteschlange</string>
+    <string name="settings_clips_language">Sprache der Clips</string>
+    <string name="settings_clips_show_title">Clip-Titel anzeigen</string>
+    <string name="settings_clips_show_title_summary">Der Titel eines laufenden Clips bleibt in der Ecke stehen; bei offener Leiste zeigt ihn die Kanalinfo</string>
+    <string name="settings_clips_row">Auf der Startseite zeigen</string>
+    <string name="settings_clips_row_summary">Eine Zeile mit den besten Clips; die Reihenfolge der Zeilen steht unter Reihenfolge</string>
+    <string-array name="display_clips_source">
+        <item>Alle Kanäle, denen ich folge</item>
+        <item>Nur Favoriten</item>
+    </string-array>
+    <string-array name="display_clips_period">
+        <item>Letzte 24 Stunden</item>
+        <item>Letzte 7 Tage</item>
+        <item>Letzte 30 Tage</item>
+        <item>Letztes Jahr</item>
+        <item>Gesamt</item>
+    </string-array>
+    <string-array name="display_clips_sort">
+        <item>Meistgesehen</item>
+        <item>Im Verhältnis zur Kanalgröße</item>
+        <item>Neueste</item>
+        <item>Kürzeste zuerst</item>
+    </string-array>
+    <string-array name="display_clips_seen">
+        <item>Normal anzeigen</item>
+        <item>Ausgegraut anzeigen</item>
+        <item>Ausblenden</item>
+    </string-array>
+    <string-array name="display_clips_queue_seen">
+        <item>Überspringen</item>
+        <item>Auch abspielen</item>
+    </string-array>
+    <string-array name="display_clips_language">
+        <item>Jede Sprache</item>
+        <item>Nur meine Stream-Sprache</item>
+    </string-array>
+</resources>

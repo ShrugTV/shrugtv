@@ -85,6 +85,19 @@ class HaDiscoveryTest {
     }
 
     @Test
+    fun `followed channels are two sensors on their own topic and go away with the group`() {
+        val on = HaDiscovery("tv", "TV", "AFTKA", "1", true, groups = HaDiscovery.GROUPS.toSet())
+        assertEquals("shrugtv/tv/followed", on.followedTopic)
+        val live = on.configs(emptyList()).first { "/sensor/shrugtv_tv/live_channels/" in it.first }.second
+        assertTrue(live.contains("shrugtv/tv/followed") && live.contains("live_count") && live.contains("value_json.live"))
+        val all = on.configs(emptyList()).first { "/sensor/shrugtv_tv/followed_channels/" in it.first }.second
+        assertTrue(all.contains("followed_count") && all.contains("value_json.followed"))
+        assertEquals(2, on.counts()[HaDiscovery.FOLLOWED])
+        val off = HaDiscovery("tv", "TV", "AFTKA", "1", true, groups = HaDiscovery.GROUPS.toSet() - HaDiscovery.FOLLOWED)
+        assertTrue(off.configs(emptyList()).filter { "live_channels" in it.first || "followed_channels" in it.first }.all { it.second.isEmpty() })
+    }
+
+    @Test
     fun `topic prefixes are checked`() {
         assertEquals("home/tv", MqttSettings.topicPrefix(" home/tv "))
         assertEquals("shrugtv", MqttSettings.topicPrefix("#"))

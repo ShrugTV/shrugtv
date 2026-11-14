@@ -6,6 +6,9 @@
     <!-- Player bar -->
     <string name="player_btn_quality">Qualität</string>
     <string name="player_btn_chat">Chat</string>
+    <string name="player_btn_prev_clip">Vorheriger Clip</string>
+    <string name="player_btn_next_clip">Nächster Clip</string>
+    <string name="player_btn_clip_source">Aufnahme</string>
     <string name="player_btn_chat_layout">Chat-Layout</string>
     <string name="player_btn_channel">Kanal</string>
     <string name="player_btn_follow">Folgen</string>
@@ -16,7 +19,7 @@
     <string name="player_more_chat_position">Chat anpassen</string>
     <string name="player_more_multiview">Multiview anpassen</string>
     <string name="player_more_video_size">Video und Chat nebeneinander</string>
-    <string name="player_more_fastforward">Zum Live-Rand</string>
+    <string name="player_more_fastforward">Zu Live springen</string>
     <string name="player_more_preview_audio">Ton der Vorschau</string>
     <string name="player_more_save_vod">VOD sichern</string>
     <string name="player_more_reload_emotes">Emotes neu laden</string>
@@ -26,7 +29,7 @@
     <string name="player_panel_volume">Lautstärke</string>
     <string name="player_panel_chapters">Kapitel</string>
     <string name="player_press_back_again">Zum Verlassen nochmal ZURÜCK drücken</string>
-    <string name="player_audio_only_hint">Nur Ton · OK bringt das Bild zurück · Chat bleibt an</string>
+    <string name="player_audio_only_hint">Nur Audio · OK bringt das Bild zurück · Chat bleibt an</string>
     <string name="player_rest_hint">Pausiert · beliebige Taste zum Weiterschauen</string>
     <string name="player_btn_prev_category">Vorige Kategorie</string>
     <string name="player_btn_next_category">Nächste Kategorie</string>
@@ -35,10 +38,10 @@
     <string name="player_stats_title">Video-Statistiken</string>
     <string name="player_stats_resolution">Auflösung</string>
     <string name="player_stats_bitrate">Bitrate</string>
-    <string name="player_stats_dropped">Ausgelassene Bilder</string>
+    <string name="player_stats_dropped">Dropped Frames</string>
     <string name="player_stats_emotes">Animierte Emotes</string>
     <string name="player_stats_buffer">Puffer</string>
-    <string name="player_stats_latency">Abstand zum Live-Rand</string>
+    <string name="player_stats_latency">Latenz zu Live</string>
     <string name="player_stats_chat_delay">Chat-Verzögerung</string>
     <string name="player_stats_memory">Speicherbedarf</string>
     <string name="player_quality_source">Quelle</string>
@@ -106,13 +109,13 @@
     <string name="companion_qr_steps">1. Handy im selben WLAN. 2. Code mit der Kamera scannen. Oder diese Adresse im Browser eines Handys oder Computers öffnen und die PIN eingeben:</string>
     <string name="companion_pin">PIN %1$s</string>
     <string name="companion_qr_valid">Gilt 2 Minuten und für ein Handy. Zurück schließt.</string>
-    <string name="companion_no_network">Kein Netz: den TV mit WLAN oder Ethernet verbinden und „Handy-Begleiter“ in den Einstellungen einschalten.</string>
+    <string name="companion_no_network">Kein Netz: den TV mit WLAN oder Ethernet verbinden und „Handy &amp; Browser“ in den Einstellungen einschalten.</string>
     <string name="companion_phone_connected">Handy verbunden: %1$s</string>
     <string name="player_more_phone">Handy</string>
     <string name="player_btn_back10">−10 s</string>
     <string name="player_btn_forward10">+10 s</string>
     <string name="player_back_to_live_hud">Wieder live</string>
-    <string name="player_btn_replay">Nochmal</string>
+    <string name="player_btn_replay">Replay</string>
     <string name="player_replay_hud">%1$d s zurück, danach wieder live</string>
     <string name="player_loading_archive">Aufzeichnung wird geladen …</string>
     <string name="player_loading_live">Zurück zu live …</string>
@@ -187,7 +190,7 @@
     <string name="pa_layout_modify_width">Breite</string>
     <string name="tooltip_channel_profile">Kanal</string>
     <string name="tooltip_chat_position">Chat anpassen</string>
-    <string name="tooltip_fastforward">Zum Live-Rand</string>
+    <string name="tooltip_fastforward">Zu Live springen</string>
     <string name="tooltip_follow">Folgen</string>
     <string name="tooltip_multiview">Multiview anpassen</string>
     <string name="tooltip_preview_audio">Ton der Vorschau</string>

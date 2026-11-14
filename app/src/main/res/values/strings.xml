@@ -291,6 +291,8 @@
     <string name="settings_mqtt_entities_avatar_summary">Profile picture of the channel that is playing</string>
     <string name="settings_mqtt_entities_preview">Stream preview</string>
     <string name="settings_mqtt_entities_preview_summary">Snapshot of the stream, Twitch refreshes it every few minutes</string>
+    <string name="settings_mqtt_entities_followed">Followed channels</string>
+    <string name="settings_mqtt_entities_followed_summary">Two sensors with the channels you follow and who is live (title, game, viewers) as attributes, for a dynamic dashboard; the topic is updated every minute while the app is open</string>
     <string name="settings_mqtt_entities_events">Events</string>
     <string name="settings_mqtt_entities_events_summary">Raid, stream ended, followed channel live, ad break – for automations</string>
     <string-array name="settings_mqtt_interval_names">
@@ -308,6 +310,8 @@
     <string name="settings_companion_chat_summary">Messages are sent with the Twitch account of this TV</string>
     <string name="settings_companion_settings">Allow settings from the browser</string>
     <string name="settings_companion_settings_summary">Connected phones and computers can change all settings of this app</string>
+    <string name="settings_companion_skin">TV skin on the phone page</string>
+    <string name="settings_companion_skin_summary">The phone and browser page wears the colours of the skin you picked on the TV and follows when you change it; off: the page keeps its own dark or light look</string>
     <string name="settings_companion_log">Log in the browser</string>
     <string name="settings_companion_log_summary">Tab "Log": ShrugTV\'s own log, live, with filters, search and export for bug reports. Tokens and passwords are always removed.</string>
     <string name="settings_companion_disconnect">Forget all devices</string>

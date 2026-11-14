@@ -28,26 +28,29 @@ object UpdateChecker {
     fun enabled(ctx: Context): Boolean =
         BuildConfig.UPDATE_CHECK && PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(PREF_ENABLED, false)
 
-    /** Blocking; call from a background thread. [force] ignores the daily limit (the "Check now" action). */
-    fun check(ctx: Context, force: Boolean): Result {
-        if (!BuildConfig.UPDATE_CHECK || BuildConfig.UPDATE_SOURCE.isEmpty()) return Result.UpToDate
+    /**
+     * Blocking; call from a background thread. [force] ignores the daily limit (the "Check now" action). [source] and
+     * [current] default to the build values; tests pass a mock server and a version.
+     */
+    fun check(ctx: Context, force: Boolean, source: String = BuildConfig.UPDATE_SOURCE, current: String = BuildConfig.VERSION_NAME): Result {
+        if (source.isEmpty()) return Result.UpToDate
         val s = store(ctx)
         val now = System.currentTimeMillis()
         val cached = s.getString("release_json", null)
-        if (!force && cached != null && now - s.getLong("last_check", 0L) < DAY_MS) return result(ctx, cached)
-        val req = Request.Builder().url(BuildConfig.UPDATE_SOURCE).header("Accept", "application/json")
+        if (!force && cached != null && now - s.getLong("last_check", 0L) < DAY_MS) return result(ctx, cached, current)
+        val req = Request.Builder().url(source).header("Accept", "application/json")
             .apply { s.getString("etag", null)?.takeIf { cached != null }?.let { header("If-None-Match", it) } }.build()
         return try {
             Http.client().newCall(req).execute().use { resp ->
                 when {
                     resp.code == 304 && cached != null -> {
                         s.edit().putLong("last_check", now).apply()
-                        result(ctx, cached)
+                        result(ctx, cached, current)
                     }
                     resp.isSuccessful -> {
                         val body = resp.body?.string().orEmpty()
                         s.edit().putString("release_json", body).putString("etag", resp.header("ETag")).putLong("last_check", now).apply()
-                        result(ctx, body)
+                        result(ctx, body, current)
                     }
                     else -> Result.Failed // 403/429 rate limit or any other answer: try again later, no crash
                 }
@@ -57,10 +60,27 @@ object UpdateChecker {
         }
     }
 
-    private fun result(ctx: Context, json: String): Result {
+    private fun result(ctx: Context, json: String, current: String): Result {
         val skipped = store(ctx).getString("skipped", null)
-        return UpdateCheck.available(BuildConfig.VERSION_NAME, json, skipped)?.let { Result.Available(it) } ?: Result.UpToDate
+        return UpdateCheck.available(current, json, skipped)?.let { Result.Available(it) } ?: Result.UpToDate
     }
+
+    /** The newer release from the last answer, without a network call; null when off, none or skipped. For the home screen card. */
+    fun pending(ctx: Context, current: String = BuildConfig.VERSION_NAME): UpdateCheck.Release? {
+        if (!enabled(ctx)) return null
+        val json = store(ctx).getString("release_json", null) ?: return null
+        return (result(ctx, json, current) as? Result.Available)?.release
+    }
+
+    /** The newest release from the last answer even when skipped (for the phone page); null when none was fetched yet or it is not newer. */
+    fun latest(ctx: Context, current: String = BuildConfig.VERSION_NAME): UpdateCheck.Release? {
+        val json = store(ctx).getString("release_json", null) ?: return null
+        val r = UpdateCheck.parseRelease(json) ?: return null
+        return r.takeIf { UpdateCheck.isNewer(current, it.tag) }
+    }
+
+    /** Epoch ms of the last answer from the release page, 0 when never asked. */
+    fun lastCheck(ctx: Context): Long = store(ctx).getLong("last_check", 0L)
 
     /** "Skip this version": no notice for it any more; a later version is announced again. */
     fun skip(ctx: Context, version: String) {

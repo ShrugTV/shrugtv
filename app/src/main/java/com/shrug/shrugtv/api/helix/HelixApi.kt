@@ -194,6 +194,11 @@ object HelixApi {
             .setCallback(callback)
     }
 
+    /** The clips of one channel, most viewed first, since [startedAt] (RFC 3339; null = all time); blocking. */
+    @JvmStatic
+    fun getClipsOfBroadcasterSync(context: Context?, broadcasterId: String, startedAt: String?, first: Int): JsonObject? =
+        helixGetSync("https://api.twitch.tv/helix/clips?broadcaster_id=$broadcasterId&first=$first" + (startedAt?.let { "&started_at=$it" } ?: ""))
+
     @JvmStatic
     fun getClipsByGame(context: Context?, gameId: Long, cursor: String, callback: ResultCallback<JsonObject>) {
         val startedAt = Instant.now().minus(Duration.ofDays(7)).truncatedTo(ChronoUnit.SECONDS).toString()

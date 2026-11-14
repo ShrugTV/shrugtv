@@ -28,6 +28,7 @@ object HomeIcons {
     }
 
     val Search = stroke("suche", "M4,11a7,7 0 1,0 14,0a7,7 0 1,0 -14,0", "M20,20l-3.5,-3.5")
+    val Clips = stroke("clips", "M4,5H20V19H4Z", "M10,9L15,12L10,15Z")
     val Stats = stroke("statistik", "M5,20V12", "M12,20V5", "M19,20V15")
     val Start = stroke("start", "M3,11l9,-7 9,7v9a1,1 0 0,1 -1,1h-5v-6H9v6H4a1,1 0 0,1 -1,-1z")
     val Grid = stroke(

@@ -1,7 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Statistikseite: was geschaut wurde -->
 <resources>
-    <string name="stats_title">Dein Schauverhalten</string>
+    <string name="stats_total_label">Geschaut</string>
+    <string name="stats_tile_days">Tage geschaut</string>
+    <string name="stats_clips_title">Geschaute Clips</string>
+    <string name="stats_clips_time">Sehzeit</string>
+    <string name="stats_clips_average">Durchschnittliche Länge</string>
+    <string name="stats_clips_channels">Am meisten von</string>
+    <string name="settings_stats_show_clips">Clips</string>
+    <string name="settings_stats_show_clips_summary">Eine Zeile mit den geschauten Clips: wie viele, wie lange, der Durchschnitt und von welchen Kanälen</string>
+    <string name="stats_tile_sessions">Sitzungen</string>
+    <string name="stats_tile_longest">Längste Sitzung</string>
+    <string name="stats_activity">Aktivität</string>
+    <string name="stats_busiest">Am meisten: %1$s · %2$s</string>
+    <string name="stats_hours_title">Tageszeit</string>
+    <string name="stats_hours_peak">Spitze %1$s</string>
+    <string name="stats_live_title">Live und Aufzeichnungen</string>
+    <string name="stats_legend_live">Live</string>
+    <string name="stats_legend_recordings">Aufzeichnungen</string>
+    <string name="settings_stats_screen">Statistik-Seite</string>
+    <string name="settings_stats_screen_summary">Karten, Diagramme, Zeitformat und Toplisten</string>
+    <string name="settings_stats_tip">Bestimmt, wie die Statistik-Seite aussieht (Button „Statistik“ auf der Startseite): mit welchem Zeitraum sie sich öffnet, welche Karten sie zeigt, wie lang die Toplisten sind, wie die Diagramme aussehen und wie Zeiten geschrieben werden. Ausgeschaltete Karten machen den anderen Platz. „Daten behalten“ löscht ältere Sitzungen beim nächsten Start der App.</string>
+    <string name="settings_stats_cat_page">Seite</string>
+    <string name="settings_stats_cat_cards">Karten</string>
+    <string name="settings_stats_cat_lists">Toplisten</string>
+    <string name="settings_stats_cat_charts">Diagramme</string>
+    <string name="settings_stats_cat_data">Daten</string>
+    <string name="settings_stats_period">Öffnet mit</string>
+    <string name="settings_stats_time_format">Zeitformat</string>
+    <string name="settings_stats_compare">Mit dem Zeitraum davor vergleichen</string>
+    <string name="settings_stats_compare_summary">Ein Pfeil und der Unterschied unter der Gesamtzeit</string>
+    <string name="settings_stats_show_tiles">Kennzahlen</string>
+    <string name="settings_stats_show_tiles_summary">Tage geschaut, Sitzungen und längste Sitzung</string>
+    <string name="settings_stats_show_activity">Aktivitäts-Diagramm</string>
+    <string name="settings_stats_show_activity_summary">Ein Balken pro Tag, beim letzten Jahr pro Monat</string>
+    <string name="settings_stats_show_hours">Tageszeit</string>
+    <string name="settings_stats_show_hours_summary">Wann du anfängst zu schauen</string>
+    <string name="settings_stats_show_channels">Meistgeschaute Kanäle</string>
+    <string name="settings_stats_show_categories">Meistgeschaute Kategorien</string>
+    <string name="settings_stats_show_live">Live und Aufzeichnungen</string>
+    <string name="settings_stats_show_live_summary">Der Anteil von Live-Streams gegenüber Aufzeichnungen</string>
+    <string name="settings_stats_top_count">Länge der Toplisten</string>
+    <string name="settings_stats_rank_by">Sortieren nach</string>
+    <string name="settings_stats_activity_style">Aktivität als</string>
+    <string name="settings_stats_highlight">Aktivsten Tag markieren</string>
+    <string name="settings_stats_highlight_summary">In der Akzentfarbe, mit seinem Namen über dem Diagramm</string>
+    <string name="settings_stats_hours_style">Tageszeit als</string>
+    <string name="settings_stats_live_style">Live und Aufzeichnungen als</string>
+    <string name="settings_stats_keep">Daten behalten für</string>
+    <string name="settings_stats_keep_summary">Ältere Sitzungen werden beim nächsten Start der App gelöscht</string>
+    <string name="stats_part_night">Nacht</string>
+    <string name="stats_part_morning">Morgen</string>
+    <string name="stats_part_afternoon">Nachmittag</string>
+    <string name="stats_part_evening">Abend</string>
+    <string name="stats_sessions_short">%1$d ×</string>
+    <string-array name="display_stats_period">
+        <item>Letzte Woche</item>
+        <item>Letzte 30 Tage</item>
+        <item>Letztes Jahr</item>
+        <item>Monat</item>
+    </string-array>
+    <string-array name="display_stats_time_format">
+        <item>1 h 35 min</item>
+        <item>1:35 h</item>
+        <item>1,6 h</item>
+    </string-array>
+    <string-array name="display_stats_top_count">
+        <item>3</item>
+        <item>5 (Standard)</item>
+        <item>8</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="display_stats_rank_by">
+        <item>Dauer</item>
+        <item>Anzahl der Sitzungen</item>
+    </string-array>
+    <string-array name="display_stats_activity_style">
+        <item>Balken</item>
+        <item>Linie</item>
+    </string-array>
+    <string-array name="display_stats_hours_style">
+        <item>24 Stunden</item>
+        <item>Tageszeiten</item>
+    </string-array>
+    <string-array name="display_stats_live_style">
+        <item>Ring</item>
+        <item>Balken</item>
+    </string-array>
+    <string-array name="display_stats_keep">
+        <item>1 Jahr</item>
+        <item>2 Jahre (Standard)</item>
+        <item>5 Jahre</item>
+    </string-array>
+    <string name="stats_title">Deine Watchtime</string>
     <string name="stats_tab_week">Letzte Woche</string>
     <string name="stats_tab_30_days">Letzte 30 Tage</string>
     <string name="stats_tab_year">Letztes Jahr</string>
@@ -25,7 +116,7 @@
     <string name="stats_time_of_day_peak">Tageszeit (Beginn einer Sitzung), am meisten um %1$s</string>
     <string name="stats_delete">Statistik löschen</string>
     <string name="stats_delete_confirm">Wirklich löschen? Nochmal OK</string>
-    <string name="stats_hint">Nur auf diesem Gerät gespeichert, nicht in Sicherungen. In den Einstellungen abschaltbar.</string>
+    <string name="stats_hint">Nur auf diesem Gerät gespeichert, nicht in Backups. In den Einstellungen abschaltbar.</string>
     <string name="home_nav_stats">Statistik</string>
     <string name="home_stats_card_title">Deine letzten 30 Tage: %1$s</string>
     <string name="home_stats_card_top">Meistgeschaut: %1$s</string>

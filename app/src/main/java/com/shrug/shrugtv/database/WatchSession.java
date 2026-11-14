@@ -29,6 +29,10 @@ public class WatchSession {
     @ColumnInfo(name = "is_vod")
     public boolean isVod;
 
+    /** A clip; clips are recordings too ({@link #isVod}), but counted on their own. */
+    @ColumnInfo(name = "is_clip", defaultValue = "0")
+    public boolean isClip;
+
     @ColumnInfo(name = "played_sec")
     public long playedSec;
 

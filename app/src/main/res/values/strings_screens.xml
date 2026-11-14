@@ -356,4 +356,6 @@
         <item quantity="other">%d values changed</item>
     </plurals>
     <string name="skin_custom">Own skin</string>
+    <string name="home_update_card">Version %1$s is available</string>
+    <string name="home_update_card_hint">Settings → App → Check now</string>
 </resources>

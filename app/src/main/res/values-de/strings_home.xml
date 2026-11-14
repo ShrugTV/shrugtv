@@ -23,7 +23,7 @@
     <string name="home_row_continue_watching">Weiterschauen</string>
     <string name="home_row_followed_channels">Gefolgte Kanäle</string>
     <string name="home_row_followed_categories">Gefolgte Kategorien</string>
-    <string name="home_row_past_broadcasts">Vergangene Übertragungen</string>
+    <string name="home_row_past_broadcasts">Frühere Streams</string>
     <string name="home_row_top_categories">Top-Kategorien</string>
     <string name="home_row_top_streams">Top-Streams</string>
     <!-- Components -->

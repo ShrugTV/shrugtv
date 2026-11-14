@@ -36,6 +36,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 object MqttBridge : DefaultLifecycleObserver {
     private const val TAG = "MqttBridge"
     private const val LINGER_MS = 120_000L
+    private const val FOLLOWED_INTERVAL_MS = 60_000L
 
     private lateinit var appContext: Context
     private val main = Handler(Looper.getMainLooper())
@@ -258,6 +259,17 @@ object MqttBridge : DefaultLifecycleObserver {
                     val c = client ?: return@collect
                     val d = discovery ?: return@collect
                     publish(c, d.eventTopic, e.toJson().toString(), retained = false)
+                    // Someone went live: refresh the followed list at once
+                    if (e.type == com.shrug.shrugtv.hub.HubEvent.FOLLOWED_LIVE) publishFollowed(c, d)
+                }
+            },
+            scope.launch {
+                // Followed channels for dashboards: once a minute while the group is on
+                while (true) {
+                    val c = client
+                    val d = discovery
+                    if (c != null && d != null) publishFollowed(c, d)
+                    delay(FOLLOWED_INTERVAL_MS)
                 }
             }
         )
@@ -265,7 +277,47 @@ object MqttBridge : DefaultLifecycleObserver {
 
     private fun publishDiscovery(c: MqttAsyncClient, d: HaDiscovery, qualities: List<String>) {
         publishedQualities = qualities
+        followedSignature = null
         for ((topic, payload) in d.configs(qualities)) publish(c, topic, payload, retained = true)
+        // Group off: also remove a message of an earlier run that is still retained on the broker
+        if (settings?.groups?.contains(HaDiscovery.FOLLOWED) != true) publish(c, d.followedTopic, "", retained = true)
+    }
+
+    @Volatile private var followedSignature: String? = null
+    private val followedLock = Any()
+
+    /** Fetches who is live and who is followed and publishes it, unless the group is off or nothing changed. */
+    private fun publishFollowed(c: MqttAsyncClient, d: HaDiscovery) {
+        val groups = settings?.groups ?: return
+        if (HaDiscovery.FOLLOWED !in groups) {
+            // Group switched off: the retained message goes away with the sensors
+            if (followedSignature != null) { publish(c, d.followedTopic, "", retained = true); followedSignature = null }
+            return
+        }
+        val (live, followed) = try {
+            kotlinx.coroutines.runBlocking {
+                val liveMovies = com.shrug.shrugtv.ui.tv.home.HomeData.followedLive(appContext)
+                val all = com.shrug.shrugtv.ui.tv.home.HomeData.followedChannels(appContext)
+                val favorites = com.shrug.shrugtv.session.AppState.favoriteChannelIds
+                fun item(m: com.shrug.shrugtv.model.Movie) = FollowedList.Item(
+                    login = m.login ?: "", name = m.displayName.ifEmpty { m.login ?: "" }, game = m.gameName,
+                    title = m.title ?: "", viewers = m.viewerCount,
+                    favorite = m.isFavorite || m.userId.toString() in favorites
+                )
+                liveMovies.filter { !it.login.isNullOrEmpty() }.map(::item) to all.filter { !it.login.isNullOrEmpty() }.map(::item)
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "followed: ${e.message}")
+            return
+        }
+        // Without a login or without a network both lists are empty: keep what HA has instead of wiping it
+        if (live.isEmpty() && followed.isEmpty() && followedSignature != null) return
+        synchronized(followedLock) {
+            val signature = FollowedList.signature(live, followed)
+            if (signature == followedSignature) return
+            followedSignature = signature
+            publish(c, d.followedTopic, FollowedList.build(live, followed, System.currentTimeMillis()), retained = true)
+        }
     }
 
     private fun publishState(c: MqttAsyncClient, d: HaDiscovery) {

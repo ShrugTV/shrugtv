@@ -21,6 +21,14 @@ class HubCommandRouterTest {
     }
 
     @Test
+    fun `replay and audio only`() {
+        assertEquals(Command.Replay, HubCommandRouter.parse("replay", "PRESS"))
+        assertEquals(Command.AudioOnly(true), HubCommandRouter.parse("audio_only", "ON"))
+        assertEquals(Command.AudioOnly(false), HubCommandRouter.parse("audio_only", "off"))
+        assertNull(HubCommandRouter.parse("audio_only", "toggle"))
+    }
+
+    @Test
     fun `watch accepts a login or JSON, nothing else`() {
         assertEquals(Command.WatchLogin("papaplatte"), HubCommandRouter.parse("watch", "Papaplatte"))
         assertEquals(Command.WatchLogin("papaplatte"), HubCommandRouter.parse("watch", "@papaplatte"))

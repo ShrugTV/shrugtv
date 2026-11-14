@@ -31,7 +31,7 @@ object HomeRowOrder {
 
     /** The built-in order, one place for the home screen and the settings. */
     val DEFAULT = listOf(
-        "followed_live", "live_history", "continue_watching", "followed_channels",
+        "followed_live", "live_history", "continue_watching", "followed_channels", "clips",
         "followed_categories", "past_broadcasts", "top_categories", "top_streams",
     )
 }

@@ -43,6 +43,8 @@ class HomeActivity : ComponentActivity() {
     private var state by mutableStateOf(HomeState())
     /** Card of the last 30 days at the start of a month; separate from [state] on purpose. */
     private var statsCard by mutableStateOf<com.shrug.shrugtv.stats.StatsCardData?>(null)
+    /** "Version X is available" for a few seconds at start; informs only, no focus. */
+    private var updateCard by mutableStateOf<String?>(null)
     /** Separate from [state], see there. */
     private var hero by mutableStateOf<Movie?>(null)
     private val heroClock = android.os.Handler(android.os.Looper.getMainLooper())
@@ -75,6 +77,7 @@ class HomeActivity : ComponentActivity() {
             scrolls = { listScrolls = it },
             search = { startActivity(Intent(this, com.shrug.shrugtv.ui.tv.search.SearchActivity::class.java)) },
             stats = { startActivity(Intent(this, com.shrug.shrugtv.ui.tv.stats.StatsActivity::class.java)) },
+            clips = { startActivity(Intent(this, com.shrug.shrugtv.ui.tv.clips.ClipsActivity::class.java)) },
             settings = { startActivity(Intent(this, com.shrug.shrugtv.ui.tv.settings.SettingsActivity::class.java)) },
             profile = {
                 val target = if (state.loginState is Login.LoggedIn) com.shrug.shrugtv.ui.tv.dialogs.LogoutActivity::class.java else LoginActivity::class.java
@@ -90,7 +93,7 @@ class HomeActivity : ComponentActivity() {
             TvHomeTheme {
                 LaunchedEffect(loadCounter) { load() }
                 androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxSize()) {
-                    HomeScreen(state, { hero }, actions, { statsCard })
+                    HomeScreen(state, { hero }, actions, { statsCard }, { updateCard })
                     if (splash != null) {
                         StartSplash(
                             splash,
@@ -102,6 +105,7 @@ class HomeActivity : ComponentActivity() {
             }
         }
         maybeShowStatsCard()
+        maybeShowUpdateCard()
         resumeLastChannel(savedInstanceState == null)
         if (android.os.Build.VERSION.SDK_INT >= 24) {
             Log.i("Start", "HomeActivity.onCreate ready after ${android.os.SystemClock.elapsedRealtime() - android.os.Process.getStartElapsedRealtime()} ms since process start")
@@ -142,6 +146,18 @@ class HomeActivity : ComponentActivity() {
     }
 
     private var listScrolls = false
+
+    /** With the update check on and a newer, not skipped release known from the last answer: a short notice at the start. */
+    private fun maybeShowUpdateCard() {
+        if (!com.shrug.shrugtv.update.UpdateChecker.enabled(this)) return
+        com.shrug.shrugtv.util.Threads.doInBackground {
+            val r = com.shrug.shrugtv.update.UpdateChecker.pending(applicationContext) ?: return@doInBackground
+            runOnUiThread {
+                updateCard = r.version
+                heroClock.postDelayed({ updateCard = null }, 10_000L)
+            }
+        }
+    }
 
     /** In the first days of a month: one card with the last 30 days, then not again that month. */
     private fun maybeShowStatsCard() {
@@ -206,6 +222,8 @@ class HomeActivity : ComponentActivity() {
         RowKind("live_history", R.string.home_row_live_history, { AppState.showLiveStreamHistory }, HomeData::liveHistory),
         RowKind("continue_watching", R.string.home_row_continue_watching, { AppState.showVodHistory }, HomeData::continueWatching),
         RowKind("followed_channels", R.string.home_row_followed_channels, { AppState.showFollowedChannels }, HomeData::followedChannels),
+        RowKind("clips", R.string.home_row_clips, { com.shrug.shrugtv.clips.ClipsSettings.rowOn(this) },
+            { ctx -> com.shrug.shrugtv.clips.ClipsSettings.load(ctx).let { s -> com.shrug.shrugtv.clips.ClipsFeed.load(ctx, s).take(s.count) } }),
         RowKind("followed_categories", R.string.home_row_followed_categories, { AppState.showFollowedGames }, HomeData::followedGames),
         RowKind("past_broadcasts", R.string.home_row_past_broadcasts, { AppState.showPastBroadcasts }, HomeData::pastBroadcasts),
         RowKind("top_categories", R.string.home_row_top_categories, { AppState.showTopGames }, HomeData::topGames),
@@ -361,7 +379,14 @@ class HomeActivity : ComponentActivity() {
 
     private fun toChannel(m: Movie) = Destinations.channel(this, m)
 
-    private fun open(m: Movie) = Destinations.open(this, m)
+    private fun open(m: Movie) {
+        // A clip from the clips row: the row is the queue
+        if (m.isClip) {
+            val pool = com.shrug.shrugtv.clips.ClipsFeed.pool()
+            com.shrug.shrugtv.clips.ClipQueue.set(if (pool.any { it.clipSlug == m.clipSlug }) pool else state.rows.firstOrNull { it.id == "clips" }?.entries.orEmpty())
+        }
+        Destinations.open(this, m)
+    }
 
     companion object {
         private const val TAG = "HomeActivity"

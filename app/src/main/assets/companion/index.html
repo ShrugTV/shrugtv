@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B0B0E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ShrugTV">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>ShrugTV</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
@@ -34,6 +38,7 @@
 <main id="app" hidden>
   <header id="now">
     <img id="now-avatar" alt="" width="56" height="56">
+    <button id="now-star" class="star" type="button" hidden></button>
     <div class="now-text">
       <div class="now-line"><strong id="now-channel"></strong><span id="now-live" class="badge"></span></div>
       <div id="now-meta" class="muted"></div>
@@ -50,6 +55,7 @@
       <button role="tab" data-tab="find" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg><span class="full" data-i18n="tabFind"></span><span class="short" aria-hidden="true" data-i18n="tabFindShort"></span></button>
       <button role="tab" data-tab="player" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg><span class="full" data-i18n="tabPlayer"></span><span class="short" aria-hidden="true" data-i18n="tabPlayerShort"></span></button>
       <button role="tab" data-tab="log" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12 15h5"/></svg><span class="full" data-i18n="tabLog"></span><span class="short" aria-hidden="true" data-i18n="tabLog"></span></button>
+      <button role="tab" data-tab="update" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 0-3-3m3 3 3-3M8 17h8"/></svg><span class="full" data-i18n="tabUpdate"></span><span class="short" aria-hidden="true" data-i18n="tabUpdateShort"></span><i class="new-dot" hidden></i></button>
       <button role="tab" data-tab="settings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span class="full" data-i18n="tabSettings"></span><span class="short" aria-hidden="true" data-i18n="tabSettingsShort"></span></button>
     </div>
     <div id="set-groups" hidden></div>
@@ -60,7 +66,15 @@
   </nav>
 
   <section id="tab-remote" class="tab">
-    <div class="dpad">
+    <div class="mode" role="group" data-i18n-label="remoteMode">
+      <button type="button" id="mode-pad" aria-pressed="true" data-i18n="modePad"></button>
+      <button type="button" id="mode-keys" aria-pressed="false" data-i18n="modeKeys"></button>
+    </div>
+    <div id="pad" role="application" tabindex="0" data-i18n-label="padLabel">
+      <span class="pad-hint" data-i18n="padHint"></span>
+      <span id="pad-arrow" aria-hidden="true"></span>
+    </div>
+    <div class="dpad" id="dpad" hidden>
       <button class="k up" data-key="up" data-i18n-label="up">▲</button>
       <button class="k left" data-key="left" data-i18n-label="left">◀</button>
       <button class="k ok" data-key="ok">OK</button>
@@ -77,22 +91,38 @@
       <button data-cmd="live" data-i18n="live"></button>
       <button data-cmd="next" data-i18n="next"></button>
     </div>
+    <div class="row">
+      <button id="btn-replay" data-cmd="replay" hidden data-i18n="replay"></button>
+      <button id="btn-audio" aria-pressed="false" hidden data-i18n="audioOnly"></button>
+    </div>
     <label class="slider"><span data-i18n="volume"></span>
       <input id="volume" type="range" min="0" max="100" step="5">
     </label>
+    <div id="recent-box" hidden>
+      <h2 data-i18n="recent"></h2>
+      <div id="recent" class="chips"></div>
+    </div>
   </section>
 
   <section id="tab-chat" class="tab" hidden>
     <div id="chat" aria-live="polite"></div>
+    <div id="quick-box">
+      <div id="quick" class="chips"></div>
+    </div>
+    <div id="reply-bar" hidden><span id="reply-text"></span><button type="button" id="reply-x" data-i18n-label="replyCancel">✕</button></div>
+    <div id="emotes" hidden></div>
     <form id="chat-form">
       <label for="chat-input" class="sr-only" data-i18n="message"></label>
+      <button type="button" id="emote-btn" aria-expanded="false" data-i18n-label="emotes">☺</button>
       <input id="chat-input" maxlength="500" autocomplete="off" enterkeyhint="send" data-i18n-placeholder="message">
       <button type="submit" data-i18n="send"></button>
     </form>
     <p id="chat-off" class="muted" hidden data-i18n="chatOff"></p>
+    <p id="chat-hint" class="muted" data-i18n="chatHint"></p>
   </section>
 
   <section id="tab-find" class="tab" hidden>
+    <div id="lists" class="chips lists" role="group" data-i18n-label="listsLabel"></div>
     <form id="search-form">
       <label for="search" class="sr-only" data-i18n="search"></label>
       <input id="search" type="search" maxlength="100" enterkeyhint="search" data-i18n-placeholder="searchChannels">
@@ -149,6 +179,10 @@
       <div id="log-view" role="log" aria-live="off" tabindex="0"></div>
       <button type="button" id="log-latest" hidden data-i18n="logLatest"></button>
     </div>
+  </section>
+
+  <section id="tab-update" class="tab" hidden>
+    <div id="upd"></div>
   </section>
 
   <section id="tab-settings" class="tab" hidden>

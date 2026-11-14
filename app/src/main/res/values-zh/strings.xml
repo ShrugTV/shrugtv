@@ -1287,4 +1287,10 @@
     <string name="update_bad_checksum">下载内容与校验和不符,已删除</string>
     <string name="update_install_failed">安装失败:%1$s</string>
     <string name="update_download_failed">下载失败,请稍后再试</string>
+    <string name="home_update_card">版本 %1$s 可用</string>
+    <string name="home_update_card_hint">设置 → 应用 → 立即检查</string>
+    <string name="settings_companion_skin">手机页面使用电视皮肤</string>
+    <string name="settings_companion_skin_summary">手机和浏览器页面使用您在电视上选择的皮肤颜色，并在您更改时同步；关闭后页面保持自己的浅色或深色外观</string>
+    <string name="settings_mqtt_entities_followed">已关注的频道</string>
+    <string name="settings_mqtt_entities_followed_summary">两个传感器，以属性形式提供您关注的频道以及谁正在直播（标题、游戏、观众数），用于动态仪表板；应用打开期间，主题每分钟更新一次</string>
 </resources>

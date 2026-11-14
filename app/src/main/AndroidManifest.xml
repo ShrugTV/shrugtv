@@ -39,7 +39,8 @@
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.ClearHistoryActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.LogoutActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.category.CategoryActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
-        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.stats.StatsActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.clips.ClipsActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
+    <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.stats.StatsActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.search.SearchActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="stateAlwaysVisible"/>
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.channel.ChannelActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Material.NoActionBar"/>
         <!-- The only entry from outside into the player: accepts only the deep-link URI and starts the
@@ -62,6 +63,12 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:host="vod" android:scheme="shrugtv"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="clip" android:scheme="shrugtv"/>
             </intent-filter>
         </activity>
         <activity android:configChanges="keyboard|keyboardHidden" android:name="com.shrug.shrugtv.ui.tv.dialogs.ContextMenuActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>

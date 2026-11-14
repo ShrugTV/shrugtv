@@ -49,6 +49,8 @@ class MqttBridgeTest {
         override fun setChatVisible(visible: Boolean) { calls += "chat $visible" }
         override fun setChatLayout(value: String) { calls += "layout $value" }
         override fun setVolume(percent: Int) { calls += "volume $percent" }
+        override fun replay() { calls += "replay" }
+        override fun setAudioOnly(on: Boolean) { calls += "audio_only $on" }
         override fun sendChat(text: String) { calls += "say $text" }
         override fun showNotice(title: String, text: String?, imageUrl: String?, seconds: Int) { calls += "notice $title" }
     }

@@ -1301,4 +1301,10 @@
     <string name="update_bad_checksum">O download não corresponde à soma de verificação e foi apagado</string>
     <string name="update_install_failed">Falha na instalação: %1$s</string>
     <string name="update_download_failed">Falha no download, tente mais tarde</string>
+    <string name="home_update_card">A versão %1$s está disponível</string>
+    <string name="home_update_card_hint">Configurações → App → Verificar agora</string>
+    <string name="settings_companion_skin">Skin da TV na página do celular</string>
+    <string name="settings_companion_skin_summary">A página do celular e do navegador usa as cores do skin escolhido na TV e acompanha quando você o muda; desligado: a página mantém o próprio visual claro ou escuro</string>
+    <string name="settings_mqtt_entities_followed">Canais seguidos</string>
+    <string name="settings_mqtt_entities_followed_summary">Dois sensores com os canais que você segue e quem está ao vivo (título, jogo, espectadores) como atributos, para um painel dinâmico; o tópico é atualizado a cada minuto enquanto o app está aberto</string>
 </resources>
